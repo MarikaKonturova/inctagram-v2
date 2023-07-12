@@ -1,0 +1,109 @@
+.Button {
+    color: var(--light-100-color);
+    cursor: pointer;
+    border-radius: 2px;
+    padding: 6px 24px;
+    font: var(--font-h3);
+    transition: color .5s, background-color .5s;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+
+.clear {
+    font: var(--font-regular-400);
+    padding: 0;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.outline {
+    border: 1px solid var(--primary-500-color);
+    color: var(--primary-500-color);
+    background: none;
+
+    &:hover {
+        border: 1px solid var(--primary-100-color);
+        color: var(--primary-100-color);
+    }
+
+    &:active {
+        border: 1px solid var(--primary-700-color);
+        color: var(--primary-700-color);
+    }
+
+    &:focus {
+        outline: 2px solid var(--primary-700-color);
+        color: var(--primary-700-color);
+    }
+}
+
+.outline.disabled{
+    outline: 1px solid var(--primary-900-color);
+    color: var(--primary-900-color);
+}
+
+.secondary {
+    background: var(--light-color);
+    border: none;
+    color: var(--dark-color);
+
+    &:active {
+        background: var(--light-900-color);
+    }
+}
+
+.secondary.disabled {
+    background: var(--light-900-color);
+    color: var(--dark-100-color);
+}
+
+.primary {
+    background: var(--primary-500-color);
+    border: none;
+    color: var(--light-100-color);
+
+    &:hover {
+        background: var(--primary-100-color);
+    }
+
+    &:active {
+        background: var(--primary-700-color);
+    }
+}
+
+.primary.disabled {
+    background: var(--primary-900-color);
+    color: var(--light-900-color);
+}
+
+.textButton {
+    background: transparent;
+    border: none;
+    color: var(--primary-500-color);
+
+    &:hover {
+        color: var(--primary-100-color);
+    }
+
+    &:active {
+        color: var(--primary-700-color);
+    }
+
+    &:focus {
+        color: var(--primary-700-color);
+        outline: 2px solid var(--primary-700-color);
+    }
+}
+
+.textButton.disabled {
+    color: var(--primary-900-color);
+}
+
+.block {
+    width: 100%;
+}
+

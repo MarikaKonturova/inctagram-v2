@@ -1,0 +1,30 @@
+.Header {
+    box-sizing: border-box;
+    background: var(--dark-700-color);
+    border-bottom: 1px solid var(--dark-300-color);
+    height: var(--header-height);
+    padding: 12px 0;
+    transition: background-color 0.5s;
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .icon{
+        fill: #fff;
+    }
+
+    .button {
+        font: var(--font-medium-500);
+        display: flex;
+        gap: 15px
+    }
+
+    .HeaderText {
+        text-decoration: none;
+        color: var(--light-color);
+        font: var(--font-large);
+    }
+}

@@ -1,0 +1,42 @@
+@import "app/styles/mixins/mixins";
+
+.wrapper {
+    &:not(:last-child) {
+        margin-bottom: 18px;
+    }
+
+    .button {
+        display: block;
+        margin-left: auto;
+    }
+}
+
+
+.device {
+    width: 100%;
+    padding: 24px 24px 17px;
+    background: var(--dark-500-color);
+    outline: 1px solid var(--dark-300-color);
+    border-radius: 2px;
+
+    @include flex($justify: space-between);
+
+    column-gap: 12px;
+
+    &:first-child {
+        margin-bottom: 24px;
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 12px;
+    }
+}
+
+.title {
+    font: var( --font-regular-700);
+
+    &:not(:last-child) {
+        margin-bottom: 18px;
+    }
+
+}

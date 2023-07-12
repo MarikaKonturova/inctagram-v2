@@ -1,0 +1,1 @@
+export { useCommentPost } from './useCommentPost'

@@ -1,0 +1,19 @@
+@import "src/app/styles/mixins/mixins";
+
+.AppLink{
+    color: var(--light-100-color);
+    text-decoration: none;
+    display: inline-flex;
+}
+
+.icon {
+    margin-right: 12px;
+    fill: var(--light-100-color);
+    width: 24px;
+    height: 24px;
+}
+
+.active {
+    fill: var(--primary-500-color);
+    color: var(--primary-500-color);
+}

@@ -1,0 +1,19 @@
+@import "app/styles/mixins/mixins";
+
+
+
+.container{
+    @include flex(row, space-between, center);
+
+    padding: 6px 24px;
+
+}
+
+.input{
+    flex: 10;
+
+}
+
+.button{
+    flex: 2
+}

@@ -1,0 +1,25 @@
+@import "app/styles/mixins/mixins";
+
+.inner {
+    @include flex;
+
+    column-gap: 12px;
+}
+
+.title {
+    font: var(--font-regular-700);
+
+    &:not(:last-child) {
+        margin-bottom: 12px;
+    }
+}
+
+.ip {
+    &:not(:last-child) {
+        margin-bottom: 5px;
+    }
+}
+
+.current {
+    color: var(--primary-500-color);
+}

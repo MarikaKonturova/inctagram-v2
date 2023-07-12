@@ -1,0 +1,51 @@
+:root { // .app.light
+    // custom color
+    --secondary-color: #0449e0;
+
+    // skeleton
+    --skeleton-color: #d9d9ff;
+    --skeleton-shadow: #a6a6ff;
+
+    // light color theme palette
+    --light-100-color: #000;
+    --light-300-color: #333;
+    --light-500-color: #171717;
+    --light-700-color: #0D0D0D;
+    --light-900-color: #000;
+
+    // dark
+    --dark-color: #000;
+    --dark-100-color: #fff;
+    --dark-300-color: #000;
+    --dark-500-color: #d8d8d8;
+    --dark-700-color: #fff;
+    --dark-900-color: #d4d8de;
+
+    // accent
+    --primary-100-color: #8C9EFF;
+    --primary-300-color: #536DFE;
+    --primary-500-color: #3D5AFE;
+    --primary-700-color: #2F68CC;
+    --primary-900-color: #213E9E;
+
+    // success
+    --success-100-color:#B2FF59;
+    --success-300-color:#76FF03;
+    --success-500-color:#64DD17;
+    --success-700-color:#43A047;
+    --success-900-color:#1B5E20;
+
+    // warning
+    --warning-100-color:#FFE082;
+    --warning-300-color:#FFB300;
+    --warning-500-color:#FFA000;
+    --warning-700-color:#F57C00;
+    --warning-900-color:#E65100;
+
+    // danger
+    --danger-100-color:#FF8A80;
+    --danger-300-color:#FF5252;
+    --danger-500-color:#FF1744;
+    --danger-700-color:#D50000;
+    --danger-900-color:#B71C1C;
+}

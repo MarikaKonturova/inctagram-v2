@@ -1,0 +1,1 @@
+export { GeneralInformationForm } from './GeneralInformationForm'

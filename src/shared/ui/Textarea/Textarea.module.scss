@@ -1,0 +1,19 @@
+.textarea {
+    min-width: 100%;
+    min-height: 70px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+    border-radius: 2px;
+    word-break: break-word;
+    border: 1px solid transparent;
+    resize: vertical;
+    background: var(--dark-color);
+    color: var(--light-900-color);
+}
+
+.errorText {
+    font-size: 14px;
+    color: var(--danger-500-color);
+}

@@ -1,0 +1,10 @@
+
+@import "app/styles/mixins/mixins";
+
+
+
+.icon{
+    @include flex(row, center, center);
+
+
+}

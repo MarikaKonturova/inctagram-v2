@@ -1,0 +1,1 @@
+export { useUpdateMyPost } from './useUpdateMyPost'

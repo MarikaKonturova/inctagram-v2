@@ -1,0 +1,90 @@
+.DropDownContainer {
+    width: 10.5em;
+}
+
+.Icon {
+    fill: var(--light-900-color);
+    width: 25px;
+}
+
+.DropDownHeader {
+    background-color: var(--dark-700-color);
+    border: 1px solid var(--dark-100-color);
+    border-radius: 2px;
+    font: var(--font-medium-400);
+    color: var(--light-900-color);
+    padding: 0.4em 0.4em 0.4em 1em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &:hover {
+        border: 1px solid var(--light-900-color);
+    }
+
+    &:active {
+        background-color: var(--dark-500-color);
+        border: 1px solid var(--light-100-color);
+        color: var(--light-100-color);
+
+        .Icon {
+            fill: var(--light-100-color);
+        }
+    }
+}
+
+.disabled {
+    background-color: transparent;
+    border: 1px solid var(--dark-100-color);
+    color: var(--dark-100-color);
+    cursor: default;
+
+    &:hover {
+        border: 1px solid var(--dark-100-color);
+    }
+
+    &:active {
+        background-color: transparent;
+        border: 1px solid var(--dark-100-color);
+        color: var(--dark-100-color);
+    }
+}
+
+.disabled.Icon {
+    display: none;
+}
+
+.active {
+    border: 1px solid var(--light-100-color);
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    &:hover {
+        border: 1px solid var(--light-100-color);
+        border-bottom: none;
+    }
+}
+
+
+.DropDownList {
+    background-color: var(--dark-500-color);
+    border: 1px solid var(--light-100-color);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    font: var(--font-medium-400);
+    color: var(--light-900-color);
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.ListItem {
+    list-style: none;
+    padding: 0.4em 1em;
+
+    &:hover {
+        background-color: var(--dark-300-color);
+        color: var(--primary-500-color);
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,1 @@
+export { useLikePost } from './useLikePost'

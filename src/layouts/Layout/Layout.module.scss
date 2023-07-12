@@ -1,0 +1,7 @@
+.layout {
+    .main {
+        background-color: var(--dark-700-color);
+        height: calc(100vh - 60px);
+        transition: background-color 0.5s;
+    }
+}

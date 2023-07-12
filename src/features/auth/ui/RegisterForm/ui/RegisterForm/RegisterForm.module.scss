@@ -1,0 +1,36 @@
+.register {
+    .title {
+        font: var(--font-h1);
+
+        &:not(:last-child) {
+            margin-bottom: 13px;
+        }
+    }
+
+    .input  {
+        &:not(:last-child) {
+            margin-bottom: 24px;
+        }
+
+        &.confirmation {
+            &:not(:last-child) {
+                margin-bottom: 36px;
+            }
+        }
+    }
+
+    .button {
+        width: 100%;
+
+        &:not(:last-child) {
+            margin-bottom: 24px;
+        }
+    }
+
+
+    .text {
+        &:not(:last-child) {
+            margin-bottom: 6px;
+        }
+    }
+}

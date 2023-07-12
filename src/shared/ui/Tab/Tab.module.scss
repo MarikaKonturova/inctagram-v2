@@ -1,0 +1,13 @@
+.tab {
+    padding: 6px 24px;
+    border: none;
+    border-bottom: 1px solid var(--dark-300-color);
+    transition: ease-in-out 0.34s;
+    color: var(--dark-300-color);
+    font-size: var(--font-line-small);
+}
+
+.selectedTab{
+    border-bottom: 1px solid var( --primary-500-color);
+    color: var( --primary-500-color);
+}

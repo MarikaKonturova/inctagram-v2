@@ -1,0 +1,12 @@
+@import "app/styles/mixins/mixins";
+
+.social {
+    @include flex($justify: center);
+
+    column-gap: 60px;
+
+    &:not(:last-child) {
+        margin-bottom: 24px;
+    }
+
+}

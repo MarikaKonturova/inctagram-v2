@@ -1,0 +1,9 @@
+{
+  "Привет": "Hello",
+  "verification-title": "Email verification link expired!",
+  "verification-text":"Looks like the verification link has expired. Not to worry, we can send the link again",
+  "verification-button":"Resend verification link",
+  "congratulations-title": "Congratulations!",
+  "congratulations-text":"Your email has been confirmed",
+  "congratulations-button":"Sign in"
+}

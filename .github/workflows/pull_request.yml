@@ -1,0 +1,58 @@
+name: linting, testing, building
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Staring Node.js 17
+        uses: actions/setup-node@v1
+        with:
+          node-version: '17'
+      - name: install modules
+        run: npm install
+      - name: linting typescript
+        run: npm run lint:ts
+      - name: linting css
+        run: npm run lint:scss
+      - name: unit testing
+        run: npm run test:unit
+
+  build-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Staring Node.js 17
+        uses: actions/setup-node@v1
+        with:
+          node-version: '17'
+      - name: install modules
+        run: npm install
+      - name: build production project
+        run: npm run build
+
+  build-storybook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Staring Node.js 17
+        uses: actions/setup-node@v1
+        with:
+          node-version: '17'
+      - name: install modules
+        run: npm install
+      - name: build storybook
+        run: npm run storybook:build

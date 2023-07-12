@@ -1,0 +1,105 @@
+@import "app/styles/mixins/mixins";
+
+.field {
+    text-align: left;
+
+    @include flex($direction: column, $justify: flex-start);
+
+    .wrapper {
+        position: relative;
+        border-radius: 2px;
+        border: none;
+
+        @include flex($align: center);
+
+
+        // standard - variant
+        &.standard::before {
+            height: 1px;
+            background-color: var(--card-entity-bg);
+            left: 0;
+            bottom: -1px;
+            content: " ";
+            position: absolute;
+            right: 0;
+            pointer-events: none;
+        }
+
+        &.standard:focus-within::before {
+            opacity: 0;
+        }
+
+        &.standard.error::before {
+            background-color: var(--danger-500-color);
+        }
+
+        &.error:focus-within {
+            outline: 2px solid var(--danger-500-color);
+        }
+
+        // outline - variant
+        &.outline {
+            outline: 1px solid var(--card-entity-bg);
+
+            &.error {
+                outline: 1px solid var(--danger-500-color);
+            }
+        }
+
+        &:focus-within {
+            outline: 2px solid var(--primary-700-color);
+        }
+
+        &:focus-within.error {
+            outline: 1px solid var(--danger-500-color);
+        }
+
+        .input {
+            font: var(--font-m);
+            font-weight: 400;
+            color: var(--light-100-color);
+            background: none;
+            width: 100%;
+            padding: 8px 0;
+
+            &.search {
+                padding-left: 40px;
+                border: none;
+                border-radius: 2px;
+                outline: 1px solid var(--card-entity-bg);
+            }
+
+            &.password {
+                padding-right: 40px;
+            }
+
+            &.disabled {
+                cursor: not-allowed;
+                user-select: none;
+                color: var(--dark-100-color);
+            }
+
+        }
+
+        button {
+            width: 24px;
+            height: 24px;
+            right: 12px;
+
+            @include position(absolute)
+    }
+
+        .icon {
+            transform: translate(50%, 50%);
+
+            @include position(absolute, 0, 50%, 0, 0);
+        }
+
+
+    }
+
+    .message {
+        font-size: 14px;
+        color: var(--danger-500-color);
+    }
+}

@@ -1,0 +1,17 @@
+.wrapperAvatar{
+    position: relative;
+    display: inline-block;
+
+    .Avatar {
+        border-radius: 50%;
+        background-color: var(--dark-500-color);
+    }
+
+    .icon{
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        width: 36px;
+        height: 36px;
+    }
+}

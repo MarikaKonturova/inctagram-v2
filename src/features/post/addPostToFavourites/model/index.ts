@@ -1,0 +1,1 @@
+export { useAddToFavouritesPost } from './useAddToFavouritesPost'

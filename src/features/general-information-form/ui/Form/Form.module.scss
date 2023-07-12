@@ -1,0 +1,21 @@
+.wrapper {
+    display:block;
+    padding: 1em;
+    margin-bottom: 0.375em;
+}
+
+.label {
+    color: var(--light-900-color);
+    font: var(--font-medium-400);
+}
+
+.formsContainer {
+    width:100%;
+    flex: 1;
+}
+
+// Any additional selector will be increase priority of passed classname
+textarea.textarea {
+    border: 1px solid var(--dark-300-color);
+    background: var(--dark-500-color);
+}
