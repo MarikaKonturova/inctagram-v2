@@ -12,15 +12,17 @@ import cls from './UpdateMyPostButton.module.scss'
 
 interface IProps {
     post: Post
+    openEditPostModal: () => void
 }
 
-export const UpdateMyPostButton: FC<IProps> = ({ post }) => {
+export const UpdateMyPostButton: FC<IProps> = ({ post, openEditPostModal }) => {
     const { theme } = useTheme()
     const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
-    const { update } = useUpdateMyPost(post)
+    // const { update } = useUpdateMyPost(post)
 
     const onEditPostClick = useCallback(() => {
-        update(post)
+        // update(post)
+        openEditPostModal()
     }, [])
 
     return (

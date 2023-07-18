@@ -34,7 +34,7 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
         setAvatar(undefined)
     }
 
-    const onSubmit = (data: ProfileInfoType) => {
+    const onSubmit = (data: ProfileDataModel) => {
         mutate(data)
     }
 

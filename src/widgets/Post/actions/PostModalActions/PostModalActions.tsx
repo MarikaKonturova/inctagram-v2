@@ -4,7 +4,7 @@ import { AddPostToFavoutitesIconButton, LikePostIconButton, SharePostIconButton 
 import cls from './PostModalActions.module.scss'
 
 interface PostModalActionsProps {
-    postId: string
+    postId: number
 }
 
 export const PostModalActions = ({ postId, ...restProps }: PostModalActionsProps) => (

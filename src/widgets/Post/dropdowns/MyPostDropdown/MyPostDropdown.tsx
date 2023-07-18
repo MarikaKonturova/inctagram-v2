@@ -7,7 +7,12 @@ import IconThreedots from 'shared/assets/icons/outline/more-horizontal.svg'
 
 import cls from './MyPostDropdown.module.scss'
 
-export const MyPostDropdown = () => {
+interface IProps {
+    openEditPostModal: () => void
+    openDeletePostModal: () => void
+}
+
+export const MyPostDropdown = ({ openEditPostModal, openDeletePostModal }: IProps) => {
     const post = {
         id: '1',
         photos: 'photo',
@@ -32,8 +37,8 @@ export const MyPostDropdown = () => {
                     leaveTo={clsx(cls.leave_to)}
                 >
                     <Menu.Items className={clsx(cls.items)}>
-                        <UpdateMyPostButton post={post} />
-                        <DeleteMyPostButton postId={post.id} />
+                        <UpdateMyPostButton openEditPostModal={openEditPostModal} post={post} />
+                        <DeleteMyPostButton postId={post.id} openDeletePostModal={openDeletePostModal}/>
                     </Menu.Items>
                 </Transition>
             </Menu>

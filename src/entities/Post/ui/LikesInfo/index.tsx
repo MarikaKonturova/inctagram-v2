@@ -11,12 +11,14 @@ const avatars = [
 
 export const LikesInfo = () => (
     <div className={cls.container}>
-        <div className={cls.avatars}>{avatars.map(el => (
-            <Avatar key={el} className={cls.avatar}
-                    src={el}
-                    size={24}
-                    alt="avatar" />
-        ))}</div>
+        <div className={cls.avatars}>
+            {avatars.map(el => (
+                <Avatar key={el} className={cls.avatar}
+                        src={el}
+                        size={24}
+                        alt="avatar" />
+            ))}
+        </div>
         <div className={cls.likes}>2 243 &quot;Like&quot;</div>
     </div>
 )

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Avatar, Card } from 'shared/ui'
+import { PostCards } from 'features/profile/getPosts/ui/PostCards/PostCards'
+import { Avatar } from 'shared/ui'
 import { useGetProfileData } from '../../model'
 
 import cls from './ProfilePage.module.scss'
@@ -11,9 +12,9 @@ export const ProfilePage = () => {
     return (
         <div className={cls.container}>
             <div className={cls.flex}>
-                <div className={cls.avatar}>
-                    <Avatar size={192} src={userData ? userData.avatarUrl : undefined} />
-                </div>
+                {/* <div className={cls.avatar}>
+                    <Avatar size={192} src={userData ? userData. : undefined} />
+                </div> */}
                 <div>
                     <div className={cls.userName}>{userData?.userName}</div>
                     <div className={cls.info}>
@@ -33,11 +34,7 @@ export const ProfilePage = () => {
                     <div className={cls.aboutMe}>{userData?.aboutMe}</div>
                 </div>
             </div>
-            <div className={cls.cardsList}>
-                <div className={cls.card}>
-                    <Card src={''} alt={''} />
-                </div>
-            </div>
+            {userData && <PostCards userData={userData} />}
         </div>
     )
 }

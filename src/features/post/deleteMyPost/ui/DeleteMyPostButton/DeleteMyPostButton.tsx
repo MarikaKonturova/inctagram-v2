@@ -11,16 +11,17 @@ import cls from './DeleteMyPostButton.module.scss'
 
 interface IProps {
     postId: string
+    openDeletePostModal: () => void
 }
 
-export const DeleteMyPostButton: FC<IProps> = ({ postId }) => {
+export const DeleteMyPostButton: FC<IProps> = ({ postId, openDeletePostModal }) => {
     const { theme } = useTheme()
     const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
-    const { deletePost } = useDeleteMyPost(postId)
+    // const { deletePost } = useDeleteMyPost(postId)
 
     const onDeletePostClick = useCallback(async () => {
         // TODO: здесь будет запрос на удаление => редирект на profile
-        deletePost()
+        // deletePost()
         // routerPush(AppRoutes.PROFILE)
     }, [])
 
@@ -29,7 +30,7 @@ export const DeleteMyPostButton: FC<IProps> = ({ postId }) => {
             {({ active }) => (
                 <button type='button'
                         className={clsx(cls.item)}
-                        onClick={onDeletePostClick}
+                        onClick={openDeletePostModal}
                 >
                     {active
                         ? <IconTrash aria-hidden="true" fill={fill}/>

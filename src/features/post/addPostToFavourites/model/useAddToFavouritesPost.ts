@@ -3,7 +3,7 @@ import { type AxiosError } from 'axios'
 import { useSnackbar } from 'widgets/SnackBar/model/store/snackbarStore'
 import { UsersService } from 'shared/api/users'
 
-export const useAddToFavouritesPost = (postId: string) => {
+export const useAddToFavouritesPost = (postId: number) => {
     const onOpen = useSnackbar((state) => state.onOpen)
 
     const { mutate: addToFavourites } = useMutation({

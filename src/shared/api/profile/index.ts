@@ -14,7 +14,7 @@ export const profileService = {
         return $api.get<ProfileDataModel>('/users/profile')
     },
 
-    updateProfileData (body: ProfileDataModel) {
+    updateProfileData (body: Omit<ProfileDataModel, 'avatars' | 'id'>) {
         return $api.put<ProfileDataModel>('/users/profile', body)
     },
 

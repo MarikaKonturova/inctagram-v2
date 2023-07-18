@@ -1,0 +1,28 @@
+.comments {
+    margin: 15px;
+}
+
+.comment {
+    display: flex;
+    gap: 12px;
+    padding: 5px;
+    align-items: flex-start;
+}
+
+.content {
+    font: var(--font-medium-400);
+}
+
+.userName {
+    font: var(--font-medium-700);
+}
+
+.time {
+    font: var(--font-small-400);
+    color: var(--light-900-color);
+}
+
+.actionButton {
+    font: var(--font-small-600);
+    color: var(--light-900-color);
+}

@@ -13,7 +13,6 @@ export const LoginForm: FC = () => {
 
     const { login, isLoading, error } = useLogin()
     const onSubmit = (data: UserLoginModel, event: any): void => {
-        console.log({ event })
         event.preventDefault()
         login(data)
     }

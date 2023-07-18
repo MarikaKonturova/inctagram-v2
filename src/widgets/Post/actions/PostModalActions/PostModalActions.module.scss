@@ -4,10 +4,8 @@
 .container{
     @include flex(row, space-between, center);
 
-    margin-top: 10px;
+    margin: 10px 0;
     width: 100%;
-    background-color: var(--dark-100-color );
-
 }
 
 .left_group{

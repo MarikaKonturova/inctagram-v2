@@ -5,7 +5,7 @@ import { type Post } from 'shared/types/post'
 // TODO: сделать enum для API routes
 export const UsersService = {
 
-    addToFavourites (postId: string) {
+    addToFavourites (postId: number) {
         return $api.post<Post>(`/users-posts/${postId}`)
     }
 

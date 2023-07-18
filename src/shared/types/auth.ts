@@ -1,3 +1,5 @@
+import { type PostImage } from './post'
+
 export interface RefreshTokenResponse {
     accessToken: string
 }
@@ -40,11 +42,12 @@ export interface PasswordRecoveryModel {
 }
 
 export interface ProfileDataModel {
+    id: number
     userName: string
-    name: string
-    surName: string
-    dateOfBirthday: string
+    firstName: string
+    lastName: string
+    dateOfBirth: string
     city: string
     aboutMe: string
-    avatarUrl: string
+    avatars: Omit<PostImage, 'uploadId'>
 }

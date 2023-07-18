@@ -18,20 +18,23 @@
 
     .content {
         @include position(relative);
-
-        overflow: auto;
+        
         z-index: 3;
+        overflow: auto;
         min-width: 378px;
         min-height: 228px;
-        border: 1px solid #4C4C4C;
-        border-radius: 2px;
-        background-color: var(--card-entity-bg);
 
         .header {
             padding: 12px 24px;
-            border-bottom: 1px solid #4C4C4C;
+            border-bottom: 1px solid var(--dark-100-color);
 
             @include flex($justify: space-between, $align: center);
         }
+    } 
+
+    .withStyles {
+        border: 1px solid var(--dark-100-color);
+        border-radius: 2px;
+        background-color: var(--card-entity-bg);
     }
 }

@@ -1,0 +1,36 @@
+.cardWrapperClassName {
+    width: 50%;
+    height: 85vh;
+    object-fit: fill;
+}
+
+.rightBlock {
+    background: var(--dark-300-color);
+    width: 50%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--dark-100-color);
+    padding: 10px 20px;
+}
+
+.bottomSection {
+    border: 1px solid var(--dark-100-color);
+    padding: 0 20px;
+}
+
+.wrapper {
+    margin-top: 14px;
+}
+
+.actionIcons {
+    align-self: self-start;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 6%;
+}

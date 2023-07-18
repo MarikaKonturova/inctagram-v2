@@ -10,7 +10,6 @@ export const useAuthMe = () => {
         queryFn: AuthService.me,
         onSuccess: ({ data }) => {
             const { userId } = data
-            console.log({ data })
             setUserId(userId)
             setAuth(true)
         },

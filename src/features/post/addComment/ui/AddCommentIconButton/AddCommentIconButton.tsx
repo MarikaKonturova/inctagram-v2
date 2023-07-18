@@ -1,6 +1,7 @@
 import React from 'react'
 import { Theme, useTheme } from 'app/providers/ThemeProvider'
-import IconShareOutline from 'shared/assets/icons/general/paper-plane.svg'
+import IconComment from 'shared/assets/icons/light/message-circle.svg'
+import IconCommentOutline from 'shared/assets/icons/outline/message-circle-outline.svg'
 import { ActionIcon } from 'shared/ui'
 import { useCommentPost } from '../../model'
 
@@ -16,7 +17,7 @@ export const AddCommentIconButton = () => {
     }
 
     return (
-        <ActionIcon filledIcon={<IconShareOutline fill={fill}/>}
-                    outlineIcon={<IconShareOutline fill={fill}/>} onClick={onCommentIconClick} />
+        <ActionIcon filledIcon={<IconComment fill={fill}/>}
+                    outlineIcon={<IconCommentOutline fill={fill}/>} onClick={onCommentIconClick} />
     )
 }
