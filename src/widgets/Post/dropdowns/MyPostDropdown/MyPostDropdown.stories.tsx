@@ -11,7 +11,7 @@ export default {
 } as ComponentMeta<typeof MyPostDropdown>
 
 const Template: ComponentStory<typeof MyPostDropdown> = () => {
-    return <MyPostDropdown />
+    return <MyPostDropdown openEditPostModal={() => {}} openDeletePostModal={() => {}}/>
 }
 
 export const DefaultPostModalActions = Template.bind({})

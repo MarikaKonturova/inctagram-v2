@@ -20,6 +20,6 @@ export const PostActions = ({ postId }: PostActionsProps) => (
             <AddCommentIconButton />
             <SharePostIconButton />
         </div>
-        <AddPostToFavoutitesIconButton postId={postId} />
+        <AddPostToFavoutitesIconButton postId={+postId} />
     </div>
 )
