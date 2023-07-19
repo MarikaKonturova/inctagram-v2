@@ -1,7 +1,7 @@
 import { type FC, useEffect, useState } from 'react'
 
 import { useModal } from 'shared/hooks/useModal'
-import { type ProfileInfoType } from 'shared/types/profile'
+import { type ProfileDataModel } from 'shared/types/auth'
 import { Button } from 'shared/ui'
 
 import cls from './GeneralInformationForm.module.scss'
@@ -10,7 +10,7 @@ import { useUpdateProfileData } from './model'
 import { AvatarBlock, AvatarModal, Form } from './ui'
 
 interface IProps {
-    userData?: ProfileInfoType
+    userData?: ProfileDataModel
 }
 
 export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
@@ -24,23 +24,24 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
         handleSubmit,
         reset,
         validErrors
-    } = useValidationForm(['userName', 'name', 'surName', 'city', 'aboutMe'], userData)
+    } = useValidationForm(['userName', 'firstName', 'lastName', 'city', 'aboutMe'], userData)
 
     const onAvatarClick = () => {
         setIsOpen(true)
     }
 
     const addProfilePhotoClick = () => {
+        setIsOpen(true)
         setAvatar(undefined)
     }
 
-    const onSubmit = (data: ProfileDataModel) => {
+    const onSubmit = (data: Omit<ProfileDataModel, 'id' | 'avatars'>) => {
         mutate(data)
     }
 
     useEffect(() => {
         reset(userData)
-        setAvatar(userData?.avatarUrl?.replace('FILES_URL=', ''))
+        setAvatar(userData?.avatars[0].url)
     }, [userData, reset])
 
     return <form onSubmit={handleSubmit(onSubmit)}>

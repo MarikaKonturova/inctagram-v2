@@ -1,16 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import { type ProfileInfoType } from 'shared/types/profile'
+import { type ProfileDataModel } from 'shared/types/auth'
 import { type ValidateUnion, createValidationSchema } from './profileFormSchema'
 
-export const useValidationForm = (arr: ValidateUnion[], defaultValues?: ProfileInfoType) => {
+export const useValidationForm = (arr: ValidateUnion[], defaultValues?: ProfileDataModel) => {
     const {
         register,
         handleSubmit,
         reset,
         control,
         formState: { errors }
-    } = useForm<ProfileInfoType>({
+    } = useForm<ProfileDataModel>({
         resolver: yupResolver(createValidationSchema(arr)),
         mode: 'onSubmit' || 'onChange',
         reValidateMode: 'onChange',
@@ -18,15 +18,15 @@ export const useValidationForm = (arr: ValidateUnion[], defaultValues?: ProfileI
     })
 
     const userNameError = errors?.userName && errors.userName.message
-    const nameError = errors?.name && errors.name.message
-    const surNameError = errors?.surName && errors.surName.message
+    const firstNameError = errors?.firstName && errors.firstName.message
+    const lastNameError = errors?.lastName && errors.lastName.message
     const cityError = errors?.city && errors.city.message
     const aboutMeError = errors?.aboutMe && errors.aboutMe.message
 
     const validErrors = {
         userNameError,
-        nameError,
-        surNameError,
+        firstNameError,
+        lastNameError,
         cityError,
         aboutMeError
     }

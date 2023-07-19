@@ -3,7 +3,7 @@ import { $api } from '../api'
 
 export const profileService = {
     uploadAvatar (file: FormData) {
-        return $api.post('/users/avatar', file, {
+        return $api.post('/users/profile/avatar', file, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

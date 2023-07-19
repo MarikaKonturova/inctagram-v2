@@ -49,5 +49,5 @@ export interface ProfileDataModel {
     dateOfBirth: string
     city: string
     aboutMe: string
-    avatars: Omit<PostImage, 'uploadId'>
+    avatars: Omit<PostImage[], 'uploadId'>
 }
