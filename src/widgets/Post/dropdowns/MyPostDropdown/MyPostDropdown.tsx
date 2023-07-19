@@ -13,14 +13,6 @@ interface IProps {
 }
 
 export const MyPostDropdown = ({ openEditPostModal, openDeletePostModal }: IProps) => {
-    const post = {
-        id: '1',
-        photos: 'photo',
-        description: 'Description',
-        createdAt: new Date().toDateString(),
-        updatedAt: new Date().toDateString()
-    }
-
     return (
         <>
             <Menu as='div' className={clsx(cls.menu)}>
@@ -37,8 +29,8 @@ export const MyPostDropdown = ({ openEditPostModal, openDeletePostModal }: IProp
                     leaveTo={clsx(cls.leave_to)}
                 >
                     <Menu.Items className={clsx(cls.items)}>
-                        <UpdateMyPostButton openEditPostModal={openEditPostModal} post={post} />
-                        <DeleteMyPostButton postId={post.id} openDeletePostModal={openDeletePostModal}/>
+                        <UpdateMyPostButton openEditPostModal={openEditPostModal} />
+                        <DeleteMyPostButton openDeletePostModal={openDeletePostModal}/>
                     </Menu.Items>
                 </Transition>
             </Menu>
