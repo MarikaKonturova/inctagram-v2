@@ -29,6 +29,16 @@ const nextConfig = {
     },
     eslint: {
         ignoreDuringBuilds: true
+    },
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'storage.yandexcloud.net',
+                port: '',
+                pathname: '/users-inctagram/**'
+            }
+        ]
     }
 }
 
