@@ -13,8 +13,6 @@ export const AuthRedirect = ({ children }: PropsWithChildren) => {
         return <PageLoader/>
     }
 
-    console.log({ isAuth })
-
     if (!isAuth && isError && !pathname.includes('auth')) {
         routerPush(AppRoutes.AUTH.LOGIN)
     } else if (pathname.includes('auth') && isAuth) {

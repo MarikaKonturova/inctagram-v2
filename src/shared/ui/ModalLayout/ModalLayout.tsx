@@ -5,11 +5,17 @@ import cls from './ModalLayout.module.scss'
 
 interface ModalLayoutProps {
     title?: string
+    id?: number
+    withHeader?: boolean
+    withStyles?: boolean
     className?: string
     onClose?: () => void
 }
 
-export const ModalLayout: FC<PropsWithChildren<ModalLayoutProps>> = ({ onClose, title, className, children }) => {
+export const ModalLayout: FC<PropsWithChildren<ModalLayoutProps>> = (props) => {
+    const { id, onClose, title, className, children, withHeader = true, withStyles = true } = props
+    const contentClassName = clsx(cls.content, withStyles ? cls.withStyles : '', {}, [className])
+
     useEffect(() => {
         const handleEscape = (event: KeyboardEvent): void => {
             event.key === 'Escape' && onClose?.()
@@ -21,15 +27,15 @@ export const ModalLayout: FC<PropsWithChildren<ModalLayoutProps>> = ({ onClose, 
     }, [onClose])
 
     return (
-        <div className={cls.container}>
+        <div id={id?.toString()} className={cls.container}>
             <div className={cls.overlay} onClick={onClose} />
-            <div className={clsx(cls.content, {}, [className])}>
-                <header className={cls.header}>
+            <div className={contentClassName}>
+                {withHeader && <header className={cls.header}>
                     <h2>{title}</h2>
                     <button type={'button'} onClick={onClose}>
                         <CloseIcon/>
                     </button>
-                </header>
+                </header>}
                 {children}
             </div>
         </div>

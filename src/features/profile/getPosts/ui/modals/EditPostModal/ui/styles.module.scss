@@ -1,0 +1,42 @@
+.cardWrapperClassName {
+    width: 50%;
+    height: 85vh;
+    object-fit: fill;
+}
+
+.container {
+    display: flex;
+}
+
+.modalContainer {
+    width: 80%;
+
+    // height: 80%;
+}
+
+.rightBlock {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.textareaContainer {
+    margin-top: 12px;
+    flex: 1;
+}
+
+.label {
+    color: #8D9094;
+    font: var(--font-medium-400);
+}
+
+.info {
+    text-align: end;
+    font: var(--font-small-400);
+    color: #8D9094;
+}
+
+.button {
+    align-self: flex-end;
+}

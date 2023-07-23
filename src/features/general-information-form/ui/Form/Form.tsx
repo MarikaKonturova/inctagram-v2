@@ -1,26 +1,26 @@
 import React from 'react'
 import { type Control, Controller, type UseFormRegister } from 'react-hook-form'
 
-import { type ProfileInfoType } from 'shared/types/profile'
+import { type ProfileDataModel } from 'shared/types/auth'
 import { DatePicker, Input, Textarea } from 'shared/ui'
 import cls from './Form.module.scss'
 
 interface IProps {
-    register: UseFormRegister<ProfileInfoType>
+    register: UseFormRegister<ProfileDataModel>
     validErrors: Record<
-    'nameError'
+    'firstNameError'
     | 'userNameError'
-    | 'surNameError'
+    | 'lastNameError'
     | 'cityError'
     | 'aboutMeError', string | undefined>
-    control: Control<ProfileInfoType, any>
+    control: Control<ProfileDataModel, any>
 }
 
 export const Form: React.FC<IProps> = ({ register, validErrors, control }) => {
     const {
         userNameError,
-        nameError,
-        surNameError,
+        firstNameError,
+        lastNameError,
         cityError,
         aboutMeError
     } = validErrors
@@ -39,30 +39,30 @@ export const Form: React.FC<IProps> = ({ register, validErrors, control }) => {
             />
 
             <Input
-                {...register('name')}
+                {...register('firstName')}
                 id="name"
                 type={'text'}
                 label="First Name"
-                error={!!nameError}
-                errorText={nameError}
+                error={!!firstNameError}
+                errorText={firstNameError}
                 className={cls.wrapper}
                 labelClassName={cls.label}
             />
 
             <Input
-                {...register('surName')}
+                {...register('lastName')}
                 id="surName"
                 type={'text'}
                 label="Last Name"
-                error={!!surNameError}
-                errorText={surNameError}
+                error={!!lastNameError}
+                errorText={lastNameError}
                 className={cls.wrapper}
                 labelClassName={cls.label}
             />
 
             <Controller
                 control={control}
-                name="dateOfBirthday"
+                name="dateOfBirth"
                 render={({ field: { onChange, value } }) => (
                     <div className={cls.wrapper}>
                         <label className={cls.label}>Date of birthday</label>

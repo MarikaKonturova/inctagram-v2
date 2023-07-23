@@ -1,0 +1,11 @@
+.cardsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    flex-shrink: 0;
+
+    .card {
+        width: 234px;
+        height: 228px;
+    }   
+}

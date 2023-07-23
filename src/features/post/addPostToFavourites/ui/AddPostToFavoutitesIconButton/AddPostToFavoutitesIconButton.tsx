@@ -6,7 +6,7 @@ import { ActionIcon } from 'shared/ui'
 import { useAddToFavouritesPost } from '../../model'
 
 interface IProps {
-    postId: string
+    postId: number
 }
 
 export const AddPostToFavoutitesIconButton: FC<IProps> = ({ postId }) => {

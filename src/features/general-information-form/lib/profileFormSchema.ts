@@ -1,13 +1,13 @@
 import * as yup from 'yup'
 
-export type ValidateUnion = 'userName' | 'name' | 'surName' | 'city' | 'aboutMe'
+export type ValidateUnion = 'userName' | 'firstName' | 'lastName' | 'city' | 'aboutMe'
 
 export const createValidationSchema = (arr: ValidateUnion[]): any => {
     const validationObject = arr.reduce((accum: any, type) => {
         switch (type) {
         case 'userName':
-        case 'name':
-        case 'surName':
+        case 'firstName':
+        case 'lastName':
         case 'city':
         case 'aboutMe': {
             accum[type] = yup

@@ -11,7 +11,6 @@ export const useLogin = () => {
         mutationFn: AuthService.login,
         retry: false,
         onSuccess: async () => {
-            console.log('inside onsuccess', { queryClient })
             await queryClient.invalidateQueries(['me']).then(() => {
                 routerPush(AppRoutes.PROFILE_SETTINGS.GENERAL_INFORMATION)
             })

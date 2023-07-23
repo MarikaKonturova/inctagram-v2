@@ -12,3 +12,5 @@ export {
 } from './subscribeOrUnsubscribe/ui/SubscribeOrUnsubscribeButton/SubscribeOrUnsubscribeButton'
 export { Report } from './report/ui/Report/Report'
 export { CopyToClipboard } from './copyToClipboard/ui/CopyToClipboard/CopyToClipboard'
+export { GetCommentaries } from './getCommentaries/ui/GetPostModal/GetCommentaries'
+export { LikeCommentIconButton } from './likeComment/ui/LikeCommentIconButton/LikeCommentIconButton'

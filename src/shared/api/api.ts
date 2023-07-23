@@ -9,7 +9,6 @@ export const $api = axios.create({
 })
 
 $api.interceptors.request.use((config) => {
-    console.log({ token: localStorage.getItem('token') })
     config.headers.Authorization = `Bearer ${localStorage.getItem('token') || ''}`
     return config
 })
@@ -19,7 +18,6 @@ $api.interceptors.response.use((config) => {
 }, async (error) => {
     const originalRequest = error.config
     if (error.response?.status === 401 && error.config && !error.config._isRetry) {
-        console.log({ originalRequest, error })
         originalRequest._isRetry = true
         try {
             const response = await axios.post<RefreshTokenResponse>(
@@ -29,7 +27,6 @@ $api.interceptors.response.use((config) => {
                     withCredentials: true,
                     headers: { Authorization: `Bearer ${localStorage.getItem('token') || ''}` }
                 })
-            console.log({ response })
             localStorage.setItem('token', response.data.accessToken)
             return await $api.request(originalRequest)
         } catch (e) {

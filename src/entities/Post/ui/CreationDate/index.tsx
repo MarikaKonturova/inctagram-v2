@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { type FC } from 'react'
 import cls from './styles.module.scss'
 
-export const CreationDate = () => (
-    <div className={cls.container}>July 3, 2021</div>
+interface Props {
+    date: string
+}
+
+export const CreationDate: FC<Props> = ({ date }) => (
+    <div className={cls.container}>{date}</div>
 )

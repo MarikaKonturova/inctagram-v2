@@ -1,7 +1,6 @@
 import React from 'react'
 import { Theme, useTheme } from 'app/providers/ThemeProvider'
-import IconComment from 'shared/assets/icons/light/message-circle.svg'
-import IconCommentOutline from 'shared/assets/icons/outline/message-circle-outline.svg'
+import IconShareOutline from 'shared/assets/icons/general/paper-plane.svg'
 import { ActionIcon } from 'shared/ui'
 import { useSharePost } from '../../model'
 
@@ -17,7 +16,7 @@ export const SharePostIconButton = () => {
     }
 
     return (
-        <ActionIcon filledIcon={<IconComment fill={fill}/>}
-                    outlineIcon={<IconCommentOutline fill={fill}/>} onClick={onShareIconClick} />
+        <ActionIcon filledIcon={<IconShareOutline fill={fill}/>}
+                    outlineIcon={<IconShareOutline fill={fill}/>} onClick={onShareIconClick} />
     )
 }

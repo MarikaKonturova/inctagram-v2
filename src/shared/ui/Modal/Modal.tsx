@@ -5,9 +5,12 @@ import { Portal } from 'shared/ui/Portal/Portal'
 interface ModalProps {
     title?: string
     isOpen?: boolean
+    withHeader?: boolean
+    withStyles?: boolean
     onClose?: () => void
     className?: string
     children?: ReactNode
+    id?: number
 }
 
 export const Modal = (props: ModalProps) => {

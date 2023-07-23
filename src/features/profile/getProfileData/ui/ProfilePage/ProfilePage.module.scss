@@ -1,0 +1,38 @@
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 36px 24px;
+
+    .flex {
+        display: flex;
+        margin-bottom: 53px;
+
+        .avatar {
+            margin-right: 38px;
+        }
+
+        .userName {
+            font-size: 20px;
+            line-height: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .info {
+            display: flex;
+            margin-bottom: 23px;
+
+            .subscribe {
+                font-weight: 700;
+            }
+        }
+
+
+    }
+}
+
+
+
+.info div:not(:last-child) {
+    margin-right: 72px;
+}

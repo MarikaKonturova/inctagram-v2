@@ -3,7 +3,7 @@ import { $api } from '../api'
 
 export const profileService = {
     uploadAvatar (file: FormData) {
-        return $api.post('/users/avatar', file, {
+        return $api.post('/users/profile/avatar', file, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -14,7 +14,7 @@ export const profileService = {
         return $api.get<ProfileDataModel>('/users/profile')
     },
 
-    updateProfileData (body: ProfileDataModel) {
+    updateProfileData (body: Omit<ProfileDataModel, 'avatars' | 'id'>) {
         return $api.put<ProfileDataModel>('/users/profile', body)
     },
 
