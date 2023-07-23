@@ -8,13 +8,12 @@ import cls from './ProfilePage.module.scss'
 export const ProfilePage = () => {
     const { response } = useGetProfileData()
     const userData = response?.data
-
     return (
         <div className={cls.container}>
             <div className={cls.flex}>
-                {/* <div className={cls.avatar}>
-                    <Avatar size={192} src={userData ? userData. : undefined} />
-                </div> */}
+                <div className={cls.avatar}>
+                    <Avatar size={192} src={userData ? userData.avatars[1].url : undefined} />
+                </div>
                 <div>
                     <div className={cls.userName}>{userData?.userName}</div>
                     <div className={cls.info}>
