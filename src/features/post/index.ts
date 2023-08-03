@@ -1,3 +1,4 @@
+
 export { AddCommentBox } from './addComment/ui/AddCommentBox/AddCommentBox'
 export { AddCommentIconButton } from './addComment/ui/AddCommentIconButton/AddCommentIconButton'
 export { UpdateMyPostButton } from './updateMyPost/ui/UpdateMyPostButton/UpdateMyPostButton'
@@ -14,3 +15,4 @@ export { Report } from './report/ui/Report/Report'
 export { CopyToClipboard } from './copyToClipboard/ui/CopyToClipboard/CopyToClipboard'
 export { GetCommentaries } from './getCommentaries/ui/GetPostModal/GetCommentaries'
 export { LikeCommentIconButton } from './likeComment/ui/LikeCommentIconButton/LikeCommentIconButton'
+export { CreatePostModal } from './CreatePostModal/ui'
