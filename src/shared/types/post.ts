@@ -47,14 +47,14 @@ export interface PostsImage {
 
 export interface NewPost {
     description: string
-    childrenMetadata:
-    Array<{
+    childrenMetadata: Array<{
         uploadId: string
     }>
 }
 
 export interface PostResponse {
     id: number
+    ownerId: number
     description: string
     location: string
     images: PostImage[]
