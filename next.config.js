@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const { i18n } = require('./next-i18next.config')
+
 const nextConfig = {
     reactStrictMode: false,
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -39,7 +41,8 @@ const nextConfig = {
                 pathname: '/users-inctagram/**'
             }
         ]
-    }
+    },
+    i18n
 }
 
 module.exports = nextConfig

@@ -1,2 +1,35 @@
-import { Redirect } from 'shared/lib/i18n/redirect'
-export default Redirect
+import { getLayoutWithSidebar } from 'layouts/Layout/LayoutWithSidebar/LayoutWithSidebar'
+import { type GetServerSidePropsContext } from 'next'
+import Head from 'next/head'
+import { AppRoutes } from 'shared/config/routeConfig/path'
+import { getTranslations } from 'shared/lib/i18n'
+import { AppLink } from 'shared/ui'
+
+export default function Home () {
+    return (
+        <>
+            <Head>
+                <title>Inctagram</title>
+                <meta name="description" content="Inctagram" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <main>
+                <>
+                    <AppLink href={AppRoutes.AUTH.CONGRATULATIONS}>Congratulations</AppLink>
+                    <AppLink href={AppRoutes.AUTH.VERIFICATION}>Verification</AppLink>
+                    <AppLink href={AppRoutes.AUTH.REGISTRATION}>registration</AppLink>
+                </>
+            </main>
+
+        </>
+    )
+}
+
+Home.getLayout = getLayoutWithSidebar
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+    return {
+        props: getTranslations(ctx.locale, ['common', 'auth'])
+    }
+}

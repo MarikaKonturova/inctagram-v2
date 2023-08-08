@@ -1,0 +1,28 @@
+.container {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    border: 1px solid var(--dark-100-color);
+    border-bottom: none;
+    z-index: 1;
+}
+
+.listItem {
+    padding: 6px 12px;
+    flex: 1 0 auto;
+    border-bottom: 1px solid var(--dark-100-color);
+    cursor: pointer;
+}
+
+.button {
+    color: var(--light-100-color);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.icon {
+    fill: #fff;
+}
