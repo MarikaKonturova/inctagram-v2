@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import React from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
@@ -12,6 +13,7 @@ export interface PasswordRecoveryValidation {
 }
 
 export const PasswordRecoveryForm = () => {
+    const { t } = useTranslation('auth')
     const {
         register,
         handleSubmit,
@@ -32,30 +34,32 @@ export const PasswordRecoveryForm = () => {
 
     return (
         <FormWrapper className={cls.rootWrapper} onSubmit={handleSubmit(onSubmit)}>
-            <h2 className={cls.title}>Forgot Password</h2>
+            <h2 className={cls.title}>{t('forgotPassword')}</h2>
             <Input
                 {...register('email')}
                 type={'email'}
-                placeholder={'Email'}
+                placeholder={`${t('email')}`}
                 error={!!emailError}
                 errorText={emailError}
                 className={cls.input}
             />
-            <p className={cls.helperText}>Enter your email address and we will send you <br /> further instructions </p>
+            <p className={cls.helperText}>{t('passwordRecovery')}</p>
 
-            {error?.response?.data.message && <p className={cls.error}>{error.response.data.message}</p>}
+            {error?.response?.data.message && <p className={cls.error}>
+                {error.response.data.message}
+            </p>}
 
             {isInfoTextShown && <p className={cls.infoText}>
-                The link has been sent by email. <br /> If you don’t receive an email send link again
+                {t('recoveryMessage')}
             </p>}
             <Button
                 disabled={isLoading}
                 type={'submit'}
                 className={cls.button}
             >
-                {isInfoTextShown ? 'Send Link again' : 'Send Link'}
+                {isInfoTextShown ? t('sendLinkAgain') : t('sendLink')}
             </Button>
-            <AppLink active href={AppRoutes.AUTH.LOGIN}>Back to Sign In</AppLink>
+            <AppLink active href={AppRoutes.AUTH.LOGIN}>{t('backToSignIn')}</AppLink>
             <ReCAPTCHA
                 {...register('recaptcha')}
                 theme="dark"

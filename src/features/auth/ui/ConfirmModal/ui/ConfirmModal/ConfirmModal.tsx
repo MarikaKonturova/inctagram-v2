@@ -1,6 +1,6 @@
 import clsx from 'clsx'
+import { useTranslation } from 'next-i18next'
 import { type FC } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useAuth } from 'features/auth/model'
 import { SelectEmail } from 'features/auth/model/selectors'
 import { useModal } from 'shared/hooks/useModal'
@@ -12,7 +12,7 @@ interface ConfirmModalProps {
 }
 
 export const ConfirmModal: FC<ConfirmModalProps> = ({ className }) => {
-    const { t } = useTranslation()
+    const { t } = useTranslation('auth')
     const { isOpen, setIsOpen } = useModal()
     const email = useAuth(SelectEmail)
 
@@ -25,7 +25,7 @@ export const ConfirmModal: FC<ConfirmModalProps> = ({ className }) => {
             className={clsx(cls.Modal, {}, [className])}
         >
             <div className={cls.content}>
-                <div className={cls.text}>{t('We have sent a link to confirm your email to')} {email}</div>
+                <div className={cls.text}>{t('emailConfirmation')} {email}</div>
                 <Button onClick={onCloseHandler} className={cls.button}>OK</Button>
             </div>
         </Modal>

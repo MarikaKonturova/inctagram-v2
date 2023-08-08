@@ -26,7 +26,7 @@ interface SidebarProps {
 export const Sidebar = (props: SidebarProps) => {
     const [open, setOpen] = useState(false)
     const { className } = props
-    const { t } = useTranslation()
+    const { t } = useTranslation('common')
     const { theme } = useTheme()
     const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
     const { asPath } = useRouter()
@@ -44,7 +44,7 @@ export const Sidebar = (props: SidebarProps) => {
                         : <IconHomeOutline className={cls.icon} fill={fill}/>
                     }
                     <span className={cls.link}>
-                        {t('Home')}
+                        {t('home')}
                     </span>
                 </AppLink>
                 <button type='button' onClick={() => {
@@ -74,7 +74,7 @@ export const Sidebar = (props: SidebarProps) => {
                     }
 
                     <span className={cls.link}>
-                        {t('My Profile')}
+                        {t('myProfile')}
                     </span>
                 </AppLink>
             </div>
@@ -87,7 +87,7 @@ export const Sidebar = (props: SidebarProps) => {
                     <IconStatistics className={cls.icon} fill={fill}/>
 
                     <span className={cls.link}>
-                        {t('Statistics')}
+                        {t('statistics')}
                     </span>
                 </AppLink>
                 <AppLink
@@ -101,7 +101,7 @@ export const Sidebar = (props: SidebarProps) => {
                     }
 
                     <span className={cls.link}>
-                        {t('Favorites')}
+                        {t('favorites')}
                     </span>
                 </AppLink>
             </div>
@@ -110,7 +110,7 @@ export const Sidebar = (props: SidebarProps) => {
             >
                 <IconLogOut className={cls.icon} fill={fill} />
                 <span className={cls.link}>
-                    Log Out
+                    {t('logout')}
                 </span>
 
             </Button>

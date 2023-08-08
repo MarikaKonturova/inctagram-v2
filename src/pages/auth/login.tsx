@@ -1,5 +1,7 @@
 import { getAuthLayout } from 'layouts/Layout/AuthLayout/AuthLayout'
+import { type GetServerSidePropsContext } from 'next'
 import { ConfirmModal, LoginForm } from 'features/auth'
+import { getTranslations } from 'shared/lib/i18n'
 
 export default function Login () {
     return <>
@@ -7,5 +9,9 @@ export default function Login () {
         <ConfirmModal/>
     </>
 }
+
+export const getServerSideProps = (ctx: GetServerSidePropsContext) => ({
+    props: getTranslations(ctx.locale, ['auth'])
+})
 
 Login.getLayout = getAuthLayout

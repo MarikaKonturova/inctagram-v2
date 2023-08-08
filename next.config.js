@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const { i18n } = require('./next-i18next.config')
+
 const nextConfig = {
     reactStrictMode: false,
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -42,7 +44,8 @@ const nextConfig = {
     },
     env: {
         API_URL: 'https://twin.cygan.lol/'
-    }
+    },
+    i18n
 }
 
 module.exports = nextConfig

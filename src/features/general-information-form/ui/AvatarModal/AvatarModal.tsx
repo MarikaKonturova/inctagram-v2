@@ -21,7 +21,7 @@ interface confirmModalProps {
     setAvatar: Dispatch<SetStateAction<string | undefined>>
 }
 export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => {
-    const { t } = useTranslation()
+    const { t } = useTranslation('common')
     const { isOpen, setIsOpen } = useModal()
     const [image, setImage] = useState<File>()
     const [preview, setPreview] = useState<string>()
@@ -80,7 +80,7 @@ export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => 
         <Modal
             isOpen={isOpen}
             onClose={onCloseHandler}
-            title={`${t('Add a profile photo')}`}
+            title={`${t('addPhoto')}`}
             className={clsx(cls.Modal, {}, [className])}
         >
             <div className={cls.content}>
@@ -92,7 +92,7 @@ export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => 
                             onClose={onClose}
                             onCrop={onCrop}
                     />
-                    <Button className={cls.button} type={'button'} onClick={save} disabled={!image}>Save</Button>
+                    <Button className={cls.button} type={'button'} onClick={save} disabled={!image}>{t('save')}</Button>
                 </div>
             </div>
         </Modal>
