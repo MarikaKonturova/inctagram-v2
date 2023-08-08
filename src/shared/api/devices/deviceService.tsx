@@ -1,14 +1,14 @@
 import { $api } from 'shared/api/api'
-import { type DeviceScheme } from 'shared/types/device'
+import { type AllDevicesScheme } from 'shared/types/device'
 
 export const deviceService = {
     getDevices () {
-        return $api.get<DeviceScheme[]>('security/devices').then(data => data)
+        return $api.get<AllDevicesScheme>('sessions').then(data => data)
     },
     terminateAllDevices () {
-        return $api.delete('security/devices')
+        return $api.delete('sessions')
     },
     terminateDevice (deviceId: string) {
-        return $api.delete(`security/devices/${deviceId}`)
+        return $api.delete(`sessions/${deviceId}`)
     }
 }
