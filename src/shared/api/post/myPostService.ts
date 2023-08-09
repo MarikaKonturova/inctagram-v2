@@ -24,9 +24,6 @@ export const MyPostService = {
     editPost (postId: number, data: Record<'description', string>) {
         return $api.put(`/posts/${postId}`, data)
     },
-    update (postId: string, newPost: Post) {
-        return $api.put<Post>(`/posts/${postId}`, newPost)
-    },
     deletePost (postId: number) {
         return $api.delete(`/posts/${postId}`)
     }
