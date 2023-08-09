@@ -1,12 +1,8 @@
 .container {
-    padding: 0 15px;
+    padding-left: 15px;
     margin: 0 auto;
     height: 100%;
     width: 100%;
-
-    &.large {
-        max-width: 1190px;
-    }
 
     &.medium {
         max-width: 1000px;
