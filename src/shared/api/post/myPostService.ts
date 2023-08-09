@@ -1,5 +1,5 @@
 import { $api } from 'shared/api/api'
-import { type PostsImage, type Post, type NewPost, type PostResponse, type GetPostsResponse } from '../../types/post'
+import { type PostsImage, type PostResponse, type GetPostsResponse } from '../../types/post'
 
 export const MyPostService = {
     createPostsImage (file: any) {
