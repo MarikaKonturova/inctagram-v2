@@ -9,8 +9,8 @@ export default function Verification () {
     )
 }
 
-export const getStaticProps = (ctx: GetStaticPropsContext) => ({
-    props: getTranslations(ctx.locale, ['auth'])
+export const getStaticProps = async (ctx: GetStaticPropsContext) => ({
+    props: await getTranslations(ctx.locale, ['auth'])
 })
 
 Verification.getLayout = getAuthLayout

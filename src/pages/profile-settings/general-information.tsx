@@ -11,8 +11,8 @@ export default function GeneralInformation () {
     return <GeneralInformationForm userData={userData} />
 }
 
-export const getServerSideProps = (ctx: GetServerSidePropsContext) => ({
-    props: getTranslations(ctx.locale, ['common'])
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => ({
+    props: await getTranslations(ctx.locale, ['common'])
 })
 
 GeneralInformation.getLayout = getLayoutWithSidebar

@@ -7,8 +7,8 @@ export default function Recovery () {
     return <NewPasswordForm/>
 }
 
-export const getServerSideProps = (ctx: GetServerSidePropsContext) => ({
-    props: getTranslations(ctx.locale, ['auth'])
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => ({
+    props: await getTranslations(ctx.locale, ['auth'])
 })
 
 Recovery.getLayout = getAuthLayout

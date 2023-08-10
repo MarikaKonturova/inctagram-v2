@@ -7,8 +7,8 @@ export default function Registration () {
     return <RegisterForm/>
 }
 
-export const getServerSideProps = (ctx: GetServerSidePropsContext) => ({
-    props: getTranslations(ctx.locale, ['auth'])
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => ({
+    props: await getTranslations(ctx.locale, ['auth'])
 })
 
 Registration.getLayout = getAuthLayout

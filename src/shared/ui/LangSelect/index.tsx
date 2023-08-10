@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import { Listbox } from '@headlessui/react'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
@@ -18,7 +17,7 @@ export const LangSelect = () => {
 
     const changeLangHandler = (locale: string) => {
         changeLocale(locale)
-        router.push('/', '', { locale })
+        void router.push('/', '', { locale })
     }
 
     return (

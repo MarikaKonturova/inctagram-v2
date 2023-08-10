@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import React from 'react'
 import { Theme, useTheme } from 'app/providers/ThemeProvider'
-import IconLogOut from 'shared/assets/icons/general/log-out.svg'
+import { Logout } from 'features/auth'
 import Statistics from 'shared/assets/icons/general/trending-up.svg'
 import Favorites from 'shared/assets/icons/light/bookmark.svg'
 import Home from 'shared/assets/icons/light/home.svg'
@@ -15,7 +15,6 @@ import ProfileOutline from 'shared/assets/icons/outline/person-outline.svg'
 import CreateOutline from 'shared/assets/icons/outline/plus-square-outline.svg'
 import { AppRoutes } from 'shared/config/routeConfig/path'
 import { AppLink } from 'shared/ui/AppLink/AppLink'
-import { Button } from 'shared/ui/Button/Button'
 import cls from './Sidebar.module.scss'
 
 interface SidebarProps {
@@ -102,16 +101,7 @@ export const Sidebar = (props: SidebarProps) => {
                     </span>
                 </AppLink>
             </div>
-            <Button theme={'clear'}
-                // disabled={isLoading}
-                    className={cls.button}
-            >
-                <IconLogOut className={cls.icon} fill={fill} />
-                <span className={cls.link}>
-                    {t('logout')}
-                </span>
-
-            </Button>
+            <Logout className={cls.button} />
         </div>
     )
 }

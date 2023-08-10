@@ -10,8 +10,8 @@ export default function Login () {
     </>
 }
 
-export const getServerSideProps = (ctx: GetServerSidePropsContext) => ({
-    props: getTranslations(ctx.locale, ['auth'])
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => ({
+    props: await getTranslations(ctx.locale, ['auth'])
 })
 
 Login.getLayout = getAuthLayout
