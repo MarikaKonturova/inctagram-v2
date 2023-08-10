@@ -28,8 +28,6 @@ export default function Home () {
 
 Home.getLayout = getLayoutWithSidebar
 
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-    return {
-        props: getTranslations(ctx.locale, ['common', 'auth'])
-    }
-}
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => ({
+    props: await getTranslations(ctx.locale, ['common', 'auth'])
+})

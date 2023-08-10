@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
+import { useRouter } from 'next/router'
 import { useCallback, useMemo } from 'react'
 import { useAuth } from 'features/auth/model'
 import { SelectEmail, SelectSetEmail } from 'features/auth/model/selectors'
 import { AuthService } from 'shared/api/auth/authService'
 import { AppRoutes } from 'shared/config/routeConfig/path'
 import { useModal } from 'shared/hooks/useModal'
-import { routerPush } from 'shared/lib/routerPush/routerPush'
 import {
     type UserRegistrationError,
     type UserRegistrationModel
@@ -23,13 +23,14 @@ export const useRegistration = () => {
     const setEmail = useAuth(SelectSetEmail)
     const email = useAuth(SelectEmail)
     const { setIsOpen } = useModal()
+    const { push } = useRouter()
 
     const { mutate: registration, isLoading, error } =
       useMutation<any, AxiosError<UserRegistrationError>, UserRegistrationModel, unknown>({
           mutationFn: AuthService.registration,
           retry: false,
           onSuccess: () => {
-              routerPush(AppRoutes.AUTH.LOGIN)
+              void push(AppRoutes.AUTH.LOGIN)
               setIsOpen(true)
               localStorage.setItem('email', email)
           }
