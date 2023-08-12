@@ -11,10 +11,10 @@ interface PropsType {
 }
 
 export const Device: FC<PropsType> = memo(({ device, isCurrentDevice }) => {
-    const lastActiveDate = new Date(device.lastActiveDate).toISOString().replace('T', ' | ').slice(0, 21)
-    const Browser: any = Icons[fnBrowserDetect(device.title).toLowerCase()]
+    const lastActiveDate = new Date(device.lastVisit).toISOString().replace('T', ' | ').slice(0, 21)
+    const Browser: any = Icons[fnBrowserDetect(device.userAgent).toLowerCase()]
 
-    const title = fnBrowserDetect(device.title)
+    const title = fnBrowserDetect(device.userAgent)
 
     return (
         <div className={cls.inner}>
