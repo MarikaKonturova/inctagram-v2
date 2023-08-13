@@ -3,17 +3,19 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { AuthService } from 'shared/api/auth/authService'
 import { AppRoutes } from 'shared/config/routeConfig/path'
+import useLocale from 'shared/hooks/useLocale'
 
 export const useConfirmEmailMutation = (code: string) => {
-    const { push } = useRouter()
+    const { push, query, asPath } = useRouter()
+    const { locale } = useLocale()
 
     const { mutate: confirmEmail } = useMutation(AuthService.confirmEmail, {
         mutationKey: ['confirm-email'],
         onSuccess: () => {
-            void push(AppRoutes.AUTH.CONGRATULATIONS)
+            void push({ pathname: AppRoutes.AUTH.CONGRATULATIONS, query }, asPath, { locale })
         },
         onError: () => {
-            void push(AppRoutes.AUTH.VERIFICATION)
+            void push({ pathname: AppRoutes.AUTH.VERIFICATION, query }, asPath, { locale })
         }
     })
 

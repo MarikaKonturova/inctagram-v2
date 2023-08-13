@@ -6,6 +6,7 @@ import { useAuth } from 'features/auth'
 import { SelectSetEmail } from 'features/auth/model/selectors'
 import { AuthService } from 'shared/api/auth/authService'
 import { AppRoutes } from 'shared/config/routeConfig/path'
+import useLocale from 'shared/hooks/useLocale'
 import { useModal } from 'shared/hooks/useModal'
 
 export const useResendEmailMutation = () => {
@@ -13,12 +14,13 @@ export const useResendEmailMutation = () => {
     const setEmail = useAuth(SelectSetEmail)
     const onOpen = useSnackbar((state) => state.onOpen)
     const { setIsOpen } = useModal()
-    const { push } = useRouter()
+    const { push, query, asPath } = useRouter()
+    const { locale } = useLocale()
 
     const { mutate: resendEmail } = useMutation(AuthService.resendEmail, {
         mutationKey: ['resendEmail'],
         onSuccess: () => {
-            void push(AppRoutes.AUTH.LOGIN)
+            void push({ pathname: AppRoutes.AUTH.LOGIN, query }, asPath, { locale })
             setIsOpen(true)
         },
         onError: () => {

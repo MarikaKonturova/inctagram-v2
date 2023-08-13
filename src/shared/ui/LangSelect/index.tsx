@@ -12,12 +12,12 @@ const languages: Record<string, string> = {
 }
 
 export const LangSelect = () => {
-    const router = useRouter()
+    const { pathname, query, asPath, push } = useRouter()
     const { locale, changeLocale } = useLocale()
 
     const changeLangHandler = (locale: string) => {
         changeLocale(locale)
-        void router.push('/', '', { locale })
+        void push({ pathname, query }, asPath, { locale })
     }
 
     return (
