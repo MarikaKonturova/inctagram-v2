@@ -2,7 +2,7 @@
 const { i18n } = require('./next-i18next.config')
 
 const nextConfig = {
-    reactStrictMode: false,
+    reactStrictMode: true,
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     webpack (config) {
         const fileLoaderRule = config.module.rules.find((rule) =>
