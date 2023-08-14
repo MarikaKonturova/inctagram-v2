@@ -14,6 +14,7 @@ import { useLoader } from 'shared/hooks/useLoader'
 import useLocale from 'shared/hooks/useLocale'
 import { AdminMenu } from 'shared/ui'
 import 'app/styles/nprogress.scss'
+// eslint-disable-next-line import/no-internal-modules
 import i18n from '../shared/config/storybook/I18nDecorator/i18next'
 
 export type NextPageWithLayout<P = Record<string, unknown>> = NextPage<P> & {
