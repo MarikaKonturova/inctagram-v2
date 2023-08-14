@@ -1,6 +1,8 @@
 import { getLayoutWithSidebar } from 'layouts/Layout/LayoutWithSidebar/LayoutWithSidebar'
+import { type GetServerSidePropsContext } from 'next'
 import { GeneralInformationForm } from 'features/general-information-form'
 import { useGetProfileData } from 'features/profile/getProfileData/model'
+import { getTranslations } from 'shared/lib/i18n'
 
 export default function GeneralInformation () {
     const { response } = useGetProfileData()
@@ -8,5 +10,9 @@ export default function GeneralInformation () {
 
     return <GeneralInformationForm userData={userData} />
 }
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => ({
+    props: await getTranslations(ctx.locale, ['common'])
+})
 
 GeneralInformation.getLayout = getLayoutWithSidebar

@@ -1,17 +1,21 @@
 import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { AuthService } from 'shared/api/auth/authService'
 import { AppRoutes } from 'shared/config/routeConfig/path'
-import { routerPush } from 'shared/lib/routerPush/routerPush'
+import useLocale from 'shared/hooks/useLocale'
 
 export const useConfirmEmailMutation = (code: string) => {
+    const { push, query, asPath } = useRouter()
+    const { locale } = useLocale()
+
     const { mutate: confirmEmail } = useMutation(AuthService.confirmEmail, {
         mutationKey: ['confirm-email'],
         onSuccess: () => {
-            routerPush(AppRoutes.AUTH.CONGRATULATIONS)
+            void push({ pathname: AppRoutes.AUTH.CONGRATULATIONS, query }, asPath, { locale })
         },
         onError: () => {
-            routerPush(AppRoutes.AUTH.VERIFICATION)
+            void push({ pathname: AppRoutes.AUTH.VERIFICATION, query }, asPath, { locale })
         }
     })
 

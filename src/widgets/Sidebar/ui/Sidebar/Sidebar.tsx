@@ -3,8 +3,8 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import React, { useState } from 'react'
 import { Theme, useTheme } from 'app/providers/ThemeProvider'
+import { Logout } from 'features/auth'
 import { CreatePostModal } from 'features/post'
-import IconLogOut from 'shared/assets/icons/general/log-out.svg'
 import IconStatistics from 'shared/assets/icons/general/trending-up.svg'
 import IconFavorites from 'shared/assets/icons/light/bookmark.svg'
 import IconHome from 'shared/assets/icons/light/home.svg'
@@ -15,7 +15,7 @@ import IconHomeOutline from 'shared/assets/icons/outline/home-outline.svg'
 import IconProfileOutline from 'shared/assets/icons/outline/person-outline.svg'
 import IconCreateOutline from 'shared/assets/icons/outline/plus-square-outline.svg'
 import { AppRoutes } from 'shared/config/routeConfig/path'
-import { Button, AppLink } from 'shared/ui'
+import { AppLink } from 'shared/ui'
 import cls from './Sidebar.module.scss'
 
 interface SidebarProps {
@@ -26,7 +26,7 @@ interface SidebarProps {
 export const Sidebar = (props: SidebarProps) => {
     const [open, setOpen] = useState(false)
     const { className } = props
-    const { t } = useTranslation()
+    const { t } = useTranslation('common')
     const { theme } = useTheme()
     const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
     const { asPath } = useRouter()
@@ -45,7 +45,7 @@ export const Sidebar = (props: SidebarProps) => {
                         : <IconHomeOutline className={cls.icon} fill={fill}/>
                     }
                     <span className={cls.link}>
-                        {t('Home')}
+                        {t('home')}
                     </span>
                 </AppLink>
                 <button type='button' onClick={() => { setOpen(true) }} className={cls.item}>
@@ -70,7 +70,7 @@ export const Sidebar = (props: SidebarProps) => {
                     }
 
                     <span className={cls.link}>
-                        {t('My Profile')}
+                        {t('myProfile')}
                     </span>
                 </AppLink>
             </div>
@@ -83,7 +83,7 @@ export const Sidebar = (props: SidebarProps) => {
                     <IconStatistics className={cls.icon} fill={fill}/>
 
                     <span className={cls.link}>
-                        {t('Statistics')}
+                        {t('statistics')}
                     </span>
                 </AppLink>
                 <AppLink
@@ -97,19 +97,11 @@ export const Sidebar = (props: SidebarProps) => {
                     }
 
                     <span className={cls.link}>
-                        {t('Favorites')}
+                        {t('favorites')}
                     </span>
                 </AppLink>
             </div>
-            <Button theme={'clear'}
-                    className={cls.button}
-            >
-                <IconLogOut className={cls.icon} fill={fill} />
-                <span className={cls.link}>
-                    Log Out
-                </span>
-
-            </Button>
+            <Logout className={cls.button} />
         </div>
     )
 }
