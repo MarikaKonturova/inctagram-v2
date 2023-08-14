@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { type RefreshTokenResponse } from 'shared/types/auth'
 
-export const API_URL = 'https://inctagram-api.vercel.app/api/'
+export const API_URL = 'https://api.cygan.lol/'
 
 export const $api = axios.create({
     withCredentials: true,

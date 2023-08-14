@@ -1,5 +1,5 @@
 import { $api } from 'shared/api/api'
-import { type PostsImage, type Post, type NewPost, type PostResponse, type GetPostsResponse } from '../../types/post'
+import { type PostsImage, type PostResponse, type GetPostsResponse } from '../../types/post'
 
 export const MyPostService = {
     createPostsImage (file: any) {
@@ -9,7 +9,8 @@ export const MyPostService = {
             }
         })
     },
-    createNewPost (newPost: NewPost) {
+    createNewPost (newPost: FormData) {
+        console.log(newPost)
         return $api.post<PostResponse>('/posts', newPost)
     },
     deletePostsImage (uploadId: string) {
@@ -23,9 +24,6 @@ export const MyPostService = {
     },
     editPost (postId: number, data: Record<'description', string>) {
         return $api.put(`/posts/${postId}`, data)
-    },
-    update (postId: string, newPost: Post) {
-        return $api.put<Post>(`/posts/${postId}`, newPost)
     },
     deletePost (postId: number) {
         return $api.delete(`/posts/${postId}`)
