@@ -14,7 +14,7 @@ import IconFavoritesOutline from 'shared/assets/icons/outline/bookmark-outline.s
 import IconHomeOutline from 'shared/assets/icons/outline/home-outline.svg'
 import IconProfileOutline from 'shared/assets/icons/outline/person-outline.svg'
 import IconCreateOutline from 'shared/assets/icons/outline/plus-square-outline.svg'
-import { AppRoutes } from 'shared/config/routeConfig/path'
+import { AppRoutes } from 'shared/constants/routePath'
 import { AppLink } from 'shared/ui'
 import cls from './Sidebar.module.scss'
 
@@ -36,69 +36,83 @@ export const Sidebar = (props: SidebarProps) => {
         <div className={clsx(cls.Sidebar, [className])}>
             <div className={cls.menu}>
                 <AppLink
-                    href={AppRoutes.HOME}
-                    active={currentPath === AppRoutes.HOME}
-                    className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.HOME })}
+          href={AppRoutes.HOME}
+          active={currentPath === AppRoutes.HOME}
+          className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.HOME })}
                 >
                     {currentPath === AppRoutes.HOME
-                        ? <IconHome className={cls.icon}/>
-                        : <IconHomeOutline className={cls.icon} fill={fill}/>
-                    }
-                    <span className={cls.link}>
-                        {t('home')}
-                    </span>
+                        ? (
+                            <IconHome className={cls.icon} />
+                        )
+                        : (
+                            <IconHomeOutline className={cls.icon} fill={fill} />
+                        )}
+                    <span className={cls.link}>{t('home')}</span>
                 </AppLink>
-                <button type='button' onClick={() => { setOpen(true) }} className={cls.item}>
-                    {
-                        !open
-                            ? <IconCreateOutline className={cls.icon} fill={fill}/>
-                            : <IconCreate className={cls.icon} fill={fill}/>
-                    }
+                <button
+          type="button"
+          onClick={() => {
+              setOpen(true)
+          }}
+          className={cls.item}
+                >
+                    {!open
+                        ? (
+                            <IconCreateOutline className={cls.icon} fill={fill} />
+                        )
+                        : (
+                            <IconCreate className={cls.icon} fill={fill} />
+                        )}
                     <p className={cls.link} style={{ color: 'white' }}>
                         {t('Create')}
                     </p>
-                    <CreatePostModal handleClose={() => { setOpen(false) }} isOpen={open}/>
+                    <CreatePostModal
+            handleClose={() => {
+                setOpen(false)
+            }}
+            isOpen={open}
+                    />
                 </button>
                 <AppLink
-                    href={`${AppRoutes.PROFILE.MY_PROFILE}`}
-                    active={currentPath === AppRoutes.PROFILE.MY_PROFILE}
-                    className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.PROFILE.MY_PROFILE })}
+          href={`${AppRoutes.PROFILE.MY_PROFILE}`}
+          active={currentPath === AppRoutes.PROFILE.MY_PROFILE}
+          className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.PROFILE.MY_PROFILE })}
                 >
                     {currentPath === AppRoutes.PROFILE.MY_PROFILE
-                        ? <IconProfile className={cls.icon}/>
-                        : <IconProfileOutline className={cls.icon} fill={fill}/>
-                    }
+                        ? (
+                            <IconProfile className={cls.icon} />
+                        )
+                        : (
+                            <IconProfileOutline className={cls.icon} fill={fill} />
+                        )}
 
-                    <span className={cls.link}>
-                        {t('myProfile')}
-                    </span>
+                    <span className={cls.link}>{t('myProfile')}</span>
                 </AppLink>
             </div>
             <div className={cls.extra}>
                 <AppLink
-                    href={AppRoutes.STATISTICS}
-                    active={currentPath === AppRoutes.STATISTICS}
-                    className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.STATISTICS })}
+          href={AppRoutes.STATISTICS}
+          active={currentPath === AppRoutes.STATISTICS}
+          className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.STATISTICS })}
                 >
-                    <IconStatistics className={cls.icon} fill={fill}/>
+                    <IconStatistics className={cls.icon} fill={fill} />
 
-                    <span className={cls.link}>
-                        {t('statistics')}
-                    </span>
+                    <span className={cls.link}>{t('statistics')}</span>
                 </AppLink>
                 <AppLink
-                    href={AppRoutes.FAVORITES}
-                    active={currentPath === AppRoutes.FAVORITES}
-                    className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.FAVORITES })}
+          href={AppRoutes.FAVORITES}
+          active={currentPath === AppRoutes.FAVORITES}
+          className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.FAVORITES })}
                 >
                     {currentPath === AppRoutes.FAVORITES
-                        ? <IconFavorites className={cls.icon}/>
-                        : <IconFavoritesOutline className={cls.icon} fill={fill}/>
-                    }
+                        ? (
+                            <IconFavorites className={cls.icon} />
+                        )
+                        : (
+                            <IconFavoritesOutline className={cls.icon} fill={fill} />
+                        )}
 
-                    <span className={cls.link}>
-                        {t('favorites')}
-                    </span>
+                    <span className={cls.link}>{t('favorites')}</span>
                 </AppLink>
             </div>
             <Logout className={cls.button} />

@@ -8,7 +8,7 @@ const resources = ns.reduce((acc, n) => {
         if (!acc[lng]) acc[lng] = {}
         acc[lng] = {
             ...acc[lng],
-            [n]: require(`../../../../../public/locales/${lng}/${n}.json`)
+            [n]: require(`../../../public/locales/${lng}/${n}.json`)
         }
     })
     return acc

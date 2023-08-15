@@ -2,7 +2,7 @@ import { useTranslation } from 'next-i18next'
 import React from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
-import { AppRoutes } from 'shared/config/routeConfig/path'
+import { AppRoutes } from 'shared/constants/routePath'
 import { AppLink, Button, FormWrapper, Input, PageLoader } from 'shared/ui'
 
 import { useRecoverPassword } from '../../model'
@@ -23,7 +23,7 @@ export const PasswordRecoveryForm = () => {
     } = useValidationForm(['email', 'recaptcha'])
     const { isInfoTextShown, onSubmit, isLoading, error } = useRecoverPassword()
 
-    if (isLoading) return <PageLoader/>
+    if (isLoading) return <PageLoader />
 
     const getRecaptchaValueHandler = (value: string | null) => {
         if (value) {
@@ -45,21 +45,15 @@ export const PasswordRecoveryForm = () => {
             />
             <p className={cls.helperText}>{t('passwordRecovery')}</p>
 
-            {error?.response?.data.message && <p className={cls.error}>
-                {error.response.data.message}
-            </p>}
+            {error?.response?.data.message && <p className={cls.error}>{error.response.data.message}</p>}
 
-            {isInfoTextShown && <p className={cls.infoText}>
-                {t('recoveryMessage')}
-            </p>}
-            <Button
-                disabled={isLoading}
-                type={'submit'}
-                className={cls.button}
-            >
+            {isInfoTextShown && <p className={cls.infoText}>{t('recoveryMessage')}</p>}
+            <Button disabled={isLoading} type={'submit'} className={cls.button}>
                 {isInfoTextShown ? t('sendLinkAgain') : t('sendLink')}
             </Button>
-            <AppLink active href={AppRoutes.AUTH.LOGIN}>{t('backToSignIn')}</AppLink>
+            <AppLink active href={AppRoutes.AUTH.LOGIN}>
+                {t('backToSignIn')}
+            </AppLink>
             <ReCAPTCHA
                 {...register('recaptcha')}
                 theme="dark"

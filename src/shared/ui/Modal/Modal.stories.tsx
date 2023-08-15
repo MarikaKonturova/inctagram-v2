@@ -1,6 +1,6 @@
 import { type ComponentMeta, type ComponentStory } from '@storybook/react'
 import { Theme } from 'app/providers/ThemeProvider'
-import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator'
+import { ThemeDecorator } from 'app/config/storybook/ThemeDecorator/ThemeDecorator'
 import { Modal } from './Modal'
 
 export default {

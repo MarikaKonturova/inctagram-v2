@@ -3,11 +3,11 @@ import { useMutation } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
+import { useTranslation } from 'next-i18next'
 import React, {
     type ChangeEvent, type FC, useState, type MouseEvent,
     type Dispatch, type SetStateAction
 } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useSnackbar } from 'widgets/SnackBar/model/store/snackbarStore'
 import { profileService } from 'shared/api/profile'
 import { useModal } from 'shared/hooks/useModal'

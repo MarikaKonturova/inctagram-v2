@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
 import { useRouter } from 'next/router'
+import { AppRoutes } from 'shared/constants/routePath'
 import { AuthService } from 'shared/api/auth/authService'
-import { AppRoutes } from 'shared/config/routeConfig/path'
 import useLocale from 'shared/hooks/useLocale'
 
 export const useLogin = () => {

@@ -5,7 +5,7 @@ import { useSnackbar } from 'widgets/SnackBar/model/store/snackbarStore'
 import { useAuth } from 'features/auth'
 import { SelectSetEmail } from 'features/auth/model/selectors'
 import { AuthService } from 'shared/api/auth/authService'
-import { AppRoutes } from 'shared/config/routeConfig/path'
+import { AppRoutes } from 'shared/constants/routePath'
 import useLocale from 'shared/hooks/useLocale'
 import { useModal } from 'shared/hooks/useModal'
 
