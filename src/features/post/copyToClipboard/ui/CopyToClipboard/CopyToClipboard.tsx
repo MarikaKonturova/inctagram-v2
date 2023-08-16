@@ -2,11 +2,11 @@ import { Menu } from '@headlessui/react'
 import clsx from 'clsx'
 import React from 'react'
 
-import { Theme, useTheme } from 'app/providers/ThemeProvider'
-
 import IconCopy from 'shared/assets/icons/light/copy.svg'
 import IconCopyOutline from 'shared/assets/icons/outline/copy-outline.svg'
-import { copyToClipboard } from 'shared/lib/copyToClipboard'
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
+import { copyToClipboard } from 'shared/utils/copyToClipboard'
 import cls from './CopyToClipboard.module.scss'
 
 export const CopyToClipboard = () => {
@@ -16,15 +16,13 @@ export const CopyToClipboard = () => {
     return (
         <Menu.Item>
             {({ active }) => (
-                <button type='button'
-                        className={clsx(cls.item)}
-                        onClick={copyToClipboard}
-                >
+                <button type="button" className={clsx(cls.item)} onClick={copyToClipboard}>
                     {active
-                        ? <IconCopy aria-hidden="true" fill={fill}/>
-                        : <IconCopyOutline aria-hidden="true" fill={fill}/>
-                    }
-                    Copy Link</button>)}
+                        ? <IconCopy aria-hidden="true" fill={fill} />
+                        : <IconCopyOutline aria-hidden="true" fill={fill} />}
+                    Copy Link
+                </button>
+            )}
         </Menu.Item>
     )
 }

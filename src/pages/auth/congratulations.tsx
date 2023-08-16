@@ -5,8 +5,8 @@ import { useTranslation } from 'next-i18next'
 import CongratulationsImg from 'shared/assets/images/congratulations.png'
 import { AppRoutes } from 'shared/constants/routePath'
 import useLocale from 'shared/hooks/useLocale'
-import { getTranslations } from 'shared/lib/i18n'
 import { Info } from 'shared/ui'
+import { getTranslations } from 'shared/utils/getTranslations'
 
 export default function Congratulations () {
     const { t } = useTranslation('auth')

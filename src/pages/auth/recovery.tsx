@@ -1,7 +1,7 @@
 import { getAuthLayout } from 'layouts/Layout/AuthLayout/AuthLayout'
 import { type GetServerSidePropsContext } from 'next'
 import { NewPasswordForm } from 'features/auth'
-import { getTranslations } from 'shared/lib/i18n'
+import { getTranslations } from 'shared/utils/getTranslations'
 
 export default function Recovery () {
     return <NewPasswordForm/>

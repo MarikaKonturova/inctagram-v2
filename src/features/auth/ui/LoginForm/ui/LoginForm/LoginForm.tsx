@@ -1,8 +1,8 @@
 
 import { useTranslation } from 'next-i18next'
 import { type FC } from 'react'
-import { AppRoutes } from 'shared/constants/routePath'
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
+import { AppRoutes } from 'shared/constants/routePath'
 import { type UserLoginModel } from 'shared/types/auth'
 import { AppLink, Button, FormWrapper, Input, SocialIcons } from 'shared/ui'
 import { useLogin } from '../../model'

@@ -3,9 +3,10 @@ import { format, getYear } from 'date-fns'
 import { range } from 'lodash'
 import { useState } from 'react'
 import LibDatePicker from 'react-datepicker'
-import { Theme, useTheme } from 'app/providers/ThemeProvider'
 import 'react-datepicker/dist/react-datepicker.css'
 import IconCalendar from 'shared/assets/icons/light/calendar.svg'
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
 import { CustomHeader } from './components/CustomHeader'
 import cls from './DatePicker.module.scss'
 
@@ -39,36 +40,32 @@ export const DatePicker = ({ value, onChange }: DatePickerProps) => {
     }
 
     return (
-        <> <div className={clsx(cls.calendar_icon_group)} >
-            <LibDatePicker
-            renderCustomHeader={({
-                date,
-                changeYear,
-                changeMonth,
-                decreaseMonth,
-                increaseMonth,
-                ...rest
-            }) => (
-                <CustomHeader
-                        date={date}
-                        decreaseMonth={decreaseMonth}
-                        increaseMonth={increaseMonth}
-                        changeYear={changeYear}
-                        years={years}
-                        months={months}
-                        changeMonth={changeMonth}
-                        {...rest} />
-            )}
-            selected={startDate} onChange={onDateChange}
-            calendarClassName={cls.day}
-            dayClassName={(date) => date.getMonth() === startDate.getMonth()
-                ? clsx(cls.day, cls.dayWhite)
-                : clsx(cls.day, cls.dayGray) }
-            wrapperClassName ={clsx(cls.calendar)}
-            />
-            <IconCalendar className={clsx(cls.icon)} fill={fill}/>
-        </div>
+        <>
+            {' '}
+            <div className={clsx(cls.calendar_icon_group)}>
+                <LibDatePicker
+          renderCustomHeader={({ date, changeYear, changeMonth, decreaseMonth, increaseMonth, ...rest }) => (
+              <CustomHeader
+              date={date}
+              decreaseMonth={decreaseMonth}
+              increaseMonth={increaseMonth}
+              changeYear={changeYear}
+              years={years}
+              months={months}
+              changeMonth={changeMonth}
+              {...rest}
+              />
+          )}
+          selected={startDate}
+          onChange={onDateChange}
+          calendarClassName={cls.day}
+          dayClassName={(date) =>
+              date.getMonth() === startDate.getMonth() ? clsx(cls.day, cls.dayWhite) : clsx(cls.day, cls.dayGray)
+          }
+          wrapperClassName={clsx(cls.calendar)}
+                />
+                <IconCalendar className={clsx(cls.icon)} fill={fill} />
+            </div>
         </>
-
     )
 }

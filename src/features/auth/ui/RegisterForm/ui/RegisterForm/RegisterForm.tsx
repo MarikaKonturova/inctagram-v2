@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { useTranslation } from 'next-i18next'
 import { type FC, memo } from 'react'
-import { AppRoutes } from 'shared/constants/routePath'
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
+import { AppRoutes } from 'shared/constants/routePath'
 
 import { AppLink, Button, FormWrapper, Input, SocialIcons } from 'shared/ui'
 

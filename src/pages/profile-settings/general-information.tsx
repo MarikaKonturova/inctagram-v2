@@ -2,7 +2,7 @@ import { getLayoutWithSidebar } from 'layouts/Layout/LayoutWithSidebar/LayoutWit
 import { type GetServerSidePropsContext } from 'next'
 import { GeneralInformationForm } from 'features/general-information-form'
 import { useGetProfileData } from 'features/profile/getProfileData/model'
-import { getTranslations } from 'shared/lib/i18n'
+import { getTranslations } from 'shared/utils/getTranslations'
 
 export default function GeneralInformation () {
     const { response } = useGetProfileData()

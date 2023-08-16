@@ -1,7 +1,9 @@
 import React from 'react'
-import { Theme, useTheme } from 'app/providers/ThemeProvider'
 import ArrowForwardIcon from 'shared/assets/icons/general/arrow-forward.svg'
 import CloseIcon from 'shared/assets/icons/general/close.svg'
+
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
 import { Modal } from 'shared/ui'
 
 import cls from './styles.module.scss'
@@ -14,9 +16,7 @@ interface IProps {
 }
 
 export const PostModal: React.FC<IProps> = (props) => {
-    const {
-        content, isOpen, handleClose, id
-    } = props
+    const { content, isOpen, handleClose, id } = props
     const { theme } = useTheme()
     const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 

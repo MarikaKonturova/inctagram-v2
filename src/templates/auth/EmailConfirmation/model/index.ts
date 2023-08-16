@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { AppRoutes } from 'shared/constants/routePath'
 import { AuthService } from 'shared/api/auth/authService'
+import { AppRoutes } from 'shared/constants/routePath'
 import useLocale from 'shared/hooks/useLocale'
 
 export const useConfirmEmailMutation = (code: string) => {

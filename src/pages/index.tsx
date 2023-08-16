@@ -2,8 +2,8 @@ import { getLayoutWithSidebar } from 'layouts/Layout/LayoutWithSidebar/LayoutWit
 import { type GetServerSidePropsContext } from 'next'
 import Head from 'next/head'
 import { AppRoutes } from 'shared/constants/routePath'
-import { getTranslations } from 'shared/lib/i18n'
 import { AppLink } from 'shared/ui'
+import { getTranslations } from 'shared/utils/getTranslations'
 
 export default function Home () {
     return (

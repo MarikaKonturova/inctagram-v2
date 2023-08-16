@@ -1,7 +1,7 @@
 import { type ComponentMeta, type ComponentStory } from '@storybook/react'
 import React from 'react'
-import { ThemeDecorator } from 'app/config/storybook/ThemeDecorator/ThemeDecorator'
-import { Theme } from 'app/providers/ThemeProvider'
+import { ThemeDecorator } from 'shared/config/storybook'
+import { Theme } from 'shared/constants/theme'
 import { Loader } from 'shared/ui/Loader/Loader'
 
 export default {

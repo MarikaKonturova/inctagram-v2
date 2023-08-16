@@ -1,7 +1,8 @@
 import React, { type ChangeEvent, type FC } from 'react'
-import { Theme, useTheme } from 'app/providers/ThemeProvider'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import IconImg from 'shared/assets/icons/light/image.svg'
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
 import { Button, Modal } from 'shared/ui'
 import cls from './styles.module.scss'
 
@@ -25,7 +26,6 @@ export const ImageModalStep: FC<IProps> = ({ onPrevClick, isOpen, file, setFile,
     }
     return (
         <Modal isOpen={isOpen} title="add Photo" withHeader={!file}>
-
             {file && (<header className={cls.header}>
                 <IconArrowBack fill={fill} onClick={onPrevClick}/>
                 <h2>Choose photo</h2>
@@ -45,10 +45,8 @@ export const ImageModalStep: FC<IProps> = ({ onPrevClick, isOpen, file, setFile,
 
                     : <div className={cls.nextContainer}>
                         <img src={file} />
-
                     </div>
                 }
-
             </div>
         </Modal>
     )

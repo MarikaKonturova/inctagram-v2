@@ -1,7 +1,7 @@
 import { type StoryContext, type Story } from '@storybook/react'
 import { type ReactElement, useEffect } from 'react'
 import { I18nextProvider } from 'react-i18next'
-import i18n from '../../i18next'
+import i18n from '../../../../../i18next'
 
 export const I18nDecorator = () =>
     function StoryComponent (StoryComponent: Story, context: StoryContext): ReactElement {
