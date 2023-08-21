@@ -39,6 +39,9 @@ const nextConfig = {
                 pathname: '/users-inctagram/**'
             }
         ]
+    },
+    env: {
+        API_URL: 'https://twin.cygan.lol/'
     }
 }
 
