@@ -1,11 +1,9 @@
 import axios from 'axios'
 import { type RefreshTokenResponse } from 'shared/types/auth'
 
-export const API_URL = 'https://api.cygan.lol/'
-
 export const $api = axios.create({
     withCredentials: true,
-    baseURL: API_URL
+    baseURL: process.env.API_URL
 })
 
 $api.interceptors.request.use((config) => {
@@ -21,7 +19,7 @@ $api.interceptors.response.use((config) => {
         originalRequest._isRetry = true
         try {
             const response = await axios.post<RefreshTokenResponse>(
-                `${API_URL}auth/update-tokens`,
+                `${process.env.API_URL as string}auth/update-tokens`,
                 {},
                 {
                     withCredentials: true,
