@@ -1,5 +1,4 @@
 
-import { type FC } from 'react'
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
 import { AppRoutes } from 'shared/config/routeConfig/path'
 import { type UserLoginModel } from 'shared/types/auth'
@@ -7,7 +6,7 @@ import { AppLink, Button, FormWrapper, Input, SocialIcons } from 'shared/ui'
 import { useLogin } from '../../model'
 import cls from './LoginForm.module.scss'
 
-export const LoginForm: FC = () => {
+export const LoginForm = () => {
     const { register, handleSubmit, validErrors: { passwordError, emailError } } =
       useValidationForm(['email', 'password'])
 

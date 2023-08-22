@@ -1,6 +1,6 @@
 
 import clsx from 'clsx'
-import { type FC, memo } from 'react'
+import { memo } from 'react'
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
 import { AppRoutes } from 'shared/config/routeConfig/path'
 
@@ -9,7 +9,7 @@ import { AppLink, Button, FormWrapper, Input, SocialIcons } from 'shared/ui'
 import { useRegistration } from '../../model'
 import cls from './RegisterForm.module.scss'
 
-export const RegisterForm: FC = memo(() => {
+export const RegisterForm = memo(() => {
     const { register, handleSubmit, validErrors: { passwordError, emailError, confPasswordError, userNameError } } =
       useValidationForm(['email', 'password', 'userName', 'confPassword'])
     const { isLoading, onSubmit, responseError } = useRegistration()
