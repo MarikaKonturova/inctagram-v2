@@ -17,7 +17,7 @@ export const RegisterForm: FC = memo(() => {
     return (
         <FormWrapper className={cls.register} onSubmit={handleSubmit(onSubmit)}>
             <h2 className={cls.title}>Sign Up</h2>
-            <SocialIcons/>
+            <SocialIcons type={'Registration'}/>
             <Input
                 {...register('userName')}
                 type={'text'}
