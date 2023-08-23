@@ -41,6 +41,13 @@ export interface PasswordRecoveryModel {
     recaptcha: string
 }
 
+export interface ProfileAvatarModel {
+    url: string
+    width: number
+    height: number
+    fileSize: number
+}
+
 export interface ProfileDataModel {
     id: number
     userName: string
@@ -49,5 +56,5 @@ export interface ProfileDataModel {
     dateOfBirth: string
     city: string
     aboutMe: string
-    avatars: Omit<PostImage[], 'uploadId'>
+    avatars: ProfileAvatarModel[]
 }

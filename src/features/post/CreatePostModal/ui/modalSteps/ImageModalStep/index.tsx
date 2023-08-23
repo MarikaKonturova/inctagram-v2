@@ -1,4 +1,4 @@
-import React, { type ChangeEvent, type FC } from 'react'
+import { type ChangeEvent, type FC } from 'react'
 import { Theme, useTheme } from 'app/providers/ThemeProvider'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import IconImg from 'shared/assets/icons/light/image.svg'
@@ -6,25 +6,27 @@ import { Button, Modal } from 'shared/ui'
 import cls from './styles.module.scss'
 
 interface IProps {
-    file?: string
-    setFile: (value: string) => void
+    file?: File
+    setFile: (value: File) => void
     onNextClick: () => void
     isOpen: boolean
     onPrevClick: () => void
+    handleClose: () => void
 }
 
-export const ImageModalStep: FC<IProps> = ({ onPrevClick, isOpen, file, setFile, onNextClick }) => {
+export const ImageModalStep: FC<IProps> = ({ onPrevClick, isOpen, file, setFile, onNextClick, handleClose }) => {
     const { theme } = useTheme()
     const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
     function handleChange (e: ChangeEvent<HTMLInputElement>) {
         console.log(e.target.files)
         if (e.target.files?.length) {
-            setFile(URL.createObjectURL(e.target.files[0]))
+            setFile(e.target.files[0])
         }
     }
+
     return (
-        <Modal isOpen={isOpen} title="add Photo" withHeader={!file}>
+        <Modal isOpen={isOpen} title="add Photo" withHeader={!file} onClose={handleClose}>
 
             {file && (<header className={cls.header}>
                 <IconArrowBack fill={fill} onClick={onPrevClick}/>
@@ -44,7 +46,7 @@ export const ImageModalStep: FC<IProps> = ({ onPrevClick, isOpen, file, setFile,
                     </label>
 
                     : <div className={cls.nextContainer}>
-                        <img src={file} />
+                        <img src={file ? URL.createObjectURL(file) : ''} />
 
                     </div>
                 }

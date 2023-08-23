@@ -1,4 +1,4 @@
-import { useState, type FC } from 'react'
+import { useState, type FC, useEffect } from 'react'
 import { useCreateMutation } from '../model'
 import { ImageModalStep } from './modalSteps/ImageModalStep'
 import { NewPostModalStep } from './modalSteps/NewPostModalStep'
@@ -26,15 +26,25 @@ export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
 
     const [currentStep, setCurrentStep] = useState<Values | null >(1)
 
-    const [file, setFile] = useState<string>()
-
+    const [file, setFile] = useState<File | undefined>()
     const onSubmit = async (data: INewPostInterface) => {
         const formData = new FormData()
-        file && formData.append('files', JSON.stringify([file]))
+        if (file) {
+            formData.append('files', file)
+        }
         formData.append('description', data.description)
         onCreate(formData)
-        isSuccess && setCurrentStep(null)
     }
+
+    // TODO: подумать, как сделать это в сихр ф-ии onSubmit
+    useEffect(() => {
+        if (isSuccess) {
+            setFile(undefined)
+            setCurrentStep(1)
+            handleClose()
+        }
+    }, [isSuccess])
+
     return (
         <>
             { currentStep === MODALSTEPS.ImageStep &&
@@ -44,16 +54,17 @@ export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
                  isOpen={isOpen && currentStep === MODALSTEPS.ImageStep }
                  setFile={setFile} file={file} onNextClick={() => { setCurrentStep(2) }}
                  onPrevClick={() => { setFile(undefined) }}
+                 handleClose={handleClose}
 
                 />
 
             )}
             {currentStep === MODALSTEPS.NewPostStep &&
             (<NewPostModalStep
-
                 isOpen={isOpen && currentStep === MODALSTEPS.NewPostStep }
                 setFile={setFile} file={file} onNextClick={onSubmit}
                 onPrevClick={() => { setCurrentStep(1) } }
+                handleClose={handleClose}
             />)}
         </>
 
