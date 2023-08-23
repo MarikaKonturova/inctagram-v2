@@ -7,7 +7,7 @@ export const PostService = {
     like () {
         return $api.get<any>('/path')
     },
-    comment (postId: string, comment: Pick<Comment, 'content'>) {
+    comment (postId: number, comment: Pick<Comment, 'content'>) {
         return $api.post<Comment>(`/posts/${postId}/comments`, comment)
     },
     share () {

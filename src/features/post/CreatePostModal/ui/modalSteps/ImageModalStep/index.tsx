@@ -19,7 +19,6 @@ export const ImageModalStep: FC<IProps> = ({ onPrevClick, isOpen, file, setFile,
     const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
     function handleChange (e: ChangeEvent<HTMLInputElement>) {
-        console.log(e.target.files)
         if (e.target.files?.length) {
             setFile(e.target.files[0])
         }

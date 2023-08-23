@@ -57,7 +57,6 @@ export const NewPostModalStep: FC<IProps> = ({ onPrevClick, isOpen, handleClose,
                     {/* // TODO: TextArea необязательна */}
                     <div className={cls.profileInfoDescription}>
                         {userData &&
-
                         <div className={cls.profileInfo}>
                             <Avatar src={userData.avatars[1].url} size={36} />
                             <p className={cls.profileName}>{userData.userName}</p>

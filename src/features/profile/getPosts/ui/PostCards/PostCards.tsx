@@ -1,4 +1,4 @@
-import React, { useState, type FC } from 'react'
+import { useState, type FC } from 'react'
 import { PostModalActions } from 'widgets/Post/actions/PostModalActions/PostModalActions'
 import { MyPostDropdown } from 'widgets/Post/dropdowns/MyPostDropdown/MyPostDropdown'
 import { GetCommentaries } from 'features/post'
@@ -7,7 +7,7 @@ import EditPostModal from 'features/profile/getPosts/ui/modals/EditPostModal/ui'
 import { GetPostModal } from 'features/profile/getPosts/ui/modals/GetPostModal'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { Card } from 'shared/ui'
-import { useGetPosts, useGetMyPost } from '../../model'
+import { useGetMyPost, useGetPosts } from '../../model'
 import cls from './PostCards.module.scss'
 
 interface Props {
@@ -29,7 +29,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
     const [postId, setPostId] = useState<number | undefined>(undefined)
 
     const { post } = useGetMyPost(postId || 0)
-
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const renderContent = () => posts?.items.map(item => {
         const onPostCardClick = () => {
             openModal(MODALS.GetPostModal)
@@ -67,7 +67,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
     return (
         <div className={cls.cardsList}>
             {renderContent()}
-            {postId && [
+            {postId && post && [
                 <GetPostModal
                  key="GetPostModal"
                  id={MODALS.GetPostModal}
@@ -79,7 +79,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
                                 openEditPostModal={openEditPostModal}
                                 openDeletePostModal={openDeletePostModal}
                  />}
-                 content={<GetCommentaries />}
+                 content={<GetCommentaries postId={postId} userData={userData}/>}
                  actionsSlot={<PostModalActions postId={postId} />} />,
                 <EditPostModal
                 id={MODALS.EditPostModal}

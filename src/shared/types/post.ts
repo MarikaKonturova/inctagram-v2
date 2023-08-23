@@ -1,3 +1,5 @@
+import { type ProfileAvatarModel, type ProfileDataModel } from './auth'
+
 export interface NewPostType {
     description: string
     files: string
@@ -59,11 +61,18 @@ export interface NewPost {
 export interface PostResponse {
     id: number
     ownerId: number
+    userName: string
+    avatars: AvatarPostModel
     description: string
     location: string
     images: PostImage[]
     createdAt: string
     updatedAt: string
+    commentCount: number
+    likeCount: number
+    isLiked: boolean
+    newLikes: Array<Pick <ProfileDataModel, 'id' | 'avatars'> & { username: string }>
+
 }
 
 export interface GetPostsResponse {
@@ -72,4 +81,31 @@ export interface GetPostsResponse {
     page: number
     pageSize: number
     items: PostResponse[]
+}
+export interface PostCommentsResponse {
+    totalCount: number
+    pagesCount: number
+    page: number
+    pageSize: number
+    items: Comment[]
+}
+
+export interface AvatarPostModel {
+    thumbnail: ProfileAvatarModel
+    medium: ProfileAvatarModel
+}
+
+export interface Comment {
+    id: number
+    postId: number
+    content: string
+    createdAt: string
+    answerCount: number
+    likeCount: number
+    isLiked: boolean
+    from: {
+        id: number
+        avatars: AvatarPostModel
+        username: string }
+
 }
