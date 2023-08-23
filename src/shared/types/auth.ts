@@ -1,4 +1,3 @@
-import { type PostImage } from './post'
 
 export interface RefreshTokenResponse {
     accessToken: string

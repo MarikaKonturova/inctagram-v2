@@ -18,6 +18,6 @@ const Template: ComponentStory<typeof AddCommentBox> = (args) => {
 
 export const DefaultActionIcon = Template.bind({})
 DefaultActionIcon.args = {
-    postId: '1'
+    postId: 1
 
 }

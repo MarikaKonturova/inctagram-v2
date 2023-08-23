@@ -1,4 +1,4 @@
-@mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap,) {
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
     display: flex;
     flex-flow: $direction $wrap;
     justify-content: $justify;
@@ -8,4 +8,9 @@
 @mixin position($position: relative, $top: null, $right: null, $bottom: null, $left: null) {
     position: $position;
     inset: $top $right $bottom $left;
+}
+
+@mixin modal-position($type, $val) {
+    position: $type;
+    inset: $val $val $val $val;
 }

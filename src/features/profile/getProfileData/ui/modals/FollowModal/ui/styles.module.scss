@@ -1,0 +1,75 @@
+.modalCustomSize {
+    width: 644px;
+    height: 100px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 0;
+}
+
+.modalHeaderSeparator {
+    height: 1px;
+    background-color: #8D9094;
+    margin-bottom: 24px;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgb(0 0 0 / 50%); // Черный цвет с 50% непрозрачности
+    z-index: 1000; // Убедитесь, что заслонка находится поверх остального содержимого
+}
+
+.usersList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.usersAndbuttons{
+    width: 400px;
+    margin-bottom: 10px;
+}
+
+.userCard {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white
+}
+
+.userCard button {
+    color: white;
+}
+
+.userAvatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.userName {
+    flex-grow: 1;
+}
+
+.FollowButton {
+    color: white;
+    border-radius: 2px;
+    background: #397DF6;
+    width: 98px;
+    height: 36px;
+    display: inline-flex;
+    padding: 6px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.deleteButton{
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+}
+
