@@ -12,7 +12,8 @@
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
     "test:unit": "jest --config ./config/jest/jest.config.ts",
     "storybook": "start-storybook -p 6006 -c ./config/storybook",
-    "storybook:build": "build-storybook -c ./config/storybook"
+    "storybook:build": "build-storybook -c ./config/storybook",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@apollo/client": "^3.7.10",
@@ -88,6 +89,7 @@
     "stylelint": "^15.3.0",
     "stylelint-config-standard-scss": "^7.0.1",
     "ts-node": "^10.9.1",
-    "tsconfig-paths-webpack-plugin": "^4.0.1"
+    "tsconfig-paths-webpack-plugin": "^4.0.1",
+    "husky": "^8.0.0"
   }
 }
