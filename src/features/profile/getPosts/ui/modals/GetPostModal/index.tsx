@@ -35,7 +35,7 @@ export const GetPostModal: React.FC<IProps> = (props) => {
         handleClose={handleClose}
         content={ <>
             <Card cardWrapperClassName={cls.cardWrapperClassName}
-                  src={post?.images[0]?.url || ''}
+                  src={post?.images[0]?.versions.huge.url || ''}
                   alt="card" />
 
             <div className={cls.rightBlock}>

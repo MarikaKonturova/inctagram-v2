@@ -48,7 +48,7 @@ function EditPostModal ({ id, isOpen, handleClose, postId }: IProps) {
         <Modal id={id} isOpen={isOpen} onClose={handleClose} title="Edit Post" className={cls.modalContainer}>
             <form className={cls.container} onSubmit={handleSubmit(saveChanges)}>
                 <Card cardWrapperClassName={cls.cardWrapperClassName}
-                      src={post?.images[0]?.url || ''}
+                      src={post?.images[0]?.versions.huge.url || ''}
                       alt="card" />
 
                 <div className={cls.rightBlock}>

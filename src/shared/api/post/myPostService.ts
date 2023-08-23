@@ -10,7 +10,6 @@ export const MyPostService = {
         })
     },
     createNewPost (newPost: FormData) {
-        console.log(newPost)
         return $api.post<PostResponse>('/posts', newPost)
     },
     deletePostsImage (uploadId: string) {

@@ -8,19 +8,22 @@ import { type INewPostInterface } from '../..'
 import cls from './styles.module.scss'
 
 interface IProps {
-    file?: string
-    setFile: (value: string) => void
+    file?: File
+    setFile: (value: File) => void
     onNextClick: (data: { description: string, location: string }) => void
     isOpen: boolean
     onPrevClick: () => void
+    handleClose: () => void
 }
 
-export const NewPostModalStep: FC<IProps> = ({ onPrevClick, isOpen, file, setFile, onNextClick }) => {
+export const NewPostModalStep: FC<IProps> = ({ onPrevClick, isOpen, handleClose, file, setFile, onNextClick }) => {
+    let image = file && URL.createObjectURL(file)
     const { theme } = useTheme()
     const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
     const { response } = useGetProfileData()
     const userData = response?.data
     const {
+        reset,
         register, formState: { errors }, handleSubmit
     } = useForm({
         defaultValues: {
@@ -31,10 +34,15 @@ export const NewPostModalStep: FC<IProps> = ({ onPrevClick, isOpen, file, setFil
 
     const onSubmit = (data: INewPostInterface) => {
         onNextClick(data)
+        reset({
+            description: '',
+            location: ''
+        })
+        image = ''
     }
 
     return (
-        <Modal isOpen={isOpen} title="add Photo" withHeader={false}>
+        <Modal isOpen={isOpen} title="add Photo" withHeader={false} onClose={handleClose}>
             <header className={cls.header}>
                 <IconArrowBack fill={fill} onClick={onPrevClick}/>
                 <h2>Publication</h2>
@@ -42,7 +50,7 @@ export const NewPostModalStep: FC<IProps> = ({ onPrevClick, isOpen, file, setFil
             </header>
             <div className={cls.mainContainer}>
                 <div className={cls.imgContainer}>
-                    <img src={file} />
+                    <img src={image } />
 
                 </div>
                 <form className={cls.descriptionContainer} onSubmit={handleSubmit(onSubmit)}>

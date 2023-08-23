@@ -34,13 +34,17 @@ export interface Post {
 }
 
 export interface PostImage {
+    uploadId: string
+    versions: {
+        huge: PostImageVersion
+        large: PostImageVersion
+    }
+}
+interface PostImageVersion {
     url: string
     width: number
     height: number
-    fileSize: number
-    uploadId: string
 }
-
 export interface PostsImage {
     images: PostImage[]
 }
