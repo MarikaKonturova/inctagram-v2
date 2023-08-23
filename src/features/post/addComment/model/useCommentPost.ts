@@ -8,16 +8,16 @@ export const useCommentPost = () => {
     const onOpen = useSnackbar((state) => state.onOpen)
 
     const queryClient = useQueryClient()
-    const { mutate: addComment } = useMutation({
-        mutationFn: ({ postId, commentContent }: { postId: string, commentContent: Pick<Comment, 'content'> }) =>
+    const { mutate: addComment, isSuccess } = useMutation({
+        mutationFn: ({ postId, commentContent }: { postId: number, commentContent: Pick<Comment, 'content'> }) =>
             PostService.comment(postId, commentContent),
         onSuccess: async () => {
             // TODO: сделать перезапрос на getPost & улучшить код (см. доп задачи Jira)
-            await queryClient.invalidateQueries(['post']).then((res) => { })
+            await queryClient.invalidateQueries(['postComments'])
         },
         onError: (error: AxiosError<{ message: string }>) => {
             onOpen(error.message, 'danger', 'left')
         }
     })
-    return { addComment }
+    return { addComment, isSuccess }
 }

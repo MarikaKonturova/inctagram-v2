@@ -1,12 +1,15 @@
 .comments {
-    margin: 15px;
+    padding: 15px;
+    width: 100%;
 }
 
 .comment {
+    width: 100%;
     display: flex;
     gap: 12px;
     padding: 5px;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .content {
@@ -25,4 +28,9 @@
 .actionButton {
     font: var(--font-small-600);
     color: var(--light-900-color);
+}
+
+.avatarCommentGroup {
+    display: flex;
+    gap: 12px;
 }
