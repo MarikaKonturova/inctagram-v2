@@ -1,8 +1,8 @@
-
+import { SocialIcons } from 'features/auth'
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
 import { AppRoutes } from 'shared/config/routeConfig/path'
 import { type UserLoginModel } from 'shared/types/auth'
-import { AppLink, Button, FormWrapper, Input, SocialIcons } from 'shared/ui'
+import { AppLink, Button, FormWrapper, Input } from 'shared/ui'
 import { useLogin } from '../../model'
 import cls from './LoginForm.module.scss'
 

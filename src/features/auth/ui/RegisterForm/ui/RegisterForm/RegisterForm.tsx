@@ -1,10 +1,11 @@
 
 import clsx from 'clsx'
 import { memo } from 'react'
+import { SocialIcons } from 'features/auth'
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
 import { AppRoutes } from 'shared/config/routeConfig/path'
 
-import { AppLink, Button, FormWrapper, Input, SocialIcons } from 'shared/ui'
+import { AppLink, Button, FormWrapper, Input } from 'shared/ui'
 
 import { useRegistration } from '../../model'
 import cls from './RegisterForm.module.scss'

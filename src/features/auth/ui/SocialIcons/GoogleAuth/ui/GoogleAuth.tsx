@@ -1,20 +1,23 @@
 import { useRouter } from 'next/router'
 import React, { type FC, useEffect, useState } from 'react'
 import Google from 'shared/assets/icons/general/google.svg'
-import { AppRoutes } from '../../../../../shared/config/routeConfig/path'
-import { routerPush } from '../../../../../shared/lib/routerPush/routerPush'
-import { Button, Modal } from '../../../../../shared/ui'
+import { AppRoutes } from 'shared/config/routeConfig/path'
+import { routerPush } from 'shared/lib/routerPush/routerPush'
+import { Button, Modal } from 'shared/ui'
 import { useGoogleAuth } from '../model'
 import style from './GoogleAuth.module.scss'
 
 export interface GoogleAndGitHubAuthProps {
     type: 'Registration' | 'Login'
 }
+
+const initialState = {
+    modalOpen: false,
+    title: ''
+}
+
 export const GoogleAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
-    const [modal, setModal] = useState({
-        modalOpen: false,
-        title: ''
-    })
+    const [modal, setModal] = useState(initialState)
 
     const { query } = useRouter()
 
@@ -55,24 +58,18 @@ export const GoogleAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
         }
     }, [queryStatus])
 
+    const handleClose = () => {
+        setModal(initialState)
+    }
+
     return (
         <>
             {
                 modal.modalOpen &&
-                <Modal isOpen={modal.modalOpen} title={'Registration'} onClose={() => {
-                    setModal({
-                        title: '',
-                        modalOpen: false
-                    })
-                }}>
+                <Modal isOpen={modal.modalOpen} title={'Registration'} onClose={handleClose}>
                     <div className={style.modal}>
                         {modal.title}
-                        <Button onClick={() => {
-                            setModal({
-                                title: '',
-                                modalOpen: false
-                            })
-                        }}>Ok</Button>
+                        <Button onClick={handleClose}>Ok</Button>
                     </div>
                 </Modal>
             }
