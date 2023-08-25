@@ -1,13 +1,12 @@
-
-import { type FC } from 'react'
+import { SocialIcons } from 'features/auth'
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
 import { AppRoutes } from 'shared/config/routeConfig/path'
 import { type UserLoginModel } from 'shared/types/auth'
-import { AppLink, Button, FormWrapper, Input, SocialIcons } from 'shared/ui'
+import { AppLink, Button, FormWrapper, Input } from 'shared/ui'
 import { useLogin } from '../../model'
 import cls from './LoginForm.module.scss'
 
-export const LoginForm: FC = () => {
+export const LoginForm = () => {
     const { register, handleSubmit, validErrors: { passwordError, emailError } } =
       useValidationForm(['email', 'password'])
 
@@ -20,7 +19,7 @@ export const LoginForm: FC = () => {
     return (
         <FormWrapper className={cls.login} onSubmit={handleSubmit(onSubmit)}>
             <h2 className={cls.title}>Sign In</h2>
-            <SocialIcons/>
+            <SocialIcons type={'Login'}/>
             <Input
                 {...register('email')}
                 type={'text'}
