@@ -15,8 +15,13 @@ export const MyPostService = {
     deletePostsImage (uploadId: string) {
         return $api.delete(`/posts/image/${uploadId}`)
     },
-    getPosts (userId: number) {
-        return $api.get<GetPostsResponse>(`/posts/${userId}`)
+    getPosts (userId: number, pageNumber: number) {
+        return $api.get<GetPostsResponse>(`/posts/${userId}`, {
+            params: {
+                pageNumber,
+                pageSize: 5
+            }
+        }).then(res => res.data)
     },
     getPost (postId: number) {
         return $api.get<PostResponse>(`/posts/p/${postId}`)
