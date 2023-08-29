@@ -33,7 +33,7 @@ export const GoogleAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
                 modalOpen: true,
                 title: 'Success'
             })
-            routerPush(AppRoutes.PROFILE_SETTINGS.GENERAL_INFORMATION)
+            routerPush(AppRoutes.PROFILE.MY_PROFILE)
         }
 
         if (queryStatus === '401') {
