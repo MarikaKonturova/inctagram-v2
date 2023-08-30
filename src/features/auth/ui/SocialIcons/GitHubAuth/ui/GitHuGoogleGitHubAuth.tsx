@@ -1,14 +1,16 @@
 import { useRouter } from 'next/router'
 import React, { type FC, useEffect, useState } from 'react'
+import Github from 'shared/assets/icons/general/github.svg'
 import Google from 'shared/assets/icons/general/google.svg'
-import { AppRoutes } from 'shared/config/routeConfig/path'
-import { routerPush } from 'shared/lib/routerPush/routerPush'
 import { Button, Modal } from 'shared/ui'
-import { useGoogleAuth } from '../model'
-import style from './GoogleAuth.module.scss'
+import { AppRoutes } from '../../../../../../shared/config/routeConfig/path'
+import { routerPush } from '../../../../../../shared/lib/routerPush/routerPush'
+import { useGoogleGitHubAuth } from '../model'
+import style from './GoogleGitHubAuth.module.scss'
 
 export interface GoogleAndGitHubAuthProps {
     type: 'Registration' | 'Login'
+    method?: 'Google' | 'GitHub'
 }
 
 const initialState = {
@@ -16,24 +18,21 @@ const initialState = {
     title: ''
 }
 
-export const GoogleAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
+export const GoogleGitHubAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
     const [modal, setModal] = useState(initialState)
 
     const { query } = useRouter()
 
     const queryStatus = query.status_code as string
 
-    const { refetch } = useGoogleAuth({ type })
+    const { refetch: googleRefetch } = useGoogleGitHubAuth({ type, method: 'Google' })
+    const { refetch: githubRefetch } = useGoogleGitHubAuth({ type, method: 'GitHub' })
 
     useEffect(() => {
         if (!queryStatus) return
 
         if (queryStatus === '200') {
-            setModal({
-                modalOpen: true,
-                title: 'Success'
-            })
-            routerPush(AppRoutes.PROFILE.MY_PROFILE)
+            routerPush(AppRoutes.PROFILE_SETTINGS.GENERAL_INFORMATION)
         }
 
         if (queryStatus === '401') {
@@ -73,8 +72,11 @@ export const GoogleAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
                     </div>
                 </Modal>
             }
-            <div onClick={() => refetch()}>
+            <div onClick={() => googleRefetch()}>
                 <Google/>
+            </div>
+            <div onClick={() => githubRefetch()}>
+                <Github/>
             </div>
         </>
     )
