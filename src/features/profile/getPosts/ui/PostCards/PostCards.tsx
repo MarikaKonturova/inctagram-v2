@@ -1,5 +1,4 @@
 import { useState, type FC, useEffect } from 'react'
-import InfiniteScroll from 'react-infinite-scroll-component'
 import { useInView } from 'react-intersection-observer'
 import { PostModalActions } from 'widgets/Post/actions/PostModalActions/PostModalActions'
 import { MyPostDropdown } from 'widgets/Post/dropdowns/MyPostDropdown/MyPostDropdown'
@@ -8,7 +7,8 @@ import DeletePostModal from 'features/profile/getPosts/ui/modals/DeletePostModal
 import EditPostModal from 'features/profile/getPosts/ui/modals/EditPostModal/ui'
 import { GetPostModal } from 'features/profile/getPosts/ui/modals/GetPostModal'
 import { type ProfileDataModel } from 'shared/types/auth'
-import { Card } from 'shared/ui'
+import { type GetPostsResponse, type PostResponse } from 'shared/types/post'
+import { Card, Loader } from 'shared/ui'
 import { useGetMyPost, useGetPosts } from '../../model'
 import photo from '../../premium_photo-1687382111414-7b87afa5da34.avif'
 import cls from './PostCards.module.scss'
@@ -41,20 +41,19 @@ export const PostCards: FC<Props> = ({ userData }) => {
     const [postId, setPostId] = useState<number | undefined>(undefined)
 
     const { post } = useGetMyPost(postId || 0)
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    // @ts-ignore
 
-    const { ref, inView } = useInView()
-
-    console.log(inView)
+    const {
+        ref,
+        inView
+    } = useInView()
 
     useEffect(() => {
         if (inView && hasNextPage) {
             void fetchNextPage()
         }
-    }, [inView])
+    }, [inView, hasNextPage])
 
-    const renderContent = (page: any) => page.items.map((item: any) => {
+    const renderContent = (page: GetPostsResponse) => page.items.map((item: PostResponse) => {
         const onPostCardClick = () => {
             openModal(MODALS.GetPostModal)
             setPostId(item.id)
@@ -91,21 +90,12 @@ export const PostCards: FC<Props> = ({ userData }) => {
     }
 
     return (
-        <div >
+        <div>
             <div className={cls.cardsList}>
-                {data?.pages.map((page, index) => (
+                {data?.pages.map((page) => (
                     page && renderContent(page)
                 ))}
             </div>
-
-            {/* <InfiniteScroll */}
-            {/*     dataLength={data?.pages.page[0].totalCount} */}
-            {/*     next={fetchNextPage} */}
-            {/*     hasMore={true} loader={<h4>Loading...</h4>}> */}
-            {/*     {data?.pages.map((page, index) => ( */}
-            {/*         page && renderContent(page) */}
-            {/*     ))} */}
-            {/* </InfiniteScroll> */}
 
             {postId && post && [
                 <GetPostModal
@@ -139,7 +129,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
             {isSuccess && (
                 <div ref={ref}>
                     {isFetchingNextPage && (
-                        <div className={'grid grid-cols-4 gap-3'}>{'Loading...'}</div>
+                        <Loader/>
                     )}
                 </div>
             )}

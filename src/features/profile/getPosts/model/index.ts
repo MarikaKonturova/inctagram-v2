@@ -10,18 +10,11 @@ export const useGetPosts = (userId: number) => {
         isFetchingNextPage,
         hasNextPage,
         isSuccess
-    } = useInfiniteQuery({
-        queryKey: ['post', userId],
-        queryFn: ({ pageParam = 1 }) => MyPostService.getPosts(userId, pageParam),
-        getNextPageParam: (lastPage, allPages) => {
-            // console.log(lastPage, allPages)
-            return lastPage.page * lastPage.pageSize < lastPage.totalCount ? lastPage.page + 1 : undefined
+    } = useInfiniteQuery(['post', userId], ({ pageParam = 1 }) => MyPostService.getPosts(userId, pageParam), {
+        getNextPageParam: (lastPage) => {
+            return lastPage.page < lastPage.pagesCount ? lastPage.page + 1 : undefined
         }
-    }
-    )
-
-    // console.log(data)
-    // const posts = data
+    })
 
     return {
         data,
