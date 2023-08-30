@@ -66,7 +66,7 @@ export const PasswordRecoveryForm = () => {
                 hl="en"
                 className={cls.recaptcha}
                 onChange={getRecaptchaValueHandler}
-                sitekey={'6LeY2y0mAAAAANwI_paCWfoksCgBm1n2z9J0nwNQ'}
+                sitekey={`${process.env.RECAPTCHA_SITE_KEY as string}`}
             />
             {recaptchaError && <p className={cls.error}>{recaptchaError}</p>}
         </FormWrapper>

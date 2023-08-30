@@ -50,10 +50,16 @@ export interface ProfileAvatarModel {
 export interface ProfileDataModel {
     id: number
     userName: string
-    firstName: string
-    lastName: string
-    dateOfBirth: string
+    firstName: string | null
+    lastName: string | null
+    dateOfBirth: string | null
     city: string
-    aboutMe: string
-    avatars: ProfileAvatarModel[]
+    aboutMe: string | null
+    avatars: {
+        thumbnail: ProfileAvatarModel
+        medium: ProfileAvatarModel
+    } | null
+    followingCount: number
+    followersCount: number
+    publicationsCount: number
 }

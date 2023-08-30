@@ -43,7 +43,8 @@ const nextConfig = {
         ]
     },
     env: {
-        API_URL: 'https://twin.cygan.lol/'
+        API_URL: 'https://twin.cygan.lol/',
+        RECAPTCHA_SITE_KEY: '6LcQ0LIlAAAAAIrqzrSIRNmk9Fnexi2g4bNPtZpX'
     },
     i18n
 }

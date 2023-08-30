@@ -4,7 +4,7 @@ import { LogoutButton } from 'shared/ui'
 import { useLogout } from '../../model'
 
 interface IProps {
-    className: string
+    className?: string
 }
 
 export const Logout = ({ className }: IProps) => {
