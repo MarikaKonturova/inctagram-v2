@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import React, { type FC, useEffect, useState } from 'react'
 import Google from 'shared/assets/icons/general/google.svg'
 import { AppRoutes } from 'shared/config/routeConfig/path'
-import { routerPush } from 'shared/lib/routerPush/routerPush'
 import { Button, Modal } from 'shared/ui'
 import { useGoogleAuth } from '../model'
 import style from './GoogleAuth.module.scss'
@@ -19,7 +18,7 @@ const initialState = {
 export const GoogleAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
     const [modal, setModal] = useState(initialState)
 
-    const { query } = useRouter()
+    const { query, push } = useRouter()
 
     const queryStatus = query.status_code as string
 
@@ -33,7 +32,7 @@ export const GoogleAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
                 modalOpen: true,
                 title: 'Success'
             })
-            routerPush(AppRoutes.PROFILE.MY_PROFILE)
+            void push(AppRoutes.PROFILE.MY_PROFILE)
         }
 
         if (queryStatus === '401') {
