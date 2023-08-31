@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { type GoogleAndGitHubAuthProps } from '../ui/GitHuGoogleGitHubAuth'
+import { type GoogleAndGitHubAuthProps } from '../ui/GoogleGitHubAuth'
 
 export const GITHUB_AUTHORIZATION = {
     registrationGitHub () {
