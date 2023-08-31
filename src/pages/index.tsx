@@ -1,7 +1,7 @@
 import { getLayoutWithSidebar } from 'layouts/Layout/LayoutWithSidebar/LayoutWithSidebar'
 import { type GetServerSidePropsContext } from 'next'
 import Head from 'next/head'
-import { AppRoutes } from 'shared/config/routeConfig/path'
+import { AppRoutes } from 'shared/constants/path'
 import { getTranslations } from 'shared/lib/i18n'
 import { AppLink } from 'shared/ui'
 

@@ -3,7 +3,7 @@ import { type GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import CongratulationsImg from 'shared/assets/images/congratulations.png'
-import { AppRoutes } from 'shared/config/routeConfig/path'
+import { AppRoutes } from 'shared/constants/path'
 import { getTranslations } from 'shared/lib/i18n'
 import { Info } from 'shared/ui'
 

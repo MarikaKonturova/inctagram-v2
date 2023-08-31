@@ -1,7 +1,7 @@
 import { act, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { AuthService } from 'shared/api/auth/authService'
-import { AppRoutes } from 'shared/config/routeConfig/path'
+import { AppRoutes } from 'shared/constants/path'
 import { routerPush } from 'shared/hooks/routerPush'
 import { type UserLoginModel } from 'shared/types/auth'
 import { renderWithQueryClient } from '../../../../../../../config/jest/renderWithQueryClient'

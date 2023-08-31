@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { type PropsWithChildren } from 'react'
-import { AppRoutes } from 'shared/config/routeConfig/path'
+import { AppRoutes } from 'shared/constants/path'
 import { PageLoader } from 'shared/ui'
 import { useAuthMe } from '../../model'
 

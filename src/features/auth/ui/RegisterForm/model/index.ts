@@ -5,7 +5,7 @@ import { useCallback, useMemo } from 'react'
 import { useAuth } from 'features/auth/model'
 import { SelectEmail, SelectSetEmail } from 'features/auth/model/selectors'
 import { AuthService } from 'shared/api/auth/authService'
-import { AppRoutes } from 'shared/config/routeConfig/path'
+import { AppRoutes } from 'shared/constants/path'
 import { useModal } from 'shared/hooks/useModal'
 import {
     type UserRegistrationError,

@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { AuthService } from 'shared/api/auth/authService'
-import { AppRoutes } from 'shared/config/routeConfig/path'
+import { AppRoutes } from 'shared/constants/path'
 
 export const useConfirmEmailMutation = (code: string) => {
     const { push } = useRouter()

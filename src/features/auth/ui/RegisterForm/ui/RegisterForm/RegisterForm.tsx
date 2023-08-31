@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { type FC, memo } from 'react'
 import { SocialIcons } from 'features/auth'
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
-import { AppRoutes } from 'shared/config/routeConfig/path'
+import { AppRoutes } from 'shared/constants/path'
 
 import { AppLink, Button, FormWrapper, Input } from 'shared/ui'
 

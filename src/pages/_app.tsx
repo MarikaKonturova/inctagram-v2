@@ -7,14 +7,14 @@ import { appWithTranslation } from 'next-i18next'
 import { type ReactElement, useState, useEffect } from 'react'
 import { CookiesProvider } from 'react-cookie'
 import { I18nextProvider } from 'react-i18next'
-import { ThemeProvider } from 'app/providers/ThemeProvider'
 import type { AppProps } from 'next/app'
 import { noRefetch } from 'shared/config/tanstackQuery/noRefetch'
+import ThemeProvider from 'shared/context/ThemeProvider'
 import { useLoader } from 'shared/hooks/useLoader'
 import useLocale from 'shared/hooks/useLocale'
 import { AdminMenu } from 'shared/ui'
 import 'app/styles/nprogress.scss'
-import i18n from '../shared/config/storybook/I18nDecorator/i18next'
+import i18n from '../../i18next'
 
 export type NextPageWithLayout<P = Record<string, unknown>> = NextPage<P> & {
     getLayout?: (page: ReactElement) => ReactElement

@@ -2,10 +2,11 @@ import { Menu } from '@headlessui/react'
 import clsx from 'clsx'
 import React, { type FC } from 'react'
 
-import { Theme, useTheme } from 'app/providers/ThemeProvider'
 import IconEdit from 'shared/assets/icons/light/edit-2.svg'
 import IconEditOutline from 'shared/assets/icons/outline/edit-2-outline.svg'
 
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
 import cls from './UpdateMyPostButton.module.scss'
 
 interface IProps {

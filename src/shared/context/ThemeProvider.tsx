@@ -1,5 +1,5 @@
-import React, { type FC, useEffect, useMemo, useState } from 'react'
-import { LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext } from '../lib/ThemeContext'
+import React, { type FC, useEffect, useMemo, useState, createContext } from 'react'
+import { LOCAL_STORAGE_THEME_KEY, Theme } from 'shared/constants/theme'
 
 let defaultTheme: Theme
 
@@ -7,6 +7,13 @@ interface ThemeProviderProps {
     initialTheme?: Theme
     children: React.ReactNode
 }
+
+export interface ThemeContextProps {
+    theme: Theme
+    setTheme: (theme: Theme) => void
+}
+
+export const ThemeContext = createContext<ThemeContextProps>({ theme: Theme.DARK, setTheme: () => {} })
 
 const ThemeProvider: FC<ThemeProviderProps> = ({ children, initialTheme }) => {
     const [theme, setTheme] = useState<Theme>(initialTheme || defaultTheme)

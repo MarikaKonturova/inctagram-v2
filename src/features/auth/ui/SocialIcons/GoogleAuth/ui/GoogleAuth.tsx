@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React, { type FC, useEffect, useState } from 'react'
 import Google from 'shared/assets/icons/general/google.svg'
-import { AppRoutes } from 'shared/config/routeConfig/path'
+import { AppRoutes } from 'shared/constants/path'
 import { Button, Modal } from 'shared/ui'
 import { useGoogleAuth } from '../model'
 import style from './GoogleAuth.module.scss'
