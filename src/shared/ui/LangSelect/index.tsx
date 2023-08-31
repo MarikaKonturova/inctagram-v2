@@ -14,12 +14,12 @@ const languages: Record<string, JSX.Element> = {
 }
 
 export const LangSelect = () => {
-    const { pathname, query, asPath, push } = useRouter()
+    const { pathname, push } = useRouter()
     const { locale, changeLocale } = useLocale()
 
     const changeLangHandler = (locale: string) => {
         changeLocale(locale)
-        void push({ pathname, query }, asPath, { locale })
+        void push({ pathname })
     }
 
     return (
