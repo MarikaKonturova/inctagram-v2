@@ -40,7 +40,10 @@ export const PostCards: FC<Props> = ({ userData }) => {
             <div key={item.id}
                  className={cls.card}
                  onClick={onPostCardClick}>
-                <Card src={ item.images[0]?.versions.huge?.url} alt='post' />
+                <Card src={ item.images[0]?.versions.huge?.url}
+                      skeletonWidth={item.images[0]?.versions.huge?.width}
+                      skeletonHeight={item.images[0]?.versions.huge?.height}
+                      alt='post' />
             </div>
         )
     })
