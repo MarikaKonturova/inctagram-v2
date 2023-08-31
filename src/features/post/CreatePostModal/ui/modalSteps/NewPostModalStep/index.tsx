@@ -58,7 +58,7 @@ export const NewPostModalStep: FC<IProps> = ({ onPrevClick, isOpen, handleClose,
                     <div className={cls.profileInfoDescription}>
                         {userData &&
                         <div className={cls.profileInfo}>
-                            <Avatar src={userData.avatars[1].url} size={36} />
+                            <Avatar src={userData.avatars.thumbnail.url} size={36} />
                             <p className={cls.profileName}>{userData.userName}</p>
                         </div>
                         }

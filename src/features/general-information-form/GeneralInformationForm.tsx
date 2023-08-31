@@ -41,7 +41,7 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
 
     useEffect(() => {
         reset(userData)
-        setAvatar(userData?.avatars[0].url)
+        setAvatar(userData?.avatars.medium.url)
     }, [userData, reset])
 
     return <form onSubmit={handleSubmit(onSubmit)}>
