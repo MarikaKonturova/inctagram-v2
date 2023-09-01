@@ -39,7 +39,7 @@ export const Card: React.FC<PropsType> = (props) => {
             <Image
                     alt={alt}
                     src={onErrorSrc || src}
-                    fill
+                    className={cls.cardImg}
                     sizes={sizes}
                     onError={handleOnError}
                     onLoadingComplete={onImageLoadingComplete}

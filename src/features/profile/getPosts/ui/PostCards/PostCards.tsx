@@ -60,10 +60,10 @@ export const PostCards: FC<Props> = ({ userData }) => {
         }
 
         return (
-            <div
-                key={item.id}
-                className={cls.card}
-                onClick={onPostCardClick}>
+            <div key={item.id}
+                 onClick={onPostCardClick}
+                 className={cls.card}
+            >
                 {/* <Card src={item.images[0]?.versions.huge?.url} alt="post"/> */}
                 <Card src={photo} alt="post"/>
             </div>
@@ -127,7 +127,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
             ]}
 
             {isSuccess && (
-                <div ref={ref}>
+                <div ref={ref} className={cls.loaderContainer} >
                     {isFetchingNextPage && (
                         <Loader/>
                     )}

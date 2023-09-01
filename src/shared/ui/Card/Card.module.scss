@@ -1,6 +1,6 @@
-.container {
-    position: relative;
-    width: 234px;
-    height: 228px;
-    object-fit: contain;
+.cardImg {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    padding: 10px;
 }
