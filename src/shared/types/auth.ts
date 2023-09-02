@@ -1,3 +1,4 @@
+import { type AvatarPostModel } from './post'
 
 export interface RefreshTokenResponse {
     accessToken: string
@@ -54,12 +55,9 @@ export interface ProfileDataModel {
     lastName: string | null
     dateOfBirth: string | null
     city: string
-    aboutMe: string | null
-    avatars: {
-        thumbnail: ProfileAvatarModel
-        medium: ProfileAvatarModel
-    } | null
     followingCount: number
     followersCount: number
     publicationsCount: number
+    aboutMe: string | null
+    avatars: AvatarPostModel | null
 }

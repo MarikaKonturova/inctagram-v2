@@ -12,7 +12,7 @@ export const ProfilePage = () => {
         <div className={cls.container}>
             <div className={cls.flex}>
                 <div className={cls.avatar}>
-                    <Avatar size={192} src={userData?.avatars?.thumbnail.url} />
+                    <Avatar size={192} src={userData?.avatars?.medium.url } />
                 </div>
                 <div>
                     <div className={cls.userName}>{userData?.userName}</div>
