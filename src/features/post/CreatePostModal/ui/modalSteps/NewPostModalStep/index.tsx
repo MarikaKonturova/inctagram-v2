@@ -1,8 +1,9 @@
 import { type FC } from 'react'
 import { useForm } from 'react-hook-form'
-import { Theme, useTheme } from 'app/providers/ThemeProvider'
 import { useGetProfileData } from 'features/profile/getProfileData/model'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
 import { Avatar, Button, Input, Modal, Textarea } from 'shared/ui'
 import { type INewPostInterface } from '../..'
 import cls from './styles.module.scss'
@@ -58,7 +59,7 @@ export const NewPostModalStep: FC<IProps> = ({ onPrevClick, isOpen, handleClose,
                     <div className={cls.profileInfoDescription}>
                         {userData &&
                         <div className={cls.profileInfo}>
-                            <Avatar src={userData.avatars.thumbnail.url} size={36} />
+                            <Avatar src={userData.avatars?.thumbnail.url} size={36} />
                             <p className={cls.profileName}>{userData.userName}</p>
                         </div>
                         }

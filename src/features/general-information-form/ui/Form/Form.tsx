@@ -66,7 +66,7 @@ export const Form: React.FC<IProps> = ({ register, validErrors, control }) => {
                 render={({ field: { onChange, value } }) => (
                     <div className={cls.wrapper}>
                         <label className={cls.label}>Date of birthday</label>
-                        <DatePicker value={value} onChange={onChange} />
+                        <DatePicker value={value || new Date().toISOString()} onChange={onChange} />
                     </div>
                 )}
             />

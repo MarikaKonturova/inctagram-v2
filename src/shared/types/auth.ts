@@ -51,10 +51,13 @@ export interface ProfileAvatarModel {
 export interface ProfileDataModel {
     id: number
     userName: string
-    firstName: string
-    lastName: string
-    dateOfBirth: string
+    firstName: string | null
+    lastName: string | null
+    dateOfBirth: string | null
     city: string
-    aboutMe: string
-    avatars: AvatarPostModel
+    followingCount: number
+    followersCount: number
+    publicationsCount: number
+    aboutMe: string | null
+    avatars: AvatarPostModel | null
 }

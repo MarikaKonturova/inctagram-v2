@@ -2,9 +2,8 @@ import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import React, { useState } from 'react'
-import { Theme, useTheme } from 'app/providers/ThemeProvider'
+import { Logout } from 'features/auth'
 import { CreatePostModal } from 'features/post'
-import IconLogOut from 'shared/assets/icons/general/log-out.svg'
 import IconStatistics from 'shared/assets/icons/general/trending-up.svg'
 import IconFavorites from 'shared/assets/icons/light/bookmark.svg'
 import IconHome from 'shared/assets/icons/light/home.svg'
@@ -14,8 +13,10 @@ import IconFavoritesOutline from 'shared/assets/icons/outline/bookmark-outline.s
 import IconHomeOutline from 'shared/assets/icons/outline/home-outline.svg'
 import IconProfileOutline from 'shared/assets/icons/outline/person-outline.svg'
 import IconCreateOutline from 'shared/assets/icons/outline/plus-square-outline.svg'
-import { AppRoutes } from 'shared/config/routeConfig/path'
-import { Button, AppLink } from 'shared/ui'
+import { AppRoutes } from 'shared/constants/path'
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
+import { AppLink } from 'shared/ui'
 import cls from './Sidebar.module.scss'
 
 interface SidebarProps {
@@ -26,7 +27,7 @@ interface SidebarProps {
 export const Sidebar = (props: SidebarProps) => {
     const [open, setOpen] = useState(false)
     const { className } = props
-    const { t } = useTranslation()
+    const { t } = useTranslation('common')
     const { theme } = useTheme()
     const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
     const { asPath } = useRouter()
@@ -35,85 +36,86 @@ export const Sidebar = (props: SidebarProps) => {
         <div className={clsx(cls.Sidebar, [className])}>
             <div className={cls.menu}>
                 <AppLink
-                    href={AppRoutes.HOME}
-                    active={currentPath === AppRoutes.HOME}
-                    className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.HOME })}
+          href={AppRoutes.HOME}
+          active={currentPath === AppRoutes.HOME}
+          className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.HOME })}
                 >
                     {currentPath === AppRoutes.HOME
-                        ? <IconHome className={cls.icon}/>
-                        : <IconHomeOutline className={cls.icon} fill={fill}/>
-                    }
-                    <span className={cls.link}>
-                        {t('Home')}
-                    </span>
+                        ? (
+                            <IconHome className={cls.icon} />
+                        )
+                        : (
+                            <IconHomeOutline className={cls.icon} fill={fill} />
+                        )}
+                    <span className={cls.link}>{t('home')}</span>
                 </AppLink>
-                <button type='button' onClick={() => {
-                    setOpen(true)
-                }} className={cls.item}>
-                    {
-                        !open
-                            ? <IconCreateOutline className={cls.icon} fill={fill}/>
-                            : <IconCreate className={cls.icon} fill={fill}/>
-                    }
+                <button
+          type="button"
+          onClick={() => {
+              setOpen(true)
+          }}
+          className={cls.item}
+                >
+                    {!open
+                        ? (
+                            <IconCreateOutline className={cls.icon} fill={fill} />
+                        )
+                        : (
+                            <IconCreate className={cls.icon} fill={fill} />
+                        )}
                     <p className={cls.link} style={{ color: 'white' }}>
-                        {t('Create')}
+                        {t('create')}
                     </p>
-
                 </button>
-                <CreatePostModal handleClose={() => {
-                    setOpen(false)
-                }} isOpen={open}/>
+                <CreatePostModal
+          handleClose={() => {
+              setOpen(false)
+          }}
+          isOpen={open}
+                />
                 <AppLink
-                    href={`${AppRoutes.PROFILE.MY_PROFILE}`}
-                    active={currentPath === AppRoutes.PROFILE.MY_PROFILE}
-                    className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.PROFILE.MY_PROFILE })}
+          href={`${AppRoutes.PROFILE.MY_PROFILE}`}
+          active={currentPath === AppRoutes.PROFILE.MY_PROFILE}
+          className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.PROFILE.MY_PROFILE })}
                 >
                     {currentPath === AppRoutes.PROFILE.MY_PROFILE
-                        ? <IconProfile className={cls.icon}/>
-                        : <IconProfileOutline className={cls.icon} fill={fill}/>
-                    }
+                        ? (
+                            <IconProfile className={cls.icon} />
+                        )
+                        : (
+                            <IconProfileOutline className={cls.icon} fill={fill} />
+                        )}
 
-                    <span className={cls.link}>
-                        {t('My Profile')}
-                    </span>
+                    <span className={cls.link}>{t('myProfile')}</span>
                 </AppLink>
             </div>
             <div className={cls.extra}>
                 <AppLink
-                    href={AppRoutes.STATISTICS}
-                    active={currentPath === AppRoutes.STATISTICS}
-                    className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.STATISTICS })}
+          href={AppRoutes.STATISTICS}
+          active={currentPath === AppRoutes.STATISTICS}
+          className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.STATISTICS })}
                 >
-                    <IconStatistics className={cls.icon} fill={fill}/>
+                    <IconStatistics className={cls.icon} fill={fill} />
 
-                    <span className={cls.link}>
-                        {t('Statistics')}
-                    </span>
+                    <span className={cls.link}>{t('statistics')}</span>
                 </AppLink>
                 <AppLink
-                    href={AppRoutes.FAVORITES}
-                    active={currentPath === AppRoutes.FAVORITES}
-                    className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.FAVORITES })}
+          href={AppRoutes.FAVORITES}
+          active={currentPath === AppRoutes.FAVORITES}
+          className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.FAVORITES })}
                 >
                     {currentPath === AppRoutes.FAVORITES
-                        ? <IconFavorites className={cls.icon}/>
-                        : <IconFavoritesOutline className={cls.icon} fill={fill}/>
-                    }
+                        ? (
+                            <IconFavorites className={cls.icon} />
+                        )
+                        : (
+                            <IconFavoritesOutline className={cls.icon} fill={fill} />
+                        )}
 
-                    <span className={cls.link}>
-                        {t('Favorites')}
-                    </span>
+                    <span className={cls.link}>{t('favorites')}</span>
                 </AppLink>
             </div>
-            <Button theme={'clear'}
-                    className={cls.button}
-            >
-                <IconLogOut className={cls.icon} fill={fill} />
-                <span className={cls.link}>
-                    Log Out
-                </span>
-
-            </Button>
+            <Logout className={cls.button} />
         </div>
     )
 }

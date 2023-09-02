@@ -24,6 +24,7 @@ export const Avatar = (props: AvatarProps) => {
             height: size || 100
         }
     }, [size])
+
     return (
         <div className={clsx(cls.wrapperAvatar, [className])}>
             {src && <img src={src as string}

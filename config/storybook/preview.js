@@ -1,13 +1,10 @@
 import { addDecorator } from '@storybook/react'
-import { StyleDecorator } from '../../src/shared/config/storybook/StyleDecorator/StyleDecorator'
-import { ThemeDecorator } from '../../src/shared/config/storybook/ThemeDecorator/ThemeDecorator'
-import { Theme } from '../../src/app/providers/ThemeProvider'
-import React, { useEffect } from 'react'
-import { RouterContext } from 'next/dist/shared/lib/router-context'
-import { QueryDecorator } from '../../src/shared/config/storybook/QueryDecorator/QueryDecorator'
-import { I18nDecorator } from '../../src/shared/config/storybook/I18nDecorator/I18nDecorator'
-import i18n from '../../src/shared/config/storybook/I18nDecorator/i18next'
 import * as NextImage from 'next/image'
+import React from 'react'
+import { RouterContext } from 'next/dist/shared/lib/router-context'
+import i18n from '../../i18next'
+import { Theme } from '../../src/app/providers/ThemeProvider'
+import { StyleDecorator, ThemeDecorator, I18nDecorator, QueryDecorator } from '../../src/shared/config/storybook'
 
 const OriginalNextImage = NextImage.default
 

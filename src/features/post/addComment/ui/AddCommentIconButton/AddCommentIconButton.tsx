@@ -1,7 +1,8 @@
 import React from 'react'
-import { Theme, useTheme } from 'app/providers/ThemeProvider'
 import IconComment from 'shared/assets/icons/light/message-circle.svg'
 import IconCommentOutline from 'shared/assets/icons/outline/message-circle-outline.svg'
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
 import { ActionIcon } from 'shared/ui'
 import { useCommentPost } from '../../model'
 

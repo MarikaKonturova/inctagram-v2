@@ -1,7 +1,8 @@
+import { useTranslation } from 'next-i18next'
 import React from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
-import { AppRoutes } from 'shared/config/routeConfig/path'
+import { AppRoutes } from 'shared/constants/path'
 import { AppLink, Button, FormWrapper, Input, PageLoader } from 'shared/ui'
 
 import { useRecoverPassword } from '../../model'
@@ -12,6 +13,7 @@ export interface PasswordRecoveryValidation {
 }
 
 export const PasswordRecoveryForm = () => {
+    const { t } = useTranslation('auth')
     const {
         register,
         handleSubmit,
@@ -21,7 +23,7 @@ export const PasswordRecoveryForm = () => {
     } = useValidationForm(['email', 'recaptcha'])
     const { isInfoTextShown, onSubmit, isLoading, error } = useRecoverPassword()
 
-    if (isLoading) return <PageLoader/>
+    if (isLoading) return <PageLoader />
 
     const getRecaptchaValueHandler = (value: string | null) => {
         if (value) {
@@ -32,37 +34,33 @@ export const PasswordRecoveryForm = () => {
 
     return (
         <FormWrapper className={cls.rootWrapper} onSubmit={handleSubmit(onSubmit)}>
-            <h2 className={cls.title}>Forgot Password</h2>
+            <h2 className={cls.title}>{t('forgotPassword')}</h2>
             <Input
                 {...register('email')}
                 type={'email'}
-                placeholder={'Email'}
+                placeholder={`${t('email')}`}
                 error={!!emailError}
                 errorText={emailError}
                 className={cls.input}
             />
-            <p className={cls.helperText}>Enter your email address and we will send you <br /> further instructions </p>
+            <p className={cls.helperText}>{t('passwordRecovery')}</p>
 
             {error?.response?.data.message && <p className={cls.error}>{error.response.data.message}</p>}
 
-            {isInfoTextShown && <p className={cls.infoText}>
-                The link has been sent by email. <br /> If you don’t receive an email send link again
-            </p>}
-            <Button
-                disabled={isLoading}
-                type={'submit'}
-                className={cls.button}
-            >
-                {isInfoTextShown ? 'Send Link again' : 'Send Link'}
+            {isInfoTextShown && <p className={cls.infoText}>{t('recoveryMessage')}</p>}
+            <Button disabled={isLoading} type={'submit'} className={cls.button}>
+                {isInfoTextShown ? t('sendLinkAgain') : t('sendLink')}
             </Button>
-            <AppLink active href={AppRoutes.AUTH.LOGIN}>Back to Sign In</AppLink>
+            <AppLink active href={AppRoutes.AUTH.LOGIN}>
+                {t('backToSignIn')}
+            </AppLink>
             <ReCAPTCHA
                 {...register('recaptcha')}
                 theme="dark"
                 hl="en"
                 className={cls.recaptcha}
                 onChange={getRecaptchaValueHandler}
-                sitekey={'6LeY2y0mAAAAANwI_paCWfoksCgBm1n2z9J0nwNQ'}
+                sitekey={`${process.env.RECAPTCHA_SITE_KEY as string}`}
             />
             {recaptchaError && <p className={cls.error}>{recaptchaError}</p>}
         </FormWrapper>

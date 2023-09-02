@@ -19,15 +19,40 @@ export const GOOGLE_AUTHORIZATION = {
 }
 
 export const useGoogleGitHubAuth = ({ type, method }: GoogleAndGitHubAuthProps) => {
+    let authorizationMethod
+
+    switch (type) {
+    case 'Registration':
+        switch (method) {
+        case 'Google':
+            authorizationMethod = GOOGLE_AUTHORIZATION.registrationGoogle
+            break
+        case 'GitHub':
+            authorizationMethod = GITHUB_AUTHORIZATION.registrationGitHub
+            break
+        default:
+            break
+        }
+        break
+    case 'Login':
+        switch (method) {
+        case 'Google':
+            authorizationMethod = GOOGLE_AUTHORIZATION.loginGoogle
+            break
+        case 'GitHub':
+            authorizationMethod = GITHUB_AUTHORIZATION.loginGitHub
+            break
+        default:
+            break
+        }
+        break
+    default:
+        break
+    }
+
     const { refetch } = useQuery({
         queryKey: ['gihubAuth'],
-        queryFn: type === 'Registration' && method === 'Google'
-            ? GOOGLE_AUTHORIZATION.registrationGoogle
-            : type === 'Login' && method === 'Google'
-                ? GOOGLE_AUTHORIZATION.loginGoogle
-                : type === 'Registration' && method === 'GitHub'
-                    ? GITHUB_AUTHORIZATION.registrationGitHub
-                    : GITHUB_AUTHORIZATION.loginGitHub,
+        queryFn: authorizationMethod,
         enabled: false
     })
 
