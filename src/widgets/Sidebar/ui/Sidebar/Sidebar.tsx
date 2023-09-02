@@ -64,7 +64,7 @@ export const Sidebar = (props: SidebarProps) => {
                             <IconCreate className={cls.icon} fill={fill} />
                         )}
                     <p className={cls.link} style={{ color: 'white' }}>
-                        {t('Create')}
+                        {t('create')}
                     </p>
                 </button>
                 <CreatePostModal
