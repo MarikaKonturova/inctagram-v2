@@ -1,5 +1,3 @@
-
-// eslint-disable-next-line boundaries/element-types
 import { type ReactNode } from 'react'
 import styles from 'features/profile/getProfileData/ui/profilePage/ProfilePage.module.scss'
 import { ModalLayout } from 'shared/ui/ModalLayout/ModalLayout'

@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
 import { useSnackbar } from 'widgets/SnackBar/model/store/snackbarStore'
 import { PostService } from 'shared/api/post/postService'
-import { type Comment } from '../../../../shared/types/comment'
+import { type Comment } from 'shared/types/comment'
 
 export const useCommentPost = () => {
     const onOpen = useSnackbar((state) => state.onOpen)

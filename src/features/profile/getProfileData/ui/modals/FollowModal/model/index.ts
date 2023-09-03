@@ -1,17 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
 import { $api } from 'shared/api/api'
-
-export interface User {
-    id: number
-    userId: number
-    userName: string
-    avatars: {
-        medium: {
-            url: string
-        }
-    }
-    isFollowing: boolean
-}
+import { type User } from 'shared/types/auth'
 
 export function useGetUsers (searchUser: string, userName: string) {
     return useQuery(['users', searchUser], async () => {
@@ -32,9 +22,8 @@ export function useToggleFollowUser (debounceSearchUser: string) {
     const queryClient = useQueryClient()
 
     return useMutation(async (userToToggle: User) => {
-        const response = await $api.post('/users/following', { selectedUserId: userToToggle.id })
+        const response = await $api.post('/users/following', { selectedUserId: userToToggle.userId })
 
-        // Проверяем, что статус ответа 201, иначе выбрасываем ошибку
         if (response.status !== 201) {
             throw new Error('Failed to process follow/unfollow action')
         }
@@ -56,6 +45,7 @@ export function useToggleFollowUser (debounceSearchUser: string) {
         },
         onError: (error) => {
             console.error('Error while toggling follow:', error)
+            toast.error('Ошибка при попытке подписаться/отписаться')
         }
     })
 }

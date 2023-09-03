@@ -1,4 +1,4 @@
-import { useState, type FC } from 'react'
+import { type FC, useState } from 'react'
 import { PostModalActions } from 'widgets/Post/actions/PostModalActions/PostModalActions'
 import { MyPostDropdown } from 'widgets/Post/dropdowns/MyPostDropdown/MyPostDropdown'
 import { GetCommentaries } from 'features/post'

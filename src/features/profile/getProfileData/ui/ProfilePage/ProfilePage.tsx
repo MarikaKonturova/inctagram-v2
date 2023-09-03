@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { PostCards } from 'features/profile/getPosts/ui/PostCards/PostCards'
 import { SubscribersModal } from 'features/profile/getProfileData/ui/modals/FollowModal/ui'
 import { Avatar } from 'shared/ui'
@@ -11,11 +11,24 @@ export const ProfilePage = () => {
     const userData = response?.data
 
     const [isModalOpen, setModalOpen] = useState(false)
+    const [followingCount, setFollowingCount] = useState<number | undefined>(userData?.followingCount)
+
+    useEffect(() => {
+        setFollowingCount(userData?.followingCount)
+    }, [userData])
+
     const openModal = () => {
         setModalOpen(true)
     }
     const closeModal = () => {
         setModalOpen(false)
+    }
+
+    const handleFollowingChange = (action: 'follow' | 'unfollow') => {
+        setFollowingCount(prevCount => {
+            if (!prevCount) return 0
+            return action === 'follow' ? prevCount + 1 : prevCount - 1
+        })
     }
 
     return (
@@ -26,22 +39,20 @@ export const ProfilePage = () => {
                             src={(userData?.avatars && userData.avatars.length > 1)
                                 ? userData.avatars[1]?.url
                                 : undefined} />
-
                 </div>
                 <div>
                     <div className={cls.userName}>{userData?.userName}</div>
                     <div className={cls.info}>
-                        <div onClick={openModal}>
-                            <div className={cls.subscribe}>2 218</div>
+                        <div >
+                            <div className={cls.subscribe}>{followingCount}</div>
                             <div>Subscriptions</div>
                         </div>
                         <div onClick={openModal}>
-                            <div className={cls.subscribe}>2358</div>
+                            <div className={cls.subscribe}>{userData?.followersCount}</div>
                             <div>Subscribers</div>
                         </div>
-
                         <div>
-                            <div className={cls.subscribe}>2764</div>
+                            <div className={cls.subscribe}>{userData?.publicationsCount}</div>
                             <div>Publications</div>
                         </div>
                     </div>
@@ -49,7 +60,8 @@ export const ProfilePage = () => {
                 </div>
             </div>
             {userData && <PostCards userData={userData} />}
-            {isModalOpen && <SubscribersModal onClose={closeModal} userName={userData?.userName} />}
+            {isModalOpen && <SubscribersModal onClose={closeModal} userName={userData?.userName}
+                                              onFollowingChange={handleFollowingChange} />}
         </div>
     )
 }

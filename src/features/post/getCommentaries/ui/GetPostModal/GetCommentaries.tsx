@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 import React, { type FC } from 'react'
 import { LikeCommentIconButton } from 'features/post'
-import catImg from 'shared/assets/images/MicrosoftTeams-image.png'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { Avatar } from 'shared/ui'
 import { useGetPostComments } from '../../model'
