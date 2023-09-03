@@ -10,7 +10,6 @@ import { type ProfileDataModel } from 'shared/types/auth'
 import { type GetPostsResponse, type PostResponse } from 'shared/types/post'
 import { Card, Loader } from 'shared/ui'
 import { useGetMyPost, useGetPosts } from '../../model'
-import photo from '../../premium_photo-1687382111414-7b87afa5da34.avif'
 import cls from './PostCards.module.scss'
 
 interface Props {
@@ -64,8 +63,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
                  onClick={onPostCardClick}
                  className={cls.card}
             >
-                {/* <Card src={item.images[0]?.versions.huge?.url} alt="post"/> */}
-                <Card src={photo} alt="post"/>
+                <Card src={item.images[0]?.versions.huge?.url} alt="post"/>
             </div>
         )
     })
