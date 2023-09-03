@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 import { type FC } from 'react'
 
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
@@ -14,6 +15,7 @@ interface NewPasswordValidation {
 }
 
 export const NewPasswordForm: FC = () => {
+    const { t } = useTranslation('auth')
     const {
         register,
         handleSubmit,
@@ -34,11 +36,11 @@ export const NewPasswordForm: FC = () => {
 
     return (
         <FormWrapper className={cls.newPassword} onSubmit={handleSubmit(onSubmit)}>
-            <h1 className={cls.title}>Create new password</h1>
+            <h1 className={cls.title}>{t('createNewPassword')}</h1>
             <Input
                 {...register('password')}
                 type="password"
-                placeholder={'New password'}
+                placeholder={t('newPassword') ?? ''}
                 error={!!passwordError}
                 errorText={passwordError}
                 className={cls.input}
@@ -46,13 +48,12 @@ export const NewPasswordForm: FC = () => {
             <Input
                 {...register('confPassword')}
                 type="password"
-                placeholder={'Password confirmation'}
+                placeholder={t('passwordConfirmation') ?? ''}
                 error={!!confPasswordError}
                 errorText={confPasswordError}
                 className={clsx(cls.input, cls.confirmation)}
             />
-            <Button type={'submit'}>Create new
-                password</Button>
+            <Button type={'submit'}>{t('createNewPassword')}</Button>
         </FormWrapper>
     )
 }

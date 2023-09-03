@@ -1,6 +1,7 @@
 import React from 'react'
-import { Theme, useTheme } from 'app/providers/ThemeProvider'
 import IconShareOutline from 'shared/assets/icons/general/paper-plane.svg'
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
 import { ActionIcon } from 'shared/ui'
 import { useSharePost } from '../../model'
 

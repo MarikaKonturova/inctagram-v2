@@ -2,10 +2,10 @@ import { Menu } from '@headlessui/react'
 import clsx from 'clsx'
 import React from 'react'
 
-import { Theme, useTheme } from 'app/providers/ThemeProvider'
-
 import IconCopy from 'shared/assets/icons/light/copy.svg'
 import IconCopyOutline from 'shared/assets/icons/outline/copy-outline.svg'
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
 import { copyToClipboard } from 'shared/lib/copyToClipboard'
 import cls from './CopyToClipboard.module.scss'
 

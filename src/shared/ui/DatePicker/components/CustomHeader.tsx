@@ -1,7 +1,8 @@
 
 import { format } from 'date-fns'
 import { type ReactDatePickerCustomHeaderProps } from 'react-datepicker'
-import { Theme, useTheme } from 'app/providers/ThemeProvider'
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
 import cls from './CustomHeader.module.scss'
 export const capitalizeFirstLetter = (text: string) => {
     return text[0].toUpperCase() + text.slice(1)

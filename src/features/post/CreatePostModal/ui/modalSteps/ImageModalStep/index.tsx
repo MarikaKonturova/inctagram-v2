@@ -1,7 +1,8 @@
 import { type ChangeEvent, type FC } from 'react'
-import { Theme, useTheme } from 'app/providers/ThemeProvider'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import IconImg from 'shared/assets/icons/light/image.svg'
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
 import { Button, Modal } from 'shared/ui'
 import cls from './styles.module.scss'
 

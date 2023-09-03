@@ -1,9 +1,12 @@
 {
-  "Привет": "Hello",
-  "verification-title": "Email verification link expired!",
-  "verification-text":"Looks like the verification link has expired. Not to worry, we can send the link again",
-  "verification-button":"Resend verification link",
-  "congratulations-title": "Congratulations!",
-  "congratulations-text":"Your email has been confirmed",
-  "congratulations-button":"Sign in"
+  "logout": "Log Out",
+  "addPhoto": "Add a Profile Photo",
+  "save": "Save",
+  "home": "Home",
+  "create": "Create",
+  "myProfile": "My Profile",
+  "messenger": "Messenger",
+  "search": "Search",
+  "statistics": "Statistics",
+  "favorites": "Favorites"
 }

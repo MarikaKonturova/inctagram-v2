@@ -1,7 +1,8 @@
 import React from 'react'
-import { Theme, useTheme } from 'app/providers/ThemeProvider'
 import IconLike from 'shared/assets/icons/light/heart.svg'
 import IconLikeOutline from 'shared/assets/icons/outline/heart-outline.svg'
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
 import { ActionIcon } from 'shared/ui'
 import { useLikePost } from '../../model'
 

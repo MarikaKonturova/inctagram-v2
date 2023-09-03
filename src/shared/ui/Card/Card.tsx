@@ -32,6 +32,7 @@ export const Card: React.FC<PropsType> = (props) => {
     const handleOnError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
         e?.currentTarget?.src !== fallbackSrc && setOnErrorSrc(fallbackSrc)
     }
+    console.log(isLoaded)
 
     return (
         <div className={clsx(cls.container, cardWrapperClassName)}>

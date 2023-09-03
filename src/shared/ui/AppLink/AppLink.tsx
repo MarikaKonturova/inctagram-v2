@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { type ReactNode } from 'react'
+import useLocale from 'shared/hooks/useLocale'
 import cls from './AppLink.module.scss'
 
 interface AppLinkProps {
@@ -24,26 +25,18 @@ export const AppLink = (props: AppLinkProps) => {
         children,
         ...rest
     } = props
-    let {
-        skipLocaleHandling
-    } = props
 
     const router = useRouter()
-    const locale = rest.locale || router.query.locale || ''
+    const { locale } = useLocale()
 
-    let href = rest.href || router.asPath
-    if (href.indexOf('http') === 0) skipLocaleHandling = true
-    if (locale && !skipLocaleHandling) {
-        href = href
-            ? `/${locale as string}${href}`
-            : router.pathname.replace('[locale]', locale as string)
-    }
+    const href = rest.href || router.asPath
 
     const mods = {
         [cls.active]: active
     }
+
     return (
-        <Link href={href} legacyBehavior>
+        <Link href={href} legacyBehavior locale={locale}>
             <a className={clsx(cls.AppLink, mods, className)} {...rest}>{children}</a>
         </Link>
     )

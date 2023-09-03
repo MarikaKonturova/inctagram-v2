@@ -60,10 +60,12 @@ export const PostCards: FC<Props> = ({ userData }) => {
 
         return (
             <div key={item.id}
-                 onClick={onPostCardClick}
                  className={cls.card}
-            >
-                <Card src={item.images[0]?.versions.huge?.url} alt="post"/>
+                 onClick={onPostCardClick}>
+                <Card src={ item.images[0]?.versions.huge?.url}
+                      skeletonWidth={item.images[0]?.versions.huge?.width}
+                      skeletonHeight={item.images[0]?.versions.huge?.height}
+                      alt='post' />
             </div>
         )
     })
@@ -97,31 +99,31 @@ export const PostCards: FC<Props> = ({ userData }) => {
 
             {postId && post && [
                 <GetPostModal
-                    key="GetPostModal"
-                    id={MODALS.GetPostModal}
-                    post={post}
-                    userName={userData.userName}
-                    isOpen={currentModal === MODALS.GetPostModal}
-                    handleClose={closeModal}
-                    headerActions={<MyPostDropdown
-                        openEditPostModal={openEditPostModal}
-                        openDeletePostModal={openDeletePostModal}
-                    />}
-                    content={<GetCommentaries postId={postId} userData={userData}/>}
-                    actionsSlot={<PostModalActions postId={postId}/>}/>,
+                 key="GetPostModal"
+                 id={MODALS.GetPostModal}
+                 post={post}
+                 userName={userData.userName}
+                 isOpen={currentModal === MODALS.GetPostModal}
+                 handleClose={closeModal}
+                 headerActions={<MyPostDropdown
+                                openEditPostModal={openEditPostModal}
+                                openDeletePostModal={openDeletePostModal}
+                 />}
+                 content={<GetCommentaries postId={postId} userData={userData}/>}
+                 actionsSlot={<PostModalActions postId={postId} />} />,
                 <EditPostModal
-                    id={MODALS.EditPostModal}
-                    key="EditPostModal"
-                    postId={postId}
-                    isOpen={currentModal === MODALS.EditPostModal}
-                    handleClose={closeModal}/>,
+                id={MODALS.EditPostModal}
+                key="EditPostModal"
+                postId={postId}
+                isOpen={currentModal === MODALS.EditPostModal}
+                handleClose={closeModal} />,
                 <DeletePostModal
-                    id={MODALS.DeletePostModal}
-                    key="DeletePostModal"
-                    postId={postId}
-                    isOpen={currentModal === MODALS.DeletePostModal}
-                    openEditPostModal={openEditPostModal}
-                    handleClose={closeModal}/>
+                id={MODALS.DeletePostModal}
+                key="DeletePostModal"
+                postId={postId}
+                isOpen={currentModal === MODALS.DeletePostModal}
+                openEditPostModal={openEditPostModal}
+                handleClose={closeModal} />
             ]}
 
             {isSuccess && (
