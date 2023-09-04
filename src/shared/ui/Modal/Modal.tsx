@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react'
+import styles from 'features/profile/getProfileData/ui/profilePage/ProfilePage.module.scss'
 import { ModalLayout } from 'shared/ui/ModalLayout/ModalLayout'
 import { Portal } from 'shared/ui/Portal/Portal'
 
@@ -26,6 +27,7 @@ export const Modal = (props: ModalProps) => {
 
     return (
         <Portal>
+            <div className={styles.overlay}></div>
             <ModalLayout {...restProps}>
                 {children}
             </ModalLayout>

@@ -55,9 +55,22 @@ export interface ProfileDataModel {
     lastName: string | null
     dateOfBirth: string | null
     city: string
+    aboutMe: string | null
+    avatars: AvatarPostModel | null
     followingCount: number
     followersCount: number
     publicationsCount: number
-    aboutMe: string | null
-    avatars: AvatarPostModel | null
+}
+
+export interface User {
+    id: number
+    userId: number
+    userName: string
+    avatars: {
+        medium: {
+            url: string
+        }
+    }
+    isFollowedBy: boolean
+    isFollowing: boolean
 }
