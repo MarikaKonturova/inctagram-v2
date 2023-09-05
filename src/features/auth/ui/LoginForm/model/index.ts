@@ -3,12 +3,13 @@ import { type AxiosError } from 'axios'
 import { useRouter } from 'next/router'
 import { AuthService } from 'shared/api/auth/authService'
 import { AppRoutes } from 'shared/constants/path'
+import { type UserError } from 'shared/types/auth'
 
 export const useLogin = () => {
     const queryClient = useQueryClient()
     const { push } = useRouter()
 
-    const { mutate: login, isLoading, error } = useMutation<any, AxiosError<{ message: string }>, any>({
+    const { mutate: login, isLoading, error } = useMutation<any, AxiosError<UserError>, any>({
         mutationFn: AuthService.login,
         retry: false,
         onSuccess: async () => {

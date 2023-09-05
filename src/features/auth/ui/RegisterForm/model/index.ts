@@ -8,7 +8,7 @@ import { AuthService } from 'shared/api/auth/authService'
 import { AppRoutes } from 'shared/constants/path'
 import { useModal } from 'shared/hooks/useModal'
 import {
-    type UserRegistrationError,
+    type UserError,
     type UserRegistrationModel
 } from 'shared/types/auth'
 
@@ -26,7 +26,7 @@ export const useRegistration = () => {
     const { push } = useRouter()
 
     const { mutate: registration, isLoading, error } =
-      useMutation<any, AxiosError<UserRegistrationError>, UserRegistrationModel, unknown>({
+      useMutation<any, AxiosError<UserError>, UserRegistrationModel, unknown>({
           mutationFn: AuthService.registration,
           retry: false,
           onSuccess: () => {
@@ -43,7 +43,7 @@ export const useRegistration = () => {
     }, [error])
 
     const responseError = useMemo(() => {
-        return error?.response?.data?.errorsMessages.reduce((accum, item) => {
+        return error?.response?.data?.messages.reduce((accum, item) => {
             accum[item.field] = item.message
             return accum
         }, {} as Record<string, string>)

@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { useSnackbar } from 'widgets/SnackBar/model/store/snackbarStore'
 import { profileService } from 'shared/api/profile'
 import { useModal } from 'shared/hooks/useModal'
+import { type UserError } from 'shared/types/auth'
 import { Button, Modal } from 'shared/ui'
 import cls from './AvatarModal.module.scss'
 
@@ -34,8 +35,8 @@ export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => 
             setAvatar(preview)
             setIsOpen(false)
         },
-        onError: (res: AxiosError<{ message: string }>) => {
-            onOpen(res.message, 'danger', 'left')
+        onError: (res: AxiosError<UserError>) => {
+            onOpen(res?.response?.data.messages[0].message || 'some error', 'danger', 'left')
         }
     })
     function dataURLtoFile (dataurl: string, filename: string) {

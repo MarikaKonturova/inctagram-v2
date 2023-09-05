@@ -20,8 +20,8 @@ export interface UserRegistrationModel {
     email: string
     password: string
 }
-export interface UserRegistrationError {
-    errorsMessages: Array<{
+export interface UserError {
+    messages: Array<{
         field: string
         message: string
     }>

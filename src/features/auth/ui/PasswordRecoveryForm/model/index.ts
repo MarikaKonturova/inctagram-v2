@@ -5,6 +5,7 @@ import { useAuth } from 'features/auth/model'
 import { SelectSetEmail } from 'features/auth/model/selectors'
 import { AuthService } from 'shared/api/auth/authService'
 import { useModal } from 'shared/hooks/useModal'
+import { type UserError } from '../../../../../shared/types/auth'
 import { type PasswordRecoveryValidation } from '../ui/PasswordRecoveryForm/PasswordRecoveryForm'
 
 export const useRecoverPassword = () => {
@@ -12,7 +13,7 @@ export const useRecoverPassword = () => {
     const setEmail = useAuth(SelectSetEmail)
     const { setIsOpen } = useModal()
 
-    const { mutate: passwordRecovery, isLoading, error } = useMutation<any, AxiosError<{ message: string }>, any>({
+    const { mutate: passwordRecovery, isLoading, error } = useMutation<any, AxiosError<UserError>, any>({
         mutationFn: AuthService.passwordRecovery,
         retry: false,
         onSuccess: async () => {
