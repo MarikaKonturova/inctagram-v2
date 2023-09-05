@@ -2,5 +2,8 @@
     position: relative;
     width: 234px;
     height: 228px;
-    object-fit: contain;
+
+    .cardImg {
+        object-fit: cover;
+    }
 }
