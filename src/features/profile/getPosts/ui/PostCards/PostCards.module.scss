@@ -12,6 +12,8 @@
     }
 
     .card {
+        padding: 10px;
+
         @media (min-width: 900px) {
             flex-basis: 25%;
             flex-grow: 0;
