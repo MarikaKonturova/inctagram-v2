@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import { $api } from '../../../../../shared/api/api'
-import { AppRoutes } from '../../../../../shared/constants/path'
-import { useAuth } from '../../../model'
+import { useAuth } from 'features/auth/model'
+import { $api } from 'shared/api/api'
+import { AppRoutes } from 'shared/constants/path'
 
 const externalAccount = {
     confirmMergeAccounts (code: string) {

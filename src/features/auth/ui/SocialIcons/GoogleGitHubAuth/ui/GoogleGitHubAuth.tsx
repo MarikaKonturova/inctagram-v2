@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 import React, { type FC, useEffect, useState } from 'react'
 import Github from 'shared/assets/icons/general/github.svg'
 import Google from 'shared/assets/icons/general/google.svg'
@@ -18,6 +19,7 @@ const initialState = {
 }
 
 export const GoogleGitHubAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
+    const { t } = useTranslation('auth')
     const [modal, setModal] = useState(initialState)
 
     const { query, push } = useRouter()
@@ -41,21 +43,21 @@ export const GoogleGitHubAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
         if (queryStatus === '401') {
             setModal({
                 modalOpen: true,
-                title: 'Unauthorized , go to sign up page to make registration'
+                title: t('unauthorizedMessage')
             })
         }
 
         if (queryStatus === '400') {
             setModal({
                 modalOpen: true,
-                title: 'User is already registered'
+                title: t('alreadyRegistered')
             })
         }
 
         if (queryStatus === '204') {
             setModal({
                 modalOpen: true,
-                title: 'An email with a verification code has been sent to the your email address'
+                title: t('successMessage')
             })
         }
     }, [queryStatus])
@@ -68,7 +70,7 @@ export const GoogleGitHubAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
         <>
             {
                 modal.modalOpen &&
-                <Modal isOpen={modal.modalOpen} title={'Registration'} onClose={handleClose}>
+                <Modal isOpen={modal.modalOpen} title={`${t('registration')}`} onClose={handleClose}>
                     <div className={style.modal}>
                         {modal.title}
                         <Button onClick={handleClose}>Ok</Button>

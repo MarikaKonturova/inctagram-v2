@@ -1,6 +1,6 @@
+import { getAuthLayout } from 'layouts/Layout/AuthLayout/AuthLayout'
 import React from 'react'
-import MergeAccount from '../../../../features/auth/ui/MergeAccount/ui/MergeAccount'
-import { getAuthLayout } from '../../../../layouts/Layout/AuthLayout/AuthLayout'
+import { MergeAccount } from 'features/auth'
 
 const MergeAccountPage = () => {
     return <MergeAccount />

@@ -14,6 +14,6 @@ export { Logout } from './ui/Logout/ui/Logout/Logout'
 
 export { SocialIcons } from './ui/SocialIcons/SocialIcons'
 
-// export { SelectEmail, SelectSetEmail, SelectUserId } from './model/selectors'
+export { MergeAccount } from './ui/MergeAccount/ui/MergeAccount'
 
 export { useAuth } from './model'

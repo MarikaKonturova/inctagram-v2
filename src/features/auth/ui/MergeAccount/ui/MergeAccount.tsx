@@ -1,13 +1,15 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 import React from 'react'
+import { useAuth } from 'features/auth/model'
 import mergeAccountsImage from 'shared/assets/images/mergeAccounts.png'
-import { Button, Modal } from '../../../../../shared/ui'
-import { useAuth } from '../../../model'
+import { Button, Modal } from 'shared/ui'
 import { useMergeAccount } from '../model'
 import style from './MergeAccount.module.scss'
 
-const MergeAccount = () => {
+export const MergeAccount = () => {
+    const { t } = useTranslation('auth')
     const { query: { code, email } } = useRouter()
     const { isLoading, confirmMerge, cancelMerge } = useMergeAccount()
     const { contentForMerge, isOpenMergePopUp, setPopUpForMerge } = useAuth()
@@ -16,18 +18,18 @@ const MergeAccount = () => {
     return (
         <>
             <div className={style.container}>
-                <span className={style.headerText}>Merge Accounts</span>
-                <span className={style.text}>The user with email : {email} is already in the system.
-                    Could we merge this accounts ?</span>
+                <span className={style.headerText}>{t('mergeAcc')}</span>
+                <span className={style.text}>{t('theUserWithEmail')} {email} {t('isAlreadyInSystem')}
+                    {t('couldWeMerge')}</span>
                 <div className={style.buttonContainer}>
                     <Button
                         onClick={() => { confirmMerge(code as string) } }
                         disabled={isLoading}
-                    >Yes,merge</Button>
+                    >{t('yes')}</Button>
                     <Button
                         onClick={() => { cancelMerge(code as string) } }
                         disabled={isLoading}
-                    >No</Button>
+                    >{t('no')}</Button>
                 </div>
                 <Image src={mergeAccountsImage} alt={'mergeAccountsImage'} />
             </div>
@@ -41,5 +43,3 @@ const MergeAccount = () => {
         </>
     )
 }
-
-export default MergeAccount
