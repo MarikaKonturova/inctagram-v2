@@ -1,3 +1,4 @@
+
 import { getAuthLayout } from 'layouts/Layout/AuthLayout/AuthLayout'
 import { type GetServerSidePropsContext } from 'next'
 import { RegisterForm } from 'features/auth'
