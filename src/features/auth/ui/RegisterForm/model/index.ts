@@ -43,7 +43,7 @@ export const useRegistration = () => {
     }, [error])
 
     const responseError = useMemo(() => {
-        return error?.response?.data?.errorsMessages.reduce((accum, item) => {
+        return error?.response?.data?.errorsMessages?.reduce((accum, item) => {
             accum[item.field] = item.message
             return accum
         }, {} as Record<string, string>)

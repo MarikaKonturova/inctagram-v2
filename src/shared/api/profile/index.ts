@@ -21,5 +21,4 @@ export const profileService = {
     subscribeOrUnsubscribe (userId: string) {
         return $api.patch<ProfileDataModel>(`/users/${userId}/subscribe`)
     }
-
 }
