@@ -35,7 +35,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
         isFetchingNextPage,
         hasNextPage
 
-    } = useGetPosts(userData.id)
+    } = useGetPosts(userData.userName)
     const [currentModal, setCurrentModal] = useState<Values | null>(null)
     const [postId, setPostId] = useState<number | undefined>(undefined)
 
@@ -111,7 +111,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
                                 openDeletePostModal={openDeletePostModal}
                  />}
                  content={<GetCommentaries postId={postId} userData={userData}/>}
-                 actionsSlot={<PostModalActions postId={postId} />} />,
+                 actionsSlot={<PostModalActions post={post} />} />,
                 <EditPostModal
                 id={MODALS.EditPostModal}
                 key="EditPostModal"

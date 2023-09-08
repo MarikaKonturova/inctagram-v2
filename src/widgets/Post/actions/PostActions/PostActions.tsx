@@ -1,25 +1,25 @@
 import clsx from 'clsx'
-import React from 'react'
 
 import {
-    LikePostIconButton,
     AddCommentIconButton,
-    SharePostIconButton,
-    AddPostToFavoutitesIconButton
+    AddPostToFavoutitesIconButton,
+    LikePostIconButton,
+    SharePostIconButton
 } from 'features/post'
+import { type PostResponse } from 'shared/types/post'
 import cls from './PostActions.module.scss'
 
 interface PostActionsProps {
-    postId: string
+    post: PostResponse
 }
 
-export const PostActions = ({ postId }: PostActionsProps) => (
+export const PostActions = ({ post }: PostActionsProps) => (
     <div className={clsx(cls.container)}>
         <div className={clsx(cls.left_group)}>
-            <LikePostIconButton />
+            <LikePostIconButton postId={post.id} postIsLiked={post.isLiked} />
             <AddCommentIconButton />
             <SharePostIconButton />
         </div>
-        <AddPostToFavoutitesIconButton postId={+postId} />
+        <AddPostToFavoutitesIconButton postId={post.id} />
     </div>
 )
