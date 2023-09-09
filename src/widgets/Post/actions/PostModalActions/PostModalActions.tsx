@@ -15,7 +15,7 @@ export const PostModalActions = ({ post, ...restProps }: PostModalActionsProps) 
                 <LikePostIconButton postIsLiked={post.isLiked} postId={post.id}/>
                 <SharePostIconButton />
             </div>
-            <AddPostToFavoutitesIconButton postId={post.id} />
+            <AddPostToFavoutitesIconButton postIsFavourite={post.isFavorite} postId={post.id} />
         </div>
     )
 }
