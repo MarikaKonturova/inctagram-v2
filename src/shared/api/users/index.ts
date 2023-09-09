@@ -6,7 +6,7 @@ import { type Post } from 'shared/types/post'
 export const UsersService = {
 
     addToFavourites (postId: number) {
-        return $api.post<Post>(`/users-posts/${postId}`)
+        return $api.post<Post>(`/users/favorite/${postId}`)
     }
 
 }

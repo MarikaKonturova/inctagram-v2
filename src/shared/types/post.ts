@@ -1,32 +1,5 @@
 import { type ProfileAvatarModel, type ProfileDataModel } from './auth'
 
-export interface NewPostType {
-    description: string
-    files: string
-}
-
-interface NewestLikes {
-    userId: string
-    login: string
-    addedAt: string
-}
-
-interface LikesInfoType {
-    likesCount: number
-    dislikesCount: number
-    myStatus: string
-    newestLikes: NewestLikes[]
-}
-/* What is that? We have PostResponse, Post and PostResponseType at the same time */
-export interface PostResponseType {
-    id: string
-    photos: string
-    description: string
-    createdAt: string
-    updatedAt: string
-    extendedLikesInfo: LikesInfoType
-}
-
 export interface Post {
     id: string
     photos: string
@@ -72,6 +45,9 @@ export interface PostResponse {
     likeCount: number
     isLiked: boolean
     newLikes: Array<Pick <ProfileDataModel, 'id' | 'avatars'> & { username: string }>
+    isFavorite: boolean
+    isFollowing: boolean
+    isFollowedBy: boolean
 
 }
 

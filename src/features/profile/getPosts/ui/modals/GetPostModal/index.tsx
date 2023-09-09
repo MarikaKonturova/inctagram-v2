@@ -47,7 +47,7 @@ export const GetPostModal: React.FC<IProps> = (props) => {
                 <div className={cls.bottomSection}>
                     {actionsSlot}
                     <div className={cls.wrapper}>
-                        <LikesInfo />
+                        <LikesInfo likeCount={post.likeCount} newLikes={post.newLikes}/>
                         <CreationDate date={creationDate} />
                     </div>
                 </div>
