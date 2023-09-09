@@ -17,7 +17,7 @@ interface LikesInfoType {
     myStatus: string
     newestLikes: NewestLikes[]
 }
-
+/* What is that? We have PostResponse, Post and PostResponseType at the same time */
 export interface PostResponseType {
     id: string
     photos: string

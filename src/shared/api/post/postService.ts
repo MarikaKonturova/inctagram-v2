@@ -4,8 +4,8 @@ import { type Comment } from 'shared/types/comment'
 // TODO: доделать API
 // TODO: сделать enum для API routes
 export const PostService = {
-    like () {
-        return $api.get<any>('/path')
+    like ({ postId, likeStatus }: { postId: number, likeStatus: string }) {
+        return $api.put(`/posts/${postId}/like-status`, { likeStatus })
     },
     comment (postId: number, comment: Pick<Comment, 'content'>) {
         return $api.post<Comment>(`/posts/${postId}/comments`, comment)
