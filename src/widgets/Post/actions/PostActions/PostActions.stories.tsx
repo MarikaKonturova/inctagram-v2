@@ -1,5 +1,6 @@
 import { type ComponentMeta, type ComponentStory } from '@storybook/react'
 import React from 'react'
+import { type PostResponse } from 'shared/types/post'
 import { PostActions } from './PostActions'
 
 export default {
@@ -11,7 +12,8 @@ export default {
 } as ComponentMeta<typeof PostActions>
 
 const Template: ComponentStory<typeof PostActions> = () => {
-    return <PostActions postId='1'/>
+    // TODO: fix
+    return <PostActions post={{} as PostResponse}/>
 }
 
 export const DefaultPostModalActions = Template.bind({})
