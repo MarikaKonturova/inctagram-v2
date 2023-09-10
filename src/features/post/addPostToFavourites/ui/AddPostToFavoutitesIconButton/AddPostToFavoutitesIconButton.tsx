@@ -8,21 +8,23 @@ import { useAddToFavouritesPost } from '../../model'
 
 interface IProps {
     postId: number
+    postIsFavourite: boolean
 }
 
-export const AddPostToFavoutitesIconButton: FC<IProps> = ({ postId }) => {
+export const AddPostToFavoutitesIconButton: FC<IProps> = ({ postIsFavourite, postId }) => {
     const { theme } = useTheme()
 
     const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
-    const { addToFavourites } = useAddToFavouritesPost(postId)
+    const { addToFavourites } = useAddToFavouritesPost()
 
     const onFavouritesIconClick = () => {
-        addToFavourites()
+        addToFavourites(postId)
     }
 
     return (
         <ActionIcon filledIcon={<IconFavouritesOutline fill={fill}/>}
                     outlineIcon={<IconFavourites fill={fill} />}
-                    onClick={onFavouritesIconClick} />
+                    onClick={onFavouritesIconClick}
+                    initialState={postIsFavourite} />
     )
 }

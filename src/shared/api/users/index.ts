@@ -16,7 +16,7 @@ export const UsersService = {
     },
 
     addToFavourites (postId: number) {
-        return $api.post<Post>(`/users-posts/${postId}`)
+        return $api.post<Post>(`/users/favorite/${postId}`)
     },
 
     follow (selectedUserId: number) {
