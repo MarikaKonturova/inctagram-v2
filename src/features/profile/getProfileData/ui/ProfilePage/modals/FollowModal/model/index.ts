@@ -1,25 +1,30 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { toast } from 'react-toastify'
-import { UsersService } from 'shared/api/users'
+import { useSnackbar } from 'features/common'
+import { UsersService } from 'shared/api'
 import { type User } from 'shared/types/auth'
 
 export function useGetUsers (searchUser: string, userName: string) {
+    const onOpen = useSnackbar(state => state.onOpen)
+
     return useQuery(['users', searchUser], async () => {
         const response = await UsersService.getFollowingUsers(userName, searchUser)
 
-        if (response.status !== 200) throw new Error('Network response was not ok')
+        if (response.status !== 200) {
+            onOpen('Network response was not ok', 'danger', 'right')
+        }
         return response.data.items
     })
 }
 
 export function useToggleFollowUser (debounceSearchUser: string) {
     const queryClient = useQueryClient()
+    const onOpen = useSnackbar(state => state.onOpen)
 
     return useMutation(async (userToToggle: User) => {
         const response = await UsersService.follow(userToToggle.userId)
 
         if (response.status !== 201) {
-            throw new Error('Failed to process follow/unfollow action')
+            onOpen('Failed to process follow/unfollow action', 'danger', 'right')
         }
 
         return {
@@ -37,15 +42,16 @@ export function useToggleFollowUser (debounceSearchUser: string) {
                 })
             })
         },
-        onError: (error) => {
-            console.error('Error while toggling follow:', error)
-            toast.error('Ошибка при попытке подписаться/отписаться')
+        onError: () => {
+            onOpen('Error while toggling follow/unfollow', 'danger', 'right')
         }
     })
 }
 
 export function useDeleteUser (debounceSearchUser: string) {
     const queryClient = useQueryClient()
+    const onOpen = useSnackbar(state => state.onOpen)
+
     return useMutation(async (userToDelete: User) => {
         const response = await UsersService.unfollow(userToDelete.userId)
 
@@ -57,8 +63,8 @@ export function useDeleteUser (debounceSearchUser: string) {
                 return oldData?.filter(user => user.id !== id)
             })
         },
-        onError: (error) => {
-            console.error('Error while deleting user:', error)
+        onError: () => {
+            onOpen('Error while deleting user:', 'danger', 'right')
         }
     })
 }

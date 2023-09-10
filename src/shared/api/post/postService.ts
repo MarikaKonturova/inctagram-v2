@@ -1,4 +1,4 @@
-import { $api } from 'shared/api/api'
+import { $api } from 'shared/api'
 import { type Comment } from 'shared/types/comment'
 
 // TODO: доделать API

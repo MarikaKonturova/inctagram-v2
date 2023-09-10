@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
-import { useSnackbar } from 'widgets/SnackBar/model/store/snackbarStore'
-import { UsersService } from 'shared/api/users'
+import { useSnackbar } from 'features/common'
+import { UsersService } from 'shared/api'
 
 export const useAddToFavouritesPost = (postId: number) => {
     const onOpen = useSnackbar((state) => state.onOpen)

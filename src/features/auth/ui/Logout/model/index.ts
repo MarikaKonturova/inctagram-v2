@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { AuthService } from 'shared/api/auth/authService'
+import { AuthService } from 'shared/api'
 
 interface LogoutReturnType {
     logout: () => void

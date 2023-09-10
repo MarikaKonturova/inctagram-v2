@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
-import { useSnackbar } from 'widgets/SnackBar/model/store/snackbarStore'
-import { PostService } from 'shared/api/post/postService'
+import { useSnackbar } from 'features/common'
+import { PostService } from 'shared/api'
 import { type Comment } from 'shared/types/comment'
 
 export const useCommentPost = () => {

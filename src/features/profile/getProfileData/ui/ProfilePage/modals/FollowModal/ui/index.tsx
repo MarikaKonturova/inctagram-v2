@@ -1,12 +1,11 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
-import { toast, ToastContainer } from 'react-toastify'
+import { useSnackbar } from 'features/common'
 import userPhoto from 'shared/assets/images/user.png'
 import { useDebounce } from 'shared/hooks/useDebounce'
 import { type User } from 'shared/types/auth'
 import { Button, Input, Loader, Modal } from 'shared/ui'
 
-import 'react-toastify/dist/ReactToastify.css'
 import { useGetUsers, useToggleFollowUser } from '../model'
 import styles from './styles.module.scss'
 
@@ -24,11 +23,12 @@ export const SubscribersModal: React.FC<SubscribersModalPropsTypes> = (props) =>
     const { data: usersData, isLoading: isUsersLoading } = useGetUsers(debounceSearchUser, userName || '')
     const toggleFollowUser = useToggleFollowUser(debounceSearchUser)
     const followingCount = usersData?.filter((user: User) => user.isFollowing).length || 0
+    const onOpen = useSnackbar(state => state.onOpen)
 
     const handleToggleFollow = (user: User) => {
         toggleFollowUser.mutate(user, {
             onSuccess: () => {
-                toast.success(`You have ${user.isFollowing ? 'unfollowed' : 'followed'} ${user.userName}!`)
+                onOpen(`You have ${user.isFollowing ? 'unfollowed' : 'followed'} ${user.userName}!`, 'success', 'right')
                 if (onFollowingChange) {
                     if (user.isFollowing) {
                         onFollowingChange('unfollow')
@@ -47,7 +47,6 @@ export const SubscribersModal: React.FC<SubscribersModalPropsTypes> = (props) =>
          onClose={onClose}
          className={styles.modal}
         >
-            <ToastContainer />
             <Input
                 type="search"
                 value={searchUser}

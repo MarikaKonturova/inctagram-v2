@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useGetMyPost } from 'features/profile/getPosts/model'
 import { useGetProfileData } from 'features/profile/getProfileData/model'
 import { Header } from 'entities/Post/ui/Header'
-import { MyPostService } from 'shared/api/post/myPostService'
+import { MyPostService } from 'shared/api'
 import catImg from 'shared/assets/images/MicrosoftTeams-image.png'
 import { Button, Card, Modal, Textarea } from 'shared/ui'
 
