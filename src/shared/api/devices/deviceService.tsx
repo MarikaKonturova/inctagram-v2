@@ -1,7 +1,7 @@
-import { $api } from 'shared/api/api'
+import { $api } from 'shared/api'
 import { type AllDevicesScheme } from 'shared/types/device'
 
-export const deviceService = {
+export const DeviceService = {
     getDevices () {
         return $api.get<AllDevicesScheme>('sessions').then(data => data)
     },

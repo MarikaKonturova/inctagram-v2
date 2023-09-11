@@ -3,7 +3,7 @@ import { type AxiosError } from 'axios'
 import { useState } from 'react'
 import { useAuth } from 'features/auth/model'
 import { SelectSetEmail } from 'features/auth/model/selectors'
-import { AuthService } from 'shared/api/auth/authService'
+import { AuthService } from 'shared/api'
 import { useModal } from 'shared/hooks/useModal'
 import { type PasswordRecoveryValidation } from '../ui/PasswordRecoveryForm/PasswordRecoveryForm'
 

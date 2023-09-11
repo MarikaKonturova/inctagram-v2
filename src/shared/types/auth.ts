@@ -61,3 +61,16 @@ export interface ProfileDataModel {
     aboutMe: string | null
     avatars: AvatarPostModel | null
 }
+
+export interface User {
+    id: number
+    userId: number
+    userName: string
+    avatars: {
+        medium: {
+            url: string
+        }
+    }
+    isFollowedBy: boolean
+    isFollowing: boolean
+}

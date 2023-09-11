@@ -3,7 +3,7 @@ import { type NextPage } from 'next'
 import { Inter } from 'next/font/google'
 import { type PropsWithChildren } from 'react'
 import { Header } from 'widgets/Header'
-import { SnackBar } from 'widgets/SnackBar'
+import { SnackBar } from 'features/common'
 import { Container } from 'shared/ui'
 import cls from './Layout.module.scss'
 

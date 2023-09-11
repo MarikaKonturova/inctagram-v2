@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { useSnackbar } from 'widgets/SnackBar/model/store/snackbarStore'
 import { useAuth } from 'features/auth'
 import { SelectSetEmail } from 'features/auth/model/selectors'
-import { AuthService } from 'shared/api/auth/authService'
+import { useSnackbar } from 'features/common'
+import { AuthService } from 'shared/api'
 import { AppRoutes } from 'shared/constants/path'
 import { useModal } from 'shared/hooks/useModal'
 

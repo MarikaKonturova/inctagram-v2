@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useCallback, useMemo } from 'react'
 import { useAuth } from 'features/auth/model'
 import { SelectEmail, SelectSetEmail } from 'features/auth/model/selectors'
-import { AuthService } from 'shared/api/auth/authService'
+import { AuthService } from 'shared/api'
 import { AppRoutes } from 'shared/constants/path'
 import { useModal } from 'shared/hooks/useModal'
 import {
@@ -43,7 +43,7 @@ export const useRegistration = () => {
     }, [error])
 
     const responseError = useMemo(() => {
-        return error?.response?.data?.errorsMessages.reduce((accum, item) => {
+        return error?.response?.data?.errorsMessages?.reduce((accum, item) => {
             accum[item.field] = item.message
             return accum
         }, {} as Record<string, string>)
