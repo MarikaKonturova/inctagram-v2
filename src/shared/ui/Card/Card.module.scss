@@ -1,6 +1,9 @@
-.cardImg {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    padding: 10px;
+.container {
+    position: relative;
+    width: 234px;
+    height: 228px;
+
+    .cardImg {
+        object-fit: cover;
+    }
 }

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useCallback, useMemo } from 'react'
 import { useAuth } from 'features/auth/model'
 import { SelectEmail, SelectSetEmail } from 'features/auth/model/selectors'
-import { AuthService } from 'shared/api/auth/authService'
+import { AuthService } from 'shared/api'
 import { AppRoutes } from 'shared/constants/path'
 import { useModal } from 'shared/hooks/useModal'
 import {

@@ -1,8 +1,7 @@
 import { act, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { AuthService } from 'shared/api/auth/authService'
+import { AuthService } from 'shared/api'
 import { AppRoutes } from 'shared/constants/path'
-import { routerPush } from 'shared/hooks/routerPush'
 import { type UserLoginModel } from 'shared/types/auth'
 import { renderWithQueryClient } from '../../../../../../../config/jest/renderWithQueryClient'
 import { LoginForm } from './LoginForm'
@@ -13,9 +12,13 @@ jest.mock('shared/api/auth/authService', () => ({
         login: jest.fn()
     }
 }))
-jest.mock('shared/lib/routerPush/routerPush', () => ({
-    routerPush: jest.fn()
+jest.mock('next/router', () => ({
+    push: jest.fn()
 }))
+
+const routerPush = {
+    push: jest.fn() // the component uses `router.push` only
+}
 
 describe('LoginForm', () => {
     it('renders without crashing', () => {

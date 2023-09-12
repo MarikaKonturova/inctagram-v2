@@ -1,7 +1,7 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
-import { MyPostService } from 'shared/api/post/myPostService'
+import { MyPostService } from 'shared/api'
 
-export const useGetPosts = (userId: number) => {
+export const useGetPosts = (userName: string) => {
     const {
         isLoading,
         error,
@@ -10,7 +10,7 @@ export const useGetPosts = (userId: number) => {
         isFetchingNextPage,
         hasNextPage,
         isSuccess
-    } = useInfiniteQuery(['post', userId], ({ pageParam = 1 }) => MyPostService.getPosts(userId, pageParam), {
+    } = useInfiniteQuery(['post', userName], ({ pageParam = 1 }) => MyPostService.getPosts(userName, pageParam), {
         getNextPageParam: (lastPage) => {
             return lastPage.page < lastPage.pagesCount ? lastPage.page + 1 : undefined
         }

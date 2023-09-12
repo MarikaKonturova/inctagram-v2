@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-import { PostService } from '../../../../shared/api/post/postService'
+import { PostService } from 'shared/api'
 
 export const useSharePost = () => {
     const { mutate: share } = useMutation({

@@ -1,4 +1,4 @@
-import { $api } from 'shared/api/api'
+import { $api } from 'shared/api'
 import { type PostsImage, type PostResponse, type GetPostsResponse, type PostCommentsResponse } from '../../types/post'
 
 export const MyPostService = {
@@ -15,8 +15,8 @@ export const MyPostService = {
     deletePostsImage (uploadId: string) {
         return $api.delete(`/posts/image/${uploadId}`)
     },
-    getPosts (userId: number, pageNumber: number) {
-        return $api.get<GetPostsResponse>(`/posts/${userId}`, {
+    getPosts (userName: string, pageNumber: number) {
+        return $api.get<GetPostsResponse>(`/posts/${userName}`, {
             params: {
                 pageNumber,
                 pageSize: 5

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
-import { useSnackbar } from 'widgets/SnackBar/model/store/snackbarStore'
+import { useSnackbar } from 'features/common/showSnackBar/model'
 import { Button } from 'shared/ui/Button/Button'
 import { Portal } from 'shared/ui/Portal/Portal'
 import cls from './SnackBar.module.scss'
@@ -8,6 +8,7 @@ import cls from './SnackBar.module.scss'
 interface SnackBarProps {
     className?: string
 }
+
 export const SnackBar = (props: SnackBarProps) => {
     const timeout = 3000
     const isOpen = useSnackbar((state) => state.isOpen)
@@ -44,16 +45,14 @@ export const SnackBar = (props: SnackBarProps) => {
 
     return (
         <Portal>
-            {
-                isOpen && (
-                    <div className={clsx(cls.container, cls[type], cls[position], { [cls.close]: close })}>
-                        <p>{message}</p>
-                        <Button theme={'clear'} onClick={handleClose} className={clsx(cls.button)}>
-                            X
-                        </Button>
-                    </div>
-                )
-            }
+            {isOpen && (
+                <div className={clsx(cls.container, cls[type], cls[position], { [cls.close]: close })}>
+                    <p>{message}</p>
+                    <Button theme={'clear'} onClick={handleClose} className={clsx(cls.button)}>
+                        X
+                    </Button>
+                </div>
+            )}
         </Portal>
     )
 }

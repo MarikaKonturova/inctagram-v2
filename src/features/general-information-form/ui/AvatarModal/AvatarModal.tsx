@@ -8,8 +8,8 @@ import React, {
     type Dispatch, type SetStateAction
 } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSnackbar } from 'widgets/SnackBar/model/store/snackbarStore'
-import { profileService } from 'shared/api/profile'
+import { useSnackbar } from 'features/common'
+import { ProfileService } from 'shared/api'
 import { useModal } from 'shared/hooks/useModal'
 import { type UserError } from 'shared/types/auth'
 import { Button, Modal } from 'shared/ui'
@@ -29,7 +29,7 @@ export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => 
     const onOpen = useSnackbar((state) => state.onOpen)
     const onCloseHandler = () => { setIsOpen(false) }
 
-    const { mutate: uploadAvatar } = useMutation(profileService.uploadAvatar, {
+    const { mutate: uploadAvatar } = useMutation(ProfileService.uploadAvatar, {
         mutationKey: ['uploadAvatar'],
         onSuccess: () => {
             setAvatar(preview)

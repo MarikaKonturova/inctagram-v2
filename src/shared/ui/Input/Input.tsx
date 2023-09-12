@@ -13,6 +13,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     className?: string
     label?: string
     labelClassName?: string
+    inputClassName?: string
     disabled?: boolean
     children?: ReactNode
 }
@@ -28,6 +29,7 @@ export const Input = memo(forwardRef<HTMLInputElement, InputProps>((props, ref) 
         placeholder,
         label,
         labelClassName,
+        inputClassName,
         id,
         type = 'text',
         ...otherProps
@@ -58,7 +60,7 @@ export const Input = memo(forwardRef<HTMLInputElement, InputProps>((props, ref) 
                 <input
                     ref={ref}
                     type={type !== 'password' ? type : isPassword}
-                    className={clsx(cls.input, mods, [cls[type]])}
+                    className={clsx(cls.input, mods, [cls[type]], inputClassName)}
                     disabled={disabled}
                     placeholder={placeholder}
                     autoComplete={type === 'password' ? 'new-password' : ''}

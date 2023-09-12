@@ -12,6 +12,7 @@ export interface useSnackbarStateType {
     onOpen: (message: string, type: color, position: positionType) => void
     onClose: () => void
 }
+
 export const useSnackbar = create(immer<useSnackbarStateType>((set) => ({
     isOpen: false,
     message: null,
