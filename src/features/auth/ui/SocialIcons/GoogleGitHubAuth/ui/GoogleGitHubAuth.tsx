@@ -77,10 +77,10 @@ export const GoogleGitHubAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
                     </div>
                 </Modal>
             }
-            <div onClick={() => googleRefetch()}>
+            <div onClick={() => googleRefetch()} className={style.icon}>
                 <Google/>
             </div>
-            <div onClick={() => githubRefetch()}>
+            <div onClick={() => githubRefetch()} className={style.icon}>
                 <Github/>
             </div>
         </>
