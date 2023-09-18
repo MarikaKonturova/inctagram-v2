@@ -4,6 +4,10 @@
     color: var(--light-100-color);
     text-decoration: none;
     display: inline-flex;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 .icon {
