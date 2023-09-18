@@ -5,7 +5,7 @@ import { useAuth } from 'features/auth/model'
 import { SelectSetEmail } from 'features/auth/model/selectors'
 import { AuthService } from 'shared/api'
 import { useModal } from 'shared/hooks/useModal'
-import { type UserError } from '../../../../../shared/types/auth'
+import { type UserError } from 'shared/types/auth'
 import { type PasswordRecoveryValidation } from '../ui/PasswordRecoveryForm/PasswordRecoveryForm'
 
 export const useRecoverPassword = () => {
