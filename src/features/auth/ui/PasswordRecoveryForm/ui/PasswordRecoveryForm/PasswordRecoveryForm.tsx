@@ -45,7 +45,8 @@ export const PasswordRecoveryForm = () => {
             />
             <p className={cls.helperText}>{t('passwordRecovery')}</p>
 
-            {error?.response?.data.message && <p className={cls.error}>{error.response.data.message}</p>}
+            {!!error?.response?.data.messages.length &&
+                <p className={cls.error}>{error.response.data.messages[0].message}</p>}
 
             {isInfoTextShown && <p className={cls.infoText}>{t('recoveryMessage')}</p>}
             <Button disabled={isLoading} type={'submit'} className={cls.button}>
