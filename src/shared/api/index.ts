@@ -10,4 +10,6 @@ export { ProfileService } from './profile/index'
 
 export { UsersService } from './users/index'
 
+export { SubscriptionsService } from './subscriptions/subscriptionsService'
+
 export { $api } from './api'

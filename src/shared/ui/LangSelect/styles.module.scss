@@ -5,7 +5,11 @@
     align-content: center;
     border: 1px solid var(--dark-100-color);
     border-bottom: none;
-    z-index: 1;
+    z-index: 999;
+}
+
+.helper {
+    margin-top: 40px;
 }
 
 .listItem {

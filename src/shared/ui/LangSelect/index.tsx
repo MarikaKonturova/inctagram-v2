@@ -25,7 +25,7 @@ export const LangSelect = () => {
     return (
         <Listbox value={locale} onChange={changeLangHandler}>
             {({ open, value }) => (
-                <div className={cls.container}>
+                <div className={clsx(cls.container, { [cls.helper]: open })}>
                     <Listbox.Button className={clsx(cls.button, cls.listItem)}>
                         {languages[locale]}
                         {open

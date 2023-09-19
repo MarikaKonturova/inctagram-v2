@@ -1,0 +1,28 @@
+.wrapper {
+    border-collapse: collapse;
+}
+
+.head {
+    background: var(--dark-500-color);
+    height: 48px;
+}
+
+.tableHeaderCell {
+    font-weight: 500;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid var(--dark-500-color);
+    width: 200px;
+}
+
+.tableRowItem  {
+    cursor: auto;
+    border-bottom: 1px solid var(--dark-500-color);
+    border-right: 1px solid var(--dark-500-color);
+    border-left: 1px solid var(--dark-500-color);
+}
+  
+.tableCell  {
+    padding: 12px;
+    font-size: 14px;
+}

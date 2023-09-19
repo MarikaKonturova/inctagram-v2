@@ -1,0 +1,18 @@
+.rootContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.tabContainer {
+    display: flex;
+    position: sticky;
+    top: 0;
+    padding-top: 36px;
+    padding-bottom: 24px;
+    z-index: 1;
+    background: var(--dark-700-color);
+}
+
+.content {
+    flex: 1;
+}

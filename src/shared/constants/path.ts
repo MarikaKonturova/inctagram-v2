@@ -9,10 +9,8 @@ export const AppRoutes = {
         REGISTRATION_CONFIRMATION: '/auth/registration-confirmation'
     },
     PROFILE: {
-        MY_PROFILE: '/profile/myprofile'
-    },
-    PROFILE_SETTINGS: {
-        GENERAL_INFORMATION: '/profile-settings/general-information'
+        MY_PROFILE: '/profile/myprofile',
+        SETTINGS: '/profile/settings/edit'
     },
     HOME: '/home',
     CREATE: '/create',

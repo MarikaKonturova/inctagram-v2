@@ -1,0 +1,37 @@
+.rootContainer {
+    background: var(--dark-500-color);
+    border: 1px solid var(--dark-300-color);
+    padding: 12px 24px;
+    margin-top: 18px;
+    margin-bottom: 30px;
+}
+
+.optionContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+.label {
+    font-weight: 600;
+}
+
+.option {
+    &:not(&:last-child) {
+        padding-bottom: 24px;
+    }
+}
+
+.disabled {
+    color: var(--dark-100-color);
+    cursor: not-allowed;
+}
+
+.iconDisabled {
+    cursor: not-allowed;
+
+    path {
+        fill: var(--dark-100-color);
+    }
+}
