@@ -8,6 +8,7 @@ export interface UserAuthModel {
     email: string
     userName: string
     userId: number
+    hasBusinessAccount: boolean
 }
 
 export interface UserLoginModel {

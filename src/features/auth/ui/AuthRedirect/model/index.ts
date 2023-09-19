@@ -3,14 +3,14 @@ import { useAuth } from 'features/auth'
 import { AuthService } from 'shared/api'
 
 export const useAuthMe = () => {
-    const { isAuth, setAuth, setUserId } = useAuth()
+    const { isAuth, setAuth, setUserData } = useAuth()
 
     const { isError, isLoading } = useQuery({
         queryKey: ['me'],
         queryFn: AuthService.me,
         onSuccess: ({ data }) => {
-            const { userId } = data
-            setUserId(userId)
+            const { userId, hasBusinessAccount } = data
+            setUserData({ userId, hasBusinessAccount })
             setAuth(true)
         },
         onError: () => {

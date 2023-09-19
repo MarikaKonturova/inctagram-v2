@@ -10,6 +10,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding: 0 60px;
     }
 
     .icon{
@@ -22,9 +23,14 @@
         gap: 15px
     }
 
-    .HeaderText {
+    .headerText {
         text-decoration: none;
         color: var(--light-color);
         font: var(--font-large);
+    }
+
+    .rightBlock {
+        display: flex;
+        gap: 48px;
     }
 }

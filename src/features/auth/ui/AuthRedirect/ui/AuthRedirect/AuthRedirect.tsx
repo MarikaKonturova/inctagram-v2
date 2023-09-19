@@ -15,7 +15,7 @@ export const AuthRedirect = ({ children }: PropsWithChildren) => {
     if (!isAuth && isError && !pathname.includes('auth')) {
         void push({ pathname: AppRoutes.AUTH.LOGIN })
     } else if (pathname.includes('auth') && isAuth) {
-        void push({ pathname: AppRoutes.PROFILE_SETTINGS.GENERAL_INFORMATION })
+        void push({ pathname: AppRoutes.PROFILE.SETTINGS })
     }
 
     return <>{children}</>

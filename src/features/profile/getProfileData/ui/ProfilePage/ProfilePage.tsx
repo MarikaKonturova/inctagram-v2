@@ -1,12 +1,15 @@
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { PostCards } from 'features/profile/getPosts/ui/PostCards/PostCards'
-import { Avatar } from 'shared/ui'
+import { AppRoutes } from 'shared/constants/path'
+import { Avatar, Button } from 'shared/ui'
 import { useGetProfileData } from '../../model'
 
 import { SubscribersModal } from './modals/FollowModal/ui'
 import cls from './ProfilePage.module.scss'
 
 export const ProfilePage = () => {
+    const router = useRouter()
     const { response } = useGetProfileData()
     const userData = response?.data
 
@@ -31,14 +34,21 @@ export const ProfilePage = () => {
         })
     }
 
+    const onProfileSettingsClick = () => {
+        void router.push(AppRoutes.PROFILE.SETTINGS)
+    }
+
     return (
         <div className={cls.container}>
             <div className={cls.flex}>
                 <div className={cls.avatar}>
                     <Avatar size={192} src={userData?.avatars?.medium.url } />
                 </div>
-                <div>
-                    <div className={cls.userName}>{userData?.userName}</div>
+                <div className={cls.rightSide}>
+                    <div className={cls.main}>
+                        <div className={cls.userName}>{userData?.userName}</div>
+                        <Button className={cls.button} onClick={onProfileSettingsClick}>Profile Settings</Button>
+                    </div>
                     <div className={cls.info}>
                         <div>
                             <div className={cls.subscribe}>{followingCount}</div>

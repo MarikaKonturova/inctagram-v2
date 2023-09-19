@@ -1,34 +1,43 @@
 .container {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 36px 24px;
+    padding-right: 36px;
 
     .flex {
         display: flex;
+        gap: 38px;
         margin-bottom: 53px;
+    
+        .rightSide {
+            flex: 1;
+        
+            .main {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
+    
+                .userName {
+                    font-size: 20px;
+                    line-height: 36px;
+                    font-weight: 700;
+                }
+    
+                .button {
+                    padding: 6px 36px;
+                    background: var(--dark-300-color);
+                }
+            }
 
-        .avatar {
-            margin-right: 38px;
-        }
-
-        .userName {
-            font-size: 20px;
-            line-height: 36px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .info {
-            display: flex;
-            margin-bottom: 23px;
-            flex-wrap: wrap;
-
-            .subscribe {
-                font-weight: 700;
+            .info {
+                display: flex;
+                margin-bottom: 23px;
+                flex-wrap: wrap;
+    
+                .subscribe {
+                    font-weight: 700;
+                }
             }
         }
-
-
     }
 }
 

@@ -6,15 +6,20 @@ interface TabProps {
     className?: string
     isSelected: boolean
     text: string
+    onClick: () => void
 }
 
 export const Tab = (props: TabProps) => {
     const {
-        text, className, isSelected
+        text, className, isSelected, onClick
     } = props
 
+    const mods = {
+        [cls.selectedTab]: isSelected
+    }
+
     return (
-        <div className={clsx(className, cls.tab, isSelected && cls.selectedTab)}>
+        <div onClick={onClick} className={clsx(cls.tab, mods, className)}>
             {text}
         </div>
     )

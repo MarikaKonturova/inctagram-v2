@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-import { AppLink, Container } from 'shared/ui'
+import { AppLink, Container, ThemeSwitcher } from 'shared/ui'
 import { LangSelect } from 'shared/ui/LangSelect'
 import cls from './Header.module.scss'
 
@@ -14,8 +14,11 @@ export const Header = (props: HeaderProps) => {
     return (
         <header className={clsx(cls.Header, [className])}>
             <Container className={cls.container}>
-                <AppLink className={cls.HeaderText} href={'/'}>Inctagram</AppLink>
-                <LangSelect />
+                <AppLink className={cls.headerText} href={'/'}>Inctagram</AppLink>
+                <div className={cls.rightBlock}>
+                    <ThemeSwitcher />
+                    <LangSelect />
+                </div>
             </Container>
         </header>
     )

@@ -14,7 +14,7 @@ export const useLogin = () => {
         retry: false,
         onSuccess: async () => {
             await queryClient.invalidateQueries(['me']).then(() => {
-                void push({ pathname: AppRoutes.PROFILE_SETTINGS.GENERAL_INFORMATION })
+                void push({ pathname: AppRoutes.PROFILE.SETTINGS })
             })
         }
     })

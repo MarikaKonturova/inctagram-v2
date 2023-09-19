@@ -5,3 +5,4 @@ export const SelectSetEmail = (state: useAuthStateType) => state.setEmail
 export const SelectUserId = (state: useAuthStateType) => state.userId
 
 export const SelectIsAuth = (state: useAuthStateType) => state.isAuth
+export const SelectHasBusinessAccount = (state: useAuthStateType) => state.hasBusinessAccount
