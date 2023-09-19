@@ -5,6 +5,7 @@ import Github from 'shared/assets/icons/general/github.svg'
 import Google from 'shared/assets/icons/general/google.svg'
 import { AppRoutes } from 'shared/constants/path'
 import { Button, Modal } from 'shared/ui'
+import { useAuth } from '../../../../model'
 import { useGoogleGitHubAuth } from '../model'
 import style from './GoogleGitHubAuth.module.scss'
 
@@ -21,7 +22,7 @@ const initialState = {
 export const GoogleGitHubAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
     const { t } = useTranslation('auth')
     const [modal, setModal] = useState(initialState)
-
+    const { setAuth } = useAuth()
     const { query, push } = useRouter()
 
     const queryStatus = query.status_code as string
@@ -33,10 +34,7 @@ export const GoogleGitHubAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
         if (!queryStatus) return
 
         if (queryStatus === '200') {
-            setModal({
-                modalOpen: true,
-                title: 'Success'
-            })
+            setAuth(true)
             void push(AppRoutes.PROFILE.MY_PROFILE)
         }
 
@@ -55,10 +53,7 @@ export const GoogleGitHubAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
         }
 
         if (queryStatus === '204') {
-            setModal({
-                modalOpen: true,
-                title: t('successMessage')
-            })
+            setAuth(true)
         }
     }, [queryStatus])
 
