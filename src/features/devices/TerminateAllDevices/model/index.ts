@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useCallback } from 'react'
-import { deviceService } from 'shared/api/devices/deviceService'
+import { DeviceService } from 'shared/api'
 
 export const useTerminateAllDevices = () => {
     const queryClient = useQueryClient()
 
     const { mutate: terminateAllDevices, isLoading: isDevicesLoading } = useMutation({
         mutationKey: ['terminate-all-session'],
-        mutationFn: deviceService.terminateAllDevices,
+        mutationFn: DeviceService.terminateAllDevices,
         retry: false,
         onSuccess: async () => {
             await queryClient.invalidateQueries(['devices'])

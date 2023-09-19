@@ -1,7 +1,7 @@
 import { type ProfileDataModel } from '../../types/auth'
 import { $api } from '../api'
 
-export const profileService = {
+export const ProfileService = {
     uploadAvatar (file: FormData) {
         return $api.post('/users/profile/avatar', file, {
             headers: {
@@ -21,5 +21,4 @@ export const profileService = {
     subscribeOrUnsubscribe (userId: string) {
         return $api.patch<ProfileDataModel>(`/users/${userId}/subscribe`)
     }
-
 }

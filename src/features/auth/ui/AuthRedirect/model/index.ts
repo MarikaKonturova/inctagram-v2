@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useAuth } from 'features/auth'
-import { AuthService } from 'shared/api/auth/authService'
+import { AuthService } from 'shared/api'
 
 export const useAuthMe = () => {
     const { isAuth, setAuth, setUserId } = useAuth()

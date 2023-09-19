@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { MyPostService } from 'shared/api/post/myPostService'
+import { MyPostService } from 'shared/api'
 
 interface Args {
     handleClose: () => void

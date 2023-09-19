@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { PostService } from '../../../../shared/api/post/postService'
+import { useMutation } from '@tanstack/react-query'
+import { PostService } from 'shared/api'
 
 export const useReport = () => {
     // TODO: доделать репорт
