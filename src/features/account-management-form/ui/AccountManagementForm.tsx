@@ -1,4 +1,5 @@
 
+import { isEmpty } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { type ChangeEvent, useEffect, useState } from 'react'
 import { useAuth } from 'features/auth'
@@ -6,8 +7,8 @@ import { SelectHasBusinessAccount } from 'features/auth/model/selectors'
 
 import Paypal from 'shared/assets/icons/general/paypal.svg'
 import Stripe from 'shared/assets/icons/general/stripe.svg'
+import { type CostOfSubscriptionType } from 'shared/types/subscriptions'
 import { Button, Modal, RadioButtons } from 'shared/ui'
-import { type OptionType } from 'shared/ui/RadioButtons/RadioButtons'
 import { useSubscriptions } from '../model'
 import cls from './styles.module.scss'
 
@@ -22,10 +23,13 @@ export const AccountManagementForm = () => {
     const hasBusinessAccount = useAuth(SelectHasBusinessAccount)
     const { query } = useRouter()
     const [modal, setModal] = useState(initialState)
-    const [selected, setSelected] = useState({} as OptionType)
+    const [selected, setSelected] = useState({} as CostOfSubscriptionType)
 
-    const ACCOUNT_TYPE_OPTIONS = [{ description: 'Personal', disabled: hasBusinessAccount },
-        { description: 'Business', disabled: !hasBusinessAccount }]
+    const ACCOUNT_TYPE_OPTIONS = [
+        { description: 'Personal', disabled: hasBusinessAccount },
+        { description: 'Business', disabled: !hasBusinessAccount }
+    ]
+
     const {
         expireAt,
         nextPayment,
@@ -33,7 +37,7 @@ export const AccountManagementForm = () => {
         onStripeHandler,
         subscriptionCosts,
         hasAutoRenewal
-    } = useSubscriptions()
+    } = useSubscriptions(selected)
 
     const onCheckboxHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (!e.currentTarget.checked) {
@@ -68,7 +72,11 @@ export const AccountManagementForm = () => {
         }
     }, [query])
 
-    // /profile/settings/edit?success=true
+    useEffect(() => {
+        if (isEmpty(selected)) {
+            setSelected(subscriptionCosts[0])
+        }
+    }, [selected, subscriptionCosts])
 
     return (
         <div>
@@ -97,11 +105,11 @@ export const AccountManagementForm = () => {
             selectedValue={hasBusinessAccount
                 ? ACCOUNT_TYPE_OPTIONS[1]
                 : ACCOUNT_TYPE_OPTIONS[0]} />
-            <RadioButtons label="Your subscription costs:"
-                          selectedValue={subscriptionCosts?.[0]}
-                          selected={selected}
-                          setSelected={setSelected}
-                          options={subscriptionCosts || []}
+            <RadioButtons<CostOfSubscriptionType> label="Your subscription costs:"
+                                                  selectedValue={subscriptionCosts[0]}
+                                                  selected={selected}
+                                                  setSelected={setSelected}
+                                                  options={subscriptionCosts || []}
             />
             <div className={cls.bottomBlock}>
                 <Paypal />

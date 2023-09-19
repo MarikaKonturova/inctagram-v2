@@ -3,8 +3,11 @@ import { type AxiosError } from 'axios'
 import { format } from 'date-fns'
 import { useSnackbar } from 'features/common'
 import { SubscriptionsService } from 'shared/api'
+import { type CostOfSubscriptionType, type SubscriptionType } from 'shared/types/subscriptions'
 
-export const useSubscriptions = () => {
+const formatDate = (date: string) => format(new Date(date), 'dd.MM.yyyy')
+
+export const useSubscriptions = (selected: CostOfSubscriptionType) => {
     const onOpen = useSnackbar((state) => state.onOpen)
 
     const { data: costOfSubscription, isLoading } = useQuery({
@@ -50,27 +53,28 @@ export const useSubscriptions = () => {
     })
 
     const onStripeHandler = () => {
-        const payload = {
-            typeSubscription: 'SEMI_ANNUALLY',
-            paymentType: 'STRIPE',
-            amount: 50
+        const { typeDescription, amount } = selected
+
+        const payload: SubscriptionType = {
+            typeSubscription: typeDescription,
+            amount,
+            paymentType: 'STRIPE'
         }
+
         createSubscriptions(payload)
     }
 
     const { endDateOfSubscription, dateOfPayment } = currentSubscription?.data.data[0] || {}
 
-    const expireAt = endDateOfSubscription &&
-    format(new Date(endDateOfSubscription), 'dd.MM.yyyy')
-    const nextPayment = dateOfPayment &&
-   format(new Date(dateOfPayment), 'dd.MM.yyyy')
+    const expireAt = endDateOfSubscription && formatDate(endDateOfSubscription)
+    const nextPayment = dateOfPayment && formatDate(dateOfPayment)
 
     return {
         expireAt,
         nextPayment,
         cancelAutoRenewal,
         onStripeHandler,
-        subscriptionCosts: costOfSubscription?.data.data,
+        subscriptionCosts: costOfSubscription?.data.data || [],
         hasAutoRenewal: currentSubscription?.data.hasAutoRenewal
     }
 }

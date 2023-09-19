@@ -1,6 +1,10 @@
+
+type PeriodType = 'MONTHLY' | 'SEMI_ANNUALLY' | 'YEARLY'
+type WalletType = 'STRIPE' | 'PAYPAL'
+
 interface SubscriptionType {
-    typeSubscription: string // 'MONTHLY' SEMI_ANNUALLY, YEARLY
-    paymentType: string// 'STRIPE' | 'PAYPAL'
+    typeSubscription: PeriodType
+    paymentType: WalletType
     amount: number
 }
 
@@ -22,12 +26,12 @@ interface CurrentSubscriptionType {
     subscriptionId: string
     dateOfPayment: string
     endDateOfSubscription: string
-    autoRenewal: true
+    autoRenewal: boolean
 }
 
 interface GetCurrentSubscriptionType {
     data: CurrentSubscriptionType[]
-    hasAutoRenewal: true
+    hasAutoRenewal: boolean
 }
 
 interface PaymentsType {
@@ -36,16 +40,18 @@ interface PaymentsType {
     dateOfPayment: string
     endDateOfSubscription: string
     price: number
-    subscriptionType: string // 'MONTHLY'
-    paymentType: string // 'STRIPE'
+    subscriptionType: PeriodType
+    paymentType: WalletType
+}
+
+interface CostOfSubscriptionType {
+    description: string
+    amount: number
+    typeDescription: PeriodType
 }
 
 interface CostOfSubscriptionsType {
-    data: Array<{
-        amount: 0
-        typeDescription: string // 'MONTHLY'
-        description: 'string'
-    }>
+    data: CostOfSubscriptionType[]
 }
 
 export type {
@@ -54,5 +60,6 @@ export type {
     CreateSubscriptionFailedResponseType,
     GetCurrentSubscriptionType,
     PaymentsType,
-    CostOfSubscriptionsType
+    CostOfSubscriptionsType,
+    CostOfSubscriptionType
 }

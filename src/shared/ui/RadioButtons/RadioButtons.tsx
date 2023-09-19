@@ -1,25 +1,24 @@
 import { RadioGroup } from '@headlessui/react'
 import clsx from 'clsx'
 import { isEmpty } from 'lodash'
-import { type FC } from 'react'
 import CheckedIcon from 'shared/assets/icons/general/radio-button-checked.svg'
 import UncheckedIcon from 'shared/assets/icons/general/radio-button-unchecked.svg'
 import cls from './RadioButtons.module.scss'
 
-export interface OptionType {
+interface OptionType {
     description: string
     disabled?: boolean
 }
 
-interface PropsType {
+interface PropsType<T> {
     label: string
-    options: OptionType[]
-    selectedValue?: OptionType
-    selected?: OptionType
-    setSelected?: (selected: OptionType) => void
+    options: Array<T & OptionType>
+    selectedValue?: T
+    selected?: T
+    setSelected?: (selected: T) => void
 }
 
-export const RadioButtons: FC<PropsType> = ({ label, options, selectedValue, selected, setSelected }) => (
+export const RadioButtons = <T,>({ label, options, selectedValue, selected, setSelected }: PropsType<T>) => (
     <RadioGroup value={isEmpty(selected) ? selectedValue : selected} onChange={setSelected}>
         <RadioGroup.Label className={cls.label}>{label}</RadioGroup.Label>
         <div className={cls.rootContainer}>
