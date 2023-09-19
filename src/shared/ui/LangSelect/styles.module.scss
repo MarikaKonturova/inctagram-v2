@@ -3,15 +3,16 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    border: 1px solid var(--dark-100-color);
+    border: 1px solid var(--dark-300-color);
     border-bottom: none;
     z-index: 1;
+    background-color: var(--dark-500-color);
 }
 
 .listItem {
     padding: 6px 12px;
     flex: 1 0 auto;
-    border-bottom: 1px solid var(--dark-100-color);
+    border-bottom: 1px solid var(--dark-300-color);
     cursor: pointer;
 }
 
