@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import GeneralInformation from 'templates/profile-settings/GeneralInformation'
 import { AccountManagementForm } from 'features/account-management-form'
 import { Tab } from 'shared/ui'
 import { DeviceList } from './DeviceList/ui/DeviceList'
+import GeneralInformation from './GeneralInformation'
 import { MyPayments } from './MyPayments'
 import cls from './styles.module.scss'
 
