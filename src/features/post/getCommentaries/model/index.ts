@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
 import { useSnackbar } from 'features/common'
-import { MyPostService } from 'shared/api'
+import { MyPostService, PostService } from 'shared/api'
 
 export const useGetPostComments = (postId: number) => {
     const onOpen = useSnackbar((state) => state.onOpen)
@@ -17,4 +17,16 @@ export const useGetPostComments = (postId: number) => {
     const comments = data?.data
 
     return { comments, isLoading, error }
+}
+
+export const useGetPostAnswersForComments = (postId: number, commentId: number) => {
+    const { data } = useQuery({
+        queryKey: ['postAnswers', commentId],
+        queryFn: () => PostService.getAnswerForComment(postId, commentId),
+        enabled: commentId != null
+    })
+
+    const answerForComment = data?.data
+
+    return { answerForComment }
 }

@@ -16,3 +16,29 @@ export interface LikesInfo {
     dislikesCount: number
     myStatus: string
 }
+
+export interface AnswersForComment {
+    page: number
+    pageSize: number
+    pagesCount: number
+    totalCount: number
+    items: ItemsForAnswers[]
+}
+
+export interface ItemsForAnswers {
+    commentId: number
+    content: string
+    createdAt: string
+    id: number
+    isLiked: boolean
+    likeCount: number
+    from: {
+        id: number
+        userName: string
+        avatars: {
+            thumbnail: {
+                url: string
+            }
+        }
+    }
+}

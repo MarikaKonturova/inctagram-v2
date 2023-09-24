@@ -14,6 +14,9 @@
 
 .content {
     font: var(--font-medium-400);
+    display:block;
+    width:200px;
+    word-wrap:break-word;
 }
 
 .userName {
@@ -34,3 +37,11 @@
     display: flex;
     gap: 12px;
 }
+
+.showAnswerButton{
+    font: var(--font-small-600);
+    color: var(--light-900-color);
+    cursor: pointer;
+}
+
+
