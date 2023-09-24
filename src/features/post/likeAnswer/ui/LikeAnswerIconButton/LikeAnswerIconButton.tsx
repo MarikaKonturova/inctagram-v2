@@ -3,18 +3,20 @@ import IconLike from 'shared/assets/icons/light/heart.svg'
 import IconLikeOutline from 'shared/assets/icons/outline/heart-outline.svg'
 import { LikeStatus } from 'shared/types/likeStatus'
 import { ActionIcon } from 'shared/ui'
-import { useLikeComment } from '../../model/useLikeComment'
 
-interface likeCommentType {
+import { useLikeAnswer } from '../../model/useLikeAnswer'
+
+interface likeAnswerType {
     commentId: number
     postId: number
+    answerId: number
     isLiked: boolean
 }
 
-export const LikeCommentIconButton: FC<likeCommentType> = ({ commentId, postId, isLiked }) => {
-    const { likeComment } = useLikeComment(postId, commentId)
+export const LikeAnswerIconButton: FC<likeAnswerType> = ({ commentId, postId, answerId, isLiked }) => {
+    const { likeAnswer } = useLikeAnswer(postId, commentId, answerId)
     const onLikeIconClick = () => {
-        likeComment({ likeStatus: isLiked ? LikeStatus.DISLIKE : LikeStatus.LIKE })
+        likeAnswer({ likeStatus: isLiked ? LikeStatus.DISLIKE : LikeStatus.LIKE })
     }
 
     return (
