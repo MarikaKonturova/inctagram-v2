@@ -16,7 +16,7 @@ interface IProps {
 export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
     const [avatar, setAvatar] = useState<string>()
     const { setIsOpen } = useModal()
-    const { mutate } = useUpdateProfileData()
+    const { mutate, responseError } = useUpdateProfileData()
 
     const {
         register,
@@ -50,7 +50,7 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
         <AvatarModal setAvatar={setAvatar} />
         <div className={cls.infoContainer}>
             <AvatarBlock avatar={avatar} onAvatarClick={onAvatarClick} addProfilePhotoClick={addProfilePhotoClick} />
-            <Form control={control} register={register} validErrors={validErrors} />
+            <Form control={control} register={register} validErrors={validErrors} responseError={responseError}/>
         </div>
         <hr className={cls.line} />
         <Button type="submit" theme={'primary'} className={cls.button}>Save Changes</Button>

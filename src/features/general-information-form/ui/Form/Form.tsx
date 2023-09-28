@@ -14,9 +14,10 @@ interface IProps {
     | 'cityError'
     | 'aboutMeError', string | undefined>
     control: Control<ProfileDataModel, any>
+    responseError: Record<string, string> | undefined
 }
 
-export const Form: React.FC<IProps> = ({ register, validErrors, control }) => {
+export const Form: React.FC<IProps> = ({ register, validErrors, control, responseError }) => {
     const {
         userNameError,
         firstNameError,
@@ -31,8 +32,8 @@ export const Form: React.FC<IProps> = ({ register, validErrors, control }) => {
                 {...register('userName')}
                 id="userName"
                 type={'text'}
-                error={!!userNameError}
-                errorText={userNameError}
+                error={!!userNameError || !!responseError?.userName}
+                errorText={userNameError || responseError?.userName}
                 className={cls.wrapper}
                 label="Username"
                 labelClassName={cls.label}
