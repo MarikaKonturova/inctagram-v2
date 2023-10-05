@@ -27,7 +27,7 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
     } = useValidationForm(['userName', 'firstName', 'lastName', 'city', 'aboutMe'], userData)
 
     const onAvatarClick = () => {
-        setIsOpen(true)
+        setAvatar(undefined)
     }
 
     const addProfilePhotoClick = () => {
