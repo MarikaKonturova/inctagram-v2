@@ -4,6 +4,7 @@ import IconLikeOutline from 'shared/assets/icons/outline/heart-outline.svg'
 import { LikeStatus } from 'shared/types/likeStatus'
 import { ActionIcon } from 'shared/ui'
 import { useLikeComment } from '../../model/useLikeComment'
+import cls from './LikeCommentIcon.module.scss'
 
 interface likeCommentType {
     commentId: number
@@ -18,10 +19,11 @@ export const LikeCommentIconButton: FC<likeCommentType> = ({ commentId, postId, 
     }
 
     return (
-        <ActionIcon filledIcon={<IconLike fill="#CC1439" />}
-                    outlineIcon={<IconLikeOutline fill="#ffffff" />}
+        <ActionIcon filledIcon={<IconLike fill="#CC1439" className={cls.likeIcon} />}
+                    outlineIcon={<IconLikeOutline fill="#ffffff" className={cls.likeIcon} />}
                     onClick={onLikeIconClick}
                     initialState={isLiked}
+                    className={cls.icon}
         />
     )
 }

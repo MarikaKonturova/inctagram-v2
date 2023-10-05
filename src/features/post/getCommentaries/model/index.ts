@@ -8,7 +8,7 @@ export const useGetPostComments = (postId: number) => {
 
     const { isLoading, error, data } = useQuery({
         queryKey: ['postComments'],
-        queryFn: () => MyPostService.getPostCommnets(postId),
+        queryFn: () => MyPostService.getPostComments(postId),
         onError: (error: AxiosError<{ message: string }>) => {
             onOpen(error.message, 'danger', 'left')
         }

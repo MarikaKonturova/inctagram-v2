@@ -1,44 +1,44 @@
-import React from 'react'
-import { Avatar } from '../../../../../shared/ui'
-import { formattedDate } from '../../../../../shared/utils'
-import { AddAnswerForCommentBox } from '../../../addAnswearForComment/ui/AddAnswerForCommentBox/AddAnswerForCommentBox'
-import { LikeAnswerIconButton } from '../../../likeAnswer/ui/LikeAnswerIconButton/LikeAnswerIconButton'
+import React, { useState } from 'react'
+import CommentInfo from 'entities/Post/ui/CommentInfo/CommentInfo'
 import { useGetPostAnswersForComments } from '../../model'
-import cls from './GetAnswersForCommentaries.module.scss'
 
-interface AnswersType {
+interface PropsType {
     commentId: number
     postId: number
     openedCommentId: number
 }
 
-const GetAnswersForCommentaries = ({ commentId, postId, openedCommentId }: AnswersType) => {
+const GetAnswersForCommentaries = ({ commentId, postId, openedCommentId }: PropsType) => {
+    const [isOpen, setIsOpen] = useState(false)
     const { answerForComment } = useGetPostAnswersForComments(postId, openedCommentId)
+
+    const viewAnswerOnClick = (commentId: number) => {
+    // setOpenedCommentId(commentId)
+        setIsOpen(!isOpen)
+    // if (isOpen) {
+    //     setOpenedCommentId(0)
+    //     setIsOpen(false)
+    // }
+    }
 
     return (
         <>
-            {answerForComment?.items.map(answer => (
+            {answerForComment?.items.map((answer) =>
                 answer.commentId === commentId
-                    ? <div className={cls.answerContent} key={answer.id}>
-                        <div>
-                            <Avatar src={answer.from.avatars.thumbnail.url} size={26} alt={'avatar'}/>
-                            <span className={cls.userName}>{answer.from.userName} </span>
-                            <span className={cls.answer}>{answer.content}</span>
-                            <div className={cls.time}>
-                                {formattedDate(answer.createdAt)}
-                                <span className={cls.actionButton}>Like: {answer.likeCount} </span>
-                            </div>
-                        </div>
-                        <LikeAnswerIconButton
-                            postId={postId}
-                            commentId={commentId}
-                            answerId={answer.id}
-                            isLiked={answer.isLiked}
+                    ? (
+                        <CommentInfo
+            key={answer.id}
+            viewAnswerOnClick={viewAnswerOnClick}
+            avatarSize={26}
+            data={answer}
+            postId={postId}
+            isOpen={isOpen}
+            openedCommentId={openedCommentId}
+            isRepliedComment
                         />
-                    </div>
+                    )
                     : null
-            ))}
-            {openedCommentId === commentId ? (<AddAnswerForCommentBox postId={postId} commentId={commentId}/>) : null}
+            )}
         </>
     )
 }

@@ -1,10 +1,4 @@
-export interface Comment {
-    id: string
-    content: string
-    commentatorInfo: CommentatorInfo
-    createdAt: string
-    likesInfo: LikesInfo
-}
+import { type Comment } from './post'
 
 export interface CommentatorInfo {
     userId: string
@@ -17,28 +11,6 @@ export interface LikesInfo {
     myStatus: string
 }
 
-export interface AnswersForComment {
-    page: number
-    pageSize: number
-    pagesCount: number
-    totalCount: number
-    items: ItemsForAnswers[]
-}
-
-export interface ItemsForAnswers {
+export type AnswerType = Omit<Comment, 'postId' | 'answerCount'> & {
     commentId: number
-    content: string
-    createdAt: string
-    id: number
-    isLiked: boolean
-    likeCount: number
-    from: {
-        id: number
-        userName: string
-        avatars: {
-            thumbnail: {
-                url: string
-            }
-        }
-    }
 }

@@ -1,4 +1,6 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { create } from 'zustand'
+import { immer } from 'zustand/middleware/immer'
 import { MyPostService } from 'shared/api'
 
 export const useGetPosts = (userName: string) => {
@@ -39,3 +41,21 @@ export const useGetMyPost = (postId: number) => {
 
     return { post }
 }
+
+export interface StateType {
+    repliedComment: {
+        id: number
+        userName: string
+    }
+    setRepliedComment: (payload: StateType['repliedComment']) => void
+}
+
+export const useBearStore = create(immer<StateType>((set) => ({
+    repliedComment: {
+        id: 0,
+        userName: ''
+    },
+    setRepliedComment: (payload: StateType['repliedComment']) => {
+        set({ repliedComment: payload })
+    }
+})))
