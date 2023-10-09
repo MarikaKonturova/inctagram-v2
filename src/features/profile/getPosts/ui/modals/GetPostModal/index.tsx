@@ -40,7 +40,8 @@ export const GetPostModal: React.FC<IProps> = (props) => {
 
             <div className={cls.rightBlock}>
                 <div className={cls.header}>
-                    <Header avatarURL={post.avatars.medium.url} title={userName} />
+                    <Header
+                    avatarURL={post.avatars?.medium.url} title={userName} />
                     <div>{headerActions}</div>
                 </div>
                 {content}

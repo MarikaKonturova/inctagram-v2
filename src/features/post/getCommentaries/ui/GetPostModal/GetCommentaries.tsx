@@ -1,5 +1,5 @@
-import React, { type FC, useState } from 'react'
-import CommentInfo from 'entities/Post/ui/CommentInfo/CommentInfo'
+import React, { type FC } from 'react'
+import { LikeCommentIconButton } from 'features/post'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { useGetPostComments } from '../../model'
 import GetAnswersForCommentaries from '../getAnswersForCommentaries/GetAnswersForCommentaries'
@@ -45,6 +45,7 @@ export const GetCommentaries: FC<Props> = ({ postId, userData }) => {
                     openedCommentId={openedCommentId as number} />
                 </div>
             ))}
+
         </div>
     )
 }
