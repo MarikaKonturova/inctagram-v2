@@ -47,6 +47,10 @@ export interface StateType {
         id: number
         userName: string
     }
+    refetch: {
+        doRefetch: boolean
+    }
+    setRefetch: (payload: StateType['refetch']) => void
     setRepliedComment: (payload: StateType['repliedComment']) => void
 }
 
@@ -55,7 +59,13 @@ export const useBearStore = create(immer<StateType>((set) => ({
         id: 0,
         userName: ''
     },
+    refetch: {
+        doRefetch: false
+    },
     setRepliedComment: (payload: StateType['repliedComment']) => {
         set({ repliedComment: payload })
+    },
+    setRefetch: (payload: StateType['refetch']) => {
+        set({ refetch: payload })
     }
 })))

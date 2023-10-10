@@ -2,16 +2,20 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
 import { useSnackbar } from 'features/common'
 import { PostService } from 'shared/api'
+import { useBearStore } from '../../../profile/getPosts/model'
 
 export const useCommentPost = () => {
     const onOpen = useSnackbar((state) => state.onOpen)
+    const { setRefetch } = useBearStore()
 
     const queryClient = useQueryClient()
     const { mutate: addComment, isSuccess } = useMutation({
+        mutationKey: ['postComments'],
         mutationFn: ({ postId, commentContent }: { postId: number, commentContent: Record<'content', string> }) =>
             PostService.comment(postId, commentContent),
         onSuccess: async () => {
             // TODO: сделать перезапрос на getPost & улучшить код (см. доп задачи Jira)
+            setRefetch({ doRefetch: true })
             await queryClient.invalidateQueries(['postComments'])
         },
         onError: (error: AxiosError<{ message: string }>) => {
@@ -23,6 +27,7 @@ export const useCommentPost = () => {
 
 export const useAnswerForComment = () => {
     const onOpen = useSnackbar((state) => state.onOpen)
+    const { setRefetch } = useBearStore()
 
     const queryClient = useQueryClient()
     const { mutate: addAnswerForComment, isSuccess } = useMutation({
@@ -31,7 +36,8 @@ export const useAnswerForComment = () => {
             answerContent: Record<'content', string> }) =>
             PostService.answerForComment(postId, commentId, answerContent),
         onSuccess: async () => {
-            await queryClient.invalidateQueries(['postComments', 'postAnswers'])
+            setRefetch({ doRefetch: true })
+            await queryClient.invalidateQueries(['postAnswers', 'postComments'])
         },
         onError: (error: AxiosError<{ message: string }>) => {
             onOpen(error.message, 'danger', 'left')

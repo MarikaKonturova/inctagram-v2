@@ -1,5 +1,5 @@
-import React, { type FC } from 'react'
-import { LikeCommentIconButton } from 'features/post'
+import React, { type FC, useState } from 'react'
+import CommentInfo from 'entities/Post/ui/CommentInfo/CommentInfo'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { useGetPostComments } from '../../model'
 import GetAnswersForCommentaries from '../getAnswersForCommentaries/GetAnswersForCommentaries'
@@ -22,10 +22,10 @@ export const GetCommentaries: FC<Props> = ({ postId, userData }) => {
     const viewAnswerOnClick = (commentId: number) => {
         setOpenedCommentId(commentId)
         setIsOpen(!isOpen)
-        // if (isOpen) {
-        //     setOpenedCommentId(0)
-        //     setIsOpen(false)
-        // }
+        if (isOpen) {
+            setOpenedCommentId(0)
+            setIsOpen(false)
+        }
     }
 
     return (
