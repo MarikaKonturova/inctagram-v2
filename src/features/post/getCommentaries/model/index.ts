@@ -7,7 +7,7 @@ export const useGetPostComments = (postId: number) => {
     const onOpen = useSnackbar((state) => state.onOpen)
 
     const { isLoading, error, data } = useQuery({
-        queryKey: ['postComments'],
+        queryKey: ['postComments', postId],
         queryFn: () => MyPostService.getPostCommnets(postId),
         onError: (error: AxiosError<{ message: string }>) => {
             onOpen(error.message, 'danger', 'left')
