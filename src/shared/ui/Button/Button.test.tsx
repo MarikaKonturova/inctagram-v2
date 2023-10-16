@@ -8,6 +8,7 @@ describe('buttons', () => {
     })
     test('Test render2', () => {
         const { getByText } = render(<Button>TEST</Button>)
-        expect(getByText('TEST')).toBeInTheDocument()
+        // TODO: fix
+        expect(screen.getByText('TEST')).toBeInTheDocument()
     })
 })

@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { useTranslation } from 'next-i18next'
 import { type FC, memo } from 'react'
+import { ValidationError } from 'yup'
 import { SocialIcons } from 'features/auth'
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
 import { AppRoutes } from 'shared/constants/path'
@@ -16,7 +17,7 @@ export const RegisterForm: FC = memo(() => {
     const { register, handleSubmit, validErrors: { passwordError, emailError, confPasswordError, userNameError } } =
       useValidationForm(['email', 'password', 'userName', 'confPassword'])
     const { isLoading, onSubmit, responseError } = useRegistration()
-
+    console.log(responseError)
     return (
         <FormWrapper className={cls.register} onSubmit={handleSubmit(onSubmit)}>
             <h2 className={cls.title}>{t('signUp')}</h2>
@@ -26,7 +27,7 @@ export const RegisterForm: FC = memo(() => {
                 type={'text'}
                 placeholder={`${t('userName')}`}
                 error={!!userNameError}
-                errorText={userNameError || responseError?.login}
+                errorText={userNameError || responseError?.userName}
                 className={cls.input}/>
             <Input
                 {...register('email')}

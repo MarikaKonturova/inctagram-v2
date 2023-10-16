@@ -6,6 +6,8 @@ module.exports = {
     extends: [
         'plugin:react/recommended',
         'standard-with-typescript',
+        'plugin:testing-library/react',
+        'plugin:jest-dom/recommended',
         '@feature-sliced'
     ],
     overrides: [

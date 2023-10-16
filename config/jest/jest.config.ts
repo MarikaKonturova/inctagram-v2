@@ -36,13 +36,12 @@ export default {
     moduleNameMapper: {
         '\\.s?css$': 'identity-obj-proxy',
         '\\.svg': path.resolve(__dirname, 'jestEmptyComponent.tsx'),
-        axios: 'axios/dist/node/axios.cjs'
+        '^.+\\.(jpg|jpeg|png|gif|webp|avif)$':
+        path.resolve(__dirname, 'fileMock.js'),
+        axios: 'axios/dist/node/axios.cjs',
+        zustand: path.resolve(__dirname, '__mocks__/zustand.ts')
     },
-    //     moduleNameMapper: {
-    //     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
-    //         '^.+\\.(css|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
-    //         '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$':
-    //     '<rootDir>/__mocks__/fileMock.js'
+
     transformIgnorePatterns: [
         // 'node_modules/(?!axios)',
         '/node_modules/',
@@ -50,6 +49,7 @@ export default {
     ],
     testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
     transform: {
-        '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }]
+        '^.+\\.m?(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }]
+
     }
 }
