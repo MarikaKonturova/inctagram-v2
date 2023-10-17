@@ -9,14 +9,15 @@ import React, {
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSnackbar } from 'features/common'
+import { useUploadAvatar } from 'features/profile/avatar/model/uploadAvatar'
+import cls from 'features/profile/avatar/ui/AvatarModal/AvatarModal.module.scss'
 import { ProfileService } from 'shared/api'
 import { useModal } from 'shared/hooks/useModal'
 import { type UserError } from 'shared/types/auth'
 import { Button, Modal } from 'shared/ui'
-import cls from './AvatarModal.module.scss'
 
 const AvatarDynamicImport =
-    dynamic(() => import('./AvatarDynamicImport'), { ssr: false })
+    dynamic(() => import('features/profile/avatar/ui/AvatarModal/AvatarDynamicImport'), { ssr: false })
 interface confirmModalProps {
     className?: string
     setAvatar: Dispatch<SetStateAction<string | undefined>>
@@ -25,20 +26,10 @@ export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => 
     const { t } = useTranslation('common')
     const { isOpen, setIsOpen } = useModal()
     const [image, setImage] = useState<File>()
-    const [preview, setPreview] = useState<string>()
-    const onOpen = useSnackbar((state) => state.onOpen)
+    // const [preview, setPreview] = useState<string>()
     const onCloseHandler = () => { setIsOpen(false) }
+    const { uploadAvatar } = useUploadAvatar(setAvatar, setIsOpen)
 
-    const { mutate: uploadAvatar } = useMutation(ProfileService.uploadAvatar, {
-        mutationKey: ['uploadAvatar'],
-        onSuccess: () => {
-            setAvatar(preview)
-            setIsOpen(false)
-        },
-        onError: (res: AxiosError<UserError>) => {
-            onOpen(res?.response?.data.messages[0].message || 'some error', 'danger', 'left')
-        }
-    })
     function dataURLtoFile (dataurl: string, filename: string) {
         const arr = dataurl.split(',')
         // @ts-ignore
@@ -54,10 +45,10 @@ export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => 
         return new File([u8arr], filename, { type: mime })
     }
     const onClose = () => {
-        setPreview(undefined)
+        // setPreview(undefined) //! !!
     }
     const onCrop = (view: string) => {
-        setPreview(view)
+        // setPreview(view) //! !!
         const file = dataURLtoFile(view, 'hello.txt')
         setImage(file)
     }
