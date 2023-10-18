@@ -27,6 +27,7 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
         mutate(data)
     }
 
+    console.log(userData)
     useEffect(() => {
         reset(userData)
     }, [userData, reset])

@@ -9,14 +9,14 @@ import { Avatar, Button } from 'shared/ui'
 export const AvatarBlock = ({ avatars }: any) => {
     const { setIsOpen } = useModal()
     const { deleteAvatar } = useDeleteAvatar(setIsOpen)
-    const [avatar, setAvatar] = useState<string>()
+    const [avatar, setAvatar] = useState<string | undefined>(avatars?.medium.url)
     const onDeleteAvatarClick = () => {
         deleteAvatar()
     }
 
     const addProfilePhotoClick = () => {
         setIsOpen(true)
-        setAvatar(undefined)
+        // setAvatar(undefined)
     }
 
     useEffect(() => {
@@ -25,6 +25,7 @@ export const AvatarBlock = ({ avatars }: any) => {
         }
     }, [avatars])
 
+    console.log(avatars)
     return (
         <div className={cls.avatarContainer}>
             <AvatarModal setAvatar={setAvatar} />
