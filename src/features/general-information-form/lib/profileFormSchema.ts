@@ -5,7 +5,15 @@ export type ValidateUnion = 'userName' | 'firstName' | 'lastName' | 'city' | 'ab
 export const createValidationSchema = (arr: ValidateUnion[]): any => {
     const validationObject = arr.reduce((accum: any, type) => {
         switch (type) {
-        case 'userName':
+        case 'userName': {
+            accum[type] = yup
+                .string()
+                .min(6, `${type} must be at least 6 characters`)
+                .max(30, `${type} must be no more than 30 characters`)
+                .required('Field is required!')
+
+            return accum
+        }
         case 'firstName':
         case 'lastName':
         case 'city':
