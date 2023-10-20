@@ -1,8 +1,6 @@
 import { type FC, useEffect } from 'react'
-
 import { type ProfileDataModel } from 'shared/types/auth'
 import { Button } from 'shared/ui'
-
 import cls from './GeneralInformationForm.module.scss'
 import { useValidationForm } from './lib'
 import { useUpdateProfileData } from './model'
