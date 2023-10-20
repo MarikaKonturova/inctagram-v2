@@ -25,7 +25,6 @@ export const AvatarBlock = ({ avatars }: any) => {
         }
     }, [avatars])
 
-    console.log(avatars)
     return (
         <div className={cls.avatarContainer}>
             <AvatarModal setAvatar={setAvatar} />
