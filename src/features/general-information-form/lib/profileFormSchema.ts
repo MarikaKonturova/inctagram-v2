@@ -7,7 +7,13 @@ export const createValidationSchema = (arr: ValidateUnion[]): any => {
         switch (type) {
         case 'userName':
         case 'firstName':
-        case 'lastName':
+        case 'lastName':{
+            accum[type] = yup
+                .string()
+                .required('Field is required!')
+                .max(50, 'Maximum number of characters 50')
+            return accum
+        }
         case 'city':
         case 'aboutMe': {
             accum[type] = yup
