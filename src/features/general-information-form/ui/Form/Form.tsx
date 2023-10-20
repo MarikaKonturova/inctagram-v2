@@ -82,7 +82,7 @@ export const Form: React.FC<IProps> = ({ register, validErrors, control, respons
                 id="aboutMe"
                 label="About me"
                 labelClassName={cls.label}
-                textareaClassName={aboutMeError ? cls.error : cls.textarea}
+                textareaClassName={cls.textarea}
                 className={cls.wrapper}
             />
         </div>
