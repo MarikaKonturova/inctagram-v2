@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export type ValidateUnion = 'userName' | 'firstName' | 'lastName' | 'city' | 'aboutMe'
+export type ValidateUnion = 'userName' | 'firstName' | 'lastName'
 
 const specialCharactersRegExp = /^[A-Za-z0-9-_]+$/
 
@@ -21,13 +21,6 @@ export const createValidationSchema = (arr: ValidateUnion[]): any => {
         }
         case 'firstName':
         case 'lastName':
-        case 'city':
-        case 'aboutMe': {
-            accum[type] = yup
-                .string()
-                .required('Field is required!')
-            return accum
-        }
         default: {
             return accum
         }
