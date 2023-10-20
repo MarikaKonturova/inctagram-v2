@@ -2,8 +2,7 @@ import * as yup from 'yup'
 
 export type ValidateUnion = 'userName' | 'firstName' | 'lastName' | 'city' | 'aboutMe'
 
-// eslint-disable-next-line no-useless-escape
-const specialCharactersRegExp = /^[^~`!@#$%^&*()+=\[{}\|;:'",.<>\/?]+$/
+const specialCharactersRegExp = /^[A-Za-z0-9-_]+$/
 
 export const createValidationSchema = (arr: ValidateUnion[]): any => {
     const validationObject = arr.reduce((accum: any, type) => {
