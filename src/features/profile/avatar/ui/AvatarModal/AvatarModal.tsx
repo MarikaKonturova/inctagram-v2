@@ -1,6 +1,4 @@
 
-import { useMutation } from '@tanstack/react-query'
-import { type AxiosError } from 'axios'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import React, {
@@ -8,12 +6,9 @@ import React, {
     type Dispatch, type SetStateAction
 } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSnackbar } from 'features/common'
 import { useUploadAvatar } from 'features/profile/avatar/model/uploadAvatar'
 import cls from 'features/profile/avatar/ui/AvatarModal/AvatarModal.module.scss'
-import { ProfileService } from 'shared/api'
 import { useModal } from 'shared/hooks/useModal'
-import { type UserError } from 'shared/types/auth'
 import { Button, Modal } from 'shared/ui'
 
 const AvatarDynamicImport =
