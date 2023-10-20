@@ -16,15 +16,16 @@ interface IProps {
 export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
     const [avatar, setAvatar] = useState<string>()
     const { setIsOpen } = useModal()
-    const { mutate, responseError } = useUpdateProfileData()
 
     const {
         register,
         control,
         handleSubmit,
         reset,
+        setError,
         validErrors
     } = useValidationForm(['userName', 'firstName', 'lastName', 'city', 'aboutMe'], userData)
+    const { mutate, responseError } = useUpdateProfileData(setError)
 
     const onAvatarClick = () => {
         setIsOpen(true)
