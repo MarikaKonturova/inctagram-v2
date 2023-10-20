@@ -13,7 +13,7 @@ export const useValidationForm = (arr: ValidateUnion[], defaultValues?: ProfileD
         formState: { errors }
     } = useForm<ProfileDataModel>({
         resolver: yupResolver(createValidationSchema(arr)),
-        mode: 'onTouched',
+        mode: 'onTouched' || 'onSubmit',
         reValidateMode: 'onChange',
         defaultValues
     })
