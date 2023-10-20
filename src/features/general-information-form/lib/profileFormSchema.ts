@@ -10,12 +10,12 @@ export const createValidationSchema = (arr: ValidateUnion[]): any => {
         case 'userName': {
             accum[type] = yup
                 .string()
+                .required('Field is required!')
                 .matches(specialCharactersRegExp,
                     'Only Latin letters, numbers, dashes and underscores are allowed')
                 .required('Password is required')
                 .min(6, `${type} must be at least 6 characters`)
                 .max(30, `${type} must be no more than 30 characters`)
-                .required('Field is required!')
 
             return accum
         }
