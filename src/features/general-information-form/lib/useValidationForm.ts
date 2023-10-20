@@ -8,6 +8,7 @@ export const useValidationForm = (arr: ValidateUnion[], defaultValues?: ProfileD
         register,
         handleSubmit,
         reset,
+        setError,
         control,
         formState: { errors }
     } = useForm<ProfileDataModel>({
@@ -36,6 +37,7 @@ export const useValidationForm = (arr: ValidateUnion[], defaultValues?: ProfileD
         register,
         handleSubmit,
         reset,
+        setError,
         control
     }
 }
