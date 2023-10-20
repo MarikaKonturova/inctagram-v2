@@ -13,7 +13,7 @@ export const useValidationForm = (arr: ValidateUnion[], defaultValues?: ProfileD
         formState: { errors }
     } = useForm<ProfileDataModel>({
         resolver: yupResolver(createValidationSchema(arr)),
-        mode: 'onTouched',
+        mode: 'onTouched' || 'onSubmit',
         reValidateMode: 'onChange',
         defaultValues
     })
@@ -21,15 +21,11 @@ export const useValidationForm = (arr: ValidateUnion[], defaultValues?: ProfileD
     const userNameError = errors?.userName && errors.userName.message
     const firstNameError = errors?.firstName && errors.firstName.message
     const lastNameError = errors?.lastName && errors.lastName.message
-    const cityError = errors?.city && errors.city.message
-    const aboutMeError = errors?.aboutMe && errors.aboutMe.message
 
     const validErrors = {
         userNameError,
         firstNameError,
-        lastNameError,
-        cityError,
-        aboutMeError
+        lastNameError
     }
 
     return {

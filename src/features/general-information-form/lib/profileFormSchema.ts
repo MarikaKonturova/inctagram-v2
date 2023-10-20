@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export type ValidateUnion = 'userName' | 'firstName' | 'lastName' | 'city' | 'aboutMe'
+export type ValidateUnion = 'userName' | 'firstName' | 'lastName'
 
 const specialCharactersRegExp = /^[A-Za-z0-9-_]+$/
 const firstAndLastNameRegExp = /^[A-Za-zА-Яа-я\s' -]+$/
@@ -28,13 +28,6 @@ export const createValidationSchema = (arr: ValidateUnion[]): any => {
                 .matches(firstAndLastNameRegExp,
                     'Only Latin and Cyrillic letters, spaces, apostrophes and dashes are allowed')
                 .max(50, 'Maximum number of characters 50')
-            return accum
-        }
-        case 'city':
-        case 'aboutMe': {
-            accum[type] = yup
-                .string()
-                .required('Field is required!')
             return accum
         }
         default: {
