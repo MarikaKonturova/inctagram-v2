@@ -1,9 +1,7 @@
 import { type FC, useEffect, useState } from 'react'
-
 import { useModal } from 'shared/hooks/useModal'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { Button } from 'shared/ui'
-
 import cls from './GeneralInformationForm.module.scss'
 import { useValidationForm } from './lib'
 import { useUpdateProfileData } from './model'
