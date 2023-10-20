@@ -28,8 +28,8 @@ export const Form: React.FC<IProps> = ({ register, validErrors, control, respons
                 {...register('userName')}
                 id="userName"
                 type={'text'}
-                error={!!userNameError || !!responseError?.userName}
-                errorText={userNameError || responseError?.userName}
+                error={!!userNameError}
+                errorText={userNameError}
                 className={cls.wrapper}
                 label="Username"
                 labelClassName={cls.label}
@@ -82,7 +82,7 @@ export const Form: React.FC<IProps> = ({ register, validErrors, control, respons
                 id="aboutMe"
                 label="About me"
                 labelClassName={cls.label}
-                textareaClassName={cls.textarea}
+                textareaClassName={aboutMeError ? cls.error : cls.textarea}
                 className={cls.wrapper}
             />
         </div>
