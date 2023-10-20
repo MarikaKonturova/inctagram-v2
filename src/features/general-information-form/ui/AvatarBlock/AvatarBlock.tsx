@@ -1,4 +1,5 @@
 import React from 'react'
+import CloseIcon from 'shared/assets/icons/general/close.svg'
 import { Avatar, Button } from 'shared/ui'
 
 import cls from './AvatarBlock.module.scss'
@@ -10,7 +11,9 @@ export const AvatarBlock = ({ avatar, onAvatarClick, addProfilePhotoClick }: any
                 ? (
                     <div className={cls.avatar}>
                         <Avatar size={192} src={avatar} />
-                        <button className={cls.imageButton} onClick={onAvatarClick} type="button" />
+                        <button onClick={onAvatarClick} className={cls.imageButton} type="button">
+                            <CloseIcon viewBox="0 5 24 24" fill={'#ffffff'} width={'100%'} heigth={'100%'}/>
+                        </button>
                     </div>
                 )
                 : (
