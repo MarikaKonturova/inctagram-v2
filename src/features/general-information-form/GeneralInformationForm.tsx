@@ -24,7 +24,7 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
         reset,
         setError,
         validErrors
-    } = useValidationForm(['userName', 'firstName', 'lastName', 'city', 'aboutMe'], userData)
+    } = useValidationForm(['userName', 'firstName', 'lastName'], userData)
     const { mutate, responseError } = useUpdateProfileData(setError)
 
     const onAvatarClick = () => {
