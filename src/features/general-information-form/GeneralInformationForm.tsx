@@ -11,15 +11,15 @@ interface IProps {
 }
 
 export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
-    const { mutate } = useUpdateProfileData()
-
     const {
         register,
         control,
         handleSubmit,
         reset,
+        setError,
         validErrors
-    } = useValidationForm(['userName', 'firstName', 'lastName', 'city', 'aboutMe'], userData)
+    } = useValidationForm(['userName', 'firstName', 'lastName'], userData)
+    const { mutate, responseError } = useUpdateProfileData(setError)
 
     const onSubmit = (data: Omit<ProfileDataModel, 'id' | 'avatars'>) => {
         mutate(data)
@@ -31,7 +31,7 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
 
     return <form onSubmit={handleSubmit(onSubmit)} className={cls.formContainer}>
         <div className={cls.infoContainer}>
-            <Form control={control} register={register} validErrors={validErrors} />
+            <Form control={control} register={register} validErrors={validErrors} responseError={responseError}/>
         </div>
         <hr className={cls.line} />
         <Button type="submit" theme={'primary'} className={cls.button}>Save Changes</Button>

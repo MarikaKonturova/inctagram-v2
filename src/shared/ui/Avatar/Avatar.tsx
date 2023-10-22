@@ -1,11 +1,11 @@
 import clsx from 'clsx'
-import { type StaticImageData } from 'next/image'
 import { type CSSProperties, useMemo } from 'react'
 import IconImg from 'shared/assets/icons/light/image.svg'
+import userImg from 'shared/assets/images/user.png'
 import cls from './Avatar.module.scss'
 interface AvatarProps {
     className?: string
-    src?: string | StaticImageData
+    src?: string
     size?: number
     alt?: string
 }
@@ -27,15 +27,15 @@ export const Avatar = (props: AvatarProps) => {
 
     return (
         <div className={clsx(cls.wrapperAvatar, [className])}>
-            {src && <img src={src as string}
-                         className={cls.Avatar}
-                         style={styles}
-                         alt={alt}
-            />}
-            {!src && <div className={cls.Avatar} style={styles}>
-                <IconImg className={clsx(cls.icon)}/>
-            </div>}
-
+            {src
+                ? <img src={src || userImg.src}
+                       className={cls.avatar}
+                       style={styles}
+                       alt={alt}
+                />
+                : <div className={cls.Avatar} style={styles}>
+                    <IconImg className={clsx(cls.icon)}/>
+                </div>}
         </div>
     )
 }

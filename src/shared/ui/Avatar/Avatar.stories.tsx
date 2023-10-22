@@ -17,14 +17,14 @@ export const Primary = Template.bind({})
 
 Primary.args = {
     size: 192,
-    src: AvatarImg
+    src: AvatarImg.src
 }
 
 export const Small = Template.bind({})
 
 Small.args = {
     size: 36,
-    src: AvatarImg
+    src: AvatarImg.src
 }
 
 export const PrimarySrcNone = Template.bind({})

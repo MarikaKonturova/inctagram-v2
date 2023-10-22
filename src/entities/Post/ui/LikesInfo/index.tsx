@@ -9,7 +9,6 @@ interface LikesInfoProps {
 }
 
 export const LikesInfo = ({ newLikes, likeCount }: LikesInfoProps) => {
-    console.log(likeCount)
     const likesCountEnhance = `${likeCount?.toString()[0]} ${likeCount?.toString().slice(1)}`
     return (
         <div className={cls.container}>

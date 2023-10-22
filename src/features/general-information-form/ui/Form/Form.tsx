@@ -10,19 +10,16 @@ interface IProps {
     validErrors: Record<
     'firstNameError'
     | 'userNameError'
-    | 'lastNameError'
-    | 'cityError'
-    | 'aboutMeError', string | undefined>
+    | 'lastNameError', string | undefined>
     control: Control<ProfileDataModel, any>
+    responseError: Record<string, string> | undefined
 }
 
-export const Form: React.FC<IProps> = ({ register, validErrors, control }) => {
+export const Form: React.FC<IProps> = ({ register, validErrors, control, responseError }) => {
     const {
         userNameError,
         firstNameError,
-        lastNameError,
-        cityError,
-        aboutMeError
+        lastNameError
     } = validErrors
 
     return (
@@ -78,8 +75,6 @@ export const Form: React.FC<IProps> = ({ register, validErrors, control }) => {
                 label="City"
                 className={cls.wrapper}
                 labelClassName={cls.label}
-                error={!!cityError}
-                errorText={cityError}
             />
 
             <Textarea
@@ -89,7 +84,6 @@ export const Form: React.FC<IProps> = ({ register, validErrors, control }) => {
                 labelClassName={cls.label}
                 textareaClassName={cls.textarea}
                 className={cls.wrapper}
-                errorText={aboutMeError}
             />
         </div>
     )

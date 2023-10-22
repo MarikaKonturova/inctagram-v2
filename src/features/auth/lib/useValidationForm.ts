@@ -20,7 +20,7 @@ export const useValidationForm = (arr: ValidateUnion[]) => {
         formState: { errors }
     } = useForm<IFormValidate>({
         resolver: yupResolver(createValidationSchema(arr)),
-        mode: 'onSubmit' || 'onChange',
+        mode: 'onTouched',
         reValidateMode: 'onChange'
     })
 
