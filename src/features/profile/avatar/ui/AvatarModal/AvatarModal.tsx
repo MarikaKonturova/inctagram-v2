@@ -7,7 +7,6 @@ import React, {
 import { useTranslation } from 'react-i18next'
 import { useUploadAvatar } from 'features/profile/avatar/model/uploadAvatar'
 import cls from 'features/profile/avatar/ui/AvatarModal/AvatarModal.module.scss'
-import { useModal } from 'shared/hooks/useModal'
 import { Button, Modal } from 'shared/ui'
 
 const AvatarDynamicImport =

@@ -4,7 +4,7 @@ import { Button } from 'shared/ui'
 import cls from './GeneralInformationForm.module.scss'
 import { useValidationForm } from './lib'
 import { useUpdateProfileData } from './model'
-import { AvatarBlock, Form } from './ui'
+import { Form } from './ui'
 
 interface IProps {
     userData?: ProfileDataModel

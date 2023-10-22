@@ -3,7 +3,6 @@ import { useDeleteAvatar } from 'features/profile/avatar/model/deleteAvatar'
 import cls from 'features/profile/avatar/ui/AvatarBlock/AvatarBlock.module.scss'
 import { AvatarModal } from 'features/profile/avatar/ui/AvatarModal/AvatarModal'
 import CloseIcon from 'shared/assets/icons/general/close.svg'
-import { useModal } from 'shared/hooks/useModal'
 import { type AvatarPostModel } from 'shared/types/post'
 import { Avatar, Button } from 'shared/ui'
 
