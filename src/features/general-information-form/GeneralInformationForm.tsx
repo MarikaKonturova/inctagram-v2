@@ -25,14 +25,12 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
         mutate(data)
     }
 
-    console.log(userData)
     useEffect(() => {
         reset(userData)
     }, [userData, reset])
 
     return <form onSubmit={handleSubmit(onSubmit)}>
         <div className={cls.infoContainer}>
-            <AvatarBlock avatars={userData?.avatars} />
             <Form control={control} register={register} validErrors={validErrors} />
         </div>
         <hr className={cls.line} />

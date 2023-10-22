@@ -15,12 +15,12 @@ const AvatarDynamicImport =
 interface confirmModalProps {
     className?: string
     setAvatar: Dispatch<SetStateAction<string | undefined>>
+    isOpen: boolean
+    setIsOpen: Dispatch<SetStateAction<boolean>>
 }
-export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => {
+export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar, isOpen, setIsOpen }) => {
     const { t } = useTranslation('common')
-    const { isOpen, setIsOpen } = useModal()
     const [image, setImage] = useState<File>()
-    // const [preview, setPreview] = useState<string>()
     const onCloseHandler = () => { setIsOpen(false) }
     const { uploadAvatar } = useUploadAvatar(setAvatar, setIsOpen)
 
@@ -38,11 +38,8 @@ export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => 
 
         return new File([u8arr], filename, { type: mime })
     }
-    const onClose = () => {
-        // setPreview(undefined) //! !!
-    }
+
     const onCrop = (view: string) => {
-        // setPreview(view) //! !!
         const file = dataURLtoFile(view, 'hello.txt')
         setImage(file)
     }
@@ -75,7 +72,7 @@ export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => 
                             width={300}
                             height={300}
                             onBeforeFileLoad={handlerChange}
-                            onClose={onClose}
+                            onClose={() => {}}
                             onCrop={onCrop}
                     />
                     <Button className={cls.button} type={'button'} onClick={save} disabled={!image}>{t('save')}</Button>

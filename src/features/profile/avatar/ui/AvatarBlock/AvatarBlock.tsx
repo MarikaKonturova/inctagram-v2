@@ -4,19 +4,20 @@ import cls from 'features/profile/avatar/ui/AvatarBlock/AvatarBlock.module.scss'
 import { AvatarModal } from 'features/profile/avatar/ui/AvatarModal/AvatarModal'
 import CloseIcon from 'shared/assets/icons/general/close.svg'
 import { useModal } from 'shared/hooks/useModal'
+import { type AvatarPostModel } from 'shared/types/post'
 import { Avatar, Button } from 'shared/ui'
 
-export const AvatarBlock = ({ avatars }: any) => {
-    const { setIsOpen } = useModal()
-    const { deleteAvatar } = useDeleteAvatar(setIsOpen)
+export const AvatarBlock = ({ avatars }: { avatars: AvatarPostModel | null | undefined }) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false)
     const [avatar, setAvatar] = useState<string | undefined>(avatars?.medium.url)
+    const { deleteAvatar } = useDeleteAvatar(setIsOpen, setAvatar)
+
     const onDeleteAvatarClick = () => {
         deleteAvatar()
     }
 
     const addProfilePhotoClick = () => {
         setIsOpen(true)
-        // setAvatar(undefined)
     }
 
     useEffect(() => {
@@ -27,7 +28,7 @@ export const AvatarBlock = ({ avatars }: any) => {
 
     return (
         <div className={cls.avatarContainer}>
-            <AvatarModal setAvatar={setAvatar} />
+            <AvatarModal setAvatar={setAvatar} isOpen={isOpen} setIsOpen={setIsOpen}/>
             <div>
                 {avatar
                     ? (
