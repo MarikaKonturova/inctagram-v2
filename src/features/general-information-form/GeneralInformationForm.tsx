@@ -29,7 +29,7 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
         reset(userData)
     }, [userData, reset])
 
-    return <form onSubmit={handleSubmit(onSubmit)}>
+    return <form onSubmit={handleSubmit(onSubmit)} className={cls.formContainer}>
         <div className={cls.infoContainer}>
             <Form control={control} register={register} validErrors={validErrors} />
         </div>
