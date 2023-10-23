@@ -10,7 +10,7 @@ export const useDeleteAvatar = (setIsOpen: (value: boolean) => void,
 
     const { mutate: deleteAvatar } = useMutation(ProfileService.deleteAvatar, {
         mutationKey: ['deleteAvatar'],
-        onSuccess: () => {
+        onSuccess: (data) => {
             setIsOpen(false)
             setAvatar(undefined)
             onOpen('Your photo has been deleted successfully', 'success', 'left')
