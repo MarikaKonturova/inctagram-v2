@@ -1,6 +1,8 @@
 .comments {
     padding: 15px;
     width: 100%;
+    max-height: calc(85vh - (56px + 100px + 52px));
+    overflow-y: auto;
 }
 
 .comment {
