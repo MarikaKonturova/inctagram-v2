@@ -85,3 +85,68 @@ export interface Comment {
         username: string }
 
 }
+
+interface FavoritePost {
+    id: number
+    ownerId: number
+    description: string
+    location: {
+        nameLocation: string
+        latitude: number
+        longitude: number
+    }
+    userName: string
+    avatars: AvatarVersions
+    images: Image[]
+    createdAt: string
+    updatedAt: string
+    commentCount: number
+    likeCount: number
+    isLiked: boolean
+    newLikes: Like[]
+    isFavorite: boolean
+    isFollowing: boolean
+    isFollowedBy: boolean
+}
+
+interface AvatarVersion {
+    url: string
+    width: number
+    height: number
+    fileSize: number
+}
+
+interface AvatarVersions {
+    thumbnail: AvatarVersion
+    medium: AvatarVersion
+}
+
+interface ImageVersion {
+    url: string
+    width: number
+    height: number
+    fileSize: number
+}
+
+interface Image {
+    uploadId: string
+    versions: {
+        huge: ImageVersion
+        large: ImageVersion
+    }
+}
+
+interface Like {
+    id: number
+    userName: string
+    avatars: AvatarVersions
+}
+export interface FavoritesType {
+    totalCount: number
+    pagesCount: number
+    page: number
+    pageSize: number
+    prevCursor: number
+    nextCursor: number
+    items: FavoritePost[]
+}
