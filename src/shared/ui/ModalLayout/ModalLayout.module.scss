@@ -5,7 +5,7 @@
     @include flex(column, center, center);
 
     padding: 36px;
-    z-index: 1;
+    z-index: 3;
 
     .overlay {
         @include position(fixed, 0);
@@ -18,7 +18,7 @@
 
     .content {
         @include position(relative);
-        
+
         z-index: 3;
         overflow: auto;
         min-width: 378px;
@@ -30,7 +30,7 @@
 
             @include flex($justify: space-between, $align: center);
         }
-    } 
+    }
 
     .withStyles {
         border: 1px solid var(--dark-100-color);

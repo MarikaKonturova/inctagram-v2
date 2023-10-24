@@ -10,12 +10,13 @@
     .imageButton {
         cursor: pointer;
         position: absolute;
-        z-index: 2;
+        z-index: 1;
         top: 14%;
         left: 77.5%;
         width: 16px;
         height: 16px;
         border-radius: 50%;
+        background-color: var(--danger-500-color);
     }
 }
 
