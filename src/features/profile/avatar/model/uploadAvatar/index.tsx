@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosResponse, type AxiosError } from 'axios'
 
 import { useSnackbar } from 'features/common'
@@ -8,13 +8,15 @@ import { type AvatarPostModel } from 'shared/types/post'
 
 export const useUploadAvatar = (setAvatar: (value: string) => void, setIsOpen: (value: boolean) => void) => {
     const onOpen = useSnackbar((state) => state.onOpen)
+    const client = useQueryClient()
 
     const { mutate: uploadAvatar } = useMutation(ProfileService.uploadAvatar, {
         mutationKey: ['uploadAvatar'],
-        onSuccess: (data: AxiosResponse<{ avatars: AvatarPostModel }>) => {
+        onSuccess: async (data: AxiosResponse<{ avatars: AvatarPostModel }>) => {
             setAvatar(data.data.avatars.medium.url)
             setIsOpen(false)
             onOpen('Your photo has been updated successfully', 'success', 'left')
+            await client.invalidateQueries(['getProfileData'])
         },
         onError: (res: AxiosError<UserError>) => {
             onOpen(res?.response?.data.messages[0].message || 'some error', 'danger', 'left')

@@ -20,9 +20,7 @@ export const AvatarBlock = ({ avatars }: { avatars: AvatarPostModel | null | und
     }
 
     useEffect(() => {
-        if (avatars) {
-            setAvatar(avatars.medium.url)
-        }
+        setAvatar(avatars?.medium.url)
     }, [avatars])
 
     return (
