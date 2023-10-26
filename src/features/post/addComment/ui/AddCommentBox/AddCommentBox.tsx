@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { useBearStore } from 'features/profile/getPosts/model'
+import { useCommentStore } from 'features/profile/getPosts/model'
 import { Button, Input } from 'shared/ui'
 import { useCommentPost } from '../../model'
 
@@ -26,7 +26,7 @@ export const AddCommentBox = ({ postId }: AddCommentBoxProps) => {
     })
     const { addComment } = useCommentPost()
     const { addAnswerForComment } = useAnswerForComment()
-    const { repliedComment, setRepliedComment } = useBearStore()
+    const { repliedComment, setRepliedComment } = useCommentStore()
 
     const onAddCommentClick = ({ text }: { text: string }) => {
         if (repliedComment.id) {

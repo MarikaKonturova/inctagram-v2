@@ -2,11 +2,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
 import { useSnackbar } from 'features/common'
 import { PostService } from 'shared/api'
-import { useBearStore } from '../../../profile/getPosts/model'
+import { useCommentStore } from '../../../profile/getPosts/model'
 
 export const useCommentPost = () => {
     const onOpen = useSnackbar((state) => state.onOpen)
-    const { setRefetch } = useBearStore()
+    const { setRefetch } = useCommentStore()
 
     const queryClient = useQueryClient()
     const { mutate: addComment, isSuccess } = useMutation({
@@ -27,7 +27,7 @@ export const useCommentPost = () => {
 
 export const useAnswerForComment = () => {
     const onOpen = useSnackbar((state) => state.onOpen)
-    const { setRefetch } = useBearStore()
+    const { setRefetch } = useCommentStore()
 
     const queryClient = useQueryClient()
     const { mutate: addAnswerForComment, isSuccess } = useMutation({

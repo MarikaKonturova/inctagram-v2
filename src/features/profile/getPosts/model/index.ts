@@ -54,7 +54,7 @@ export interface StateType {
     setRepliedComment: (payload: StateType['repliedComment']) => void
 }
 
-export const useBearStore = create(immer<StateType>((set) => ({
+export const useCommentStore = create(immer<StateType>((set) => ({
     repliedComment: {
         id: 0,
         userName: ''

@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import React from 'react'
 import { LikeCommentIconButton } from 'features/post'
-import { useBearStore } from 'features/profile/getPosts/model'
+import { useCommentStore } from 'features/profile/getPosts/model'
 import { type AnswerType } from 'shared/types/comment'
 import { type Comment } from 'shared/types/post'
 import { Avatar } from 'shared/ui'
@@ -41,7 +41,7 @@ function CommentInfo ({
         likeCount,
         answerCount
     } = data
-    const { setRepliedComment } = useBearStore()
+    const { setRepliedComment } = useCommentStore()
 
     const onAnswerHandler = () => {
         setRepliedComment({ id: isRepliedComment && commentId ? commentId : id, userName })

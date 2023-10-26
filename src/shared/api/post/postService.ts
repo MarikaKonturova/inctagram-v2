@@ -1,5 +1,5 @@
 import { $api } from 'shared/api'
-import { type AnswerType } from 'shared/types/comment' // , type Comment
+import { type AnswerType } from 'shared/types/comment'
 import { type PostResponseType } from 'shared/types/post'
 
 // TODO: доделать API

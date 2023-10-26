@@ -1,7 +1,7 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query'
 
+import { PostService } from 'shared/api'
 import { type LikeStatus } from 'shared/types/likeStatus'
-import { PostService } from '../../../../shared/api'
 
 export const useLikeComment = (postId: number, commentId: number) => {
     const queryClient = useQueryClient()

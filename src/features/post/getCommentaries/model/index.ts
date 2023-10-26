@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
 import { useSnackbar } from 'features/common'
 import { MyPostService, PostService } from 'shared/api'
-import { useBearStore } from '../../../profile/getPosts/model'
+import { useCommentStore } from '../../../profile/getPosts/model'
 
 export const useGetPostComments = (postId: number) => {
     const onOpen = useSnackbar((state) => state.onOpen)
-    const { refetch, setRefetch } = useBearStore()
+    const { refetch, setRefetch } = useCommentStore()
     const { isLoading, error, data } = useQuery({
         queryKey: ['postComments', 'postAnswers'],
         queryFn: () => MyPostService.getPostComments(postId),
