@@ -31,7 +31,7 @@ useRouter.mockReturnValue({
     // return mock for push method
     push: pushMock
     // ... add the props or methods you need
-})  
+})
 
 /* jest.mock('next/router', () => jest.requireActual('next-router-mock')) */
 
