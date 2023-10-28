@@ -12,7 +12,6 @@ export const useGetProfileData = () => {
     const { data: response, isLoading } = useQuery(['getProfileData'],
         () => ProfileService.getProfileData(), {
             onSuccess: ({ data }) => {
-                console.log(data)
                 setAuth(true)
             },
             onError: (error: AxiosError<UserError>) => {

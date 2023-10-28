@@ -1,9 +1,7 @@
 import { type FC, useEffect, useState } from 'react'
-
 import { useModal } from 'shared/hooks/useModal'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { Button } from 'shared/ui'
-
 import cls from './GeneralInformationForm.module.scss'
 import { useValidationForm } from './lib'
 import { useUpdateProfileData } from './model'
@@ -16,18 +14,19 @@ interface IProps {
 export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
     const [avatar, setAvatar] = useState<string>()
     const { setIsOpen } = useModal()
-    const { mutate } = useUpdateProfileData()
 
     const {
         register,
         control,
         handleSubmit,
         reset,
+        setError,
         validErrors
-    } = useValidationForm(['userName', 'firstName', 'lastName', 'city', 'aboutMe'], userData)
+    } = useValidationForm(['userName', 'firstName', 'lastName'], userData)
+    const { mutate, responseError } = useUpdateProfileData(setError)
 
     const onAvatarClick = () => {
-        setIsOpen(true)
+        setAvatar(undefined)
     }
 
     const addProfilePhotoClick = () => {
@@ -50,7 +49,7 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
         <AvatarModal setAvatar={setAvatar} />
         <div className={cls.infoContainer}>
             <AvatarBlock avatar={avatar} onAvatarClick={onAvatarClick} addProfilePhotoClick={addProfilePhotoClick} />
-            <Form control={control} register={register} validErrors={validErrors} />
+            <Form control={control} register={register} validErrors={validErrors} responseError={responseError}/>
         </div>
         <hr className={cls.line} />
         <Button type="submit" theme={'primary'} className={cls.button}>Save Changes</Button>

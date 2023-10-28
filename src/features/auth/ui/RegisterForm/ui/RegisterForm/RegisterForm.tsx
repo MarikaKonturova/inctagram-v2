@@ -25,14 +25,14 @@ export const RegisterForm: FC = memo(() => {
                 {...register('userName')}
                 type={'text'}
                 placeholder={`${t('userName')}`}
-                error={!!userNameError}
+                error={!!userNameError || !!responseError?.userName}
                 errorText={userNameError || responseError?.userName}
                 className={cls.input}/>
             <Input
                 {...register('email')}
                 type={'email'}
                 placeholder={`${t('email')}`}
-                error={!!emailError}
+                error={!!emailError || !!responseError?.email}
                 errorText={emailError || responseError?.email}
                 className={cls.input}/>
             <Input

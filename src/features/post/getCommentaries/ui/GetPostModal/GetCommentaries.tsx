@@ -1,7 +1,5 @@
-/* eslint-disable max-len */
 import React, { type FC } from 'react'
 import { LikeCommentIconButton } from 'features/post'
-import catImg from 'shared/assets/images/MicrosoftTeams-image.png'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { Avatar } from 'shared/ui'
 import { useGetPostComments } from '../../model'
@@ -25,7 +23,11 @@ export const GetCommentaries: FC<Props> = ({ postId, userData }) => {
                 (<div className={cls.comment} key={comment.id}>
                     <div className={cls.avatarCommentGroup}>
 
-                        <Avatar src={comment.from.avatars.thumbnail.url} size={36} alt="avatar" />
+                        <Avatar
+                         src={comment.from.avatars?.thumbnail.url}
+                         size={36}
+                         alt="avatar"
+                        />
                         <div>
                             <span className={cls.userName}>{userData.userName} </span>
                             <span className={cls.content}>{comment.content}</span>
