@@ -38,8 +38,7 @@ export default {
         '\\.svg': path.resolve(__dirname, 'jestEmptyComponent.tsx'),
         '^.+\\.(jpg|jpeg|png|gif|webp|avif)$':
         path.resolve(__dirname, 'fileMock.js'),
-        axios: 'axios/dist/node/axios.cjs',
-        zustand: path.resolve(__dirname, '__mocks__/zustand.ts')
+        axios: 'axios/dist/node/axios.cjs'
     },
 
     transformIgnorePatterns: [

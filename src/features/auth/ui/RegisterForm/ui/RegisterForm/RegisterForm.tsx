@@ -17,7 +17,6 @@ export const RegisterForm: FC = memo(() => {
     const { register, handleSubmit, validErrors: { passwordError, emailError, confPasswordError, userNameError } } =
       useValidationForm(['email', 'password', 'userName', 'confPassword'])
     const { isLoading, onSubmit, responseError } = useRegistration()
-    console.log(responseError)
     return (
         <FormWrapper className={cls.register} onSubmit={handleSubmit(onSubmit)}>
             <h2 className={cls.title}>{t('signUp')}</h2>

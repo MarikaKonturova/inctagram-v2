@@ -20,26 +20,6 @@ const data = {
 jest.mock('next/router', () => ({
     useRouter: jest.fn()
 }))
-/* jest.mock('features/auth/model', () => ({
-    email: '',
-    userId: 0,
-    isAuth: false,
-    hasBusinessAccount: false,
-    isOpenMergePopUp: false,
-    contentForMerge: '',
-    setEmail: (email: string) => {
-
-    },
-    setAuth: (isAuth: boolean) => {
-
-    },
-    setUserData: (data: { userId: number, hasBusinessAccount: boolean }) => {
-
-    },
-    setPopUpForMerge: (isOpenMergePopUp, contentForMerge) => {
-
-    }
-})) */
 
 // setup a new mocking function for push method
 const pushMock = jest.fn()
@@ -51,7 +31,7 @@ useRouter.mockReturnValue({
     // return mock for push method
     push: pushMock
     // ... add the props or methods you need
-})
+})  
 
 /* jest.mock('next/router', () => jest.requireActual('next-router-mock')) */
 
@@ -75,7 +55,7 @@ describe('RegisterForm', () => {
     })
 
     it('submits the form with valid data', async () => {
-        const { container } = renderComponent()
+        renderComponent()
 
         const userNameInput = screen.getByPlaceholderText('Username')
         const emailInput = screen.getByPlaceholderText('Email')

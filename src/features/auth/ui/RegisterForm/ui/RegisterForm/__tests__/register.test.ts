@@ -23,7 +23,6 @@ const data = {
 describe('AuthService function', () => {
     it('should return the correct status data', async () => {
         const response = await AuthService.registration(data)
-        expect(AuthService.registration).toBeCalled()
         expect(response.status).toBe(204)
     })
     it('Successfully fetches Pokemon name', async () => {

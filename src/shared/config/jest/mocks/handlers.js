@@ -3,7 +3,7 @@ import { rest } from 'msw'
 export const TEST_BASE_URL = 'https://twin.cygan.lol'
 
 const handlers = [
-    rest.post('https://twin.cygan.lol/auth/registration', async (req, res, ctx) => {
+    rest.post('http://localhost/auth/registration', async (req, res, ctx) => {
         const { userName, email, password } = await req.json()
 
         sessionStorage.setItem('is-authenticated', 'true')
