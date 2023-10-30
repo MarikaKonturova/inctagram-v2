@@ -1,5 +1,5 @@
 
-export function dataURLtoFile (dataurl: string, filename: string) {
+export function convertDataUrlToFile (dataurl: string, filename: string) {
     const arr = dataurl.split(',')
     // @ts-ignore
     const mime = arr[0].match(/:(.*?);/)[1]

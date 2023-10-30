@@ -1,5 +1,5 @@
 import { $api } from 'shared/api'
-import { type PostsImage, type PostResponse, type GetPostsResponse, type PostCommentsResponse } from '../../types/post'
+import { type PostsImage, type PostResponse, type PostResponseType, type Comment } from '../../types/post'
 
 export const MyPostService = {
     createPostsImage (file: any) {
@@ -16,7 +16,7 @@ export const MyPostService = {
         return $api.delete(`/posts/image/${uploadId}`)
     },
     getPosts (userName: string, pageNumber: number) {
-        return $api.get<GetPostsResponse>(`/posts/${userName}`, {
+        return $api.get<PostResponseType>(`/posts/${userName}`, {
             params: {
                 pageNumber,
                 pageSize: 5
@@ -32,8 +32,7 @@ export const MyPostService = {
     deletePost (postId: number) {
         return $api.delete(`/posts/${postId}`)
     },
-    getPostCommnets (postId: number) {
-        return $api.get<PostCommentsResponse>(`/posts/${postId}/comments`)
+    getPostComments (postId: number) {
+        return $api.get<PostResponseType<Comment[]>>(`/posts/${postId}/comments`)
     }
-
 }

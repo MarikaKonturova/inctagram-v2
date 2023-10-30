@@ -6,12 +6,12 @@ interface PropsType {
     height: number
     onBeforeFileLoad: (e: ChangeEvent<HTMLInputElement>) => void
     onCrop: (view: string) => void
-    onClose: () => void
 }
-const AvatarDynamicImport: FC<PropsType> = ({ height, width, onBeforeFileLoad, onCrop, onClose }) => {
+
+const AvatarDynamicImport: FC<PropsType> = ({ height, width, onBeforeFileLoad, onCrop }) => {
     return (
         <Avatar width={width} height={height} onBeforeFileLoad={onBeforeFileLoad}
-                onCrop={onCrop} onClose={onClose} imageHeight={300} imageWidth={350} />
+                onCrop={onCrop} imageHeight={300} imageWidth={350} />
     )
 }
 
