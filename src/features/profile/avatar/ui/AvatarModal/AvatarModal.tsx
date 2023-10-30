@@ -26,7 +26,6 @@ export const AvatarModal: FC<PropsType> = ({ className, setAvatar, isOpen, setIs
     const { t } = useTranslation('common')
     const [image, setImage] = useState<File>()
     const [errorMessage, setErrorMessage] = useState('')
-    const onCloseHandler = () => { setIsOpen(false) }
     const { uploadAvatar } = useUploadAvatar(setAvatar, setIsOpen)
 
     const onCrop = (view: string) => {
@@ -39,6 +38,11 @@ export const AvatarModal: FC<PropsType> = ({ className, setAvatar, isOpen, setIs
             setErrorMessage('Photo size must be less than 10 MB!')
             e.target.value = ''
         }
+    }
+
+    const onCloseHandler = () => {
+        setIsOpen(false)
+        setErrorMessage('')
     }
 
     const save = (e: MouseEvent<HTMLButtonElement>) => {
