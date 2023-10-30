@@ -6,6 +6,7 @@ import { GetCommentaries } from 'features/post'
 import DeletePostModal from 'features/profile/getPosts/ui/modals/DeletePostModal/ui'
 import EditPostModal from 'features/profile/getPosts/ui/modals/EditPostModal/ui'
 import { GetPostModal } from 'features/profile/getPosts/ui/modals/GetPostModal'
+import { MODALS, type Values } from 'shared/constants/post'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { type PostResponseType, type PostResponse } from 'shared/types/post'
 import { Card, Loader } from 'shared/ui'
@@ -15,15 +16,6 @@ import cls from './PostCards.module.scss'
 interface Props {
     userData: ProfileDataModel
 }
-
-const MODALS = {
-    GetPostModal: 1,
-    EditPostModal: 2,
-    DeletePostModal: 3
-} as const
-
-type Keys = keyof typeof MODALS
-type Values = typeof MODALS[Keys]
 
 export const PostCards: FC<Props> = ({ userData }) => {
     const {

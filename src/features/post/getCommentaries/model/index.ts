@@ -14,7 +14,8 @@ export const useGetPostComments = (postId: number) => {
         refetchInterval: refetch ? 100 : false,
         onError: (error: AxiosError<{ message: string }>) => {
             onOpen(error.message, 'danger', 'left')
-        }
+        },
+        enabled: !!postId
     })
 
     const comments = data?.data
