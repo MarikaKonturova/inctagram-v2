@@ -23,7 +23,7 @@ export const MyPayments = () => {
         }
     })
 
-    const tableData = data?.data.map(el => ({
+    const tableData = data?.data.items.map(el => ({
         ...el,
         dateOfPayment: formateDate(el.dateOfPayment),
         endDateOfSubscription: formateDate(el.endDateOfSubscription)
