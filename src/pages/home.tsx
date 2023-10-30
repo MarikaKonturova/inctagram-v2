@@ -4,9 +4,7 @@ import { getLayoutWithSidebar } from '../layouts/Layout/LayoutWithSidebar/Layout
 
 const Home = () => {
     return (
-        <div>
-            <PublicationCards/>
-        </div>
+        <PublicationCards/>
     )
 }
 

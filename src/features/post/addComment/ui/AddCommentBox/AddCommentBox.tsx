@@ -41,7 +41,7 @@ export const AddCommentBox = ({ postId, className }: AddCommentBoxProps) => {
 
     useEffect(() => {
         if (repliedComment.userName) {
-            setValue('text', repliedComment.userName + ' ')
+            setValue('text', `${repliedComment.userName}  `)
             setFocus('text')
         }
     }, [repliedComment.userName])

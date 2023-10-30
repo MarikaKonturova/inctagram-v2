@@ -31,9 +31,9 @@ export const PublicationCards: FC = () => {
                 <Publication
                     createdAt = {item.createdAt}
                     publ = {item}
-                    src={item.images[0]?.versions.huge?.url}
-                    skeletonWidth={item.images[0]?.versions.huge?.width}
-                    skeletonHeight={item.images[0]?.versions.huge?.height}
+                    src={item.images[0]?.versions.large?.url}
+                    skeletonWidth={item.images[0]?.versions.large?.width}
+                    skeletonHeight={item.images[0]?.versions.large?.height}
                     cardWrapperClassName={cls.cardWrapper}
                     alt='post'/>
             </div>
