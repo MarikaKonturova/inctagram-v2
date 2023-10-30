@@ -1,53 +1,55 @@
+import { Listbox } from '@headlessui/react'
 import clsx from 'clsx'
-import React, { type SelectHTMLAttributes, useState } from 'react'
+import React, { type SelectHTMLAttributes, forwardRef, memo } from 'react'
 import ArrowDown from 'shared/assets/icons/general/arrow-Down.svg'
 import ArrowUp from 'shared/assets/icons/general/arrow-Up.svg'
 import cls from './Select.module.scss'
 
-interface SelectProps extends SelectHTMLAttributes<HTMLInputElement> {
+interface SelectProps extends Omit<SelectHTMLAttributes<HTMLInputElement>, 'onChange'> {
     options: string[]
-    selectedItem?: string
     disabled?: boolean
+    label: string
+    value: string
+    onChange: (value: string) => void
 }
-export const Select = (props: SelectProps) => {
+
+export const Select = memo(forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     const {
         options,
-        selectedItem,
+        label,
         disabled,
-        ...otherProps
+        value,
+        onChange
     } = props
-    const [isOpen, setIsOpen] = useState(false)
-    const [selectedOption, setSelectedOption] = useState(selectedItem)
-
-    const toggling = () => { setIsOpen(!isOpen) }
-
-    const onOptionClicked = (value: string) => () => {
-        setSelectedOption(value)
-        setIsOpen(false)
-    }
-
-    const mods = {
-        [cls.active]: isOpen,
-        [cls.disabled]: disabled
-    }
 
     return (
-        <div className={clsx(cls.DropDownContainer)}>
-            <button type='button' className={clsx(cls.DropDownHeader, mods)} disabled={disabled} onClick={toggling} >
-                {selectedOption || options[0]}
-                {isOpen ? <ArrowUp className={clsx(cls.Icon)} /> : <ArrowDown className={clsx(cls.Icon)} />}
-            </button>
-            {isOpen && (
-                <div>
-                    <div className={clsx(cls.DropDownList)}>
+        <Listbox ref={ref} value={value || ''} onChange={onChange}>
+            {({ open, value }) => (
+                <div className={cls.dropDownContainer}>
+                    <label className={cls.labelClassName}>{label}</label>
+                    <Listbox.Button
+                        type='button'
+                        className={clsx(cls.dropDownHeader, {
+                            [cls.active]: open,
+                            [cls.disabled]: disabled
+                        })}
+                    >
+                        {value}
+                        {open ? <ArrowUp className={clsx(cls.Icon)} /> : <ArrowDown className={clsx(cls.icon)} />}
+                    </Listbox.Button>
+
+                    <Listbox.Options className={clsx(cls.dropDownList)}>
                         {options.map(option => (
-                            <li className={clsx(cls.ListItem)} onClick={onOptionClicked(option)} key={Math.random()}>
+                            <Listbox.Option
+                                value={option}
+                                className={clsx(cls.listItem)}
+                                key={option}>
                                 {option}
-                            </li>
+                            </Listbox.Option>
                         ))}
-                    </div>
+                    </Listbox.Options>
                 </div>
             )}
-        </div>
+        </Listbox>
     )
-}
+}))

@@ -41,7 +41,6 @@ export const NewPasswordForm: FC = () => {
                 {...register('password')}
                 type="password"
                 placeholder={t('newPassword') ?? ''}
-                error={!!passwordError}
                 errorText={passwordError}
                 className={cls.input}
             />
@@ -49,7 +48,6 @@ export const NewPasswordForm: FC = () => {
                 {...register('confPassword')}
                 type="password"
                 placeholder={t('passwordConfirmation') ?? ''}
-                error={!!confPasswordError}
                 errorText={confPasswordError}
                 className={clsx(cls.input, cls.confirmation)}
             />

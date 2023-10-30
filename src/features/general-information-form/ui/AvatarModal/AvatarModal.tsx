@@ -13,20 +13,25 @@ import { ProfileService } from 'shared/api'
 import { useModal } from 'shared/hooks/useModal'
 import { type UserError } from 'shared/types/auth'
 import { Button, Modal } from 'shared/ui'
+import { dataURLtoFile } from 'shared/utils/convertDataUrlToFile'
 import cls from './AvatarModal.module.scss'
 
 const AvatarDynamicImport =
     dynamic(() => import('./AvatarDynamicImport'), { ssr: false })
-interface confirmModalProps {
+interface PropsType {
     className?: string
     setAvatar: Dispatch<SetStateAction<string | undefined>>
 }
-export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => {
+
+export const AvatarModal: FC<PropsType> = ({ className, setAvatar }) => {
     const { t } = useTranslation('common')
     const { isOpen, setIsOpen } = useModal()
     const [image, setImage] = useState<File>()
     const [preview, setPreview] = useState<string>()
+    const [errorMsg, setErrorMsg] = useState('')
+
     const onOpen = useSnackbar((state) => state.onOpen)
+
     const onCloseHandler = () => { setIsOpen(false) }
 
     const { mutate: uploadAvatar } = useMutation(ProfileService.uploadAvatar, {
@@ -39,36 +44,28 @@ export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => 
             onOpen(res?.response?.data.messages[0].message || 'some error', 'danger', 'left')
         }
     })
-    function dataURLtoFile (dataurl: string, filename: string) {
-        const arr = dataurl.split(',')
-        // @ts-ignore
-        const mime = arr[0].match(/:(.*?);/)[1]
-        const bstr = atob(arr[1])
-        let n = bstr.length
-        const u8arr = new Uint8Array(n)
 
-        while (n--) {
-            u8arr[n] = bstr.charCodeAt(n)
-        }
-
-        return new File([u8arr], filename, { type: mime })
-    }
     const onClose = () => {
         setPreview(undefined)
     }
+
     const onCrop = (view: string) => {
+        setErrorMsg('')
         setPreview(view)
         const file = dataURLtoFile(view, 'hello.txt')
+
         setImage(file)
     }
 
-    const handlerChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const fileReader = new FileReader()
+    const onBeforeFileLoad = (e: ChangeEvent<HTMLInputElement>) => {
+        const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
 
-        if (e.target.files) {
-            image && fileReader.readAsDataURL(image)
+        if (e.target.files && e.target.files[0].size > MAX_FILE_SIZE) {
+            setErrorMsg('Maximum image size is 10 Mb')
+            e.target.value = ''
         }
     }
+
     const save = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         const formData = new FormData()
@@ -89,10 +86,11 @@ export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => 
                     <AvatarDynamicImport
                             width={300}
                             height={300}
-                            onBeforeFileLoad={handlerChange}
+                            onBeforeFileLoad={onBeforeFileLoad}
                             onClose={onClose}
                             onCrop={onCrop}
                     />
+                    {errorMsg && <p className={cls.error}>{errorMsg}</p>}
                     <Button className={cls.button} type={'button'} onClick={save} disabled={!image}>{t('save')}</Button>
                 </div>
             </div>
