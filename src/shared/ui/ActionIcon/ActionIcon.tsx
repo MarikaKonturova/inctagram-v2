@@ -6,14 +6,17 @@ interface ActionIconProps {
     filledIcon: ReactNode
     onClick: () => Promise<void> | void
     initialState?: boolean
+    className?: string
 }
-export const ActionIcon = ({ onClick, filledIcon, outlineIcon, initialState = false }: ActionIconProps) => {
+export const ActionIcon = ({ onClick, filledIcon, outlineIcon, initialState = false, className }: ActionIconProps) => {
     const [fill, setFill] = useState(initialState)
+
     const onIconClick = async () => {
         await onClick()
         setFill(!fill)
     }
-    return <div onClick={onIconClick} className={clsx(cls.icon)}>
+
+    return <div onClick={onIconClick} className={clsx(cls.icon, className)}>
         {fill ? filledIcon : outlineIcon }
     </div>
 }

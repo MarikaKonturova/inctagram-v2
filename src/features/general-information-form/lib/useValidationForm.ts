@@ -3,15 +3,19 @@ import { useForm } from 'react-hook-form'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { type ValidateUnion, createValidationSchema } from './profileFormSchema'
 
-export const useValidationForm = (arr: ValidateUnion[], defaultValues?: ProfileDataModel) => {
+export type GeneralInformationFormValues = ProfileDataModel & { country: string }
+
+export const useValidationForm = (arr: ValidateUnion[], defaultValues?: GeneralInformationFormValues) => {
     const {
         register,
         handleSubmit,
         reset,
         setError,
         control,
-        formState: { errors }
-    } = useForm<ProfileDataModel>({
+        setValue,
+        watch,
+        formState: { errors, isDirty }
+    } = useForm<GeneralInformationFormValues>({
         resolver: yupResolver(createValidationSchema(arr)),
         mode: 'onTouched' || 'onSubmit',
         reValidateMode: 'onChange',
@@ -21,11 +25,13 @@ export const useValidationForm = (arr: ValidateUnion[], defaultValues?: ProfileD
     const userNameError = errors?.userName && errors.userName.message
     const firstNameError = errors?.firstName && errors.firstName.message
     const lastNameError = errors?.lastName && errors.lastName.message
+    const aboutMeError = errors?.aboutMe && errors.aboutMe.message
 
     const validErrors = {
         userNameError,
         firstNameError,
-        lastNameError
+        lastNameError,
+        aboutMeError
     }
 
     return {
@@ -34,6 +40,9 @@ export const useValidationForm = (arr: ValidateUnion[], defaultValues?: ProfileD
         handleSubmit,
         reset,
         setError,
-        control
+        control,
+        isDirty,
+        setValue,
+        watch
     }
 }

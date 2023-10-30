@@ -48,22 +48,14 @@ export interface PostResponse {
     isFavorite: boolean
     isFollowing: boolean
     isFollowedBy: boolean
-
 }
 
-export interface GetPostsResponse {
+export interface PostResponseType<D = PostResponse[]> {
     totalCount: number
     pagesCount: number
     page: number
     pageSize: number
-    items: PostResponse[]
-}
-export interface PostCommentsResponse {
-    totalCount: number
-    pagesCount: number
-    page: number
-    pageSize: number
-    items: Comment[]
+    items: D
 }
 
 export interface AvatarPostModel {
@@ -82,8 +74,8 @@ export interface Comment {
     from: {
         id: number
         avatars: AvatarPostModel
-        username: string }
-
+        userName: string
+    }
 }
 
 interface FavoritePost {
