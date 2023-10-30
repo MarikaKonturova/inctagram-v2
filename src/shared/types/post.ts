@@ -50,7 +50,7 @@ export interface PostResponse {
     isFollowedBy: boolean
 }
 
-export interface PostResponseType<D = PostResponse[]> {
+export interface ResponseType<D = PostResponse[]> {
     totalCount: number
     pagesCount: number
     page: number

@@ -8,7 +8,7 @@ import EditPostModal from 'features/profile/getPosts/ui/modals/EditPostModal/ui'
 import { GetPostModal } from 'features/profile/getPosts/ui/modals/GetPostModal'
 import { MODALS, type Values } from 'shared/constants/post'
 import { type ProfileDataModel } from 'shared/types/auth'
-import { type PostResponseType, type PostResponse } from 'shared/types/post'
+import { type ResponseType, type PostResponse } from 'shared/types/post'
 import { Card, Loader } from 'shared/ui'
 import { useGetMyPost, useGetPosts } from '../../model'
 import cls from './PostCards.module.scss'
@@ -44,7 +44,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
         }
     }, [inView, hasNextPage])
 
-    const renderContent = (page: PostResponseType) => page.items.map((item: PostResponse) => {
+    const renderContent = (page: ResponseType) => page.items.map((item: PostResponse) => {
         const onPostCardClick = () => {
             openModal(MODALS.GetPostModal)
             setPostId(item.id)

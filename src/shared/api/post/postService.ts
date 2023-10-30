@@ -1,6 +1,6 @@
 import { $api } from 'shared/api'
 import { type AnswerType } from 'shared/types/comment'
-import { type PostResponseType } from 'shared/types/post'
+import { type ResponseType } from 'shared/types/post'
 
 // TODO: доделать API
 // TODO: сделать enum для API routes
@@ -28,6 +28,6 @@ export const PostService = {
         return $api.post<Comment>(`/posts/${postId}/comments/${commentId}/answers`, answer)
     },
     getAnswerForComment (postId: number, commentId: number) {
-        return $api.get<PostResponseType<AnswerType[]>>(`/posts/${postId}/comments/${commentId}/answers`)
+        return $api.get<ResponseType<AnswerType[]>>(`/posts/${postId}/comments/${commentId}/answers`)
     }
 }
