@@ -6,7 +6,7 @@ import IconCopy from 'shared/assets/icons/light/copy.svg'
 import IconCopyOutline from 'shared/assets/icons/outline/copy-outline.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
-import { copyToClipboard } from 'shared/lib/copyToClipboard'
+import { copyToClipboard } from 'shared/utils/copyToClipboard'
 import cls from './CopyToClipboard.module.scss'
 
 export const CopyToClipboard = () => {

@@ -3,8 +3,8 @@ import * as NextImage from 'next/image'
 import React from 'react'
 import { RouterContext } from 'next/dist/shared/lib/router-context'
 import i18n from '../../i18next'
-import { Theme } from '../../src/app/providers/ThemeProvider'
 import { StyleDecorator, ThemeDecorator, I18nDecorator, QueryDecorator } from '../../src/shared/config/storybook'
+import { Theme } from '../../src/shared/constants/theme'
 
 const OriginalNextImage = NextImage.default
 

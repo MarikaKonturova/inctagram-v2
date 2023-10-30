@@ -39,7 +39,6 @@ export const PasswordRecoveryForm = () => {
                 {...register('email')}
                 type={'email'}
                 placeholder={`${t('email')}`}
-                error={!!emailError}
                 errorText={emailError}
                 className={cls.input}
             />

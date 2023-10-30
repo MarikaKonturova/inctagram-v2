@@ -1,6 +1,8 @@
 import { type FC, useEffect } from 'react'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { Button } from 'shared/ui'
+import { getInitialValues } from 'shared/utils/getInitialValues'
+
 import cls from './GeneralInformationForm.module.scss'
 import { useValidationForm } from './lib'
 import { useUpdateProfileData } from './model'
@@ -11,29 +13,39 @@ interface IProps {
 }
 
 export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
+    const defaultValues = getInitialValues(userData)
+
     const {
         register,
         control,
         handleSubmit,
         reset,
         setError,
-        validErrors
-    } = useValidationForm(['userName', 'firstName', 'lastName'], userData)
-    const { mutate, responseError } = useUpdateProfileData(setError)
+        isDirty,
+        validErrors,
+        setValue,
+        watch
+    } = useValidationForm(['userName', 'firstName', 'lastName', 'aboutMe'],
+        defaultValues)
+    const { mutate } = useUpdateProfileData(setError)
 
-    const onSubmit = (data: Omit<ProfileDataModel, 'id' | 'avatars'>) => {
+    const onSubmit = (data: Omit<ProfileDataModel, 'id' | 'avatars'> & { country: string }) => {
         mutate(data)
     }
 
     useEffect(() => {
-        reset(userData)
+        reset(getInitialValues(userData))
     }, [userData, reset])
 
     return <form onSubmit={handleSubmit(onSubmit)} className={cls.formContainer}>
         <div className={cls.infoContainer}>
-            <Form control={control} register={register} validErrors={validErrors} responseError={responseError}/>
+            <Form control={control}
+                  register={register}
+                  validErrors={validErrors}
+                  setValue={setValue}
+                  watch={watch} />
         </div>
         <hr className={cls.line} />
-        <Button type="submit" theme={'primary'} className={cls.button}>Save Changes</Button>
+        <Button type="submit" theme={'primary'} className={cls.button} disabled={!isDirty}>Save Changes</Button>
     </form>
 }

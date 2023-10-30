@@ -101,6 +101,7 @@
 
 .textButton.disabled {
     color: var(--primary-900-color);
+    cursor: not-allowed;
 }
 
 .block {

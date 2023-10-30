@@ -1,13 +1,18 @@
-.DropDownContainer {
-    width: 10.5em;
+.dropDownContainer {
+    width: 100%;
 }
 
-.Icon {
+.labelClassName {
+    color: var(--light-900-color);
+    font: var(--font-medium-400);
+}
+
+.icon {
     fill: var(--light-900-color);
     width: 25px;
 }
 
-.DropDownHeader {
+.dropDownHeader {
     background-color: var(--dark-700-color);
     border: 1px solid var(--dark-100-color);
     border-radius: 2px;
@@ -56,18 +61,16 @@
 
 .active {
     border: 1px solid var(--light-100-color);
-    border-bottom: none;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 
     &:hover {
         border: 1px solid var(--light-100-color);
-        border-bottom: none;
     }
 }
 
 
-.DropDownList {
+.dropDownList {
     background-color: var(--dark-500-color);
     border: 1px solid var(--light-100-color);
     border-bottom-left-radius: 2px;
@@ -76,9 +79,11 @@
     color: var(--light-900-color);
     margin: 0;
     box-sizing: border-box;
+    max-height: 20vh;
+    overflow-y: auto;
 }
 
-.ListItem {
+.listItem {
     list-style: none;
     padding: 0.4em 1em;
 

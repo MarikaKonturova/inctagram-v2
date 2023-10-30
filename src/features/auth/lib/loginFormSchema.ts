@@ -8,6 +8,7 @@ export type ValidateUnion =
   | 'recaptcha'
 
 const passwordRegExp = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])/g
+const specialCharactersRegExp = /^[A-Za-z0-9-_]+$/
 
 const passwordValidMassage =
   'Password should include one uppercase letter, one lowercase letter, one number and one special character'
@@ -18,9 +19,11 @@ export const createValidationSchema = (arr: ValidateUnion[]): any => {
         case 'userName': {
             accum[type] = yup
                 .string()
+                .required('Field is required!')
+                .matches(specialCharactersRegExp,
+                    'Only Latin letters, numbers, dashes and underscores are allowed')
                 .min(6, `${type} must be at least 6 characters`)
                 .max(30, `${type} must be no more than 30 characters`)
-                .required('Field is required!')
             return accum
         }
         case 'email': {

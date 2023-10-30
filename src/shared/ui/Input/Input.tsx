@@ -8,7 +8,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     type?: 'email' | 'password' | 'text' | 'search'/* text or password */
     variant?: 'outline' | 'standard'
     placeholder?: string
-    error?: boolean
+    isRequired?: boolean
     errorText?: string
     className?: string
     label?: string
@@ -24,12 +24,12 @@ export const Input = memo(forwardRef<HTMLInputElement, InputProps>((props, ref) 
         variant = 'standard',
         children,
         disabled,
-        error,
         errorText,
         placeholder,
         label,
         labelClassName,
         inputClassName,
+        isRequired,
         id,
         type = 'text',
         ...otherProps
@@ -38,11 +38,11 @@ export const Input = memo(forwardRef<HTMLInputElement, InputProps>((props, ref) 
     const mods = {
         [cls.disabled]: disabled,
         [cls.outline]: type === 'search',
-        [cls.error]: error
+        [cls.error]: !!errorText
     }
 
     const mod = {
-        [cls.error]: error
+        [cls.error]: !!errorText
     }
 
     const [isVisible, setIsVisible] = useState(false)
@@ -55,7 +55,9 @@ export const Input = memo(forwardRef<HTMLInputElement, InputProps>((props, ref) 
 
     return (
         <div className={clsx(cls.field, className)}>
-            {label && <label htmlFor={id} className={labelClassName}>{label}</label>}
+            {label && <span className={labelClassName}>{label}
+                {isRequired && <span className={cls.required}>*</span>}
+            </span>}
             <div className={clsx(cls.wrapper, mod, cls[variant])}>
                 <input
                     ref={ref}
@@ -63,7 +65,7 @@ export const Input = memo(forwardRef<HTMLInputElement, InputProps>((props, ref) 
                     className={clsx(cls.input, mods, [cls[type]], inputClassName)}
                     disabled={disabled}
                     placeholder={placeholder}
-                    autoComplete={type === 'password' ? 'new-password' : ''}
+                    autoComplete={type === 'password' ? 'on' : 'off'}
                     {...otherProps}
                 />
                 {type === 'password' && <Eye isVisible={isVisible} onClick={onClickChangeVisible}/>}

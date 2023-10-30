@@ -1,26 +1,52 @@
-import React from 'react'
-import { type Control, Controller, type UseFormRegister } from 'react-hook-form'
+import clsx from 'clsx'
+import React, { useEffect } from 'react'
+import {
+    Controller,
+    type Control,
+    type UseFormRegister,
+    type UseFormSetValue,
+    type UseFormWatch
+} from 'react-hook-form'
 
-import { type ProfileDataModel } from 'shared/types/auth'
-import { DatePicker, Input, Textarea } from 'shared/ui'
+import { type GeneralInformationFormValues } from 'features/general-information-form/lib/useValidationForm'
+import { COUNTRIES } from 'shared/constants/countryList'
+import { DatePicker, Input, Select, Textarea } from 'shared/ui'
 import cls from './Form.module.scss'
 
 interface IProps {
-    register: UseFormRegister<ProfileDataModel>
+    register: UseFormRegister<GeneralInformationFormValues>
     validErrors: Record<
     'firstNameError'
     | 'userNameError'
-    | 'lastNameError', string | undefined>
-    control: Control<ProfileDataModel, any>
-    responseError: Record<string, string> | undefined
+    | 'lastNameError'
+    | 'aboutMeError', string | undefined>
+    control: Control<GeneralInformationFormValues, any>
+    setValue: UseFormSetValue<GeneralInformationFormValues>
+    watch: UseFormWatch<GeneralInformationFormValues>
 }
 
-export const Form: React.FC<IProps> = ({ register, validErrors, control, responseError }) => {
+export const Form: React.FC<IProps> = (props) => {
+    const {
+        register,
+        validErrors,
+        control,
+        setValue,
+        watch
+    } = props
     const {
         userNameError,
         firstNameError,
-        lastNameError
+        lastNameError,
+        aboutMeError
     } = validErrors
+    const country = watch('country')
+    const city = watch('city')
+
+    useEffect(() => {
+        if (country && city && !COUNTRIES[country]?.includes(city)) {
+            setValue('city', '')
+        }
+    }, [country, city])
 
     return (
         <div className={cls.formsContainer}>
@@ -28,9 +54,10 @@ export const Form: React.FC<IProps> = ({ register, validErrors, control, respons
                 {...register('userName')}
                 id="userName"
                 type={'text'}
-                error={!!userNameError}
                 errorText={userNameError}
                 className={cls.wrapper}
+                variant='outline'
+                isRequired
                 label="Username"
                 labelClassName={cls.label}
             />
@@ -40,9 +67,10 @@ export const Form: React.FC<IProps> = ({ register, validErrors, control, respons
                 id="name"
                 type={'text'}
                 label="First Name"
-                error={!!firstNameError}
                 errorText={firstNameError}
                 className={cls.wrapper}
+                variant='outline'
+                isRequired
                 labelClassName={cls.label}
             />
 
@@ -51,9 +79,10 @@ export const Form: React.FC<IProps> = ({ register, validErrors, control, respons
                 id="surName"
                 type={'text'}
                 label="Last Name"
-                error={!!lastNameError}
                 errorText={lastNameError}
                 className={cls.wrapper}
+                variant='outline'
+                isRequired
                 labelClassName={cls.label}
             />
 
@@ -68,21 +97,30 @@ export const Form: React.FC<IProps> = ({ register, validErrors, control, respons
                 )}
             />
 
-            <Input
-                {...register('city')}
-                id="city"
-                type={'text'}
-                label="City"
-                className={cls.wrapper}
-                labelClassName={cls.label}
-            />
-
+            <div className={clsx(cls.wrapper, cls.selectContainer)}>
+                <Controller
+                control={control}
+                name="country"
+                render={({ field: { onChange, value } }) => (
+                    <Select options={Object.keys(COUNTRIES)}
+                            label="Select your country"
+                            value={value}
+                            onChange={onChange} />
+                )} />
+                <Controller
+                control={control}
+                name="city"
+                render={({ field }) => (
+                    <Select options={country ? COUNTRIES[country] : []} label="Select your city" {...field} />
+                )} />
+            </div>
             <Textarea
                 {...register('aboutMe')}
                 id="aboutMe"
                 label="About me"
+                errorText={aboutMeError}
                 labelClassName={cls.label}
-                textareaClassName={cls.textarea}
+                textareaClassName={aboutMeError ? cls.error : cls.textarea}
                 className={cls.wrapper}
             />
         </div>

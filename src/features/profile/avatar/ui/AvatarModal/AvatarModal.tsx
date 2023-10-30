@@ -8,48 +8,43 @@ import { useTranslation } from 'react-i18next'
 import { useUploadAvatar } from 'features/profile/avatar/model/uploadAvatar'
 import cls from 'features/profile/avatar/ui/AvatarModal/AvatarModal.module.scss'
 import { Button, Modal } from 'shared/ui'
+import { convertDataUrlToFile } from 'shared/utils/convertDataUrlToFile'
+
+const AVATAR_SIZE = 300
+const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
 
 const AvatarDynamicImport =
     dynamic(() => import('features/profile/avatar/ui/AvatarModal/AvatarDynamicImport'), { ssr: false })
-interface confirmModalProps {
+interface PropsType {
     className?: string
     setAvatar: Dispatch<SetStateAction<string | undefined>>
     isOpen: boolean
     setIsOpen: Dispatch<SetStateAction<boolean>>
 }
-export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar, isOpen, setIsOpen }) => {
+
+export const AvatarModal: FC<PropsType> = ({ className, setAvatar, isOpen, setIsOpen }) => {
     const { t } = useTranslation('common')
     const [image, setImage] = useState<File>()
-    const onCloseHandler = () => { setIsOpen(false) }
+    const [errorMessage, setErrorMessage] = useState('')
     const { uploadAvatar } = useUploadAvatar(setAvatar, setIsOpen)
 
-    function dataURLtoFile (dataurl: string, filename: string) {
-        const arr = dataurl.split(',')
-        // @ts-ignore
-        const mime = arr[0].match(/:(.*?);/)[1]
-        const bstr = atob(arr[1])
-        let n = bstr.length
-        const u8arr = new Uint8Array(n)
-
-        while (n--) {
-            u8arr[n] = bstr.charCodeAt(n)
-        }
-
-        return new File([u8arr], filename, { type: mime })
-    }
-
     const onCrop = (view: string) => {
-        const file = dataURLtoFile(view, 'hello.txt')
+        const file = convertDataUrlToFile(view, 'hello.txt')
         setImage(file)
     }
 
-    const handlerChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const fileReader = new FileReader()
-
-        if (e.target.files) {
-            image && fileReader.readAsDataURL(image)
+    const onBeforeFileLoad = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0].size > MAX_FILE_SIZE) {
+            setErrorMessage('Photo size must be less than 10 MB!')
+            e.target.value = ''
         }
     }
+
+    const onCloseHandler = () => {
+        setIsOpen(false)
+        setErrorMessage('')
+    }
+
     const save = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         const formData = new FormData()
@@ -66,16 +61,16 @@ export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar, isOpe
             className={clsx(cls.Modal, {}, [className])}
         >
             <div className={cls.content}>
-                <div className={cls.flex}>
-                    <AvatarDynamicImport
-                            width={300}
-                            height={300}
-                            onBeforeFileLoad={handlerChange}
-                            onClose={() => {}}
+                {errorMessage && <div className={cls.errorBlock}>
+                    <p><strong>Error!</strong> {errorMessage}</p>
+                </div>}
+                <AvatarDynamicImport
+                            width={AVATAR_SIZE}
+                            height={AVATAR_SIZE}
+                            onBeforeFileLoad={onBeforeFileLoad}
                             onCrop={onCrop}
-                    />
-                    <Button className={cls.button} type={'button'} onClick={save} disabled={!image}>{t('save')}</Button>
-                </div>
+                />
+                <Button className={cls.button} type={'button'} onClick={save} disabled={!image}>{t('save')}</Button>
             </div>
         </Modal>
     )
