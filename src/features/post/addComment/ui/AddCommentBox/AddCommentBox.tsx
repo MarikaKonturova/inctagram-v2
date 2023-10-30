@@ -1,8 +1,11 @@
 import clsx from 'clsx'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { useCommentStore } from 'features/profile/getPosts/model'
 import { Button, Input } from 'shared/ui'
 import { useCommentPost } from '../../model'
 
+import { useAnswerForComment } from '../../model/useCommentPost'
 import cls from './AddCommentBox.module.scss'
 
 interface AddCommentBoxProps {
@@ -11,22 +14,57 @@ interface AddCommentBoxProps {
 }
 
 export const AddCommentBox = ({ postId, className }: AddCommentBoxProps) => {
-    const [text, setText] = useState('')
-    const { addComment, isSuccess } = useCommentPost()
-    const onAddCommentClick = async () => {
-        addComment({ postId, commentContent: { content: text } })
-    }
-    useEffect(() => {
-        if (isSuccess) {
-            setText('')
+    const {
+        control,
+        handleSubmit,
+        reset,
+        setValue,
+        setFocus
+    } = useForm({
+        defaultValues: {
+            text: ''
         }
-    }, [isSuccess])
+    })
+    const { addComment } = useCommentPost()
+    const { addAnswerForComment } = useAnswerForComment()
+    const { repliedComment, setRepliedComment } = useCommentStore()
+
+    const onAddCommentClick = ({ text }: { text: string }) => {
+        if (repliedComment.id) {
+            addAnswerForComment({ postId, commentId: repliedComment.id, answerContent: { content: text } })
+        } else {
+            addComment({ postId, commentContent: { content: text } })
+        }
+        reset()
+        setRepliedComment({ id: 0, userName: '' })
+    }
+
+    useEffect(() => {
+        if (repliedComment.userName) {
+            setValue('text', repliedComment.userName + ' ')
+            setFocus('text')
+        }
+    }, [repliedComment.userName])
 
     // return <div className={clsx(cls.container)}>
-    return <div className={clsx(cls.container, {}, [className])}>
-        <Input value={text} onChange={(e) => { setText(e.currentTarget.value) }} className={clsx(cls.input)}
-               placeholder='Add a Comment...'
-        />
-        <Button onClick={onAddCommentClick} className={clsx(cls.button)} theme={'textButton'}>Publish</Button>
-    </div>
+    return (
+        <div className={clsx(cls.container, {}, [className])}>
+            <Controller
+            name="text"
+            control={control}
+            render={({ field }) => (
+                <Input {...field}
+                       className={clsx(cls.input)}
+                       placeholder='Add a Comment...'
+                />)} />
+
+            <Button
+            theme={'textButton'}
+            className={clsx(cls.button)}
+            onClick={handleSubmit(onAddCommentClick)}
+            >
+                Publish
+            </Button>
+        </div>
+    )
 }

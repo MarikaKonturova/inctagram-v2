@@ -29,14 +29,12 @@ export const LoginForm: FC = () => {
                 {...register('email')}
                 type={'text'}
                 placeholder={t('email') ?? ''}
-                error={!!emailError}
                 errorText={emailError}
                 className={cls.input}/>
             <Input
                 {...register('password')}
                 type={'password'}
                 placeholder={t('password') ?? ''}
-                error={!!passwordError}
                 errorText={passwordError}
                 className={cls.input}/>
             <p className={cls.link}>

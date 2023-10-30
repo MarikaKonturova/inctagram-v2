@@ -10,6 +10,10 @@ export const ProfileService = {
         })
     },
 
+    deleteAvatar () {
+        return $api.delete('/users/profile/avatar')
+    },
+
     getProfileData () {
         return $api.get<ProfileDataModel>('/users/profile')
     },

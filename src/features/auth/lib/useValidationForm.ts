@@ -17,10 +17,11 @@ export const useValidationForm = (arr: ValidateUnion[]) => {
         reset,
         setValue,
         clearErrors,
-        formState: { errors }
+        setError,
+        formState: { errors, isValid }
     } = useForm<IFormValidate>({
         resolver: yupResolver(createValidationSchema(arr)),
-        mode: 'onSubmit' || 'onChange',
+        mode: 'onTouched',
         reValidateMode: 'onChange'
     })
 
@@ -44,6 +45,8 @@ export const useValidationForm = (arr: ValidateUnion[]) => {
         handleSubmit,
         reset,
         clearErrors,
-        setValue
+        setValue,
+        setError,
+        isValid
     }
 }

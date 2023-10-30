@@ -5,6 +5,10 @@
 
     @include flex($direction: column, $justify: flex-start);
 
+    .required {
+        color: var(--danger-500-color);
+    }
+
     .wrapper {
         position: relative;
         border-radius: 2px;
