@@ -3,8 +3,8 @@ import IconLike from 'shared/assets/icons/light/heart.svg'
 import IconLikeOutline from 'shared/assets/icons/outline/heart-outline.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
+import { LikeStatus } from 'shared/types/likeStatus'
 import { ActionIcon } from 'shared/ui'
-import { LikeStatus } from '../../constants/likeStatus'
 import { useLikePost } from '../../model'
 
 interface LikePostIconButtonProps {

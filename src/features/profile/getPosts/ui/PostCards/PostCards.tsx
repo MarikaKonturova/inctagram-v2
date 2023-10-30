@@ -7,7 +7,7 @@ import DeletePostModal from 'features/profile/getPosts/ui/modals/DeletePostModal
 import EditPostModal from 'features/profile/getPosts/ui/modals/EditPostModal/ui'
 import { GetPostModal } from 'features/profile/getPosts/ui/modals/GetPostModal'
 import { type ProfileDataModel } from 'shared/types/auth'
-import { type GetPostsResponse, type PostResponse } from 'shared/types/post'
+import { type PostResponseType, type PostResponse } from 'shared/types/post'
 import { Card, Loader } from 'shared/ui'
 import { useGetMyPost, useGetPosts } from '../../model'
 import cls from './PostCards.module.scss'
@@ -52,7 +52,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
         }
     }, [inView, hasNextPage])
 
-    const renderContent = (page: GetPostsResponse) => page.items.map((item: PostResponse) => {
+    const renderContent = (page: PostResponseType) => page.items.map((item: PostResponse) => {
         const onPostCardClick = () => {
             openModal(MODALS.GetPostModal)
             setPostId(item.id)
@@ -126,7 +126,6 @@ export const PostCards: FC<Props> = ({ userData }) => {
                 openEditPostModal={openEditPostModal}
                 handleClose={closeModal} />
             ]}
-
             {isSuccess && (
                 <div ref={ref} className={cls.loaderContainer} >
                     {isFetchingNextPage && (

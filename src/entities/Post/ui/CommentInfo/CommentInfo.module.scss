@@ -1,8 +1,6 @@
 .comments {
     padding: 15px;
     width: 100%;
-    max-height: calc(85vh - (56px + 100px + 52px));
-    overflow-y: auto;
 }
 
 .comment {
@@ -25,6 +23,13 @@
     font: var(--font-medium-700);
 }
 
+.bottomInfo {
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 .time {
     font: var(--font-small-400);
     color: var(--light-900-color);
@@ -38,10 +43,9 @@
 .avatarCommentGroup {
     display: flex;
     gap: 12px;
-    border: 1px solid deeppink;
 }
 
-.showAnswerButton{
+.button{
     font: var(--font-small-600);
     color: var(--light-900-color);
     cursor: pointer;
@@ -51,4 +55,14 @@
     flex: 1;
 }
 
+.additionalStyle {
+    padding-left: 40px;
+}
 
+.line {
+    border-bottom: 1px solid var(--light-900-color);
+    width: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 16px;
+}
