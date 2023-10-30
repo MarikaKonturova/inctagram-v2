@@ -9,10 +9,11 @@ import { useAnswerForComment } from '../../model/useCommentPost'
 import cls from './AddCommentBox.module.scss'
 
 interface AddCommentBoxProps {
+    className?: string
     postId: number
 }
 
-export const AddCommentBox = ({ postId }: AddCommentBoxProps) => {
+export const AddCommentBox = ({ postId, className }: AddCommentBoxProps) => {
     const {
         control,
         handleSubmit,
@@ -40,13 +41,14 @@ export const AddCommentBox = ({ postId }: AddCommentBoxProps) => {
 
     useEffect(() => {
         if (repliedComment.userName) {
-            setValue('text', repliedComment.userName + ' ')
+            setValue('text', `${repliedComment.userName}  `)
             setFocus('text')
         }
     }, [repliedComment.userName])
 
+    // return <div className={clsx(cls.container)}>
     return (
-        <div className={clsx(cls.container)}>
+        <div className={clsx(cls.container, {}, [className])}>
             <Controller
             name="text"
             control={control}
