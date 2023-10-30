@@ -1,10 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { HomeService } from '../../../../shared/api/home'
-import { useAuth } from '../../../auth'
+import { HomeService } from 'shared/api/home'
 
 export const useGetHomeData = () => {
-    const { setAuth } = useAuth()
-
     const {
         isFetchingNextPage,
         status,
@@ -19,7 +16,6 @@ export const useGetHomeData = () => {
         ,
         {
             getNextPageParam: (lastPage) => {
-                // return allPages.length + 1
                 return lastPage.data.page < lastPage.data.pagesCount ? lastPage.data.page + 1 : undefined
             }
         }

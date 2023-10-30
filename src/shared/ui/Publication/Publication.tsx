@@ -2,17 +2,17 @@ import clsx from 'clsx'
 import { formatDistanceToNow } from 'date-fns'
 import Image, { type ImageProps } from 'next/image'
 import React, { useState } from 'react'
-import { CreationDate } from '../../../entities/Post/ui/CreationDate'
-import { Header } from '../../../entities/Post/ui/Header'
-import { LikesInfo } from '../../../entities/Post/ui/LikesInfo'
-import { Description } from '../../../entities/Publication/ui/Description'
 import {
     AddCommentBox,
     AddCommentIconButton,
     AddPostToFavoutitesIconButton,
     LikePostIconButton,
     SharePostIconButton
-} from '../../../features/post'
+} from 'features/post'
+import { CreationDate } from 'entities/Post/ui/CreationDate'
+import { Header } from 'entities/Post/ui/Header'
+import { LikesInfo } from 'entities/Post/ui/LikesInfo'
+import { Description } from 'entities/Publication/ui/Description'
 import { type ResponseItem } from '../../types/home'
 import { Skeleton } from '../Skeleton/Skeleton'
 
@@ -33,10 +33,8 @@ export const Publication: React.FC<PropsType> = (props) => {
         publ,
         src,
         alt,
-        // sizes = '100vw',
         skeletonWidth,
         skeletonHeight = 'inherit',
-        // cardWrapperClassName,
         fallbackSrc
     } = props
     const [isLoaded, setIsLoaded] = useState(true)
@@ -68,7 +66,6 @@ export const Publication: React.FC<PropsType> = (props) => {
                 className={cls.cardImg}
                 width={491}
                 height={504}
-                // sizes={sizes}
                 onError={handleOnError}
                 onLoadingComplete={onImageLoadingComplete}
             />
@@ -81,8 +78,8 @@ export const Publication: React.FC<PropsType> = (props) => {
                 <AddPostToFavoutitesIconButton postIsFavourite={publ.isFavorite} postId={publ.id} />
             </div>
             <Description avatarURL={publ.avatars?.medium.url} title={publ.userName} description = {publ.description}/>
-            <div style={{ marginTop: '14px', marginBottom: '24px' }}>
-                < LikesInfo newLikes={publ.newLikes} likeCount={publ.likeCount}/>
+            <div className={cls.likesInfo}>
+                <LikesInfo newLikes={publ.newLikes} likeCount={publ.likeCount}/>
             </div>
             <div className={cls.allComments}>View All Comments ({publ.likeCount})</div>
             <AddCommentBox postId={publ.id} className={clsx(cls.containerAddComment)}/>

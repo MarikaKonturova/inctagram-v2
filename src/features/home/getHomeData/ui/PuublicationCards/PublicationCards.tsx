@@ -1,8 +1,8 @@
 import React, { type FC, useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { type PublicationsInPagesResponse } from '../../../../../shared/types/home'
-import { Loader } from '../../../../../shared/ui'
-import { Publication } from '../../../../../shared/ui/Publication/Publication'
+import { type PublicationsInPagesResponse } from 'shared/types/home'
+import { Loader } from 'shared/ui'
+import { Publication } from 'shared/ui/Publication/Publication'
 import { useGetHomeData } from '../../model'
 import cls from './PublicationCards.module.scss'
 
@@ -13,11 +13,7 @@ export const PublicationCards: FC = () => {
         fetchNextPage,
         isFetchingNextPage
     } = useGetHomeData()
-    // const [currentModal, setCurrentModal] = useState<Values | null>(null)
-    // const [postId, setPostId] = useState<number | undefined>(undefined)
 
-    // const { post } = useGetMyPost(postId || 0)
-    console.log(data)
     const {
         ref,
         inView
@@ -30,16 +26,8 @@ export const PublicationCards: FC = () => {
     }, [inView])
 
     const renderContent = (page: PublicationsInPagesResponse) => page.items.map((item) => {
-        // const onPostCardClick = () => {
-        //     openModal(MODALS.GetPostModal)
-        //     setPostId(item.id)
-        // }
-
         return (
-            <div key={item.id}
-                 className={cls.card}
-                // onClick={onPostCardClick}
-            >
+            <div key={item.id} className={cls.card}>
                 <Publication
                     createdAt = {item.createdAt}
                     publ = {item}

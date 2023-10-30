@@ -17,7 +17,10 @@
     }
 }
 
-
+.likesInfo {
+    margin-top: 14px;
+    margin-bottom: 24px;
+}
 
 .actionContainer{
     @include flex(row, space-between, center);
