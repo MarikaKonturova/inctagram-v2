@@ -1,6 +1,3 @@
-
-import { useMutation } from '@tanstack/react-query'
-import { type AxiosError } from 'axios'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import React, {
@@ -8,37 +5,24 @@ import React, {
     type Dispatch, type SetStateAction
 } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSnackbar } from 'features/common'
-import { ProfileService } from 'shared/api'
-import { useModal } from 'shared/hooks/useModal'
-import { type UserError } from 'shared/types/auth'
+import { useUploadAvatar } from 'features/profile/avatar/model/uploadAvatar'
+import cls from 'features/profile/avatar/ui/AvatarModal/AvatarModal.module.scss'
 import { Button, Modal } from 'shared/ui'
-import cls from './AvatarModal.module.scss'
 
 const AvatarDynamicImport =
-    dynamic(() => import('./AvatarDynamicImport'), { ssr: false })
+    dynamic(() => import('features/profile/avatar/ui/AvatarModal/AvatarDynamicImport'), { ssr: false })
 interface confirmModalProps {
     className?: string
     setAvatar: Dispatch<SetStateAction<string | undefined>>
+    isOpen: boolean
+    setIsOpen: Dispatch<SetStateAction<boolean>>
 }
-export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => {
+export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar, isOpen, setIsOpen }) => {
     const { t } = useTranslation('common')
-    const { isOpen, setIsOpen } = useModal()
     const [image, setImage] = useState<File>()
-    const [preview, setPreview] = useState<string>()
-    const onOpen = useSnackbar((state) => state.onOpen)
     const onCloseHandler = () => { setIsOpen(false) }
+    const { uploadAvatar } = useUploadAvatar(setAvatar, setIsOpen)
 
-    const { mutate: uploadAvatar } = useMutation(ProfileService.uploadAvatar, {
-        mutationKey: ['uploadAvatar'],
-        onSuccess: () => {
-            setAvatar(preview)
-            setIsOpen(false)
-        },
-        onError: (res: AxiosError<UserError>) => {
-            onOpen(res?.response?.data.messages[0].message || 'some error', 'danger', 'left')
-        }
-    })
     function dataURLtoFile (dataurl: string, filename: string) {
         const arr = dataurl.split(',')
         // @ts-ignore
@@ -53,11 +37,8 @@ export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => 
 
         return new File([u8arr], filename, { type: mime })
     }
-    const onClose = () => {
-        setPreview(undefined)
-    }
+
     const onCrop = (view: string) => {
-        setPreview(view)
         const file = dataURLtoFile(view, 'hello.txt')
         setImage(file)
     }
@@ -90,7 +71,7 @@ export const AvatarModal: FC<confirmModalProps> = ({ className, setAvatar }) => 
                             width={300}
                             height={300}
                             onBeforeFileLoad={handlerChange}
-                            onClose={onClose}
+                            onClose={() => {}}
                             onCrop={onCrop}
                     />
                     <Button className={cls.button} type={'button'} onClick={save} disabled={!image}>{t('save')}</Button>
