@@ -1,13 +1,14 @@
 /* eslint-disable testing-library/no-wait-for-multiple-assertions */
-import { screen, waitFor } from '@testing-library/react'
+import { QueryClient } from '@tanstack/query-core'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { rest } from 'msw'
-import { useRouter } from 'next/router'
 import { I18nextProvider } from 'react-i18next'
 import { RegisterForm } from 'features/auth'
-import { TEST_BASE_URL } from 'shared/config/jest/mocks/handlers'
+import { RouterContext } from 'next/dist/shared/lib/router-context'
 import { server } from 'shared/config/jest/mocks/server'
-import { renderWithQueryClient } from '../../../../../../../../config/jest/renderWithQueryClient'
+import { createMockRouter } from '../../../../../../../../__mocks__/next_router'
 import i18n from '../../../../../../../../i18next'
 
 const data = {
@@ -16,34 +17,26 @@ const data = {
     password: 'testpasswordQ1q**'
 }
 
-// mock useRouter
-jest.mock('next/router', () => ({
-    useRouter: jest.fn()
-}))
-
-// setup a new mocking function for push method
-const pushMock = jest.fn()
-
-// mock a return value on useRouter
-// @ts-ignore
-useRouter.mockReturnValue({
-    query: {},
-    // return mock for push method
-    push: pushMock
-    // ... add the props or methods you need
-})
-
 /* jest.mock('next/router', () => jest.requireActual('next-router-mock')) */
 
 describe('RegisterForm', () => {
     let renderComponent: () => any
 
     beforeEach(() => {
+        const router = createMockRouter({
+
+        })
+        const queryClient = new QueryClient()
+
         // eslint-disable-next-line testing-library/no-render-in-lifecycle
-        renderComponent = () => renderWithQueryClient(
-            <I18nextProvider i18n={i18n}>
-                <RegisterForm />
-            </I18nextProvider>
+        renderComponent = () => render(
+            <RouterContext.Provider value={router}>
+                <QueryClientProvider client={queryClient}>
+                    <I18nextProvider i18n={i18n}>
+                        <RegisterForm />
+                    </I18nextProvider>
+                </QueryClientProvider>
+            </RouterContext.Provider>
         )
     })
 
@@ -55,7 +48,19 @@ describe('RegisterForm', () => {
     })
 
     it('submits the form with valid data', async () => {
-        renderComponent()
+        const router = createMockRouter({
+
+        })
+        const queryClient = new QueryClient()
+        render(
+            <RouterContext.Provider value={router}>
+                <QueryClientProvider client={queryClient}>
+                    <I18nextProvider i18n={i18n}>
+                        <RegisterForm />
+                    </I18nextProvider>
+                </QueryClientProvider>
+            </RouterContext.Provider>
+        )
 
         const userNameInput = screen.getByPlaceholderText('Username')
         const emailInput = screen.getByPlaceholderText('Email')
@@ -73,12 +78,15 @@ describe('RegisterForm', () => {
             expect(passwordInput).toHaveValue(data.password)
             expect(confPasswordInput).toHaveValue(data.password)
         })
+        await userEvent.click(screen.getByTestId('sign-up-submit'))
+        expect(router.push).toHaveBeenCalledWith(
+            { pathname: '/auth/login' }
+        )
     })
 
     it('displays validation errors', async () => {
         renderComponent()
 
-        // Click on the "Sign Up" button without filling out the form
         await userEvent.click(screen.getByTestId('sign-up-submit'))
 
         await waitFor(() => {
@@ -88,26 +96,42 @@ describe('RegisterForm', () => {
                 'one lowercase letter, one number and one special character'))
                 .toBeInTheDocument()
         })
-        // показать разные ошибки && починить компонент
     })
 
     describe('Registration Errors', () => {
         it('should fail with error if user with this email is already exist', async () => {
-            renderComponent()
+            const router = createMockRouter({
+
+            })
+            const queryClient = new QueryClient()
+            render(
+                <RouterContext.Provider value={router}>
+                    <QueryClientProvider client={queryClient}>
+                        <I18nextProvider i18n={i18n}>
+                            <RegisterForm />
+                        </I18nextProvider>
+                    </QueryClientProvider>
+                </RouterContext.Provider>
+            )
 
             server.use(
-                rest.get(`${TEST_BASE_URL}/auth/registration`, (req, res, ctx) => {
-                    return res(ctx.status(400))
+                rest.post('http://localhost/auth/registration', (req, res, ctx) => {
+                    return res(
+                        ctx.status(400),
+                        ctx.json({
+                            statusCode: 400,
+                            messages: [{
+                                field: 'userName',
+                                message: 'User with this userName is already exist'
+                            }],
+                            error: 'BAD_REQUEST'
+                        })
+                    )
                 })
             )
-            const data = {
-                userName: 'testuser',
-                email: 'test@example.com',
-                password: 'testpasswordQ1q**'
-            }
 
-            const userNameInput = screen.getByPlaceholderText(/username/i)
-            const emailInput = screen.getByPlaceholderText(/email/i)
+            const userNameInput = screen.getByPlaceholderText('Username')
+            const emailInput = screen.getByPlaceholderText('Email')
             const passwordInput = screen.getByPlaceholderText('Password')
             const confPasswordInput = screen.getByPlaceholderText('Password confirmation')
 
@@ -116,17 +140,18 @@ describe('RegisterForm', () => {
             await userEvent.type(passwordInput, data.password)
             await userEvent.type(confPasswordInput, data.password)
 
-            /*     expect(userNameInput).toHaveTextContent('testuser')
-            expect(emailInput).toHaveTextContent('test@example.com')
-            expect(passwordInput).toHaveTextContent('testpasswordQ1q**')
-            expect(confPasswordInput).toHaveTextContent('testpasswordQ1q**')
- */
+            await waitFor(() => {
+                expect(userNameInput).toHaveValue(data.userName)
+                expect(emailInput).toHaveValue(data.email)
+                expect(passwordInput).toHaveValue(data.password)
+                expect(confPasswordInput).toHaveValue(data.password)
+            })
             await userEvent.click(screen.getByTestId('sign-up-submit'))
 
-            /* await waitFor(() => {
-                const validationText = screen.getByText(/user with this email is already exist/i)
+            await waitFor(() => {
+                const validationText = screen.getByText('User with this userName is already exist')
                 expect(validationText).toBeInTheDocument()
-            }) */
+            })
         })
     })
 })

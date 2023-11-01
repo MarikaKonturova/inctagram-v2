@@ -1,9 +1,9 @@
 import { rest } from 'msw'
 
-export const TEST_BASE_URL = 'https://twin.cygan.lol'
+export const TEST_BASE_URL = 'http://localhost'
 
 const handlers = [
-    rest.post('http://localhost/auth/registration', async (req, res, ctx) => {
+    rest.post(`${TEST_BASE_URL}/auth/registration`, async (req, res, ctx) => {
         const { userName, email, password } = await req.json()
 
         sessionStorage.setItem('is-authenticated', 'true')
@@ -12,12 +12,8 @@ const handlers = [
             ctx.status(204), ctx.json({})
 
         )
-    }),
-    rest.get('https://pokeapi.co/api/v2/pokemon/3', (req, res, ctx) => {
-        return res(
-            ctx.json({ name: 'pikachu' })
-        )
     })
+
 ]
 
 module.exports = { handlers }

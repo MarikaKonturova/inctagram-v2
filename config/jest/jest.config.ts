@@ -32,10 +32,10 @@ export default {
     // эта регулярка должна работать везде
         '<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)'
     ],
-    setupFilesAfterEnv: ['<rootDir>config/jest/setupTests.ts'],
+    setupFilesAfterEnv: ['<rootDir>config/jest/jest.setup.ts'],
     moduleNameMapper: {
         '\\.s?css$': 'identity-obj-proxy',
-        '\\.svg': path.resolve(__dirname, 'jestEmptyComponent.tsx'),
+        '\\.svg': '<rootDir>/src/shared/config/jest/ui/jestEmptyComponent.tsx',
         '^.+\\.(jpg|jpeg|png|gif|webp|avif)$':
         path.resolve(__dirname, 'fileMock.js'),
         axios: 'axios/dist/node/axios.cjs'
