@@ -86,12 +86,21 @@ describe('RegisterForm', () => {
 
     it('displays validation errors', async () => {
         renderComponent()
+        const userNameInput = screen.getByPlaceholderText('Username')
+        const emailInput = screen.getByPlaceholderText('Email')
+        const passwordInput = screen.getByPlaceholderText('Password')
+        const confPasswordInput = screen.getByPlaceholderText('Password confirmation')
 
-        await userEvent.click(screen.getByTestId('sign-up-submit'))
-
+        await userEvent.click(userNameInput)
+        await userEvent.keyboard('{Tab}')
+        await userEvent.click(emailInput)
+        await userEvent.keyboard('{Tab}')
+        await userEvent.click(passwordInput)
+        await userEvent.keyboard('{Tab}')
+        await userEvent.click(confPasswordInput)
+        await userEvent.keyboard('{Tab}')
         await waitFor(() => {
-            expect(screen.getByText('userName must be at least 6 characters')).toBeInTheDocument()
-            expect(screen.getByText('Field is required!')).toBeInTheDocument()
+            expect(screen.getAllByText('Field is required!').length).toBe(2)
             expect(screen.getByText('Password should include one uppercase letter, ' +
                 'one lowercase letter, one number and one special character'))
                 .toBeInTheDocument()
