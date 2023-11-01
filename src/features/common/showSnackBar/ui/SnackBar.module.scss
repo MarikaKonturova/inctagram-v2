@@ -13,7 +13,7 @@
     justify-content: space-between;
     align-items: center;
     animation: fadein 0.5s;
-    border: 1px groove #fff;
+    border: transparent;
 
     .button {
         padding: 5px 10px;
@@ -44,7 +44,8 @@
 }
 
 .warning {
-    background-color: var(--warning-500-color);
+    background-color: var(--warning-900-color);
+    border:1px solid var(--warning-500-color);
 
     .button{
         &:hover {
@@ -54,8 +55,8 @@
 }
 /* stylelint-disable no-descending-specificity */
 .success {
-    background-color: var(--success-500-color);
-
+    background-color: var(--success-900-color);
+    border:1px solid var(--success-500-color);
     .button{
         &:hover {
             background: var(--success-700-color);
@@ -65,7 +66,8 @@
 
 
 .danger {
-    background-color: var(--danger-500-color);
+    background-color: var(--danger-900-color);
+    border:1px solid var(--danger-500-color);
 
     .button{
         &:hover {
