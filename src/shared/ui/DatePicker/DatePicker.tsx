@@ -34,13 +34,14 @@ export const DatePicker = ({ value, onChange }: DatePickerProps) => {
     const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
     const dateFromProps = value && new Date(Date.parse(value))
     const [startDate, setStartDate] = useState(dateFromProps || new Date())
+
     const onDateChange = (date: Date) => {
         setStartDate(date)
         onChange?.(format(date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"))
     }
 
     return (
-        <> <div className={clsx(cls.calendar_icon_group)} >
+        <div className={clsx(cls.calendar_icon_group)}>
             <LibDatePicker
             renderCustomHeader={({
                 date,
@@ -66,10 +67,9 @@ export const DatePicker = ({ value, onChange }: DatePickerProps) => {
                 ? clsx(cls.day, cls.dayWhite)
                 : clsx(cls.day, cls.dayGray) }
             wrapperClassName ={clsx(cls.calendar)}
+            onKeyDown={(e) => { e.preventDefault() }}
             />
             <IconCalendar className={clsx(cls.icon)} fill={fill}/>
         </div>
-        </>
-
     )
 }

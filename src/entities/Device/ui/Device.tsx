@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { type FC, memo } from 'react'
 import { Icons } from 'shared/assets/icons/browsers'
-import { fnBrowserDetect } from 'shared/lib/browser-detect'
 import { type DeviceScheme } from 'shared/types/device'
+import { fnBrowserDetect } from 'shared/utils/browser-detect'
 import cls from './Device.module.scss'
 
 interface PropsType {

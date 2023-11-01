@@ -13,9 +13,13 @@ import cls from './RegisterForm.module.scss'
 export const RegisterForm: FC = memo(() => {
     const { t } = useTranslation('auth')
 
-    const { register, handleSubmit, validErrors: { passwordError, emailError, confPasswordError, userNameError } } =
+    const {
+        register, setError, handleSubmit, isValid,
+        validErrors: { passwordError, emailError, confPasswordError, userNameError }
+    } =
       useValidationForm(['email', 'password', 'userName', 'confPassword'])
-    const { isLoading, onSubmit, responseError } = useRegistration()
+    const { isLoading, onSubmit } = useRegistration(setError)
+
     return (
         <FormWrapper className={cls.register} onSubmit={handleSubmit(onSubmit)}>
             <h2 className={cls.title}>{t('signUp')}</h2>
@@ -24,34 +28,30 @@ export const RegisterForm: FC = memo(() => {
                 {...register('userName')}
                 type={'text'}
                 placeholder={`${t('userName')}`}
-                error={!!userNameError || !!responseError?.userName}
-                errorText={userNameError || responseError?.userName}
+                errorText={userNameError}
                 className={cls.input}/>
             <Input
                 {...register('email')}
                 type={'email'}
                 placeholder={`${t('email')}`}
-                error={!!emailError || !!responseError?.email}
-                errorText={emailError || responseError?.email}
+                errorText={emailError}
                 className={cls.input}/>
             <Input
                 {...register('password')}
                 type={'password'}
                 placeholder={`${t('password')}`}
-                error={!!passwordError}
                 errorText={passwordError}
                 className={cls.input}/>
             <Input
                 {...register('confPassword')}
                 type={'password'}
-                error={!!confPasswordError}
                 errorText={confPasswordError}
                 placeholder={`${t('passwordConfirmation')}`}
                 className={clsx(cls.input, cls.confirmation)}/>
 
             <Button
             data-testid='sign-up-submit'
-            disabled={isLoading}
+            disabled={!isValid || isLoading}
             type={'submit'}
             className={cls.button}>
                 {t('signUp')}

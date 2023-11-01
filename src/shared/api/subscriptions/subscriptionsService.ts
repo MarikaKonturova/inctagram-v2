@@ -1,4 +1,5 @@
 import { $api } from 'shared/api'
+import { type ResponseType } from 'shared/types/post'
 import {
     type CostOfSubscriptionsType,
     type CreateSubscriptionFailedResponseType,
@@ -17,7 +18,7 @@ export const SubscriptionsService = {
         return $api.get<GetCurrentSubscriptionType>('subscriptions/current-subscriptions')
     },
     getMyPayments () {
-        return $api.get<PaymentsType[]>('subscriptions/my-payments')
+        return $api.get<ResponseType<PaymentsType[]>>('subscriptions/my-payments')
     },
     cancelAutoRenewal () {
         return $api.post<PaymentsType>('subscriptions/canceled-auto-renewal')

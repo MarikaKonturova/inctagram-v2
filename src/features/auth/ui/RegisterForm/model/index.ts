@@ -1,9 +1,11 @@
 import { useMutation } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
 import { useRouter } from 'next/router'
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
+import { type UseFormSetError } from 'react-hook-form'
 import { useAuth } from 'features/auth/model'
 import { SelectEmail, SelectSetEmail } from 'features/auth/model/selectors'
+import { useSnackbar } from 'features/common'
 import { AuthService } from 'shared/api'
 import { AppRoutes } from 'shared/constants/path'
 import { useModal } from 'shared/hooks/useModal'
@@ -19,9 +21,10 @@ interface RegisterValidation {
     confPassword?: string
 }
 
-export const useRegistration = () => {
+export const useRegistration = (setError: UseFormSetError<UserRegistrationModel>) => {
     const setEmail = useAuth(SelectSetEmail)
     const email = useAuth(SelectEmail)
+    const onOpen = useSnackbar((state) => state.onOpen)
     const { setIsOpen } = useModal()
     const { push } = useRouter()
 
@@ -33,6 +36,13 @@ export const useRegistration = () => {
               void push({ pathname: AppRoutes.AUTH.LOGIN })
               setIsOpen(true)
               localStorage.setItem('email', email)
+          },
+          onError: (err) => {
+              const error = err.response?.data.messages[0]
+
+              // FIX
+              setError(error?.field as any, error || {})
+              onOpen('Error', 'danger', 'left')
           }
       })
 
@@ -42,12 +52,5 @@ export const useRegistration = () => {
         setEmail(data.email)
     }, [error])
 
-    const responseError = useMemo(() => {
-        return error?.response?.data?.messages.reduce((accum, item) => {
-            accum[item.field] = item.message
-            return accum
-        }, {} as Record<string, string>)
-    }, [error])
-
-    return { isLoading, onSubmit, responseError }
+    return { isLoading, onSubmit }
 }

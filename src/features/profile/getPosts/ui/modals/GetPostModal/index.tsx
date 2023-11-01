@@ -11,7 +11,7 @@ import cls from './styles.module.scss'
 
 interface IProps {
     actionsSlot: React.ReactNode
-    headerActions: React.ReactNode
+    headerActions?: React.ReactNode
     content: React.ReactNode
     post: PostResponse
     id: number
