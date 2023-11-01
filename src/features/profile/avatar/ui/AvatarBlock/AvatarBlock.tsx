@@ -5,18 +5,24 @@ import { AvatarModal } from 'features/profile/avatar/ui/AvatarModal/AvatarModal'
 import CloseIcon from 'shared/assets/icons/general/close.svg'
 import { type AvatarPostModel } from 'shared/types/post'
 import { Avatar, Button } from 'shared/ui'
+import { ConfirmationModal } from 'shared/ui/ConfirmationModal/ConfirmationModal'
 
 export const AvatarBlock = ({ avatars }: { avatars: AvatarPostModel | null | undefined }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
     const [avatar, setAvatar] = useState<string | undefined>(avatars?.medium.url)
-    const { deleteAvatar } = useDeleteAvatar(setIsOpen, setAvatar)
+    const { deleteAvatar, isLoading } = useDeleteAvatar(setDeleteModalOpen, setAvatar)
 
-    const onDeleteAvatarClick = () => {
-        deleteAvatar()
+    const onDeleteButtonClick = () => {
+        setDeleteModalOpen(true)
     }
 
     const addProfilePhotoClick = () => {
         setIsOpen(true)
+    }
+
+    const deleteAvatarConfirmationClick = () => {
+        deleteAvatar()
     }
 
     useEffect(() => {
@@ -30,8 +36,14 @@ export const AvatarBlock = ({ avatars }: { avatars: AvatarPostModel | null | und
                 {avatar
                     ? (
                         <div className={cls.avatar}>
+                            <ConfirmationModal
+                                isModalOpen={deleteModalOpen}
+                                onYesAction={deleteAvatarConfirmationClick}
+                                setModalOpen={setDeleteModalOpen}
+                                isLoading={isLoading}
+                            />
                             <Avatar size={192} src={avatar}/>
-                            <button onClick={onDeleteAvatarClick} className={cls.imageButton} type="button">
+                            <button onClick={onDeleteButtonClick} className={cls.imageButton} type="button">
                                 <CloseIcon viewBox="0 5 24 24" fill={'#ffffff'} width={'100%'} heigth={'100%'}/>
                             </button>
                         </div>
