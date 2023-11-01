@@ -5,6 +5,7 @@ import Github from 'shared/assets/icons/general/github.svg'
 import Google from 'shared/assets/icons/general/google.svg'
 import { AppRoutes } from 'shared/constants/path'
 import { Button, Modal } from 'shared/ui'
+import { useSnackbar } from '../../../../../common'
 import { useAuth } from '../../../../model'
 import { useGoogleGitHubAuth } from '../model'
 import style from './GoogleGitHubAuth.module.scss'
@@ -23,6 +24,7 @@ export const GoogleGitHubAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
     const { t } = useTranslation('auth')
     const [modal, setModal] = useState(initialState)
     const { setAuth } = useAuth()
+    const onOpen = useSnackbar((state) => state.onOpen)
     const { query, push } = useRouter()
 
     const queryStatus = query.status_code as string
@@ -39,17 +41,11 @@ export const GoogleGitHubAuth: FC<GoogleAndGitHubAuthProps> = ({ type }) => {
         }
 
         if (queryStatus === '401') {
-            setModal({
-                modalOpen: true,
-                title: t('unauthorizedMessage')
-            })
+            onOpen(t('unauthorizedMessage'), 'danger', 'left')
         }
 
         if (queryStatus === '400') {
-            setModal({
-                modalOpen: true,
-                title: t('alreadyRegistered')
-            })
+            onOpen(t('alreadyRegistered'), 'danger', 'left')
         }
 
         if (queryStatus === '204') {

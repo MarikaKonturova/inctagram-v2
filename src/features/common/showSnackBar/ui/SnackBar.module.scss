@@ -6,7 +6,6 @@
     height: auto;
     padding: 0.625rem 1rem;
     border-radius: 5px;
-    border: transparent;
     background-color: var(--primary-100-color);
     box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
     display: flex;
@@ -14,6 +13,7 @@
     justify-content: space-between;
     align-items: center;
     animation: fadein 0.5s;
+    border: 1px groove #fff;
 
     .button {
         padding: 5px 10px;
