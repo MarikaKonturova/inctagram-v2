@@ -39,6 +39,7 @@ export const DatePicker = ({ value, onChange }: DatePickerProps) => {
         setStartDate(date)
         onChange?.(format(date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"))
     }
+    console.log(startDate)
 
     return (
         <div className={clsx(cls.calendar_icon_group)}>
@@ -48,8 +49,7 @@ export const DatePicker = ({ value, onChange }: DatePickerProps) => {
                 changeYear,
                 changeMonth,
                 decreaseMonth,
-                increaseMonth,
-                ...rest
+                increaseMonth
             }) => (
                 <CustomHeader
                         date={date}
@@ -59,9 +59,11 @@ export const DatePicker = ({ value, onChange }: DatePickerProps) => {
                         years={years}
                         months={months}
                         changeMonth={changeMonth}
-                        {...rest} />
+                />
             )}
-            selected={startDate} onChange={onDateChange}
+            selected={startDate}
+            onChange={onDateChange}
+            calendarStartDay={1}
             calendarClassName={cls.day}
             dayClassName={(date) => date.getMonth() === startDate.getMonth()
                 ? clsx(cls.day, cls.dayWhite)
