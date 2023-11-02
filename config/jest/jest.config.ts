@@ -32,17 +32,15 @@ export default {
     // эта регулярка должна работать везде
         '<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)'
     ],
-    setupFilesAfterEnv: ['<rootDir>config/jest/setupTests.ts'],
+    setupFilesAfterEnv: ['<rootDir>config/jest/jest.setup.ts'],
     moduleNameMapper: {
         '\\.s?css$': 'identity-obj-proxy',
-        '\\.svg': path.resolve(__dirname, 'jestEmptyComponent.tsx'),
+        '\\.svg': '<rootDir>/src/shared/config/jest/ui/jestEmptyComponent.tsx',
+        '^.+\\.(jpg|jpeg|png|gif|webp|avif)$':
+        path.resolve(__dirname, 'fileMock.js'),
         axios: 'axios/dist/node/axios.cjs'
     },
-    //     moduleNameMapper: {
-    //     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
-    //         '^.+\\.(css|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
-    //         '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$':
-    //     '<rootDir>/__mocks__/fileMock.js'
+
     transformIgnorePatterns: [
         // 'node_modules/(?!axios)',
         '/node_modules/',
@@ -50,6 +48,7 @@ export default {
     ],
     testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
     transform: {
-        '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }]
+        '^.+\\.m?(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }]
+
     }
 }

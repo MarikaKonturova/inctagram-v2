@@ -13,7 +13,7 @@ export interface useAuthStateType {
     setAuth: (isAuth: boolean) => void
     setPopUpForMerge: (isOpenMergePopUp: boolean, contentForMerge: string) => void
 }
-export const useAuth = create(immer<useAuthStateType>((set) => ({
+export const useAuth = create<useAuthStateType>((set) => ({
     email: '',
     userId: 0,
     isAuth: false,
@@ -21,25 +21,25 @@ export const useAuth = create(immer<useAuthStateType>((set) => ({
     isOpenMergePopUp: false,
     contentForMerge: '',
     setEmail: (email: string) => {
-        set(state => {
-            state.email = email
-        })
+        set(state => ({
+            ...state, email
+        }))
     },
     setAuth: (isAuth: boolean) => {
-        set(state => {
-            state.isAuth = isAuth
-        })
+        set(state => ({
+            ...state, isAuth
+        }))
     },
     setUserData: (data: { userId: number, hasBusinessAccount: boolean }) => {
-        set(state => {
-            state.userId = data.userId
-            state.hasBusinessAccount = data.hasBusinessAccount
-        })
+        set(state => ({
+            ...state, userId: data.userId, hasBusinessAccount: data.hasBusinessAccount
+
+        }))
     },
     setPopUpForMerge: (isOpenMergePopUp, contentForMerge) => {
-        set(state => {
-            state.isOpenMergePopUp = isOpenMergePopUp
-            state.contentForMerge = contentForMerge
-        })
+        set(state => ({
+            ...state, isOpenMergePopUp, contentForMerge
+
+        }))
     }
-})))
+}))

@@ -29,7 +29,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src", "i18next.js",
+    "src", "i18next.js", "src/shared/config/jest/mocks",
   ],
   "exclude": [
     "node_modules",
