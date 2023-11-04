@@ -1,9 +1,6 @@
-
 @import "app/styles/mixins/mixins";
 
-
-
-.icon{
+.icon {
     transition: fill 0.5s;
 }
 
@@ -11,7 +8,7 @@
 //     border: 2px solid green !important;
 // }
 
-.calendar_icon_group{
+.calendar_icon_group {
     width: 230px;
     height: 36px;
     padding: 6px 12px;
@@ -21,8 +18,8 @@
 
     background-color: var(--dark-500-color);
 
-    >:nth-child(2){
-        >:nth-child(2){
+    > :nth-child(2) {
+        > :nth-child(2) {
             transform: none !important;
             position: absolute !important;
             left: 0 !important;
@@ -30,76 +27,77 @@
         }
     }
 
-    &>:nth-child(2)>:nth-child(2)>div>div
-        {
-        border: 1px solid var(--dark-300-color) ;
+    & > :nth-child(2) > :nth-child(2) > div > div {
+        border: 1px solid var(--dark-300-color);
         border-radius: 0.3rem;
 
-        >:nth-child(1){
+        > :nth-child(1) {
             display: none;
         }
 
-        >:nth-child(3){
-            >:nth-child(1){
+        > :nth-child(3) {
+            > :nth-child(1) {
                 background-color: var(--dark-500-color);
                 border: none;
 
-                >:nth-child(2)>*{
-                    color:var(--light-100-color)
-                    
+                > :nth-child(2) > * {
+                    color: var(--light-100-color);
                 }
             }
 
-            >:nth-child(2){
+            > :nth-child(2) {
                 background-color: var(--dark-500-color);
                 border: none;
                 margin: 0;
-
-           
             }
-        }}
+        }
+    }
 
-    &>div>div>input {
+    & > div > div > input {
         background-color: transparent;
         color: var(--light-100-color);
         width: 75%;
     }
 
-    .day{
+    .day {
         color: var(--light-100-color);
         background-color: var(--dark-500-color);
 
-        &:hover{
+        &:hover {
             background-color: var(--primary-500-color);
             border: 2 px solid var(--primary-900-color);
             border-radius: 50%;
         }
-    
+
+        &:global(.react-datepicker__day--selected) {
+            color: var(--light-100-color);
+            background-color: var(--primary-500-color);
+            position: relative;
+            border-radius: 50%;
+            align-self: center;
+            width: 1.6rem;
+            height: 1.6rem;
+            box-shadow: 0 0 0 2px var(--primary-900-color);
+        }
     }
 
-    .dayWhite{
+    .dayWhite {
         color: var(--light-100-color);
     }
 
-    .dayGray{
+    .dayGray {
         color: var(--dark-100-color);
     }
-    
-    .icon{
+
+    .icon {
         width: 25%;
     }
 
-
-    &:focus-within{
+    &:focus-within {
         width: 230px;
 
-        .icon{
+        .icon {
             transition: fill 0.5s;
-           
         }
-        
     }
-
-   
-
 }

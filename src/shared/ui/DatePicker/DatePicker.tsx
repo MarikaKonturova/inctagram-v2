@@ -70,6 +70,7 @@ export const DatePicker = ({ value, onChange }: DatePickerProps) => {
                 : clsx(cls.day, cls.dayGray) }
             wrapperClassName ={clsx(cls.calendar)}
             onKeyDown={(e) => { e.preventDefault() }}
+            dateFormat={'dd/MM/yyyy'}
             />
             <IconCalendar className={clsx(cls.icon)} fill={fill}/>
         </div>
