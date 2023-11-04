@@ -20,7 +20,7 @@ interface IProps {
     'firstNameError'
     | 'userNameError'
     | 'lastNameError'
-    | 'aboutMeError', string | undefined>
+    | 'aboutMeError' | 'dateOfBirthError', string | undefined>
     control: Control<GeneralInformationFormValues, any>
     setValue: UseFormSetValue<GeneralInformationFormValues>
     watch: UseFormWatch<GeneralInformationFormValues>
@@ -39,11 +39,11 @@ export const Form: React.FC<IProps> = (props) => {
         userNameError,
         firstNameError,
         lastNameError,
-        aboutMeError
+        aboutMeError,
+        dateOfBirthError
     } = validErrors
     const country = watch('country')
     const city = watch('city')
-
     useEffect(() => {
         if (country && city && !COUNTRIES[country]?.includes(city)) {
             setValue('city', '')
@@ -94,7 +94,12 @@ export const Form: React.FC<IProps> = (props) => {
                 render={({ field: { onChange, value } }) => (
                     <div className={cls.wrapper}>
                         <label className={cls.label}>{`${t('dateOfBirth')}`}</label>
-                        <DatePicker value={value || new Date().toISOString()} onChange={onChange} />
+                        <DatePicker
+                            value={value || new Date().toISOString()}
+                            onChange={onChange}
+                            setValue={setValue}
+                            // to fix touch issue with DatePicker and yup
+                            errorText={dateOfBirthError}/>
                     </div>
                 )}
             />
