@@ -50,10 +50,12 @@ export const DatePicker = ({ value, onChange, errorText, setValue }: DatePickerP
                 changeYear,
                 changeMonth,
                 decreaseMonth,
+
                 increaseMonth
             }) => (
                 <CustomHeader
                         date={date}
+
                         decreaseMonth={decreaseMonth}
                         increaseMonth={increaseMonth}
                         changeYear={changeYear}

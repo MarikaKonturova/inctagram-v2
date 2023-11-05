@@ -8,7 +8,7 @@ import cls from './Select.module.scss'
 interface SelectProps extends Omit<SelectHTMLAttributes<HTMLInputElement>, 'onChange'> {
     options: string[]
     disabled?: boolean
-    label: string
+    label?: string
     value: string
     onChange: (value: string) => void
 }
@@ -25,7 +25,7 @@ export const Select = memo(forwardRef<HTMLInputElement, SelectProps>((props, ref
     return (
         <Listbox ref={ref} value={value || ''} onChange={onChange}>
             {({ open, value }) => (
-                <div className={cls.dropDownContainer}>
+                <div className={`${cls.dropDownContainer} ${props.className ?? ''}`}>
                     <label className={cls.labelClassName}>{label}</label>
                     <Listbox.Button
                         type='button'

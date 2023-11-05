@@ -1,4 +1,5 @@
 import { parse } from 'date-fns'
+import differenceInYears from 'date-fns/differenceInYears'
 import * as yup from 'yup'
 
 export type ValidateUnion = 'userName' | 'firstName' | 'lastName' | 'aboutMe' | 'dateOfBirth'
@@ -37,14 +38,11 @@ export const createValidationSchema = (arr: ValidateUnion[]): any => {
         }
         case 'dateOfBirth': {
             const currentDate = new Date()
-            const thirteenYearsAgo = new Date(currentDate)
-            thirteenYearsAgo.setFullYear(currentDate.getFullYear() - 13)
-            const minYears = currentDate.valueOf() - thirteenYearsAgo.valueOf()
             accum[type] = yup.date()
                 .required('Field is required!')
                 .max(currentDate, 'Date of birth cannot be greater than the current date')
-                .min(minYears, 'A user under 13 cannot create a profile')
-
+                .test('dob', 'A user under 13 cannot create a profile',
+                    (value) => differenceInYears(currentDate, new Date(value)) >= 13)
             return accum
         }
         default: {
