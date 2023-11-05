@@ -58,7 +58,6 @@ export const CustomHeader = (props: Pick<ReactDatePickerCustomHeaderProps,
                     >
 
                     </Select>
-                  
 
                 </div>
 

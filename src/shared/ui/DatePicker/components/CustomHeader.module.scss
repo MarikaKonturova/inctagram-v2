@@ -1,43 +1,46 @@
 @import "app/styles/mixins/mixins";
 
 .header {
-  @include flex(row, space-between, center);
+    @include flex(row, space-between, center);
 
-  background-color: var(--dark-500-color);
-  font: var(--font-small-600);
-  padding: 15px;
+    background-color: var(--dark-500-color);
+    font: var(--font-small-600);
+    padding: 15px;
 }
 
 .buttonBox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .button {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 24px;
-  color: white;
-  background-color: var(--dark-100-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 24px;
+    color: white;
+    background-color: var(--dark-100-color);
 }
+
 .selectBox {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
+
 .select {
-  background-color: var(--dark-500-color);
-  color: var(--light-100-color);
-  font: var(--font-small-600);
-  ul {
-    position: absolute !important;
-    z-index: 10;
-  }
+    background-color: var(--dark-500-color);
+    color: var(--light-100-color);
+    font: var(--font-small-600);
+
+    ul {
+        position: absolute !important;
+        z-index: 10;
+    }
 }
