@@ -6,6 +6,8 @@
   "save": "Сохранять",
   "yes": "Да",
   "no": "Нет",
+  "logOutConfirmationHeader": "Выход из аккаунта",
+  "logOutConfirmationBody": "Вы действительно хотите выйти из аккаунта?",
   "home": "Главная",
   "create": "Создать",
   "myProfile": "Мой профиль",
