@@ -9,7 +9,7 @@ export const useDeleteAvatar = (setIsOpen: (value: boolean) => void,
     const onOpen = useSnackbar((state) => state.onOpen)
     const client = useQueryClient()
 
-    const { mutate: deleteAvatar } = useMutation(ProfileService.deleteAvatar, {
+    const { mutate: deleteAvatar, isLoading } = useMutation(ProfileService.deleteAvatar, {
         mutationKey: ['deleteAvatar'],
         onSuccess: async () => {
             setIsOpen(false)
@@ -22,6 +22,7 @@ export const useDeleteAvatar = (setIsOpen: (value: boolean) => void,
         }
     })
     return {
-        deleteAvatar
+        deleteAvatar,
+        isLoading
     }
 }

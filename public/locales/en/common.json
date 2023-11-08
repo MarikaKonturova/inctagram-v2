@@ -1,6 +1,10 @@
 {
   "logout": "Log Out",
   "addPhoto": "Add a Profile Photo",
+  "deletePhotoHeader": "Delete the Profile Photo",
+  "deletePhotoMessage": "Are you sure you want to delete the profile photo?",
+  "yes": "Yes",
+  "no": "No",
   "save": "Save",
   "home": "Home",
   "create": "Create",
