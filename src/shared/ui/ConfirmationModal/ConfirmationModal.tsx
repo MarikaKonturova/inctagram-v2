@@ -10,10 +10,12 @@ interface ConfirmationModalProps {
     onYesAction: () => void
     setModalOpen: Dispatch<SetStateAction<boolean>>
     isLoading?: boolean
+    headerText: string
+    bodyText: string
 }
 
 export const ConfirmationModal: FC<ConfirmationModalProps> = (
-    { className, isModalOpen, onYesAction, setModalOpen, isLoading }) => {
+    { className, isModalOpen, onYesAction, setModalOpen, isLoading, headerText, bodyText }) => {
     const { t } = useTranslation('common')
     const onCloseHandler = () => { setModalOpen(false) }
 
@@ -23,11 +25,11 @@ export const ConfirmationModal: FC<ConfirmationModalProps> = (
         <Modal
             isOpen={isModalOpen}
             onClose={onCloseHandler}
-            title={`${t('deletePhotoHeader')}`}
+            title={headerText}
             className={clsx(cls.Modal, {}, [className])}
         >
             <div className={cls.content}>
-                <p className={cls.message}>{`${t('deletePhotoMessage')}`}</p>
+                <p className={cls.message}>{bodyText}</p>
                 <div className={cls.flex}>
                     <Button
                         className={cls.button}
