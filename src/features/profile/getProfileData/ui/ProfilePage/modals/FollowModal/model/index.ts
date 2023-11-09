@@ -3,11 +3,13 @@ import { useSnackbar } from 'features/common'
 import { UsersService } from 'shared/api'
 import { type User } from 'shared/types/auth'
 
-export function useGetUsers (searchUser: string, userName: string) {
+export function useGetUsers (searchUser: string, userName: string, fetchDataName: string, count: number) {
     const onOpen = useSnackbar(state => state.onOpen)
 
-    return useQuery(['users', searchUser], async () => {
-        const response = await UsersService.getFollowingUsers(userName, searchUser)
+    return useQuery(['users', searchUser, fetchDataName, count], async () => {
+        const response = fetchDataName === 'following'
+            ? await UsersService.getFollowersUsers(userName, searchUser)
+            : await UsersService.getFollowingUsers(userName, searchUser)
 
         if (response.status !== 200) {
             onOpen('Network response was not ok', 'danger', 'right')

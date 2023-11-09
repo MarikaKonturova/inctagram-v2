@@ -5,7 +5,7 @@ import { AppRoutes } from 'shared/constants/path'
 import { Avatar, Button } from 'shared/ui'
 import { useGetProfileData } from '../../model'
 
-import { SubscribersModal } from './modals/FollowModal/ui'
+import { FollowingAndFollowersModal } from './modals/FollowModal/ui'
 import cls from './ProfilePage.module.scss'
 
 export const ProfilePage = () => {
@@ -14,6 +14,7 @@ export const ProfilePage = () => {
     const userData = response?.data
 
     const [isModalOpen, setModalOpen] = useState(false)
+    const [isSubscriptionsModalOpen, setIsSubscriptionsModalOpen] = useState(false)
     const [followingCount, setFollowingCount] = useState<number | undefined>(userData?.followingCount)
 
     useEffect(() => {
@@ -23,8 +24,14 @@ export const ProfilePage = () => {
     const openModal = () => {
         setModalOpen(true)
     }
+    const openSubscriptionModal = () => {
+        setIsSubscriptionsModalOpen(true)
+    }
     const closeModal = () => {
         setModalOpen(false)
+    }
+    const closeSubscriptionsModal = () => {
+        setIsSubscriptionsModalOpen(false)
     }
 
     const handleFollowingChange = (action: 'follow' | 'unfollow') => {
@@ -50,7 +57,7 @@ export const ProfilePage = () => {
                         <Button className={cls.button} onClick={onProfileSettingsClick}>Profile Settings</Button>
                     </div>
                     <div className={cls.info}>
-                        <div>
+                        <div onClick={openSubscriptionModal}>
                             <div className={cls.subscribe}>{followingCount}</div>
                             <div>Subscriptions</div>
                         </div>
@@ -67,10 +74,21 @@ export const ProfilePage = () => {
                 </div>
             </div>
             {userData && <PostCards userData={userData} />}
-            {isModalOpen && <SubscribersModal isOpen={isModalOpen}
-                                              onClose={closeModal}
-                                              userName={userData?.userName}
-                                              onFollowingChange={handleFollowingChange} />}
+            {
+                isModalOpen && <FollowingAndFollowersModal isOpen={isModalOpen}
+                                                           onClose={closeModal}
+                                                           userName={userData?.userName}
+                                                           fetchDataName={'followers'}
+                                                           onFollowingChange={handleFollowingChange}/>
+            }
+            {
+                isSubscriptionsModalOpen && <FollowingAndFollowersModal isOpen={isSubscriptionsModalOpen}
+                                                                        onClose={closeSubscriptionsModal}
+                                                                        userName={userData?.userName}
+                                                                        fetchDataName={'following'}
+                                                                        onFollowingChange={handleFollowingChange}
+                />
+            }
         </div>
     )
 }
