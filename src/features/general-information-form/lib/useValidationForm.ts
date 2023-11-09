@@ -26,12 +26,14 @@ export const useValidationForm = (arr: ValidateUnion[], defaultValues?: GeneralI
     const firstNameError = errors?.firstName && errors.firstName.message
     const lastNameError = errors?.lastName && errors.lastName.message
     const aboutMeError = errors?.aboutMe && errors.aboutMe.message
+    const dateOfBirthError = errors?.dateOfBirth && errors.dateOfBirth.message
 
     const validErrors = {
         userNameError,
         firstNameError,
         lastNameError,
-        aboutMeError
+        aboutMeError,
+        dateOfBirthError
     }
 
     return {

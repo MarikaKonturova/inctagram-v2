@@ -25,7 +25,7 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
         validErrors,
         setValue,
         watch
-    } = useValidationForm(['userName', 'firstName', 'lastName', 'aboutMe'],
+    } = useValidationForm(['userName', 'firstName', 'lastName', 'aboutMe', 'dateOfBirth'],
         defaultValues)
     const { mutate } = useUpdateProfileData(setError)
 
