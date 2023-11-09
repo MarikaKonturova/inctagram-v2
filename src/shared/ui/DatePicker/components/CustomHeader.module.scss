@@ -34,13 +34,24 @@
     justify-content: center;
 }
 
-.select {
+.selectYears,
+.selectMonths {
     background-color: var(--dark-500-color);
     color: var(--light-100-color);
     font: var(--font-small-600);
+    position: relative;
 
     ul {
         position: absolute !important;
+        width: 100%;
         z-index: 10;
     }
+}
+
+.selectYears {
+    width: 80px;
+}
+
+.selectMonths {
+    width: 100px;
 }

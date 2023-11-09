@@ -1,4 +1,5 @@
 
+import clsx from 'clsx'
 import { format, getMonth, getYear } from 'date-fns'
 import { type ChangeEvent } from 'react'
 import { type ReactDatePickerCustomHeaderProps } from 'react-datepicker'
@@ -44,20 +45,18 @@ export const CustomHeader = (props: Pick<ReactDatePickerCustomHeaderProps,
                 </button>
                 <div className={cls.selectBox}>
                     <Select
-                     className={cls.select}
+                     className={cls.selectYears}
                      value={getYear(date).toString()}
                      onChange={(value) => { changeYear(+value) }}
                      options={yearsString}
-                    >
+                    />
 
-                    </Select> <Select
-                     className={cls.select}
+                    <Select
+                     className={cls.selectMonths}
                      value={months[getMonth(date)]}
                      onChange={(value) => { changeMonth(months.indexOf(value)) }}
                      options={months}
-                    >
-
-                    </Select>
+                    />
 
                 </div>
 
