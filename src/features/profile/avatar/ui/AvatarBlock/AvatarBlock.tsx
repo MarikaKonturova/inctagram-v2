@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDeleteAvatar } from 'features/profile/avatar/model/deleteAvatar'
 import cls from 'features/profile/avatar/ui/AvatarBlock/AvatarBlock.module.scss'
 import { AvatarModal } from 'features/profile/avatar/ui/AvatarModal/AvatarModal'
@@ -12,6 +13,7 @@ export const AvatarBlock = ({ avatars }: { avatars: AvatarPostModel | null | und
     const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
     const [avatar, setAvatar] = useState<string | undefined>(avatars?.medium.url)
     const { deleteAvatar, isLoading } = useDeleteAvatar(setDeleteModalOpen, setAvatar)
+    const { t } = useTranslation('common')
 
     const onDeleteButtonClick = () => {
         setDeleteModalOpen(true)
@@ -41,6 +43,8 @@ export const AvatarBlock = ({ avatars }: { avatars: AvatarPostModel | null | und
                                 onYesAction={deleteAvatarConfirmationClick}
                                 setModalOpen={setDeleteModalOpen}
                                 isLoading={isLoading}
+                                headerText={`${t('deletePhotoHeader')}`}
+                                bodyText={`${t('deletePhotoMessage')}`}
                             />
                             <Avatar size={192} src={avatar}/>
                             <button onClick={onDeleteButtonClick} className={cls.imageButton} type="button">

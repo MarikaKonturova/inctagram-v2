@@ -5,6 +5,8 @@
   "deletePhotoMessage": "Are you sure you want to delete the profile photo?",
   "yes": "Yes",
   "no": "No",
+  "logOutConfirmationHeader": "Log Out",
+  "logOutConfirmationBody": "Are you sure you want to log out?",
   "save": "Save",
   "home": "Home",
   "create": "Create",
