@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, { useEffect } from 'react'
+import React, { useEffect, useTransition } from 'react'
 import {
     Controller,
     type Control,
@@ -8,6 +8,7 @@ import {
     type UseFormWatch
 } from 'react-hook-form'
 
+import { useTranslation } from 'react-i18next'
 import { type GeneralInformationFormValues } from 'features/general-information-form/lib/useValidationForm'
 import { COUNTRIES } from 'shared/constants/countryList'
 import { DatePicker, Input, Select, Textarea } from 'shared/ui'
@@ -19,13 +20,14 @@ interface IProps {
     'firstNameError'
     | 'userNameError'
     | 'lastNameError'
-    | 'aboutMeError', string | undefined>
+    | 'aboutMeError' | 'dateOfBirthError', string | undefined>
     control: Control<GeneralInformationFormValues, any>
     setValue: UseFormSetValue<GeneralInformationFormValues>
     watch: UseFormWatch<GeneralInformationFormValues>
 }
 
 export const Form: React.FC<IProps> = (props) => {
+    const { t } = useTranslation()
     const {
         register,
         validErrors,
@@ -37,11 +39,11 @@ export const Form: React.FC<IProps> = (props) => {
         userNameError,
         firstNameError,
         lastNameError,
-        aboutMeError
+        aboutMeError,
+        dateOfBirthError
     } = validErrors
     const country = watch('country')
     const city = watch('city')
-
     useEffect(() => {
         if (country && city && !COUNTRIES[country]?.includes(city)) {
             setValue('city', '')
@@ -91,8 +93,13 @@ export const Form: React.FC<IProps> = (props) => {
                 name="dateOfBirth"
                 render={({ field: { onChange, value } }) => (
                     <div className={cls.wrapper}>
-                        <label className={cls.label}>Date of birthday</label>
-                        <DatePicker value={value || new Date().toISOString()} onChange={onChange} />
+                        <label className={cls.label}>{`${t('dateOfBirth')}`}</label>
+                        <DatePicker
+                            value={value || new Date().toISOString()}
+                            onChange={onChange}
+                            setValue={setValue}
+                            // to fix touch issue with DatePicker and yup
+                            errorText={dateOfBirthError}/>
                     </div>
                 )}
             />
