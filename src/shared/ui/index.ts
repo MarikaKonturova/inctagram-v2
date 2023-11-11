@@ -1,3 +1,4 @@
+export { Checkbox } from './Checkbox/Checkbox';
 export { Table } from './Table/Table'
 export { ActionIcon } from './ActionIcon/ActionIcon'
 export { AdminMenu } from './AdminMenu/AdminMenu'

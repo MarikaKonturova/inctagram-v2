@@ -19,11 +19,26 @@
         }
     }
 
+    .agreementField {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font: var(--font-small-link);
+        line-height: 1rem;
+        padding: 6px;
+
+        .link {
+            color: var(--primary-300-color);
+            text-decoration: underline;
+        }
+    }
+
     .button {
         width: 100%;
 
         &:not(:last-child) {
             margin-bottom: 24px;
+            margin-top: 12px;
         }
     }
 

@@ -1,7 +1,8 @@
 import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
-const ns = ['common', 'auth']
+const ns = ['common', 'auth', 'privacy-policy', 'terms-of-use']
+
 const supportedLngs = ['en', 'ru']
 const resources = ns.reduce((acc, n) => {
     supportedLngs.forEach((lng) => {
