@@ -1,11 +1,12 @@
 import clsx from 'clsx'
+import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import { memo, type FC } from 'react'
 import { SocialIcons } from 'features/auth'
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
 import { AppRoutes } from 'shared/constants/path'
 
-import { AppLink, Button, FormWrapper, Input } from 'shared/ui'
+import { AppLink, Button, Checkbox, FormWrapper, Input } from 'shared/ui'
 
 import { useRegistration } from '../../model'
 import cls from './RegisterForm.module.scss'
@@ -14,11 +15,12 @@ export const RegisterForm: FC = memo(() => {
     const { t } = useTranslation('auth')
 
     const {
-        register, setError, handleSubmit, isValid,
+        register, setError, handleSubmit, isValid, watch, reset,
         validErrors: { passwordError, emailError, confPasswordError, userNameError }
     } =
       useValidationForm(['email', 'password', 'userName', 'confPassword'])
-    const { isLoading, onSubmit } = useRegistration(setError)
+    const { isLoading, onSubmit } = useRegistration(setError, reset)
+    const isAgree = watch('isAgree')
 
     return (
         <FormWrapper className={cls.register} onSubmit={handleSubmit(onSubmit)}>
@@ -48,10 +50,17 @@ export const RegisterForm: FC = memo(() => {
                 errorText={confPasswordError}
                 placeholder={`${t('passwordConfirmation')}`}
                 className={clsx(cls.input, cls.confirmation)}/>
-
+                <div className={cls.agreementField}>
+                <Checkbox {...register('isAgree')} defaultChecked={false} />
+                I agree to the 
+                <Link href={AppRoutes.AUTH.TERMS_OF_SERVICE} className={cls.link}>Terms of Service</Link> and
+                 <Link href={AppRoutes.AUTH.PRIVACY_POLICY} className={cls.link}>
+                    Privacy Policy
+                </Link>
+            </div>
             <Button
             data-testid='sign-up-submit'
-            disabled={!isValid || isLoading}
+            disabled={!isAgree || !isValid || isLoading}
             type={'submit'}
             className={cls.button}>
                 {t('signUp')}

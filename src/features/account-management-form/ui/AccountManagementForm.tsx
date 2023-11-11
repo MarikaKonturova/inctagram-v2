@@ -8,7 +8,7 @@ import { SelectHasBusinessAccount } from 'features/auth/model/selectors'
 import Paypal from 'shared/assets/icons/general/paypal.svg'
 import Stripe from 'shared/assets/icons/general/stripe.svg'
 import { type CostOfSubscriptionType } from 'shared/types/subscriptions'
-import { Button, Modal, RadioButtons } from 'shared/ui'
+import { Button, Modal, RadioButtons, Checkbox } from 'shared/ui'
 import { useSubscriptions } from '../model'
 import cls from './styles.module.scss'
 
@@ -92,8 +92,7 @@ export const AccountManagementForm = () => {
                 </div>
             </div>
             <div className={cls.checkboxContainer}>
-                <input type="checkbox"
-                       className={cls.checkbox}
+                <Checkbox
                        disabled={!hasAutoRenewal}
                        checked={hasAutoRenewal}
                        onChange={onCheckboxHandler} />

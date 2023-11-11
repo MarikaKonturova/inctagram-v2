@@ -1,0 +1,37 @@
+.rootContainer {
+    margin: 24px 64px;  
+}
+
+.main {
+    max-width: 958px;
+    margin: 0 auto;
+    color: var(--light-100-color);
+}
+
+.title {
+    text-align: center;
+    font: var(--font-h1);
+    padding-top: 24px;
+    padding-bottom: 20px;
+}
+
+.contentContainer {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.paragraph {
+    white-space: pre-line;
+    font: var(--font-regular-link);
+}
+
+.button {
+    display: flex;
+    gap: 12px;
+}
+
+.icon {
+    path {
+        fill: var(--light-100-color);
+    }
+}

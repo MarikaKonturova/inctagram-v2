@@ -24,16 +24,6 @@
     margin-bottom: 17px;
 }
 
-.checkbox {
-    width: 24px;
-    height: 24px;
-    accent-color: var(--light-100-color);
-
-    &:disabled {
-        cursor: not-allowed;
-    }
-}
-
 .modal {
     display: flex;
     padding: 0 24px;

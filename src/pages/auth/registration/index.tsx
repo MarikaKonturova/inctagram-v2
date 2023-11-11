@@ -1,11 +1,11 @@
 
 import { getAuthLayout } from 'layouts/Layout/AuthLayout/AuthLayout'
 import { type GetServerSidePropsContext } from 'next'
-import { RegisterForm } from 'features/auth'
+import { ConfirmModal, RegisterForm } from 'features/auth'
 import { getTranslations } from 'shared/lib/i18n'
 
 export default function Registration () {
-    return <RegisterForm/>
+    return [<RegisterForm/>, <ConfirmModal />]
 }
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => ({
