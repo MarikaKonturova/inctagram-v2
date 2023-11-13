@@ -16,7 +16,7 @@ interface ConfirmationModalProps {
 
 export const ConfirmationModal: FC<ConfirmationModalProps> = (
     { className, isModalOpen, onYesAction, setModalOpen, isLoading, headerText, bodyText }) => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation('auth')
     const onCloseHandler = () => { setModalOpen(false) }
 
     const onYesClickAction = () => { onYesAction() }
@@ -37,7 +37,7 @@ export const ConfirmationModal: FC<ConfirmationModalProps> = (
                         theme={'outline'}
                         type={'button'}
                         disabled={isLoading}
-                    >{`${t('yes')}`}
+                    >{`${t('yesConfirm')}`}
                     </Button>
                     <Button
                         className={cls.button}
