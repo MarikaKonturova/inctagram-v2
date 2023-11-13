@@ -5,7 +5,7 @@ import * as yup from 'yup'
 export type ValidateUnion = 'userName' | 'firstName' | 'lastName' | 'aboutMe' | 'dateOfBirth'
 
 const specialCharactersRegExp = /^[A-Za-z0-9-_]+$/
-const firstAndLastNameRegExp = /^[A-Za-zА-Яа-я\s' -]+$/
+const firstAndLastNameRegExp = /^(?! )(?![\s\S]* $)[A-Za-zА-Яа-я'-]+(?:\s[A-Za-zА-Яа-я'-]+)*$/
 
 export const createValidationSchema = (arr: ValidateUnion[]): any => {
     const validationObject = arr.reduce((accum: any, type) => {

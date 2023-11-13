@@ -8,6 +8,7 @@ export interface IFormValidate {
     email: string
     confPassword?: string
     recaptcha?: string
+    isAgree?: boolean
 }
 
 export const useValidationForm = (arr: ValidateUnion[]) => {
@@ -18,6 +19,7 @@ export const useValidationForm = (arr: ValidateUnion[]) => {
         setValue,
         clearErrors,
         setError,
+        watch,
         formState: { errors, isValid }
     } = useForm<IFormValidate>({
         resolver: yupResolver(createValidationSchema(arr)),
@@ -47,6 +49,7 @@ export const useValidationForm = (arr: ValidateUnion[]) => {
         clearErrors,
         setValue,
         setError,
-        isValid
+        isValid,
+        watch
     }
 }

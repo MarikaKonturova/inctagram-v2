@@ -19,6 +19,7 @@ export const PasswordRecoveryForm = () => {
         handleSubmit,
         clearErrors,
         setValue,
+        isValid,
         validErrors: { emailError, recaptchaError }
     } = useValidationForm(['email', 'recaptcha'])
     const { isInfoTextShown, onSubmit, isLoading, error } = useRecoverPassword()
@@ -48,7 +49,7 @@ export const PasswordRecoveryForm = () => {
                 <p className={cls.error}>{error.response.data.messages[0].message}</p>}
 
             {isInfoTextShown && <p className={cls.infoText}>{t('recoveryMessage')}</p>}
-            <Button disabled={isLoading} type={'submit'} className={cls.button}>
+            <Button disabled={!isValid || isLoading} type={'submit'} className={cls.button}>
                 {isInfoTextShown ? t('sendLinkAgain') : t('sendLink')}
             </Button>
             <AppLink active href={AppRoutes.AUTH.LOGIN}>
