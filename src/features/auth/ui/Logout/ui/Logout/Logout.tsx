@@ -11,8 +11,8 @@ interface IProps {
 
 export const Logout = ({ className }: IProps) => {
     const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
-    const { logout, isLoading } = useLogout()
-    const { t } = useTranslation('common')
+    const { logout, isLoading, email } = useLogout()
+    const { t } = useTranslation('auth')
 
     const onLogOutClick = () => { setDeleteModalOpen(true) }
 
@@ -24,7 +24,7 @@ export const Logout = ({ className }: IProps) => {
                 isLoading={isLoading}
                 setModalOpen={setDeleteModalOpen}
                 headerText={`${t('logOutConfirmationHeader')}`}
-                bodyText={`${t('logOutConfirmationBody')}`}
+                bodyText={`${t('logOutConfirmationBody')}${email ? ` "${email}"?` : '?'} `}
             />
             <LogoutButton disabled={isLoading} onClick={onLogOutClick} className={className} />
         </>
