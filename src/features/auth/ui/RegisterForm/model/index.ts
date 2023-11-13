@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
 import { useCallback } from 'react'
-import { UseFormReset, type UseFormSetError } from 'react-hook-form'
+import { type UseFormReset, type UseFormSetError } from 'react-hook-form'
 import { useAuth } from 'features/auth/model'
 import { SelectEmail, SelectSetEmail } from 'features/auth/model/selectors'
 import { useSnackbar } from 'features/common'
@@ -20,7 +20,8 @@ interface RegisterValidation {
     confPassword?: string
 }
 
-export const useRegistration = (setError: UseFormSetError<UserRegistrationModel>, reset: UseFormReset<UserRegistrationModel>) => {
+export const useRegistration = (setError: UseFormSetError<UserRegistrationModel>,
+    reset: UseFormReset<UserRegistrationModel>) => {
     const setEmail = useAuth(SelectSetEmail)
     const email = useAuth(SelectEmail)
     const onOpen = useSnackbar((state) => state.onOpen)
@@ -31,14 +32,14 @@ export const useRegistration = (setError: UseFormSetError<UserRegistrationModel>
           mutationFn: AuthService.registration,
           retry: false,
           onSuccess: () => {
-             setIsOpen(true)
+              setIsOpen(true)
               localStorage.setItem('email', email) // ?
               reset()
           },
           onError: (err) => {
               const error = err.response?.data.messages[0]
-              if(error?.message === 'User with this email is already exist'){
-                setIsOpen(true)
+              if (error?.message === 'User with this email is already exist') {
+                  setIsOpen(true)
               }
               // FIX
               setError(error?.field as any, error || {})
