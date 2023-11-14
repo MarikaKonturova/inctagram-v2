@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, { useEffect, useTransition } from 'react'
+import React, { useEffect } from 'react'
 import {
     Controller,
     type Control,
