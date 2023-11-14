@@ -66,6 +66,14 @@
             width: 100%;
             padding: 8px 0;
 
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover,
+            &:-webkit-autofill:focus, {
+                -webkit-text-fill-color: var(--light-100-color);
+                transition: background-color 5000s ease-in-out 0s;
+                background-color: none;
+            }
+
             &.search {
                 padding-left: 40px;
                 border: none;
