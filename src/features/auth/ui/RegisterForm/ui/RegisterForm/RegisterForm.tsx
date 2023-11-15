@@ -50,11 +50,11 @@ export const RegisterForm: FC = memo(() => {
                 errorText={confPasswordError}
                 placeholder={`${t('passwordConfirmation')}`}
                 className={clsx(cls.input, cls.confirmation)}/>
-                <div className={cls.agreementField}>
+            <div className={cls.agreementField}>
                 <Checkbox {...register('isAgree')} defaultChecked={false} />
-                I agree to the 
+                I agree to the
                 <Link href={AppRoutes.AUTH.TERMS_OF_SERVICE} className={cls.link}>Terms of Service</Link> and
-                 <Link href={AppRoutes.AUTH.PRIVACY_POLICY} className={cls.link}>
+                <Link href={AppRoutes.AUTH.PRIVACY_POLICY} className={cls.link}>
                     Privacy Policy
                 </Link>
             </div>

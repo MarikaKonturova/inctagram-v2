@@ -1,8 +1,8 @@
-import { GetServerSidePropsContext } from "next"
+import { getAuthLayout } from 'layouts/Layout/AuthLayout/AuthLayout'
+import { type GetServerSidePropsContext } from 'next'
 import { useTranslation } from 'next-i18next'
-import { getTranslations } from "shared/lib/i18n"
-import { getAuthLayout } from "layouts/Layout/AuthLayout/AuthLayout"
-import { LegalContent } from "entities/LegalContent/ui/LegalContent"
+import { LegalContent } from 'entities/LegalContent/ui/LegalContent'
+import { getTranslations } from 'shared/lib/i18n'
 
 export default function PrivacyPolicy () {
     const { t } = useTranslation('privacy-policy')
@@ -15,4 +15,3 @@ export const getStaticProps = async (ctx: GetServerSidePropsContext) => ({
 })
 
 PrivacyPolicy.getLayout = getAuthLayout
-
