@@ -15,7 +15,7 @@ const PATHS = [
 
 export function ProfileSettingsPage () {
     const { query } = useRouter()
-    const isSuccess = query.success === 'true'
+    const isSuccess = query.success === "true";
     const [selectedTab, setSelectedTab] = useState(isSuccess ? PATHS[2] : PATHS[0])
 
     return (
