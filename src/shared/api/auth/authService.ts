@@ -35,9 +35,7 @@ export const AuthService = {
     },
 
     createPassword (params: UserCreatePasswordModel) {
-        return $api.post('/auth/new-password', params).catch((e: AxiosError<{ message: string }>) => {
-            console.log(e.response?.data.message)
-        })
+        return $api.post('/auth/new-password', params)
     },
 
     resendEmail (params: UseResendLinkModel) {

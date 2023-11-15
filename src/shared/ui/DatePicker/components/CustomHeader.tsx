@@ -1,7 +1,5 @@
 
-import clsx from 'clsx'
-import { format, getMonth, getYear } from 'date-fns'
-import { type ChangeEvent } from 'react'
+import { getMonth, getYear } from 'date-fns'
 import { type ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'

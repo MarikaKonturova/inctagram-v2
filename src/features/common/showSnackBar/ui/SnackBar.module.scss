@@ -57,6 +57,7 @@
 .success {
     background-color: var(--success-900-color);
     border:1px solid var(--success-500-color);
+
     .button{
         &:hover {
             background: var(--success-700-color);

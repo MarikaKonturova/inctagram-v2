@@ -27,9 +27,7 @@ export const NewPasswordForm: FC = () => {
 
     const { createPassword, isError, isLoading } = useCreatePassword()
     if (isLoading) return <PageLoader/>
-    if (isError) {
-        console.log('Something went wrong. Please try again')
-    }
+
     const onSubmit = (data: NewPasswordValidation): void => {
         createPassword({ recoveryCode: String(code), newPassword: data.password })
     }
