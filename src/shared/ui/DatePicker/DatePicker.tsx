@@ -1,11 +1,13 @@
 import clsx from 'clsx'
-import { format, getYear } from 'date-fns'
+import { addDays, format, getYear } from 'date-fns'
 import { range } from 'lodash'
+import Link from 'next/link'
 import LibDatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { type UseFormSetValue } from 'react-hook-form'
 import { type GeneralInformationFormValues } from 'features/general-information-form/lib/useValidationForm'
 import IconCalendar from 'shared/assets/icons/light/calendar.svg'
+import { AppRoutes } from 'shared/constants/path'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
 import { CustomHeader } from './components/CustomHeader'
@@ -17,7 +19,7 @@ interface DatePickerProps {
     errorText?: string
     setValue: UseFormSetValue<GeneralInformationFormValues>
 }
-const years = range(1990, +getYear(new Date()) + 1, 1)
+const years = range(+getYear(new Date()) - 100, +getYear(new Date()) + 1, 1)
 const months = [
     'January',
     'February',
@@ -43,14 +45,13 @@ export const DatePicker = ({ value, onChange, errorText, setValue }: DatePickerP
     }
 
     return (<div>
-        <div className={clsx(cls.calendar_icon_group)}>
+        <div className={clsx(cls.calendarContainer, errorText && cls.calendarContainerError)}>
             <LibDatePicker
             renderCustomHeader={({
                 date,
                 changeYear,
                 changeMonth,
                 decreaseMonth,
-
                 increaseMonth
             }) => (
                 <CustomHeader
@@ -66,19 +67,23 @@ export const DatePicker = ({ value, onChange, errorText, setValue }: DatePickerP
             )}
             selected={startDate}
             onChange={onDateChange}
+            className={clsx(cls.libCalendar, errorText && cls.libCalendarError)}
             calendarStartDay={1}
             calendarClassName={cls.day}
-            dayClassName={(date) => date.getMonth() === startDate.getMonth()
-                ? clsx(cls.day, cls.dayWhite)
-                : clsx(cls.day, cls.dayGray) }
-            wrapperClassName ={clsx(cls.calendar)}
+            dayClassName={ () => clsx(cls.day, cls.dayWhite)}
             onKeyDown={(e) => { e.preventDefault() }}
-            /* maxDate={addDays(new Date(), 0)} */
+            maxDate={addDays(new Date(), 0)}
             dateFormat={'dd/MM/yyyy'}
             />
             <IconCalendar className={clsx(cls.icon)} fill={fill}/>
         </div>
-        <p style={{ color: 'red' }}>{errorText}</p>
+        {errorText && <div className={cls.errorBlockInfo}>
+            <p>{errorText}. </p>
+            <Link href={AppRoutes.AUTH.PRIVACY_POLICY} className={cls.link}>
+                Privacy Policy
+            </Link>
+        </div>}
+
     </div>
 
     )

@@ -8,15 +8,17 @@
 //     border: 2px solid green !important;
 // }
 
-.calendar_icon_group {
-    width: 230px;
+.calendarContainer {
     height: 36px;
     padding: 6px 12px;
     position: relative;
+    width: 100%;
 
-    @include flex(row, center, flex-start);
+    @include flex(row, space-between, flex-start);
 
     background-color: var(--dark-500-color);
+
+  
 
     > :nth-child(2) {
         > :nth-child(2) {
@@ -53,11 +55,8 @@
         }
     }
 
-    & > div > div > input {
-        background-color: transparent;
-        color: var(--light-100-color);
-        width: 75%;
-    }
+ 
+ 
 
     .day {
         color: var(--light-100-color);
@@ -78,32 +77,62 @@
             width: 1.6rem;
             height: 1.6rem;
             box-shadow: 0 0 0 2px var(--primary-900-color);
+            
         }
 
         &:global(.react-datepicker__day--disabled) {
-            color: red; /* Change the text color */
-            opacity: 0.5; /* Reduce the opacity */
-            cursor: not-allowed; /* Change the cursor to indicate that it's not clickable */
+            color: var(--dark-100-color);
+            pointer-events: none;
+
         }
-    }
 
-    .dayWhite {
-        color: var(--light-100-color);
-    }
-
-    .dayGray {
-        color: var(--dark-100-color);
-    }
-
-    .icon {
-        width: 25%;
-    }
-
-    &:focus-within {
-        width: 230px;
-
-        .icon {
-            transition: fill 0.5s;
+        &:global(.react-datepicker__day--weekend) {
+            color: var(--danger-300-color);
         }
+
+        &:global(.react-datepicker__day--outside-month) {
+            color: var(--dark-100-color) !important;
+            pointer-events: none;
+        }
+
+        
+    }
+
+   
+
+   
+ 
+
+   
+ 
+}
+
+.libCalendar{
+    background-color: transparent;
+    color: var(--light-100-color);
+    width: 75%;
+        
+}
+
+
+// error
+
+.calendarContainerError {
+    border: 1px solid var(--danger-500-color);
+}
+
+.libCalendarError{
+    color: var(--danger-500-color);
+        
+}
+
+.errorBlockInfo {
+    display: flex;
+    gap: 1px;
+    align-items: end;
+    color: var(--danger-500-color);
+
+    a {
+        color: var(--danger-500-color);
     }
 }
