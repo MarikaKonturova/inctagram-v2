@@ -42,7 +42,7 @@ export const Select = memo(forwardRef<HTMLInputElement, SelectProps>((props, ref
                         {options.map(option => (
                             <Listbox.Option
                                 value={option}
-                                className={clsx(cls.listItem)}
+                                className={({ active }) => clsx(cls.listItem, active && cls.activeListItem)}
                                 key={option}>
                                 {option}
                             </Listbox.Option>

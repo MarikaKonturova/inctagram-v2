@@ -36,7 +36,6 @@ export const CustomHeader = (props: Pick<ReactDatePickerCustomHeaderProps,
     const yearsString = years.map(year => year.toString())
     return (
         <div className={cls.header} {...rest} >
-            {/*  <div>{headerText}</div> */}
             <div className={cls.buttonBox}>
                 <button type="button" className={cls.button} style={{ color: fill }} onClick={decreaseMonth}>
                     {'<'}
