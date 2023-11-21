@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSnackbar } from 'features/common'
 import userPhoto from 'shared/assets/images/user.png'
 import { useDebounce } from 'shared/hooks/useDebounce'
@@ -9,25 +9,35 @@ import { Button, Input, Loader, Modal } from 'shared/ui'
 import { useGetUsers, useToggleFollowUser } from '../model'
 import styles from './styles.module.scss'
 
-interface SubscribersModalPropsTypes {
+interface FollowingAndFollowersModalPropsTypes {
     isOpen: boolean
     onClose: () => void
     userName?: string
+    fetchDataName: string
     onFollowingChange?: (action: 'follow' | 'unfollow') => void
 }
 
-export const SubscribersModal: React.FC<SubscribersModalPropsTypes> = (props) => {
-    const { isOpen, onClose, userName, onFollowingChange } = props
+export const FollowingAndFollowersModal: React.FC<FollowingAndFollowersModalPropsTypes> = (props) => {
+    const { isOpen, onClose, userName, onFollowingChange, fetchDataName } = props
     const [searchUser, setSearchUser] = useState<string>('')
+    const [count, setCount] = useState<number>(0)
     const debounceSearchUser = useDebounce(searchUser, 500)
-    const { data: usersData, isLoading: isUsersLoading } = useGetUsers(debounceSearchUser, userName || '')
+    const { data: usersData, isLoading: isUsersLoading, refetch } =
+        useGetUsers(debounceSearchUser, userName || '', fetchDataName, count)
     const toggleFollowUser = useToggleFollowUser(debounceSearchUser)
-    const followingCount = usersData?.filter((user: User) => user.isFollowing).length || 0
+    const followingCount = usersData?.filter((user: User) =>
+        fetchDataName === 'following' ? user.isFollowing : user.isFollowedBy).length || 0
     const onOpen = useSnackbar(state => state.onOpen)
+    const title = fetchDataName === 'following' ? 'Subscription' : 'Subscribed'
+
+    useEffect(() => {
+        void refetch()
+    }, [count])
 
     const handleToggleFollow = (user: User) => {
         toggleFollowUser.mutate(user, {
             onSuccess: () => {
+                setCount(followingCount)
                 onOpen(`You have ${user.isFollowing ? 'unfollowed' : 'followed'} ${user.userName}!`, 'success', 'right')
                 if (onFollowingChange) {
                     if (user.isFollowing) {
@@ -42,7 +52,7 @@ export const SubscribersModal: React.FC<SubscribersModalPropsTypes> = (props) =>
 
     return (
         <Modal
-         title={`Subscribed to: ${String(followingCount)}`}
+         title={`${title} to: ${String(followingCount)}`}
          isOpen={isOpen}
          onClose={onClose}
          className={styles.modal}
