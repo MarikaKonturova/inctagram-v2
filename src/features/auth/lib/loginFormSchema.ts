@@ -9,7 +9,7 @@ export type ValidateUnion =
 
 const passwordRegExp = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/
 const specialCharactersRegExp = /^[A-Za-z0-9-_]+$/
-
+const emailRegExp = /^[a-zA-Z0-9.!#$%&():;'"’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 const passwordValidMassage =
   'Password should include one uppercase Latin letter, one lowercase Latin letter, one number and one special character'
 
@@ -29,8 +29,9 @@ export const createValidationSchema = (arr: ValidateUnion[]): any => {
         case 'email': {
             accum[type] = yup
                 .string()
-                .email('The email must match the format example@example.com')
+                .matches(emailRegExp, 'The email must match the format example@example.com')
                 .required('Field is required!')
+                .max(320)
             return accum
         }
         case 'password': {
