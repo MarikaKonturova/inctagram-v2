@@ -42,8 +42,6 @@ export const LoginForm: FC = () => {
                     {t('forgotPassword')}
                 </AppLink>
             </p>
-            {!!error?.response?.data.messages.length && <p className={cls.error}>
-                {error.response.data.messages[0].message}</p>}
             <Button data-testid='sign-in-submit'
                     disabled={isLoading}
                     type={'submit'}
