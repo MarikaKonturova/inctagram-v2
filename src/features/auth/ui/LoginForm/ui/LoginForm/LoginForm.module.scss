@@ -7,6 +7,12 @@
         }
     }
 
+    .errorBorder {
+        border: 2px solid var(--danger-700-color);
+        border-radius: 3px;
+        margin: 5px;
+    }
+
     .input  {
         &:not(:last-child) {
             margin-bottom: 24px;
