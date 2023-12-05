@@ -12,10 +12,10 @@ import cls from './LoginForm.module.scss'
 export const LoginForm: FC = () => {
     const { t } = useTranslation('auth')
 
-    const { register, handleSubmit, validErrors: { passwordError, emailError } } =
+    const { register, isValid, handleSubmit, validErrors: { passwordError, emailError } } =
       useValidationForm(['email', 'password'])
 
-    const { login, isLoading, error } = useLogin()
+    const { login, isLoading, error, isSuccess } = useLogin()
     const onSubmit = (data: UserLoginModel, event: any): void => {
         event.preventDefault()
         login(data)
@@ -30,20 +30,23 @@ export const LoginForm: FC = () => {
                 type={'text'}
                 placeholder={t('email') ?? ''}
                 errorText={emailError}
-                className={cls.input}/>
+                className={error ? cls.errorBorder : cls.input}
+            />
             <Input
                 {...register('password')}
                 type={'password'}
                 placeholder={t('password') ?? ''}
                 errorText={passwordError}
-                className={cls.input}/>
+                className={error ? cls.errorBorder : cls.input}
+            />
+            {error ? <div className={cls.error}>The email or password are incorrect. Try again please</div> : null}
             <p className={cls.link}>
                 <AppLink href={'/auth/password-recovery'}>
                     {t('forgotPassword')}
                 </AppLink>
             </p>
             <Button data-testid='sign-in-submit'
-                    disabled={isLoading}
+                    disabled={isLoading || !isValid}
                     type={'submit'}
                     className={cls.button}>
                 {t('signIn')}
