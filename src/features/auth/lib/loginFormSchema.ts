@@ -1,4 +1,6 @@
 import * as yup from 'yup'
+import YupPassword from 'yup-password'
+YupPassword(yup) // extend yup
 
 export type ValidateUnion =
   | 'userName'
@@ -9,7 +11,8 @@ export type ValidateUnion =
 
 const passwordRegExp = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/
 const specialCharactersRegExp = /^[A-Za-z0-9-_]+$/
-const emailRegExp = /^[a-zA-Z0-9.!#$%&():;'"’*+/=?^_`{|}~-]*@[a-zA-Z0-9.!#$%&():;'"’*+/=?^_`{|}~-]*(\.\w{2,3})+$/
+// eslint-disable-next-line max-len
+const emailRegExp = /^[a-zA-Z0-9.!#$%&():;'"’<>*+/=?^_`\\[\]{|}~,№\\\\<>,-]*@[a-zA-Z0-9.!#$%&():;'"’*+/=?^_`\\[\]{|}~,№\\\\<>,№{|}~-]+(\.\w+)+$/
 const passwordValidMassage =
   'Password should include one uppercase Latin letter, one lowercase Latin letter, one number and one special character'
 
@@ -40,6 +43,8 @@ export const createValidationSchema = (arr: ValidateUnion[]): any => {
                 .matches(passwordRegExp, {
                     message: passwordValidMassage
                 })
+                .minLowercase(1)
+                .minUppercase(1)
                 .min(6, `${type} must be at least 6 characters`)
                 .max(20, `${type} must be no more than 20 characters`)
                 .required('Field is required!')
