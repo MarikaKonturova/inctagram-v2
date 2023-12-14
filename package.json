@@ -43,6 +43,7 @@
     "nprogress": "^0.2.0",
     "postcss": "^8.4.21",
     "react": "18.2.0",
+    "react-advanced-cropper": "^0.19.4",
     "react-avatar-edit": "^1.2.0",
     "react-cookie": "^4.1.1",
     "react-datepicker": "^4.11.0",
