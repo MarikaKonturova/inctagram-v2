@@ -37,7 +37,7 @@ function CommentInfo ({
         commentId,
         content,
         createdAt,
-        from: { id: fromId, userName, avatars: { thumbnail: { url } } },
+        from: { id: fromId, userName, avatars },
         likeCount,
         answerCount
     } = data
@@ -49,7 +49,7 @@ function CommentInfo ({
 
     return (
         <div className={clsx(cls.avatarCommentGroup, { [cls.additionalStyle]: isRepliedComment })}>
-            <Avatar src={url} size={avatarSize} alt="avatar" />
+            <Avatar src={avatars?.thumbnail.url} size={avatarSize} alt="avatar" />
             <div className={cls.commentInfo}>
                 <span className={cls.userName}>{userName} </span>
                 <span className={cls.content}>{content}</span>
