@@ -4224,6 +4224,13 @@ address@^1.0.1:
   resolved "https://registry.yarnpkg.com/address/-/address-1.2.2.tgz#2b5248dac5485a6390532c6a517fda2e3faac89e"
   integrity sha512-4B/qKCfeE/ODUaAUpSwfzazo5x29WD4r3vXiWsB7I2mSDAihwEqKO+g8GELZUQSSAo5e1XTYh3ZVfLyxBc12nA==
 
+advanced-cropper@~0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/advanced-cropper/-/advanced-cropper-0.18.0.tgz#dc09a572ac719ee6f149a73ffd4ef094b7b7e1a1"
+  integrity sha512-Bo0fiW8F+kI4f8zEm8YXIDkGNi+aXaQPxqDijU7hY+1ETACbvFnNCxssspgAwHBy9RpFlcXMmjcq+LImUOhaqQ==
+  dependencies:
+    tslib "^2.4.0"
+
 agent-base@6:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-6.0.2.tgz#49fff58577cfee3f37176feab4c22e00f86d7f77"
@@ -11640,6 +11647,15 @@ raw-loader@^4.0.2:
   dependencies:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
+
+react-advanced-cropper@^0.19.4:
+  version "0.19.4"
+  resolved "https://registry.yarnpkg.com/react-advanced-cropper/-/react-advanced-cropper-0.19.4.tgz#39ca10f6ffad47945aece3f2e0723842c630ff0a"
+  integrity sha512-CJAeOyg5gMvrhZoaMKcP6XJf10xanUCHqRCFXUtIiKxcHgSGAVGedd/zjvCIG4E1hMoFwaaFazS/Hw0Odhtjmw==
+  dependencies:
+    advanced-cropper "~0.18.0"
+    classnames "^2.2.6"
+    tslib "^2.4.0"
 
 react-async-script@^1.2.0:
   version "1.2.0"

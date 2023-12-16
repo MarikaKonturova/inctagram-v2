@@ -1,5 +1,7 @@
 import { useState, type FC, useEffect } from 'react'
 import { useCreateMutation } from '../model'
+import { CropImageModalStep } from './modalSteps/CropImageModalStep'
+import { FilterIamgeModalStep } from './modalSteps/FilterImageModalStep'
 import { ImageModalStep } from './modalSteps/ImageModalStep'
 import { NewPostModalStep } from './modalSteps/NewPostModalStep'
 
@@ -15,7 +17,9 @@ export interface INewPostInterface {
 
 const MODALSTEPS = {
     ImageStep: 1,
-    NewPostStep: 2
+    CropImageStep: 2,
+    filterImageStep: 3,
+    NewPostStep: 4
 } as const
 
 type Keys = keyof typeof MODALSTEPS
@@ -27,6 +31,7 @@ export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
     const [currentStep, setCurrentStep] = useState<Values | null >(1)
 
     const [file, setFile] = useState<File | undefined>()
+    const [workingImage, setWorkingImage] = useState<File | undefined>()
     const onSubmit = async (data: INewPostInterface) => {
         const formData = new FormData()
         if (file) {
@@ -59,11 +64,25 @@ export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
                 />
 
             )}
+            {currentStep === MODALSTEPS.CropImageStep &&
+            (<CropImageModalStep
+                isOpen={isOpen && currentStep === MODALSTEPS.CropImageStep }
+                setFile={setWorkingImage} file={file} onNextClick={() => { setCurrentStep(3) }}
+                onPrevClick={() => { setCurrentStep(1) } }
+                handleClose={handleClose}
+            />)}
+            {currentStep === MODALSTEPS.filterImageStep &&
+            (<FilterIamgeModalStep
+                isOpen={isOpen && currentStep === MODALSTEPS.filterImageStep }
+                setFile={setWorkingImage} file={workingImage} onNextClick={() => { setCurrentStep(4) }}
+                onPrevClick={() => { setCurrentStep(2) } }
+                handleClose={handleClose}
+            />)}
             {currentStep === MODALSTEPS.NewPostStep &&
             (<NewPostModalStep
                 isOpen={isOpen && currentStep === MODALSTEPS.NewPostStep }
-                setFile={setFile} file={file} onNextClick={onSubmit}
-                onPrevClick={() => { setCurrentStep(1) } }
+                setFile={setFile} file={workingImage} onNextClick={onSubmit}
+                onPrevClick={() => { setCurrentStep(3) } }
                 handleClose={handleClose}
             />)}
         </>
