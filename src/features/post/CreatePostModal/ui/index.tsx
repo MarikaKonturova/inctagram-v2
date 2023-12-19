@@ -29,13 +29,18 @@ export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
     const { onCreate, isSuccess } = useCreateMutation({ handleClose })
 
     const [currentStep, setCurrentStep] = useState<Values | null >(1)
+    /* const [state, setState]  = useState(){
+        file:
+        name:
+        workingImage:
 
+    } */
     const [file, setFile] = useState<File | undefined>()
     const [workingImage, setWorkingImage] = useState<File | undefined>()
     const onSubmit = async (data: INewPostInterface) => {
         const formData = new FormData()
-        if (file) {
-            formData.append('files', file)
+        if (workingImage) {
+            formData.append('files', workingImage)
         }
         formData.append('description', data.description)
         onCreate(formData)

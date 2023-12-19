@@ -16,6 +16,7 @@ export const ImageModalStep: FC<IProps> = ({ onPrevClick, isOpen, file, setFile,
     function handleChange (e: ChangeEvent<HTMLInputElement>) {
         if (e.target.files?.length) {
             setFile(e.target.files[0])
+            const fileName = e.target.files[0].name
             onNextClick()
         }
     }

@@ -1,8 +1,8 @@
 @import "app/styles/mixins/mixins";
 
 .mainContainer {
-    height: 50vh;
     display: flex;
+    height: fit-content;
 }
 
 .header {
@@ -14,11 +14,12 @@
 
 .imgContainer {
     flex: 1;
+    height: fit-content;
 
     img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
     }
 }
 
