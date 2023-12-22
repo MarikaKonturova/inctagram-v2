@@ -4224,6 +4224,13 @@ address@^1.0.1:
   resolved "https://registry.yarnpkg.com/address/-/address-1.2.2.tgz#2b5248dac5485a6390532c6a517fda2e3faac89e"
   integrity sha512-4B/qKCfeE/ODUaAUpSwfzazo5x29WD4r3vXiWsB7I2mSDAihwEqKO+g8GELZUQSSAo5e1XTYh3ZVfLyxBc12nA==
 
+advanced-cropper@~0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/advanced-cropper/-/advanced-cropper-0.18.0.tgz#dc09a572ac719ee6f149a73ffd4ef094b7b7e1a1"
+  integrity sha512-Bo0fiW8F+kI4f8zEm8YXIDkGNi+aXaQPxqDijU7hY+1ETACbvFnNCxssspgAwHBy9RpFlcXMmjcq+LImUOhaqQ==
+  dependencies:
+    tslib "^2.4.0"
+
 agent-base@6:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-6.0.2.tgz#49fff58577cfee3f37176feab4c22e00f86d7f77"
@@ -8150,6 +8157,11 @@ html-tags@^3.1.0, html-tags@^3.2.0:
   resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-3.3.1.tgz#a04026a18c882e4bba8a01a3d39cfe465d40b5ce"
   integrity sha512-ztqyC3kLto0e9WbNp0aeP+M3kTt+nbaIveGmUxAtZa+8iFgKLUOD4YKM5j+f3QD89bra7UeumolZHKuOXnTmeQ==
 
+html-to-image@^1.11.11:
+  version "1.11.11"
+  resolved "https://registry.yarnpkg.com/html-to-image/-/html-to-image-1.11.11.tgz#c0f8a34dc9e4b97b93ff7ea286eb8562642ebbea"
+  integrity sha512-9gux8QhvjRO/erSnDPv28noDZcPZmYE7e1vFsBLKLlRlKDSqNJYebj6Qz1TGd5lsRV+X+xYyjCKjuZdABinWjA==
+
 html-void-elements@^1.0.0:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/html-void-elements/-/html-void-elements-1.0.5.tgz#ce9159494e86d95e45795b166c2021c2cfca4483"
@@ -11641,6 +11653,15 @@ raw-loader@^4.0.2:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
+react-advanced-cropper@^0.19.4:
+  version "0.19.4"
+  resolved "https://registry.yarnpkg.com/react-advanced-cropper/-/react-advanced-cropper-0.19.4.tgz#39ca10f6ffad47945aece3f2e0723842c630ff0a"
+  integrity sha512-CJAeOyg5gMvrhZoaMKcP6XJf10xanUCHqRCFXUtIiKxcHgSGAVGedd/zjvCIG4E1hMoFwaaFazS/Hw0Odhtjmw==
+  dependencies:
+    advanced-cropper "~0.18.0"
+    classnames "^2.2.6"
+    tslib "^2.4.0"
+
 react-async-script@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-async-script/-/react-async-script-1.2.0.tgz#ab9412a26f0b83f5e2e00de1d2befc9400834b21"
@@ -14555,6 +14576,11 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+yup-password@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/yup-password/-/yup-password-0.2.2.tgz#07169da2aa246dd9e389075596175b95f7f994b9"
+  integrity sha512-2PHfqGWtbXg4OfDV7VKFIb3hyEaYgTYpEORnFqgGAYqzENWmGzWMoeGvJg2Ohmq6maTRxhJzLZpNTITrqlZTrA==
 
 yup@^1.1.1:
   version "1.1.1"
