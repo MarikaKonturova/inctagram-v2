@@ -4,7 +4,7 @@ import { useGetProfileData } from 'features/profile/getProfileData/model'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
-import { Avatar, Button, Input, Modal, Textarea } from 'shared/ui'
+import { Avatar, Button, Input, Textarea } from 'shared/ui'
 import { type INewPostInterface } from '../..'
 import cls from './styles.module.scss'
 
@@ -12,12 +12,10 @@ interface IProps {
     file?: File
     setFile: (value: File) => void
     onNextClick: (data: { description: string, location: string }) => void
-    isOpen: boolean
     onPrevClick: () => void
-    handleClose: () => void
 }
 
-export const NewPostModalStep: FC<IProps> = ({ onPrevClick, isOpen, handleClose, file, setFile, onNextClick }) => {
+export const NewPostModalStep: FC<IProps> = ({ onPrevClick, file, setFile, onNextClick }) => {
     let image = file && URL.createObjectURL(file)
     const { theme } = useTheme()
     const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
@@ -43,7 +41,7 @@ export const NewPostModalStep: FC<IProps> = ({ onPrevClick, isOpen, handleClose,
     }
 
     return (
-        <Modal isOpen={isOpen} title="add Photo" withHeader={false} onClose={handleClose}>
+        <>
             <header className={cls.header}>
                 <IconArrowBack fill={fill} onClick={onPrevClick}/>
                 <h2>Publication</h2>
@@ -55,7 +53,6 @@ export const NewPostModalStep: FC<IProps> = ({ onPrevClick, isOpen, handleClose,
 
                 </div>
                 <form className={cls.descriptionContainer} onSubmit={handleSubmit(onSubmit)}>
-                    {/* // TODO: TextArea необязательна */}
                     <div className={cls.profileInfoDescription}>
                         {userData &&
                         <div className={cls.profileInfo}>
@@ -71,8 +68,6 @@ export const NewPostModalStep: FC<IProps> = ({ onPrevClick, isOpen, handleClose,
                 placeholder={'Write your description here'}
                 {...register('description',
                     { maxLength: { value: 500, message: 'Max length of description is 500 characters' } })}/>
-                        {/*   //TODO: Location необязательный */}
-
                     </div>
                     <Input
                         {...register('location')}
@@ -87,6 +82,6 @@ export const NewPostModalStep: FC<IProps> = ({ onPrevClick, isOpen, handleClose,
                 </form>
 
             </div>
-        </Modal>
+        </>
     )
 }

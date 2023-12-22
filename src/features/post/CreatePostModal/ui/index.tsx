@@ -1,4 +1,5 @@
 import { useState, type FC, useEffect } from 'react'
+import { Modal } from 'shared/ui'
 import { useCreateMutation } from '../model'
 import { CropImageModalStep } from './modalSteps/CropImageModalStep'
 import { FilterIamgeModalStep } from './modalSteps/FilterImageModalStep'
@@ -29,12 +30,7 @@ export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
     const { onCreate, isSuccess } = useCreateMutation({ handleClose })
 
     const [currentStep, setCurrentStep] = useState<Values | null >(1)
-    /* const [state, setState]  = useState(){
-        file:
-        name:
-        workingImage:
 
-    } */
     const [file, setFile] = useState<File | undefined>()
     const [workingImage, setWorkingImage] = useState<File | undefined>()
     const onSubmit = async (data: INewPostInterface) => {
@@ -46,7 +42,44 @@ export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
         onCreate(formData)
     }
 
-    // TODO: подумать, как сделать это в сихр ф-ии onSubmit
+    const renderStep = () => {
+        const setNexStep = () => {
+            currentStep && setCurrentStep((currentStep + 1) as Values)
+        }
+        const setPrevStep = () => {
+            currentStep && setCurrentStep((currentStep - 1) as Values)
+        }
+        return <>
+            { currentStep === MODALSTEPS.ImageStep &&
+            (
+                <ImageModalStep
+                 setFile={setFile} onNextClick={setNexStep}
+                />
+            )}
+            {currentStep === MODALSTEPS.CropImageStep &&
+            (<CropImageModalStep
+                setFile={setWorkingImage}
+                file={file}
+                onNextClick={setNexStep}
+                onPrevClick={() => { setPrevStep(); setFile(undefined) }}
+            />)}
+            {currentStep === MODALSTEPS.filterImageStep &&
+            (<FilterIamgeModalStep
+                setFile={setWorkingImage}
+                file={workingImage}
+                onNextClick={setNexStep}
+                onPrevClick={setPrevStep}
+            />)}
+            {currentStep === MODALSTEPS.NewPostStep &&
+            (<NewPostModalStep
+                setFile={setFile}
+                file={workingImage}
+                onNextClick={onSubmit}
+                onPrevClick={setPrevStep}
+            />)}
+        </>
+    }
+
     useEffect(() => {
         if (isSuccess) {
             setFile(undefined)
@@ -56,41 +89,9 @@ export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
     }, [isSuccess])
 
     return (
-        <>
-            { currentStep === MODALSTEPS.ImageStep &&
-            (
-
-                <ImageModalStep
-                 isOpen={isOpen && currentStep === MODALSTEPS.ImageStep }
-                 setFile={setFile} file={file} onNextClick={() => { setCurrentStep(2) }}
-                 onPrevClick={() => { setFile(undefined) }}
-                 handleClose={handleClose}
-
-                />
-
-            )}
-            {currentStep === MODALSTEPS.CropImageStep &&
-            (<CropImageModalStep
-                isOpen={isOpen && currentStep === MODALSTEPS.CropImageStep }
-                setFile={setWorkingImage} file={file} onNextClick={() => { setCurrentStep(3) }}
-                onPrevClick={() => { setCurrentStep(1) } }
-                handleClose={handleClose}
-            />)}
-            {currentStep === MODALSTEPS.filterImageStep &&
-            (<FilterIamgeModalStep
-                isOpen={isOpen && currentStep === MODALSTEPS.filterImageStep }
-                setFile={setWorkingImage} file={workingImage} onNextClick={() => { setCurrentStep(4) }}
-                onPrevClick={() => { setCurrentStep(2) } }
-                handleClose={handleClose}
-            />)}
-            {currentStep === MODALSTEPS.NewPostStep &&
-            (<NewPostModalStep
-                isOpen={isOpen && currentStep === MODALSTEPS.NewPostStep }
-                setFile={setFile} file={workingImage} onNextClick={onSubmit}
-                onPrevClick={() => { setCurrentStep(3) } }
-                handleClose={handleClose}
-            />)}
-        </>
+        <Modal isOpen={isOpen} title="add Photo" withHeader={!file} onClose={handleClose}>
+            {renderStep()}
+        </Modal>
 
     )
 }
