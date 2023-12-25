@@ -8,10 +8,11 @@
         align-items: center;
         gap: 24px;
 
-        .errorBlock {
+        .errorBox {
             background: var(--danger-900-color);
             border: 1px solid var(--danger-500-color);
             padding: 10px;
+            text-align: center;
         }
         
         .button{

@@ -1,8 +1,12 @@
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
-import React, {
-    type ChangeEvent, type FC, useState, type MouseEvent,
-    type Dispatch, type SetStateAction
+import {
+    useState,
+    type ChangeEvent,
+    type Dispatch,
+    type FC,
+    type MouseEvent,
+    type SetStateAction
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useUploadAvatar } from 'features/profile/avatar/model/uploadAvatar'
@@ -34,9 +38,19 @@ export const AvatarModal: FC<PropsType> = ({ className, setAvatar, isOpen, setIs
     }
 
     const onBeforeFileLoad = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0].size > MAX_FILE_SIZE) {
-            setErrorMessage('Photo size must be less than 10 MB!')
-            e.target.value = ''
+        const allowedImageTypes = ['image/jpeg', 'image/png']
+
+        const file = e.target.files?.[0]
+        if (file) {
+            if (!allowedImageTypes.includes(file?.type)) {
+                setErrorMessage('The format of the uploaded photo must be PNG and JPEG')
+                e.target.value = ''
+            } else if (file?.size > MAX_FILE_SIZE) {
+                setErrorMessage('Photo size must be less than 10 MB!')
+                e.target.value = ''
+            } else {
+                setErrorMessage('')
+            }
         }
     }
 
@@ -61,15 +75,11 @@ export const AvatarModal: FC<PropsType> = ({ className, setAvatar, isOpen, setIs
             className={clsx(cls.Modal, {}, [className])}
         >
             <div className={cls.content}>
-                {errorMessage && <div className={cls.errorBlock}>
+                {errorMessage && <div className={cls.errorBox}>
                     <p><strong>Error!</strong> {errorMessage}</p>
                 </div>}
-                <AvatarDynamicImport
-                            width={AVATAR_SIZE}
-                            height={AVATAR_SIZE}
-                            onBeforeFileLoad={onBeforeFileLoad}
-                            onCrop={onCrop}
-                />
+                <AvatarDynamicImport width={AVATAR_SIZE} height={AVATAR_SIZE} onBeforeFileLoad={onBeforeFileLoad}
+                                     onCrop={onCrop} />
                 <Button className={cls.button} type={'button'} onClick={save} disabled={!image}>{t('save')}</Button>
             </div>
         </Modal>
