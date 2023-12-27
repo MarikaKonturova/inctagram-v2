@@ -3,23 +3,23 @@ import { useCallback } from 'react'
 import { DeviceService } from 'shared/api'
 
 export const useTerminateAllDevices = () => {
-    const queryClient = useQueryClient()
+  const queryClient = useQueryClient()
 
-    const { mutate: terminateAllDevices, isLoading: isDevicesLoading } = useMutation({
-        mutationKey: ['terminate-all-session'],
-        mutationFn: DeviceService.terminateAllDevices,
-        retry: false,
-        onSuccess: async () => {
-            await queryClient.invalidateQueries(['devices'])
-        }
-    })
+  const { isLoading: isDevicesLoading, mutate: terminateAllDevices } = useMutation({
+    mutationFn: DeviceService.terminateAllDevices,
+    mutationKey: ['terminate-all-session'],
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(['devices'])
+    },
+    retry: false,
+  })
 
-    const onAllTerminate = useCallback(() => {
-        terminateAllDevices()
-    }, [terminateAllDevices])
+  const onAllTerminate = useCallback(() => {
+    terminateAllDevices()
+  }, [terminateAllDevices])
 
-    return {
-        isDevicesLoading,
-        onAllTerminate
-    }
+  return {
+    isDevicesLoading,
+    onAllTerminate,
+  }
 }

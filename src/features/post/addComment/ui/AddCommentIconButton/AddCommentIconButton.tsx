@@ -4,21 +4,27 @@ import IconCommentOutline from 'shared/assets/icons/outline/message-circle-outli
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
 import { ActionIcon } from 'shared/ui'
+
 import { useCommentPost } from '../../model'
 
 export const AddCommentIconButton = () => {
-    const { theme } = useTheme()
+  const { theme } = useTheme()
 
-    const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
-    const { addComment } = useCommentPost()
+  const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
+  const { addComment } = useCommentPost()
 
-    const onCommentIconClick = () => {
-        // addComment()
-        return new Promise<void>((resolve) => { resolve() })
-    }
+  const onCommentIconClick = () => {
+    // addComment()
+    return new Promise<void>(resolve => {
+      resolve()
+    })
+  }
 
-    return (
-        <ActionIcon filledIcon={<IconComment fill={fill}/>}
-                    outlineIcon={<IconCommentOutline fill={fill}/>} onClick={onCommentIconClick} />
-    )
+  return (
+    <ActionIcon
+      filledIcon={<IconComment fill={fill} />}
+      onClick={onCommentIconClick}
+      outlineIcon={<IconCommentOutline fill={fill} />}
+    />
+  )
 }

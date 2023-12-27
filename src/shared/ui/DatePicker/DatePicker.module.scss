@@ -1,7 +1,7 @@
-@import "app/styles/mixins/mixins";
+@import 'app/styles/mixins/mixins';
 
 .icon {
-    transition: fill 0.5s;
+  transition: fill 0.5s;
 }
 
 // .react-datepicker__day.react-datepicker__day--today {
@@ -9,130 +9,115 @@
 // }
 
 .calendarContainer {
-    height: 36px;
-    padding: 6px 12px;
-    position: relative;
-    width: 100%;
+  @include flex(row, space-between, flex-start);
 
-    @include flex(row, space-between, flex-start);
+  position: relative;
 
+  width: 100%;
+  height: 36px;
+  padding: 6px 12px;
+
+  background-color: var(--dark-500-color);
+
+  > :nth-child(2) {
+    > :nth-child(2) {
+      position: absolute !important;
+      top: 26px !important;
+      left: 0 !important;
+      transform: none !important;
+    }
+  }
+
+  & > :nth-child(2) > :nth-child(2) > div > div {
+    border: 1px solid var(--dark-300-color);
+    border-radius: 0.3rem;
+
+    > :nth-child(1) {
+      display: none;
+    }
+
+    > :nth-child(3) {
+      > :nth-child(1) {
+        background-color: var(--dark-500-color);
+        border: none;
+
+        > :nth-child(2) > * {
+          color: var(--light-100-color);
+        }
+      }
+
+      > :nth-child(2) {
+        margin: 0;
+        background-color: var(--dark-500-color);
+        border: none;
+      }
+    }
+  }
+
+  .day {
+    color: var(--light-100-color);
     background-color: var(--dark-500-color);
 
-  
-
-    > :nth-child(2) {
-        > :nth-child(2) {
-            transform: none !important;
-            position: absolute !important;
-            left: 0 !important;
-            top: 26px !important;
-        }
+    &:hover {
+      background-color: var(--primary-500-color);
+      border: 2 px solid var(--primary-900-color);
+      border-radius: 50%;
     }
 
-    & > :nth-child(2) > :nth-child(2) > div > div {
-        border: 1px solid var(--dark-300-color);
-        border-radius: 0.3rem;
+    &:global(.react-datepicker__day--selected) {
+      position: relative;
 
-        > :nth-child(1) {
-            display: none;
-        }
+      align-self: center;
 
-        > :nth-child(3) {
-            > :nth-child(1) {
-                background-color: var(--dark-500-color);
-                border: none;
+      width: 1.6rem;
+      height: 1.6rem;
 
-                > :nth-child(2) > * {
-                    color: var(--light-100-color);
-                }
-            }
+      color: var(--light-100-color);
 
-            > :nth-child(2) {
-                background-color: var(--dark-500-color);
-                border: none;
-                margin: 0;
-            }
-        }
+      background-color: var(--primary-500-color);
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px var(--primary-900-color);
     }
 
- 
- 
-
-    .day {
-        color: var(--light-100-color);
-        background-color: var(--dark-500-color);
-
-        &:hover {
-            background-color: var(--primary-500-color);
-            border: 2 px solid var(--primary-900-color);
-            border-radius: 50%;
-        }
-
-        &:global(.react-datepicker__day--selected) {
-            color: var(--light-100-color);
-            background-color: var(--primary-500-color);
-            position: relative;
-            border-radius: 50%;
-            align-self: center;
-            width: 1.6rem;
-            height: 1.6rem;
-            box-shadow: 0 0 0 2px var(--primary-900-color);
-            
-        }
-
-        &:global(.react-datepicker__day--disabled) {
-            color: var(--dark-100-color);
-            pointer-events: none;
-
-        }
-
-        &:global(.react-datepicker__day--weekend) {
-            color: var(--danger-300-color);
-        }
-
-        &:global(.react-datepicker__day--outside-month) {
-            color: var(--dark-100-color) !important;
-            pointer-events: none;
-        }
-
-        
+    &:global(.react-datepicker__day--disabled) {
+      pointer-events: none;
+      color: var(--dark-100-color);
     }
 
-   
+    &:global(.react-datepicker__day--weekend) {
+      color: var(--danger-300-color);
+    }
 
-   
- 
-
-   
- 
+    &:global(.react-datepicker__day--outside-month) {
+      pointer-events: none;
+      color: var(--dark-100-color) !important;
+    }
+  }
 }
 
-.libCalendar{
-    background-color: transparent;
-    color: var(--light-100-color);
-    width: 75%;
-        
+.libCalendar {
+  width: 75%;
+  color: var(--light-100-color);
+  background-color: transparent;
 }
-
 
 // error
 
 .calendarContainerError {
-    border: 1px solid var(--danger-500-color);
+  border: 1px solid var(--danger-500-color);
 }
 
-.libCalendarError{
-    color: var(--danger-500-color);
-        
+.libCalendarError {
+  color: var(--danger-500-color);
 }
 
 .errorBlockInfo {
-    display: flex;
-    gap: 1px;
-    align-items: end;
-    color: var(--danger-500-color);
+  display: flex;
+  gap: 1px;
+  align-items: flex-end;
+  color: var(--danger-500-color);
 
-    a {
-        color: var(--danger-500-color);
-    }
+  a {
+    color: var(--danger-500-color);
+  }
 }

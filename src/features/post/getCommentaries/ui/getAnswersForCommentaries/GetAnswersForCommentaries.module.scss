@@ -1,36 +1,38 @@
 .userName {
-    font: var(--font-medium-700);
-    padding: 5px;
+  padding: 5px;
+  font: var(--font-medium-700);
 }
 
 .time {
-    font: var(--font-small-400);
-    color: var(--light-900-color);
-    padding: 5px;
+  padding: 5px;
+  font: var(--font-small-400);
+  color: var(--light-900-color);
 }
 
 .actionButton {
-    font: var(--font-small-600);
-    color: var(--light-900-color);
-    padding: 5px;
+  padding: 5px;
+  font: var(--font-small-600);
+  color: var(--light-900-color);
 }
 
 .avatarCommentGroup {
-    display: flex;
-    gap: 12px;
+  display: flex;
+  gap: 12px;
 }
 
-.answerContent{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    font: var(--font-medium-400);
+.answerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 15px;
+
+  font: var(--font-medium-400);
 }
 
-.answer{
-    display:block;
-    width:200px;
-    word-wrap:break-word;
-    padding-left: 15px;
+.answer {
+  display: block;
+  width: 200px;
+  padding-left: 15px;
+  word-wrap: break-word;
 }

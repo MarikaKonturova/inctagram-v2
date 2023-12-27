@@ -1,54 +1,53 @@
 .comments {
-    padding: 15px;
-    width: 100%;
-    max-height: calc(85vh - (56px + 100px + 52px));
-    overflow-y: auto;
+  overflow-y: auto;
+  width: 100%;
+  max-height: calc(85vh - (56px + 100px + 52px));
+  padding: 15px;
 }
 
 .comment {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 5px;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 5px;
 }
 
 .content {
-    font: var(--font-medium-400);
-    display:block;
-    width:200px;
-    word-wrap:break-word;
+  display: block;
+  width: 200px;
+  font: var(--font-medium-400);
+  word-wrap: break-word;
 }
 
 .userName {
-    font: var(--font-medium-700);
+  font: var(--font-medium-700);
 }
 
 .time {
-    font: var(--font-small-400);
-    color: var(--light-900-color);
+  font: var(--font-small-400);
+  color: var(--light-900-color);
 }
 
 .actionButton {
-    font: var(--font-small-600);
-    color: var(--light-900-color);
+  font: var(--font-small-600);
+  color: var(--light-900-color);
 }
 
 .avatarCommentGroup {
-    display: flex;
-    gap: 12px;
-    border: 1px solid deeppink;
+  display: flex;
+  gap: 12px;
+  border: 1px solid deeppink;
 }
 
-.showAnswerButton{
-    font: var(--font-small-600);
-    color: var(--light-900-color);
-    cursor: pointer;
+.showAnswerButton {
+  cursor: pointer;
+  font: var(--font-small-600);
+  color: var(--light-900-color);
 }
 
 .commentInfo {
-    flex: 1;
+  flex: 1;
 }
-
-

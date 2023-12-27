@@ -1,12 +1,11 @@
-@import "app/styles/mixins/mixins";
+@import 'app/styles/mixins/mixins';
 
 .social {
-    @include flex($justify: center, $align: center);
+  @include flex($justify: center, $align: center);
 
-    column-gap: 60px;
+  column-gap: 60px;
 
-    &:not(:last-child) {
-        margin-bottom: 24px;
-    }
-
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
 }

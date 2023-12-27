@@ -1,30 +1,35 @@
 import React from 'react'
 import { Button, Modal } from 'shared/ui'
+
 import { useDeleteMutation } from '../model'
 import cls from './styles.module.scss'
 
 interface IProps {
-    isOpen: boolean
-    id: number
-    postId: number
-    handleClose: () => void
-    openEditPostModal: () => void
+  handleClose: () => void
+  id: number
+  isOpen: boolean
+  openEditPostModal: () => void
+  postId: number
 }
 
-function DeletePostModal ({ isOpen, handleClose, id, postId, openEditPostModal }: IProps) {
-    const { onDelete } = useDeleteMutation({ handleClose, postId })
+function DeletePostModal({ handleClose, id, isOpen, openEditPostModal, postId }: IProps) {
+  const { onDelete } = useDeleteMutation({ handleClose, postId })
 
-    return (
-        <Modal id={id} isOpen={isOpen} onClose={handleClose} title="Delete Post">
-            <div className={cls.rootContainer}>
-                <p>Are you sure you want to delete this post?</p>
-                <div className={cls.buttonsContainer}>
-                    <Button type="submit" theme="outline" onClick={onDelete}>Yes</Button>
-                    <Button type="submit" theme="primary" onClick={openEditPostModal}>No</Button>
-                </div>
-            </div>
-        </Modal>
-    )
+  return (
+    <Modal id={id} isOpen={isOpen} onClose={handleClose} title={'Delete Post'}>
+      <div className={cls.rootContainer}>
+        <p>Are you sure you want to delete this post?</p>
+        <div className={cls.buttonsContainer}>
+          <Button onClick={onDelete} theme={'outline'} type={'submit'}>
+            Yes
+          </Button>
+          <Button onClick={openEditPostModal} theme={'primary'} type={'submit'}>
+            No
+          </Button>
+        </div>
+      </div>
+    </Modal>
+  )
 }
 
 export default DeletePostModal

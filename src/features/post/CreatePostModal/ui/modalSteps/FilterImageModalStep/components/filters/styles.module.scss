@@ -1,22 +1,21 @@
-@import "app/styles/mixins/mixins";
+@import 'app/styles/mixins/mixins';
 
-.container{
-    display: grid;
-    grid-template-areas: 
-        ". . ."
-        ". . ."
-        ". . ."; 
-
+.container {
+  display: grid;
+  grid-template-areas:
+    '. . .'
+    '. . .'
+    '. . .';
 }
 
-.imageGroup{
-    @include flex(column, center, center);
+.imageGroup {
+  @include flex(column, center, center);
 
-    gap: 3px;
-    padding: 5px;
+  gap: 3px;
+  padding: 5px;
 
-    img{
-        width: 100px;
-        height: 100px;
-    }
+  img {
+    width: 100px;
+    height: 100px;
+  }
 }

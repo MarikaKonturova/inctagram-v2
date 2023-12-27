@@ -1,78 +1,80 @@
-@import "app/styles/mixins/mixins";
+@import 'app/styles/mixins/mixins';
 
 .mainContainer {
-    display: flex;
-    height: fit-content;
+  display: flex;
+  height: fit-content;
 }
 
 .header {
-    padding: 12px 24px;
-    border-bottom: 1px solid var(--dark-100-color);
+  @include flex($justify: space-between, $align: center);
 
-    @include flex($justify: space-between, $align: center);
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--dark-100-color);
 }
 
 .imgContainer {
-    flex: 1;
-    
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+  flex: 1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .profileInfoDescription {
-    width: 100%;
+  width: 100%;
 }
 
 .profileInfo {
-    display: flex;
-    width: 100%;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 10px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .profileName {
-    font: var(--font-regular-700);
+  font: var(--font-regular-700);
 }
 
 .profileImg {
-    width: 100px;
+  width: 100px;
 }
 
 .descriptionContainer {
-    padding: 1rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 1rem;
 }
 
 .textareaContainer {
-    width: 100%;
-    font: var(--font-regular-400);
-    color: var(--light-900-color);
+  width: 100%;
+  font: var(--font-regular-400);
+  color: var(--light-900-color);
 
-    textarea {
-        min-height: 150px !important;
-    }
+  textarea {
+    min-height: 150px !important;
+  }
 }
 
 .label {
-    font: var(--font-medium-400);
-    color: var(--light-900-color);
+  font: var(--font-medium-400);
+  color: var(--light-900-color);
 }
 
 .wrapper {
-    width: 100%;
-    align-self: flex-end;
+  align-self: flex-end;
+  width: 100%;
 
-    input {
-        padding: 0 !important;
-        border-bottom: 1px solid var(--dark-100-color);
-    }
+  input {
+    padding: 0 !important;
+    border-bottom: 1px solid var(--dark-100-color);
+  }
 }

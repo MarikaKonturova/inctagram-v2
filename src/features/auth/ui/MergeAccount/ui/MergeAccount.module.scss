@@ -1,31 +1,32 @@
-.container{
-    height: 100%;
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+
+  .headerText {
+    font-weight: bold;
+  }
+
+  .text {
+    width: 250px;
+    font-style: normal;
+    text-align: center;
+  }
+
+  .buttonContainer {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     gap: 20px;
-
-    .headerText{
-        font-weight: bold;
-    }
-
-    .text{
-        width: 250px;
-        text-align: center;
-        font-style:normal;
-    }
-
-    .buttonContainer{
-        display: flex;
-        flex-direction: row;
-        gap: 20px
-    }
+  }
 }
 
-.textForModal{
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.textForModal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
 }

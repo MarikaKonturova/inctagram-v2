@@ -1,19 +1,15 @@
-@import "app/styles/mixins/mixins";
+@import 'app/styles/mixins/mixins';
 
+.container {
+  @include flex(row, space-between, center);
 
-
-.container{
-    @include flex(row, space-between, center);
-
-    padding: 6px 24px;
-
+  padding: 6px 24px;
 }
 
-.input{
-    flex: 10;
-
+.input {
+  flex: 10;
 }
 
-.button{
-    flex: 2
+.button {
+  flex: 2;
 }

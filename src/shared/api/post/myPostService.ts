@@ -1,38 +1,46 @@
 import { $api } from 'shared/api'
-import { type PostsImage, type PostResponse, type ResponseType, type Comment } from '../../types/post'
+
+import {
+  type Comment,
+  type PostResponse,
+  type PostsImage,
+  type ResponseType,
+} from '../../types/post'
 
 export const MyPostService = {
-    createPostsImage (file: any) {
-        return $api.post<PostsImage>('/posts/image', file, {
-            headers: {
-                'Content-type': 'multipart/form-data'
-            }
-        })
-    },
-    createNewPost (newPost: FormData) {
-        return $api.post<PostResponse>('/posts', newPost)
-    },
-    deletePostsImage (uploadId: string) {
-        return $api.delete(`/posts/image/${uploadId}`)
-    },
-    getPosts (userName: string, pageNumber: number) {
-        return $api.get<ResponseType>(`/posts/${userName}`, {
-            params: {
-                pageNumber,
-                pageSize: 5
-            }
-        }).then(res => res.data)
-    },
-    getPost (postId: number) {
-        return $api.get<PostResponse>(`/posts/p/${postId}`)
-    },
-    editPost (postId: number, data: Record<'description', string>) {
-        return $api.put(`/posts/${postId}`, data)
-    },
-    deletePost (postId: number) {
-        return $api.delete(`/posts/${postId}`)
-    },
-    getPostComments (postId: number) {
-        return $api.get<ResponseType<Comment[]>>(`/posts/${postId}/comments`)
-    }
+  createNewPost(newPost: FormData) {
+    return $api.post<PostResponse>('/posts', newPost)
+  },
+  createPostsImage(file: any) {
+    return $api.post<PostsImage>('/posts/image', file, {
+      headers: {
+        'Content-type': 'multipart/form-data',
+      },
+    })
+  },
+  deletePost(postId: number) {
+    return $api.delete(`/posts/${postId}`)
+  },
+  deletePostsImage(uploadId: string) {
+    return $api.delete(`/posts/image/${uploadId}`)
+  },
+  editPost(postId: number, data: Record<'description', string>) {
+    return $api.put(`/posts/${postId}`, data)
+  },
+  getPost(postId: number) {
+    return $api.get<PostResponse>(`/posts/p/${postId}`)
+  },
+  getPostComments(postId: number) {
+    return $api.get<ResponseType<Comment[]>>(`/posts/${postId}/comments`)
+  },
+  getPosts(userName: string, pageNumber: number) {
+    return $api
+      .get<ResponseType>(`/posts/${userName}`, {
+        params: {
+          pageNumber,
+          pageSize: 5,
+        },
+      })
+      .then(res => res.data)
+  },
 }

@@ -4,27 +4,30 @@ import IconFavourites from 'shared/assets/icons/outline/bookmark-outline.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
 import { ActionIcon } from 'shared/ui'
+
 import { useAddToFavouritesPost } from '../../model'
 
 interface IProps {
-    postId: number
-    postIsFavourite: boolean
+  postId: number
+  postIsFavourite: boolean
 }
 
-export const AddPostToFavoutitesIconButton: FC<IProps> = ({ postIsFavourite, postId }) => {
-    const { theme } = useTheme()
+export const AddPostToFavoutitesIconButton: FC<IProps> = ({ postId, postIsFavourite }) => {
+  const { theme } = useTheme()
 
-    const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
-    const { addToFavourites } = useAddToFavouritesPost()
+  const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
+  const { addToFavourites } = useAddToFavouritesPost()
 
-    const onFavouritesIconClick = () => {
-        addToFavourites(postId)
-    }
+  const onFavouritesIconClick = () => {
+    addToFavourites(postId)
+  }
 
-    return (
-        <ActionIcon filledIcon={<IconFavouritesOutline fill={fill}/>}
-                    outlineIcon={<IconFavourites fill={fill} />}
-                    onClick={onFavouritesIconClick}
-                    initialState={postIsFavourite} />
-    )
+  return (
+    <ActionIcon
+      filledIcon={<IconFavouritesOutline fill={fill} />}
+      initialState={postIsFavourite}
+      onClick={onFavouritesIconClick}
+      outlineIcon={<IconFavourites fill={fill} />}
+    />
+  )
 }

@@ -2,44 +2,48 @@ import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
 export interface useAuthStateType {
-    email: string
-    isAuth: boolean
-    userId: number
-    isOpenMergePopUp: boolean
-    hasBusinessAccount: boolean
-    contentForMerge: string
-    setUserData: (data: { userId: number, hasBusinessAccount: boolean }) => void
-    setEmail: (email: string) => void
-    setAuth: (isAuth: boolean) => void
-    setPopUpForMerge: (isOpenMergePopUp: boolean, contentForMerge: string) => void
+  contentForMerge: string
+  email: string
+  hasBusinessAccount: boolean
+  isAuth: boolean
+  isOpenMergePopUp: boolean
+  setAuth: (isAuth: boolean) => void
+  setEmail: (email: string) => void
+  setPopUpForMerge: (isOpenMergePopUp: boolean, contentForMerge: string) => void
+  setUserData: (data: { hasBusinessAccount: boolean; userId: number }) => void
+  userId: number
 }
-export const useAuth = create<useAuthStateType>((set) => ({
-    email: '',
-    userId: 0,
-    isAuth: false,
-    hasBusinessAccount: false,
-    isOpenMergePopUp: false,
-    contentForMerge: '',
-    setEmail: (email: string) => {
-        set(state => ({
-            ...state, email
-        }))
-    },
-    setAuth: (isAuth: boolean) => {
-        set(state => ({
-            ...state, isAuth
-        }))
-    },
-    setUserData: (data: { userId: number, hasBusinessAccount: boolean }) => {
-        set(state => ({
-            ...state, userId: data.userId, hasBusinessAccount: data.hasBusinessAccount
-
-        }))
-    },
-    setPopUpForMerge: (isOpenMergePopUp, contentForMerge) => {
-        set(state => ({
-            ...state, isOpenMergePopUp, contentForMerge
-
-        }))
-    }
+export const useAuth = create<useAuthStateType>(set => ({
+  contentForMerge: '',
+  email: '',
+  hasBusinessAccount: false,
+  isAuth: false,
+  isOpenMergePopUp: false,
+  setAuth: (isAuth: boolean) => {
+    set(state => ({
+      ...state,
+      isAuth,
+    }))
+  },
+  setEmail: (email: string) => {
+    set(state => ({
+      ...state,
+      email,
+    }))
+  },
+  setPopUpForMerge: (isOpenMergePopUp, contentForMerge) => {
+    set(state => ({
+      ...state,
+      contentForMerge,
+      isOpenMergePopUp,
+    }))
+  },
+  setUserData: (data: { hasBusinessAccount: boolean; userId: number }) => {
+    set(state => ({
+      ...state,
+      hasBusinessAccount: data.hasBusinessAccount,
+      userId: data.userId,
+    }))
+  },
+  userId: 0,
 }))

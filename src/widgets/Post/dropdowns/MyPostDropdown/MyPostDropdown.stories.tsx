@@ -1,19 +1,17 @@
 import { type ComponentMeta, type ComponentStory } from '@storybook/react'
 import React from 'react'
+
 import { MyPostDropdown } from './MyPostDropdown'
 
 export default {
-    title: 'features/PostModalActions',
-    component: MyPostDropdown,
-    argTypes: {
-
-    }
+  argTypes: {},
+  component: MyPostDropdown,
+  title: 'features/PostModalActions',
 } as ComponentMeta<typeof MyPostDropdown>
 
 const Template: ComponentStory<typeof MyPostDropdown> = () => {
-    return <MyPostDropdown openEditPostModal={() => {}} openDeletePostModal={() => {}}/>
+  return <MyPostDropdown openDeletePostModal={() => {}} openEditPostModal={() => {}} />
 }
 
 export const DefaultPostModalActions = Template.bind({})
-DefaultPostModalActions.args = {
-}
+DefaultPostModalActions.args = {}

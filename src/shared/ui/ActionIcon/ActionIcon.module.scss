@@ -1,8 +1,5 @@
+@import 'app/styles/mixins/mixins';
 
-@import "app/styles/mixins/mixins";
-
-
-
-.icon{
-    @include flex(row, center, center);
+.icon {
+  @include flex(row, center, center);
 }

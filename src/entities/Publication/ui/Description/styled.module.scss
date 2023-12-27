@@ -1,20 +1,19 @@
 .description {
-    display: flex;
-    align-items: start;
+  display: flex;
+  align-items: start;
 }
 
 .headerTitle {
-    margin-right: 12px;
+  margin-right: 12px;
 }
 
 .rightBlock {
-    margin-left: 12px;
+  margin-left: 12px;
 }
 
-
 .lessMore {
-    color: var(--light-900-color);
-    font: var(--font-regular-500);
-    margin-top: 5px;
-    cursor: pointer
+  cursor: pointer;
+  margin-top: 5px;
+  font: var(--font-regular-500);
+  color: var(--light-900-color);
 }

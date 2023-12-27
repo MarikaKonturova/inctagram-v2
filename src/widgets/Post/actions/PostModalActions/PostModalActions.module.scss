@@ -1,16 +1,15 @@
-@import "app/styles/mixins/mixins";
+@import 'app/styles/mixins/mixins';
 
+.container {
+  @include flex(row, space-between, center);
 
-.container{
-    @include flex(row, space-between, center);
-
-    margin: 10px 0;
-    width: 100%;
+  width: 100%;
+  margin: 10px 0;
 }
 
-.left_group{
-    @include flex(row, flex-start, center);
+.left_group {
+  @include flex(row, flex-start, center);
 
-    gap: 5%;
-    flex: 11;
+  flex: 11;
+  gap: 5%;
 }

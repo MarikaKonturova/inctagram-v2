@@ -1,107 +1,123 @@
-@import "app/styles/mixins/mixins";
+@import 'app/styles/mixins/mixins';
 
 .mainContainer {
-    min-height: 50vh;
-    max-height: 60vh;
-    width: 550px;
+  width: 550px;
+  min-height: 50vh;
+  max-height: 60vh;
 
-    label {
-        height: 100%;
-        width: 100%;
-    }
+  label {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .header {
-    padding: 12px 24px;
-    border-bottom: 1px solid var(--dark-100-color);
+  @include flex($justify: space-between, $align: center);
 
-    @include flex($justify: space-between, $align: center);
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--dark-100-color);
 }
 
 .nextContainer {
-    overflow-y: auto;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
 
-    img {
-        width: 80%;
-    }
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 80%;
+  }
 }
 
 .inputFile {
+  position: relative;
+  display: inline-block;
+
+  & span {
+    cursor: pointer;
+
     position: relative;
-    display: inline-block;
 
-    & span {
-        position: relative;
-        background: var(--primary-500-color);
-        border: none;
-        color: var(--light-100-color);
-        cursor: pointer;
-        border-radius: 2px;
-        padding: 9px 24px;
-        font: var(--font-h3);
-        transition: color 0.5s, background-color 0.5s;
+    padding: 9px 24px;
 
-        &:disabled {
-            cursor: not-allowed;
-        }
+    font: var(--font-h3);
+    color: var(--light-100-color);
 
-        &:hover {
-            background: var(--primary-100-color);
-        }
+    background: var(--primary-500-color);
+    border: none;
+    border-radius: 2px;
 
-        &:active {
-            background: var(--primary-700-color);
-        }
+    transition:
+      color 0.5s,
+      background-color 0.5s;
+
+    &:disabled {
+      cursor: not-allowed;
     }
 
-    input[type="file"] {
-        position: absolute;
-        z-index: -1;
-        opacity: 0;
-        display: block;
-        width: 0;
-        height: 0;
+    &:hover {
+      background: var(--primary-100-color);
     }
+
+    &:active {
+      background: var(--primary-700-color);
+    }
+  }
+
+  input[type='file'] {
+    position: absolute;
+    z-index: -1;
+
+    display: block;
+
+    width: 0;
+    height: 0;
+
+    opacity: 0;
+  }
 }
 
 .container {
-    height: 50vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 50vh;
 }
 
 .imgContainer {
-    height: 228px;
-    width: 222px;
-    background-color: var(--dark-500-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    svg {
-        width: 50px;
-        height: 50px;
-    }
+  width: 222px;
+  height: 228px;
+
+  background-color: var(--dark-500-color);
+
+  svg {
+    width: 50px;
+    height: 50px;
+  }
 }
 
-.errorBox{
-    padding: 1rem 3rem;
-    width: 90%;
-    margin:auto;
-    margin-top: 35px;
-    background-color: var(--danger-900-color);
-    border: 1px solid var(--danger-500-color);
-    white-space: pre-wrap;
-    text-align: center;
+.errorBox {
+  width: 90%;
+  margin: auto;
+  margin-top: 35px;
+  padding: 1rem 3rem;
+
+  text-align: center;
+  white-space: pre-wrap;
+
+  background-color: var(--danger-900-color);
+  border: 1px solid var(--danger-500-color);
 }

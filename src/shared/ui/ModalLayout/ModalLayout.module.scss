@@ -1,40 +1,40 @@
-@import "app/styles/mixins/mixins";
+@import 'app/styles/mixins/mixins';
 
 .container {
+  @include position(fixed, 0);
+  @include flex(column, center, center);
+
+  z-index: 3;
+  padding: 36px;
+
+  .overlay {
     @include position(fixed, 0);
-    @include flex(column, center, center);
 
-    padding: 36px;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background: rgb(0 0 0 / 54%);
+  }
+
+  .content {
+    @include position(relative);
+
     z-index: 3;
+    overflow: auto;
+    min-width: 378px;
+    min-height: 228px;
 
-    .overlay {
-        @include position(fixed, 0);
+    .header {
+      @include flex($justify: space-between, $align: center);
 
-        width: 100%;
-        height: 100%;
-        background: rgb(0 0 0 / 54%);
-        z-index: 2;
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--dark-100-color);
     }
+  }
 
-    .content {
-        @include position(relative);
-
-        z-index: 3;
-        overflow: auto;
-        min-width: 378px;
-        min-height: 228px;
-
-        .header {
-            padding: 12px 24px;
-            border-bottom: 1px solid var(--dark-100-color);
-
-            @include flex($justify: space-between, $align: center);
-        }
-    }
-
-    .withStyles {
-        border: 1px solid var(--dark-100-color);
-        border-radius: 2px;
-        background-color: var(--card-entity-bg);
-    }
+  .withStyles {
+    background-color: var(--card-entity-bg);
+    border: 1px solid var(--dark-100-color);
+    border-radius: 2px;
+  }
 }

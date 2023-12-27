@@ -1,11 +1,11 @@
-@import "app/styles/mixins/mixins";
+@import 'app/styles/mixins/mixins';
 
 .button {
-    @include flex($align: center);
-    
-    column-gap: 12px;
+  @include flex($align: center);
 
-    &:hover {
-        color: var(--danger-500-color);
-    }
+  column-gap: 12px;
+
+  &:hover {
+    color: var(--danger-500-color);
+  }
 }

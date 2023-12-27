@@ -7,23 +7,29 @@ import { ActionIcon } from 'shared/ui'
 import { useLikeAnswer } from '../../model/useLikeAnswer'
 
 interface likeAnswerType {
-    commentId: number
-    postId: number
-    answerId: number
-    isLiked: boolean
+  answerId: number
+  commentId: number
+  isLiked: boolean
+  postId: number
 }
 
-export const LikeAnswerIconButton: FC<likeAnswerType> = ({ commentId, postId, answerId, isLiked }) => {
-    const { likeAnswer } = useLikeAnswer(postId, commentId, answerId)
-    const onLikeIconClick = () => {
-        likeAnswer({ likeStatus: isLiked ? LikeStatus.DISLIKE : LikeStatus.LIKE })
-    }
+export const LikeAnswerIconButton: FC<likeAnswerType> = ({
+  answerId,
+  commentId,
+  isLiked,
+  postId,
+}) => {
+  const { likeAnswer } = useLikeAnswer(postId, commentId, answerId)
+  const onLikeIconClick = () => {
+    likeAnswer({ likeStatus: isLiked ? LikeStatus.DISLIKE : LikeStatus.LIKE })
+  }
 
-    return (
-        <ActionIcon filledIcon={<IconLike fill="#CC1439" />}
-                    outlineIcon={<IconLikeOutline fill="#ffffff" />}
-                    onClick={onLikeIconClick}
-                    initialState={isLiked}
-        />
-    )
+  return (
+    <ActionIcon
+      filledIcon={<IconLike fill={'#CC1439'} />}
+      initialState={isLiked}
+      onClick={onLikeIconClick}
+      outlineIcon={<IconLikeOutline fill={'#ffffff'} />}
+    />
+  )
 }

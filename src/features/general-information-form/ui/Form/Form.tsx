@@ -1,135 +1,133 @@
 import clsx from 'clsx'
+import { type GeneralInformationFormValues } from 'features/general-information-form/lib/useValidationForm'
 import React, { useEffect } from 'react'
 import {
-    Controller,
-    type Control,
-    type UseFormRegister,
-    type UseFormSetValue,
-    type UseFormWatch
+  type Control,
+  Controller,
+  type UseFormRegister,
+  type UseFormSetValue,
+  type UseFormWatch,
 } from 'react-hook-form'
-
 import { useTranslation } from 'react-i18next'
-import { type GeneralInformationFormValues } from 'features/general-information-form/lib/useValidationForm'
 import { COUNTRIES } from 'shared/constants/countryList'
 import { DatePicker, Input, Select, Textarea } from 'shared/ui'
+
 import cls from './Form.module.scss'
 
 interface IProps {
-    register: UseFormRegister<GeneralInformationFormValues>
-    validErrors: Record<
-    'firstNameError'
-    | 'userNameError'
-    | 'lastNameError'
-    | 'aboutMeError' | 'dateOfBirthError', string | undefined>
-    control: Control<GeneralInformationFormValues, any>
-    setValue: UseFormSetValue<GeneralInformationFormValues>
-    watch: UseFormWatch<GeneralInformationFormValues>
+  control: Control<GeneralInformationFormValues, any>
+  register: UseFormRegister<GeneralInformationFormValues>
+  setValue: UseFormSetValue<GeneralInformationFormValues>
+  validErrors: Record<
+    'aboutMeError' | 'dateOfBirthError' | 'firstNameError' | 'lastNameError' | 'userNameError',
+    string | undefined
+  >
+  watch: UseFormWatch<GeneralInformationFormValues>
 }
 
-export const Form: React.FC<IProps> = (props) => {
-    const { t } = useTranslation()
-    const {
-        register,
-        validErrors,
-        control,
-        setValue,
-        watch
-    } = props
-    const {
-        userNameError,
-        firstNameError,
-        lastNameError,
-        aboutMeError,
-        dateOfBirthError
-    } = validErrors
-    const country = watch('country')
-    const city = watch('city')
-    useEffect(() => {
-        if (country && city && !COUNTRIES[country]?.includes(city)) {
-            setValue('city', '')
-        }
-    }, [country, city])
+export const Form: React.FC<IProps> = props => {
+  const { t } = useTranslation()
+  const { control, register, setValue, validErrors, watch } = props
+  const { aboutMeError, dateOfBirthError, firstNameError, lastNameError, userNameError } =
+    validErrors
+  const country = watch('country')
+  const city = watch('city')
 
-    return (
-        <div className={cls.formsContainer}>
-            <Input
-                {...register('userName')}
-                id="userName"
-                type={'text'}
-                errorText={userNameError}
-                className={cls.wrapper}
-                variant='outline'
-                isRequired
-                label="Username"
-                labelClassName={cls.label}
-            />
+  useEffect(() => {
+    if (country && city && !COUNTRIES[country]?.includes(city)) {
+      setValue('city', '')
+    }
+  }, [country, city])
 
-            <Input
-                {...register('firstName')}
-                id="name"
-                type={'text'}
-                label="First Name"
-                errorText={firstNameError}
-                className={cls.wrapper}
-                variant='outline'
-                isRequired
-                labelClassName={cls.label}
-            />
+  return (
+    <div className={cls.formsContainer}>
+      <Input
+        {...register('userName')}
+        className={cls.wrapper}
+        errorText={userNameError}
+        id={'userName'}
+        isRequired
+        label={'Username'}
+        labelClassName={cls.label}
+        type={'text'}
+        variant={'outline'}
+      />
 
-            <Input
-                {...register('lastName')}
-                id="surName"
-                type={'text'}
-                label="Last Name"
-                errorText={lastNameError}
-                className={cls.wrapper}
-                variant='outline'
-                isRequired
-                labelClassName={cls.label}
-            />
+      <Input
+        {...register('firstName')}
+        className={cls.wrapper}
+        errorText={firstNameError}
+        id={'name'}
+        isRequired
+        label={'First Name'}
+        labelClassName={cls.label}
+        type={'text'}
+        variant={'outline'}
+      />
 
-            <Controller
-                control={control}
-                name="dateOfBirth"
-                render={({ field: { onChange, value } }) => (
-                    <div className={cls.wrapper}>
-                        <label className={cls.label}>{`${t('dateOfBirth')}`}</label>
-                        <DatePicker
-                            value={value || new Date().toISOString()}
-                            onChange={onChange}
-                            setValue={setValue}
-                            // to fix touch issue with DatePicker and yup
-                            errorText={dateOfBirthError}/>
-                    </div>
-                )}
-            />
+      <Input
+        {...register('lastName')}
+        className={cls.wrapper}
+        errorText={lastNameError}
+        id={'surName'}
+        isRequired
+        label={'Last Name'}
+        labelClassName={cls.label}
+        type={'text'}
+        variant={'outline'}
+      />
 
-            <div className={clsx(cls.wrapper, cls.selectContainer)}>
-                <Controller
-                control={control}
-                name="country"
-                render={({ field: { onChange, value } }) => (
-                    <Select options={Object.keys(COUNTRIES)}
-                            label="Select your country"
-                            value={value}
-                            onChange={onChange} />
-                )} />
-                <Controller
-                control={control}
-                name="city"
-                render={({ field }) => (
-                    <Select options={country ? COUNTRIES[country] : []} label="Select your city" {...field} />
-                )} />
-            </div>
-            <Textarea
-                {...register('aboutMe')}
-                id="aboutMe"
-                label="About me"
-                errorText={aboutMeError}
-                labelClassName={cls.label}
-                textareaClassName={aboutMeError ? cls.error : cls.textarea}
-                className={cls.wrapper}
+      <Controller
+        control={control}
+        name={'dateOfBirth'}
+        render={({ field: { onChange, value } }) => (
+          <div className={cls.wrapper}>
+            <label className={cls.label}>{`${t('dateOfBirth')}`}</label>
+            <DatePicker
+              // to fix touch issue with DatePicker and yup
+              errorText={dateOfBirthError}
+              onChange={onChange}
+              setValue={setValue}
+              value={value || new Date().toISOString()}
             />
-        </div>
-    )
+          </div>
+        )}
+      />
+
+      <div className={clsx(cls.wrapper, cls.selectContainer)}>
+        <Controller
+          control={control}
+          name={'country'}
+          render={({ field: { onChange, value } }) => (
+            <Select
+              label={'Select your country'}
+              onChange={onChange}
+              options={Object.keys(COUNTRIES)}
+              value={value}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name={'city'}
+          render={({ field }) => (
+            <Select
+              label={'Select your city'}
+              options={country ? COUNTRIES[country] : []}
+              {...field}
+            />
+          )}
+        />
+      </div>
+      <Textarea
+        {...register('aboutMe')}
+        className={cls.wrapper}
+        errorText={aboutMeError}
+        id={'aboutMe'}
+        label={'About me'}
+        labelClassName={cls.label}
+        textareaClassName={aboutMeError ? cls.error : cls.textarea}
+      />
+    </div>
+  )
 }

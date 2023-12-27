@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { InfiniteData } from '@tanstack/react-query'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { PostModalActions } from 'widgets/Post/actions/PostModalActions/PostModalActions'
 import { MODALS, type Values } from 'shared/constants/post'
 import { type FavoritesType } from 'shared/types/post'
 import { Card, Loader } from 'shared/ui'
+import { PostModalActions } from 'widgets/Post/actions/PostModalActions/PostModalActions'
+
 import { GetCommentaries } from '../../post'
 import { useGetMyPost } from '../../profile/getPosts/model'
 import { GetPostModal } from '../../profile/getPosts/ui/modals/GetPostModal'
@@ -12,81 +14,79 @@ import { useGetFavoritesData } from '../model'
 import cls from './favorites.module.scss'
 
 const Favorites = () => {
-    const { response } = useGetProfileData()
-    const userData = response?.data
-    const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } =
-        useGetFavoritesData(response?.data.userName)
-    const { ref, inView } = useInView({ threshold: 0.0 })
-    const [currentModal, setCurrentModal] = useState<Values | null>(null)
-    const [postId, setPostId] = useState<number | undefined>(undefined)
-    const { post } = useGetMyPost(postId || 0)
+  const { response } = useGetProfileData()
+  const userData = response?.data
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } = useGetFavoritesData(
+    response?.data.userName
+  )
+  const { inView, ref } = useInView({ threshold: 0.0 })
+  const [currentModal, setCurrentModal] = useState<Values | null>(null)
+  const [postId, setPostId] = useState<number | undefined>(undefined)
+  const { post } = useGetMyPost(postId || 0)
 
-    useEffect(() => {
-        if (inView && hasNextPage) {
-            void fetchNextPage()
-        }
-    }, [inView, hasNextPage])
-
-    const openModal = (id: Values) => {
-        if (currentModal !== null) {
-            closeModal()
-        }
-        setCurrentModal(id)
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      void fetchNextPage()
     }
+  }, [inView, hasNextPage])
 
-    const closeModal = () => {
-        setCurrentModal(null)
+  const openModal = (id: Values) => {
+    if (currentModal !== null) {
+      closeModal()
     }
-    const renderContent = (page: FavoritesType) => {
-        return page.items.map((item) => {
-            const onPostClick = () => {
-                openModal(MODALS.GetPostModal)
-                setPostId(item.id)
-            }
+    setCurrentModal(id)
+  }
 
-            return (
-                <div key={item.id}
-                     className={cls.card}
-                     onClick={onPostClick}>
-                    <Card src={ item.images[0]?.versions.huge?.url}
-                          skeletonWidth={item.images[0]?.versions.huge?.width}
-                          skeletonHeight={item.images[0]?.versions.huge?.height}
-                          cardWrapperClassName={cls.cardWrapper}
-                          alt='post' />
-                </div>
-            )
-        })
-    }
-    return (
-        <div className={cls.favoritesPage}>
-            <div className={cls.cardsList}>
-                {data?.pages.map((page) => (
-                    page && renderContent(page)
-                ))}
-            </div>
+  const closeModal = () => {
+    setCurrentModal(null)
+  }
+  const renderContent = (page: FavoritesType) => {
+    return page.items.map(item => {
+      const onPostClick = () => {
+        openModal(MODALS.GetPostModal)
+        setPostId(item.id)
+      }
 
-            {postId && post && userData &&
-                <GetPostModal
-                    key={postId}
-                    id={MODALS.GetPostModal}
-                    post={post}
-                    userName={response?.data.userName}
-                    isOpen={currentModal === MODALS.GetPostModal}
-                    handleClose={closeModal}
-                    content={<GetCommentaries key={postId} postId={postId} userData={userData}/>}
-                    actionsSlot={<PostModalActions post={post} />} />
-            }
-
-            {isSuccess && (
-                <div ref={ref} className={cls.loaderContainer}>
-                    {isFetchingNextPage && (
-                        <Loader/>
-                    )}
-                </div>
-            )}
-
+      return (
+        <div className={cls.card} key={item.id} onClick={onPostClick}>
+          <Card
+            alt={'post'}
+            cardWrapperClassName={cls.cardWrapper}
+            skeletonHeight={item.images[0]?.versions.huge?.height}
+            skeletonWidth={item.images[0]?.versions.huge?.width}
+            src={item.images[0]?.versions.huge?.url}
+          />
         </div>
-    )
+      )
+    })
+  }
+
+  return (
+    <div className={cls.favoritesPage}>
+      <div className={cls.cardsList}>
+        {(data as InfiniteData<FavoritesType>)?.pages.map(page => page && renderContent(page))}
+      </div>
+
+      {postId && post && userData && (
+        <GetPostModal
+          actionsSlot={<PostModalActions post={post} />}
+          content={<GetCommentaries key={postId} postId={postId} userData={userData} />}
+          handleClose={closeModal}
+          id={MODALS.GetPostModal}
+          isOpen={currentModal === MODALS.GetPostModal}
+          key={postId}
+          post={post}
+          userName={response?.data.userName}
+        />
+      )}
+
+      {isSuccess && (
+        <div className={cls.loaderContainer} ref={ref}>
+          {isFetchingNextPage && <Loader />}
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default Favorites

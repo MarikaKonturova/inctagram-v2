@@ -1,49 +1,47 @@
 .container {
-    max-width: 1600px;
-    margin: 0 auto;
-    padding-right: 36px;
-    padding-top: 36px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-top: 36px;
+  padding-right: 36px;
 
-    .flex {
+  .flex {
+    display: flex;
+    gap: 38px;
+    margin-bottom: 53px;
+
+    .rightSide {
+      flex: 1;
+
+      .main {
         display: flex;
-        gap: 38px;
-        margin-bottom: 53px;
-    
-        .rightSide {
-            flex: 1;
-        
-            .main {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 20px;
-    
-                .userName {
-                    font-size: 20px;
-                    line-height: 36px;
-                    font-weight: 700;
-                }
-    
-                .button {
-                    padding: 6px 36px;
-                    background: var(--dark-300-color);
-                }
-            }
+        justify-content: space-between;
+        margin-bottom: 20px;
 
-            .info {
-                display: flex;
-                margin-bottom: 23px;
-                flex-wrap: wrap;
-    
-                .subscribe {
-                    font-weight: 700;
-                }
-            }
+        .userName {
+          font-size: 20px;
+          font-weight: 700;
+          line-height: 36px;
         }
+
+        .button {
+          padding: 6px 36px;
+          background: var(--dark-300-color);
+        }
+      }
+
+      .info {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 23px;
+
+        .subscribe {
+          font-weight: 700;
+        }
+      }
     }
+  }
 }
 
-
-
 .info div:not(:last-child) {
-    margin-right: 72px;
+  margin-right: 72px;
 }
