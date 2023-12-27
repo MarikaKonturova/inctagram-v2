@@ -2,57 +2,57 @@ import { type ProfileDataModel } from './auth'
 import { type AvatarPostModel, type PostImage } from './post'
 
 export interface Location {
-    nameLocation: string
-    latitude: number
-    longitude: number
+  latitude: number
+  longitude: number
+  nameLocation: string
 }
 
 export interface Thumbnail {
-    url: string
-    width: number
-    height: number
-    fileSize: number
+  fileSize: number
+  height: number
+  url: string
+  width: number
 }
 
 export interface Medium {
-    url: string
-    width: number
-    height: number
-    fileSize: number
+  fileSize: number
+  height: number
+  url: string
+  width: number
 }
 
 export interface NewLikesAvatars {
-    thumbnail: Thumbnail
-    medium: Medium
+  medium: Medium
+  thumbnail: Thumbnail
 }
 
 export interface ResponseItem {
-    id: number
-    ownerId: number
-    description: string
-    location: Location
-    userName: string
-    avatars: AvatarPostModel
-    images: PostImage[]
-    createdAt: string
-    updatedAt: string
-    commentCount: number
-    likeCount: number
-    isLiked: boolean
-    newLikes: Array<Pick <ProfileDataModel, 'id' | 'avatars'> & { username: string }>
-    isFavorite: boolean
-    isFollowing: boolean
-    isFollowedBy: boolean
+  avatars: AvatarPostModel
+  commentCount: number
+  createdAt: string
+  description: string
+  id: number
+  images: PostImage[]
+  isFavorite: boolean
+  isFollowedBy: boolean
+  isFollowing: boolean
+  isLiked: boolean
+  likeCount: number
+  location: Location
+  newLikes: Array<Pick<ProfileDataModel, 'avatars' | 'id'> & { username: string }>
+  ownerId: number
+  updatedAt: string
+  userName: string
 }
 
 export interface PublicationsResponse {
-    totalCount: number
-    pagesCount: number
-    page: number
-    pageSize: number
-    prevCursor: number
-    nextCursor: number
-    items: ResponseItem[]
+  items: ResponseItem[]
+  nextCursor: number
+  page: number
+  pageSize: number
+  pagesCount: number
+  prevCursor: number
+  totalCount: number
 }
 
 // export interface GetPublicationsResponse {
@@ -64,11 +64,11 @@ export interface PublicationsResponse {
 // }
 
 export interface PublicationsInPagesResponse {
-    items: ResponseItem[]
-    nextCursor: number
-    page: number
-    pageSize: number
-    pagesCount: number
-    prevCursor: number
-    totalCount: number
+  items: ResponseItem[]
+  nextCursor: number
+  page: number
+  pageSize: number
+  pagesCount: number
+  prevCursor: number
+  totalCount: number
 }

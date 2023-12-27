@@ -1,36 +1,39 @@
 .cardWrapperClassName {
-    width: 50%;
-    height: 85vh;
-    object-fit: fill;
+  width: 50%;
+  height: 85vh;
+  object-fit: fill;
 }
 
 .rightBlock {
-    background: var(--dark-300-color);
-    width: 50%;
+  width: 50%;
+  background: var(--dark-300-color);
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid var(--dark-100-color);
-    padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 20px;
+
+  border: 1px solid var(--dark-100-color);
 }
 
 .bottomSection {
-    border: 1px solid var(--dark-100-color);
-    padding: 0 20px;
+  padding: 0 20px;
+  border: 1px solid var(--dark-100-color);
 }
 
 .wrapper {
-    margin-top: 14px;
+  margin-top: 14px;
 }
 
 .actionIcons {
-    align-self: self-start;
-    height: 40vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 6%;
+  display: flex;
+  flex-direction: column;
+  align-self: self-start;
+  justify-content: space-between;
+
+  height: 40vh;
+  margin-top: 6%;
 }

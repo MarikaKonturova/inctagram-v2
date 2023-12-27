@@ -1,11 +1,11 @@
 export interface DeviceScheme {
-    ip: string
-    userAgent: string
-    lastVisit: string
-    deviceId: string
+  deviceId: string
+  ip: string
+  lastVisit: string
+  userAgent: string
 }
 
 export interface AllDevicesScheme {
-    devices: DeviceScheme[]
-    currentDeviceId: string
+  currentDeviceId: string
+  devices: DeviceScheme[]
 }

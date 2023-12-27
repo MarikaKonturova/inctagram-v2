@@ -4,14 +4,14 @@ import React from 'react'
 import { SnackBar } from './SnackBar'
 
 export default {
-    title: 'widgets/SnackBar',
-    component: SnackBar,
-    argTypes: {
-        backgroundColor: { control: 'color' }
-    }
+  argTypes: {
+    backgroundColor: { control: 'color' },
+  },
+  component: SnackBar,
+  title: 'widgets/SnackBar',
 } as ComponentMeta<typeof SnackBar>
 
-const Template: ComponentStory<typeof SnackBar> = () => <SnackBar/>
+const Template: ComponentStory<typeof SnackBar> = () => <SnackBar />
 
 export const Normal = Template.bind({})
 Normal.args = {}

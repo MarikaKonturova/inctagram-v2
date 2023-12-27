@@ -1,46 +1,45 @@
-import React, { useState } from 'react'
 import CommentInfo from 'entities/Post/ui/CommentInfo/CommentInfo'
+import React, { useState } from 'react'
+
 import { useGetPostAnswersForComments } from '../../model'
 
 interface PropsType {
-    commentId: number
-    postId: number
-    openedCommentId: number
+  commentId: number
+  openedCommentId: number
+  postId: number
 }
 
-const GetAnswersForCommentaries = ({ commentId, postId, openedCommentId }: PropsType) => {
-    const [isOpen, setIsOpen] = useState(false)
-    const { answerForComment } = useGetPostAnswersForComments(postId, openedCommentId)
+const GetAnswersForCommentaries = ({ commentId, openedCommentId, postId }: PropsType) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const { answerForComment } = useGetPostAnswersForComments(postId, openedCommentId)
 
-    const viewAnswerOnClick = (commentId: number) => {
+  const viewAnswerOnClick = (commentId: number) => {
     // setOpenedCommentId(commentId)
-        setIsOpen(!isOpen)
+    setIsOpen(!isOpen)
     // if (isOpen) {
     //     setOpenedCommentId(0)
     //     setIsOpen(false)
     // }
-    }
+  }
 
-    return (
-        <>
-            {answerForComment?.items.map((answer) =>
-                answer.commentId === commentId
-                    ? (
-                        <CommentInfo
-            key={answer.id}
-            viewAnswerOnClick={viewAnswerOnClick}
+  return (
+    <>
+      {answerForComment?.items.map(answer =>
+        answer.commentId === commentId ? (
+          <CommentInfo
             avatarSize={26}
             data={answer}
-            postId={postId}
             isOpen={isOpen}
-            openedCommentId={openedCommentId}
             isRepliedComment
-                        />
-                    )
-                    : null
-            )}
-        </>
-    )
+            key={answer.id}
+            openedCommentId={openedCommentId}
+            postId={postId}
+            viewAnswerOnClick={viewAnswerOnClick}
+          />
+        ) : null
+      )}
+    </>
+  )
 }
 
 export default GetAnswersForCommentaries

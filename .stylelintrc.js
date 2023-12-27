@@ -1,7 +1,6 @@
-{
-  "extends": "stylelint-config-standard-scss",
-  "rules": {
-    "indentation": 4,
+module.exports = {
+  extends: ["stylelint-config-standard-scss", 'stylelint-config-clean-order'],
+  rules: {
     "selector-class-pattern": null,
     "selector-pseudo-class-no-unknown": [
       true,
@@ -9,5 +8,8 @@
         "ignorePseudoClasses": ["global"]
       }
     ]
+
+    
   }
 }
+ 

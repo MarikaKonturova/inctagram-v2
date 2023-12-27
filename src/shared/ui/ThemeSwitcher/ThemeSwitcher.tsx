@@ -7,23 +7,29 @@ import { useTheme } from 'shared/hooks/useTheme'
 import { Button } from 'shared/ui/Button/Button'
 
 interface ThemeSwitcherProps {
-    className?: string
-    size?: number
+  className?: string
+  size?: number
 }
 
 export const ThemeSwitcher = memo(({ className, size = 25 }: ThemeSwitcherProps) => {
-    const { theme, toggleTheme } = useTheme()
-    if (!theme) return null
-    return (
-        <Button
-                theme={'clear'}
-                onClick={toggleTheme}
-                style={{ lineHeight: 0 }}
-                className={clsx('', {}, [className])}>
-            {theme === Theme.DARK
-                ? <DarkIcon height={size} width={size}/>
-                : <LightIcon height={size} width={size}/>}
-        </Button>
-    )
-}
-)
+  const { theme, toggleTheme } = useTheme()
+
+  if (!theme) {
+    return null
+  }
+
+  return (
+    <Button
+      className={clsx('', {}, [className])}
+      onClick={toggleTheme}
+      style={{ lineHeight: 0 }}
+      theme={'clear'}
+    >
+      {theme === Theme.DARK ? (
+        <DarkIcon height={size} width={size} />
+      ) : (
+        <LightIcon height={size} width={size} />
+      )}
+    </Button>
+  )
+})

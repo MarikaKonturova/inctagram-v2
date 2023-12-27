@@ -1,71 +1,70 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { MyPostService } from 'shared/api'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-import { MyPostService } from 'shared/api'
 
 export const useGetPosts = (userName: string) => {
-    const {
-        isLoading,
-        error,
-        data,
-        fetchNextPage,
-        isFetchingNextPage,
-        hasNextPage,
-        isSuccess
-    } = useInfiniteQuery(['post', userName], ({ pageParam = 1 }) => MyPostService.getPosts(userName, pageParam), {
-        getNextPageParam: (lastPage) => {
-            return lastPage.page < lastPage.pagesCount ? lastPage.page + 1 : undefined
-        }
-    })
+  const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isSuccess } =
+    useInfiniteQuery(
+      ['post', userName],
+      ({ pageParam = 1 }) => MyPostService.getPosts(userName, pageParam),
+      {
+        getNextPageParam: lastPage => {
+          return lastPage.page < lastPage.pagesCount ? lastPage.page + 1 : undefined
+        },
+      }
+    )
 
-    return {
-        data,
-        isLoading,
-        error,
-        fetchNextPage,
-        isFetchingNextPage,
-        hasNextPage,
-        isSuccess
-    }
+  return {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    isSuccess,
+  }
 }
 
 export const useGetMyPost = (postId: number) => {
-    const {
-        isLoading,
-        error,
-        data
-    } = useQuery(['post', postId], () => MyPostService.getPost(postId), {
-        enabled: !!postId
-    })
-    const post = data?.data
+  const { data, error, isLoading } = useQuery(
+    ['post', postId],
+    () => MyPostService.getPost(postId),
+    {
+      enabled: !!postId,
+    }
+  )
+  const post = data?.data
 
-    return { post }
+  return { post }
 }
 
 export interface StateType {
-    repliedComment: {
-        id: number
-        userName: string
-    }
-    refetch: {
-        doRefetch: boolean
-    }
-    setRefetch: (payload: StateType['refetch']) => void
-    setRepliedComment: (payload: StateType['repliedComment']) => void
+  refetch: {
+    doRefetch: boolean
+  }
+  repliedComment: {
+    id: number
+    userName: string
+  }
+  setRefetch: (payload: StateType['refetch']) => void
+  setRepliedComment: (payload: StateType['repliedComment']) => void
 }
 
-export const useCommentStore = create(immer<StateType>((set) => ({
-    repliedComment: {
-        id: 0,
-        userName: ''
-    },
+export const useCommentStore = create(
+  immer<StateType>(set => ({
     refetch: {
-        doRefetch: false
+      doRefetch: false,
     },
-    setRepliedComment: (payload: StateType['repliedComment']) => {
-        set({ repliedComment: payload })
+    repliedComment: {
+      id: 0,
+      userName: '',
     },
     setRefetch: (payload: StateType['refetch']) => {
-        set({ refetch: payload })
-    }
-})))
+      set({ refetch: payload })
+    },
+    setRepliedComment: (payload: StateType['repliedComment']) => {
+      set({ repliedComment: payload })
+    },
+  }))
+)

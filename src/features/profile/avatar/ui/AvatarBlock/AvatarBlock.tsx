@@ -1,64 +1,62 @@
-import React, { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useDeleteAvatar } from 'features/profile/avatar/model/deleteAvatar'
 import cls from 'features/profile/avatar/ui/AvatarBlock/AvatarBlock.module.scss'
 import { AvatarModal } from 'features/profile/avatar/ui/AvatarModal/AvatarModal'
+import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import CloseIcon from 'shared/assets/icons/general/close.svg'
 import { type AvatarPostModel } from 'shared/types/post'
 import { Avatar, Button } from 'shared/ui'
 import { ConfirmationModal } from 'shared/ui/ConfirmationModal/ConfirmationModal'
 
 export const AvatarBlock = ({ avatars }: { avatars: AvatarPostModel | null | undefined }) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
-    const [avatar, setAvatar] = useState<string | undefined>(avatars?.medium.url)
-    const { deleteAvatar, isLoading } = useDeleteAvatar(setDeleteModalOpen, setAvatar)
-    const { t } = useTranslation('common')
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
+  const [avatar, setAvatar] = useState<string | undefined>(avatars?.medium.url)
+  const { deleteAvatar, isLoading } = useDeleteAvatar(setDeleteModalOpen, setAvatar)
+  const { t } = useTranslation('common')
 
-    const onDeleteButtonClick = () => {
-        setDeleteModalOpen(true)
-    }
+  const onDeleteButtonClick = () => {
+    setDeleteModalOpen(true)
+  }
 
-    const addProfilePhotoClick = () => {
-        setIsOpen(true)
-    }
+  const addProfilePhotoClick = () => {
+    setIsOpen(true)
+  }
 
-    const deleteAvatarConfirmationClick = () => {
-        deleteAvatar()
-    }
+  const deleteAvatarConfirmationClick = () => {
+    deleteAvatar()
+  }
 
-    useEffect(() => {
-        setAvatar(avatars?.medium.url)
-    }, [avatars])
+  useEffect(() => {
+    setAvatar(avatars?.medium.url)
+  }, [avatars])
 
-    return (
-        <div className={cls.avatarContainer}>
-            <AvatarModal setAvatar={setAvatar} isOpen={isOpen} setIsOpen={setIsOpen}/>
-            <div>
-                {avatar
-                    ? (
-                        <div className={cls.avatar}>
-                            <ConfirmationModal
-                                isModalOpen={deleteModalOpen}
-                                onYesAction={deleteAvatarConfirmationClick}
-                                setModalOpen={setDeleteModalOpen}
-                                isLoading={isLoading}
-                                headerText={`${t('deletePhotoHeader')}`}
-                                bodyText={`${t('deletePhotoMessage')}`}
-                            />
-                            <Avatar size={192} src={avatar}/>
-                            <button onClick={onDeleteButtonClick} className={cls.imageButton} type="button">
-                                <CloseIcon viewBox="0 5 24 24" fill={'#ffffff'} width={'100%'} heigth={'100%'}/>
-                            </button>
-                        </div>
-                    )
-                    : (
-                        <Avatar size={192} src={avatar}/>
-                    )}
-            </div>
-            <Button theme={'outline'} type="button" onClick={addProfilePhotoClick}>
-                Add a profile photo
-            </Button>
-        </div>
-    )
+  return (
+    <div className={cls.avatarContainer}>
+      <AvatarModal isOpen={isOpen} setAvatar={setAvatar} setIsOpen={setIsOpen} />
+      <div>
+        {avatar ? (
+          <div className={cls.avatar}>
+            <ConfirmationModal
+              bodyText={`${t('deletePhotoMessage')}`}
+              headerText={`${t('deletePhotoHeader')}`}
+              isLoading={isLoading}
+              isModalOpen={deleteModalOpen}
+              onYesAction={deleteAvatarConfirmationClick}
+              setModalOpen={setDeleteModalOpen}
+            />
+            <Avatar size={192} src={avatar} />
+            <button className={cls.imageButton} onClick={onDeleteButtonClick} type={'button'}>
+              <CloseIcon fill={'#ffffff'} heigth={'100%'} viewBox={'0 5 24 24'} width={'100%'} />
+            </button>
+          </div>
+        ) : (
+          <Avatar size={192} src={avatar} />
+        )}
+      </div>
+      <Button onClick={addProfilePhotoClick} theme={'outline'} type={'button'}>
+        Add a profile photo
+      </Button>
+    </div>
+  )
 }

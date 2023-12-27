@@ -1,103 +1,110 @@
 .container {
-    min-width: 300px;
-    position: fixed;
-    z-index: 1000;
-    bottom: 1rem;
-    height: auto;
-    padding: 0.625rem 1rem;
+  position: fixed;
+  z-index: 1000;
+  bottom: 1rem;
+
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+
+  min-width: 300px;
+  height: auto;
+  padding: 0.625rem 1rem;
+
+  background-color: var(--primary-100-color);
+  border: transparent;
+  border-radius: 5px;
+  box-shadow:
+    0 3px 6px rgb(0 0 0 / 16%),
+    0 3px 6px rgb(0 0 0 / 23%);
+
+  animation: fadein 0.5s;
+
+  .button {
+    cursor: pointer;
+
+    padding: 5px 10px;
+
+    font-size: 1.3rem;
+
+    border: none;
     border-radius: 5px;
-    background-color: var(--primary-100-color);
-    box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
-    display: flex;
-    gap: 10px;
-    justify-content: space-between;
-    align-items: center;
-    animation: fadein 0.5s;
-    border: transparent;
-
-    .button {
-        padding: 5px 10px;
-        font-size: 1.3rem;
-        border-radius: 5px;
-        outline: none;
-        border: none;
-        cursor: pointer;
-    }
-
+    outline: none;
+  }
 }
 
-.left{
-    left: 15px
+.left {
+  left: 15px;
 }
 
-.right{
-    right: 15px;
+.right {
+  right: 15px;
 }
 
-.center{
-    left: 50%;
-    transform: translateX(-50%);
+.center {
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .close {
-    animation: fadeout 0.5s;
+  animation: fadeout 0.5s;
 }
 
 .warning {
-    background-color: var(--warning-900-color);
-    border:1px solid var(--warning-500-color);
+  background-color: var(--warning-900-color);
+  border: 1px solid var(--warning-500-color);
 
-    .button{
-        &:hover {
-            background: var(--warning-700-color);
-        }
+  .button {
+    &:hover {
+      background: var(--warning-700-color);
     }
+  }
 }
 /* stylelint-disable no-descending-specificity */
 .success {
-    background-color: var(--success-900-color);
-    border:1px solid var(--success-500-color);
+  background-color: var(--success-900-color);
+  border: 1px solid var(--success-500-color);
 
-    .button{
-        &:hover {
-            background: var(--success-700-color);
-        }
+  .button {
+    &:hover {
+      background: var(--success-700-color);
     }
+  }
 }
 
-
 .danger {
-    background-color: var(--danger-900-color);
-    border:1px solid var(--danger-500-color);
+  background-color: var(--danger-900-color);
+  border: 1px solid var(--danger-500-color);
 
-    .button{
-        &:hover {
-            background: var(--danger-700-color);
-        }
+  .button {
+    &:hover {
+      background: var(--danger-700-color);
     }
+  }
 }
 /* stylelint-enable no-descending-specificity */
 
 @keyframes fadein {
-    from {
-        bottom: 0;
-        opacity: 0;
-    }
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
 
-    to {
-        bottom: 1rem;
-        opacity: 1;
-    }
+  to {
+    bottom: 1rem;
+    opacity: 1;
+  }
 }
 
-@keyframes fadeout  {
-    from {
-        bottom: 1rem;
-        opacity: 1;
-    }
+@keyframes fadeout {
+  from {
+    bottom: 1rem;
+    opacity: 1;
+  }
 
-    to {
-        bottom: 0;
-        opacity: 0;
-    }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
 }

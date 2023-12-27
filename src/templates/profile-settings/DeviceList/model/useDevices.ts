@@ -4,8 +4,8 @@ import { DeviceService } from 'shared/api'
 import { type AllDevicesScheme } from 'shared/types/device'
 
 export const useDevices = () => {
-    return useQuery<AxiosResponse<AllDevicesScheme>>(['devices'], {
-        queryFn: DeviceService.getDevices,
-        retry: false
-    })
+  return useQuery<AxiosResponse<AllDevicesScheme>>(['devices'], {
+    queryFn: DeviceService.getDevices,
+    retry: false,
+  })
 }

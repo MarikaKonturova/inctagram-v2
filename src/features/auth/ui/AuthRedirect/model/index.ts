@@ -3,26 +3,27 @@ import { useAuth } from 'features/auth'
 import { AuthService } from 'shared/api'
 
 export const useAuthMe = () => {
-    const { isAuth, setAuth, setUserData } = useAuth()
+  const { isAuth, setAuth, setUserData } = useAuth()
 
-    const { isError, isLoading } = useQuery({
-        queryKey: ['me'],
-        queryFn: AuthService.me,
-        onSuccess: ({ data }) => {
-            const { userId, hasBusinessAccount } = data
-            setUserData({ userId, hasBusinessAccount })
-            setAuth(true)
-        },
-        onError: () => {
-            setAuth(false)
-        },
-        retry: false,
-        refetchInterval: false,
-        refetchIntervalInBackground: false,
-        refetchOnWindowFocus: false,
-        refetchOnMount: false,
-        refetchOnReconnect: false
-    })
+  const { isError, isLoading } = useQuery({
+    onError: () => {
+      setAuth(false)
+    },
+    onSuccess: ({ data }) => {
+      const { hasBusinessAccount, userId } = data
 
-    return { isAuth, isError, isLoading }
+      setUserData({ hasBusinessAccount, userId })
+      setAuth(true)
+    },
+    queryFn: AuthService.me,
+    queryKey: ['me'],
+    refetchInterval: false,
+    refetchIntervalInBackground: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+    retry: false,
+  })
+
+  return { isAuth, isError, isLoading }
 }

@@ -5,32 +5,34 @@ import { useCommentStore } from 'features/profile/getPosts/model'
 import { MyPostService, PostService } from 'shared/api'
 
 export const useGetPostComments = (postId: number) => {
-    const onOpen = useSnackbar((state) => state.onOpen)
-    const { refetch, setRefetch } = useCommentStore()
-    const { isLoading, error, data } = useQuery({
-        queryKey: ['postComments', 'postComments', postId],
-        queryFn: () => MyPostService.getPostComments(postId),
-        onSuccess: () => { setRefetch({ doRefetch: false }) },
-        refetchInterval: refetch.doRefetch ? 100 : false,
-        onError: (error: AxiosError<{ message: string }>) => {
-            onOpen(error.message, 'danger', 'left')
-        },
-        enabled: !!postId
-    })
+  const onOpen = useSnackbar(state => state.onOpen)
+  const { refetch, setRefetch } = useCommentStore()
+  const { data, error, isLoading } = useQuery({
+    enabled: !!postId,
+    onError: (error: AxiosError<{ message: string }>) => {
+      onOpen(error.message, 'danger', 'left')
+    },
+    onSuccess: () => {
+      setRefetch({ doRefetch: false })
+    },
+    queryFn: () => MyPostService.getPostComments(postId),
+    queryKey: ['postComments', 'postComments', postId],
+    refetchInterval: refetch.doRefetch ? 100 : false,
+  })
 
-    const comments = data?.data
+  const comments = data?.data
 
-    return { comments, isLoading, error }
+  return { comments, error, isLoading }
 }
 
 export const useGetPostAnswersForComments = (postId: number, commentId: number) => {
-    const { data } = useQuery({
-        queryKey: ['postAnswers', 'postComments', commentId],
-        queryFn: () => PostService.getAnswerForComment(postId, commentId),
-        enabled: !!commentId
-    })
+  const { data } = useQuery({
+    enabled: !!commentId,
+    queryFn: () => PostService.getAnswerForComment(postId, commentId),
+    queryKey: ['postAnswers', 'postComments', commentId],
+  })
 
-    const answerForComment = data?.data
+  const answerForComment = data?.data
 
-    return { answerForComment }
+  return { answerForComment }
 }

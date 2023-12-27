@@ -1,72 +1,102 @@
 module.exports = {
     env: {
-        browser: true,
-        es2021: true
+      amd: true,
+      browser: true,
+      es2021: true,
+      node: true,
     },
+    ignorePatterns: ['**/*.test.*', '**/*.d.ts'],
     extends: [
-        'plugin:react/recommended',
-        'standard-with-typescript',
-        'plugin:testing-library/react',
-        'plugin:jest-dom/recommended',
-        '@feature-sliced'
+      'eslint:recommended',
+      'plugin:react/recommended',
+      'plugin:react/jsx-runtime',
+      'plugin:react-hooks/recommended',
+      'prettier/prettier',
+      'plugin:import/recommended',
+      'plugin:import/typescript',
+      'plugin:prettier/recommended',
+      'plugin:testing-library/react',
+      'plugin:jest-dom/recommended',
+      'plugin:perfectionist/recommended-natural',
+      '@feature-sliced'
     ],
     overrides: [
+      {
+        files: ['**/*.stories.tsx'],
+        rules: {
+          'no-console': 'off',
+          'react-hooks/rules-of-hooks': 'off',
+        },
+      },
     ],
+    parser: '@typescript-eslint/parser',
     parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        parser: '@typescript-eslint/parser',
-        settings: {
-            "import/resolver": {
-              "typescript": {
-                "alwaysTryTypes": true
-              }
-            }},
-        project: './tsconfig.json',
-        tsconfigRootDir: __dirname,
-        ecmaFeatures: {
-            jsx: true
-        }
+      ecmaFeatures: {
+        jsx: true,
+      },
+      ecmaVersion: 12,
+      sourceType: 'module',
     },
-    plugins: [
-        'react'
-    ],
+    plugins: ['react', '@typescript-eslint', 'import', 'perfectionist'],
     rules: {
-        indent: 'off',
-        'react/jsx-indent-props': [2, 'first'],
-        'react/jsx-indent': ['error', 4], // 4 - spaces
-        '@typescript-eslint/indent': ['error', 4, { ignoredNodes: ['JSXAttribute'] }],
-        'react/jsx-filename-extension': [
-            2,
-            { extensions: ['.js', '.jsx', '.ts', '.tsx'] }
-        ], // 2 - error - Запретить расширения файлов, которые могут содержать JSX
-        'import/no-unresolved': 'off', // Отключить правило, которое не позволяет импортировать модули, которые не были установлены через npm
-        'import/prefer-default-export': 'off', // Отключить правило, которое требует, чтобы каждый модуль имел по крайней мере один экспорт по умолчанию,
-        'no-unused-vars': 'warn', // Предупреждение, если переменная не используется
-        '@typescript-eslint/no-unused-vars': 'warn', // Предупреждение, если переменная не используется,
-        'react/require-default-props': 'off', // Отключить правило, которое требует, чтобы все пропсы имели значения по умолчанию
-        'react/react-in-jsx-scope': 'off', // Отключить правило, которое требует, чтобы каждый файл, содержащий JSX, импортировал React
-        'react/button-has-type': 'error', // Предупреждение, если кнопка не имеет типа
-        'react/jsx-props-no-spreading': 'off', // Отключить правило, которое предупреждает о распространении пропсов
-        'react/function-component-definition': 'off', // Отключить правило, которое требует, чтобы функциональные компоненты были определены как стрелочные функции или функции
-        '@typescript-eslint/explicit-function-return-type': 'off', // Предупреждение, если функция не возвращает тип
-        'no-shadow': 'off', // Отключить правило, которое запрещает объявлять переменные с тем же именем, что и переменные, определенные во внешней области видимости
-        'import/extensions': 'off', // Отключить правило, которое требует, чтобы импорты имели расширения
-        'import/no-extraneous-dependencies': 'warn', // Отключить правило, которое запрещает импортировать модули, которые не указаны в package.json
-        'no-underscore-dangle': 'off', // Отключить правило, которое запрещает использовать подчеркивание в идентификаторах
-        '@typescript-eslint/strict-boolean-expressions': 'off', // Отключить правило, которое требует, чтобы выражения boolean были явными// Предупреждение, если строка не является литеральной строкой
-        'max-len': ['error', { ignoreComments: true, code: 120 }], // Ошибка, если строка превышает 120 символов
-        '@typescript-eslint/consistent-type-assertions': 'off', // export default
-        '@typescript-eslint/prefer-includes': 'off', // Предупреждение, если не используется метод includes
-        '@typescript-eslint/prefer-nullish-coalescing': 'off', // Предупреждение, если не используется оператор объединения с null
-        'react/display-name': 'off', // Предупреждение, если компонент не имеет отображаемого имени
-        '@typescript-eslint/ban-ts-comment': 'warn',
-        '@typescript-eslint/prefer-ts-expect-error': 'off',
-        '@typescript-eslint/triple-slash-reference': 'warn',
-        '@typescript-eslint/no-misused-promises': 'off',
-        '@typescript-eslint/promise-function-async': 'off',
-        '@typescript-eslint/return-await': 'off',
-        'react/prop-types': 'off',
-        '@typescript-eslint/no-var-requires': 'off'
-    }
-}
+    'import/no-internal-modules': 'off',
+    "boundaries/element-types": 1,
+      'arrow-parens': 'off',
+      'consistent-return': 'off',
+      curly: ['error', 'all'],
+      'import/extensions': [
+        'error',
+        { css: 'always', json: 'always', scss: 'always', svg: 'always' },
+      ],
+      'import/no-duplicates': 'off',
+      'import/order': 'off',
+      'import/prefer-default-export': 'off',
+      'max-lines': ['error', 300],
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'no-debugger': 'off',
+      'no-duplicate-imports': 'error',
+      'no-empty-pattern': 'off',
+      'no-nested-ternary': 'error',
+      'no-undef': 'warn',
+      'no-unused-vars': 'off',
+      'no-var': 'error',
+      'padding-line-between-statements': [
+        'error',
+        { blankLine: 'always', next: 'return', prev: '*' },
+        { blankLine: 'always', next: '*', prev: ['const', 'let', 'var'] },
+        {
+          blankLine: 'any',
+          next: ['const', 'let', 'var'],
+          prev: ['const', 'let', 'var'],
+        },
+      ],
+      'prefer-const': 'error',
+      'react/display-name': 'off',
+      'react/jsx-boolean-value': ['error'],
+      'react/jsx-curly-brace-presence': [
+        'error',
+        { children: 'ignore', propElementValues: 'always', props: 'always' },
+      ],
+      'react/jsx-fragments': ['error'],
+      'react/prop-types': 'off',
+      'react/void-dom-elements-no-children': ['error'],
+    },
+    settings: {
+      'import/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx'],
+      },
+      'import/resolver': {
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+          paths: ['src'],
+        },
+        typescript: {
+          alwaysTryTypes: true,
+        },
+      },
+  
+      react: {
+        version: 'detect',
+      },
+    },
+  }

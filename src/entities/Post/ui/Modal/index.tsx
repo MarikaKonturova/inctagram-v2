@@ -8,30 +8,28 @@ import { Modal } from 'shared/ui'
 import cls from './styles.module.scss'
 
 interface IProps {
-    content: React.ReactNode
-    isOpen: boolean
-    id: number
-    handleClose: () => void
+  content: React.ReactNode
+  handleClose: () => void
+  id: number
+  isOpen: boolean
 }
 
-export const PostModal: React.FC<IProps> = (props) => {
-    const {
-        content, isOpen, handleClose, id
-    } = props
-    const { theme } = useTheme()
-    const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
+export const PostModal: React.FC<IProps> = props => {
+  const { content, handleClose, id, isOpen } = props
+  const { theme } = useTheme()
+  const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
-    return (
-        <Modal id={id} isOpen={isOpen} onClose={handleClose} withHeader={false} withStyles={false}>
-            <div className={cls.container}>
-                <div className={cls.closeIconContainer} onClick={handleClose}>
-                    <CloseIcon fill={fill} />
-                </div>
-                {content}
-                <div className={cls.nextIconContainer}>
-                    <ArrowForwardIcon fill={fill} />
-                </div>
-            </div>
-        </Modal>
-    )
+  return (
+    <Modal id={id} isOpen={isOpen} onClose={handleClose} withHeader={false} withStyles={false}>
+      <div className={cls.container}>
+        <div className={cls.closeIconContainer} onClick={handleClose}>
+          <CloseIcon fill={fill} />
+        </div>
+        {content}
+        <div className={cls.nextIconContainer}>
+          <ArrowForwardIcon fill={fill} />
+        </div>
+      </div>
+    </Modal>
+  )
 }

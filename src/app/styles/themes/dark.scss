@@ -1,51 +1,51 @@
 .app_dark_theme {
-    // custom color
-    --secondary-color: rgb(78 135 255 / 48%);
+  // custom color
+  --secondary-color: rgb(78 135 255 / 48%);
 
-    // skeleton
-    --skeleton-color: #d9d9ff;
-    --skeleton-shadow: #a6a6ff;
+  // skeleton
+  --skeleton-color: #d9d9ff;
+  --skeleton-shadow: #a6a6ff;
 
-    // dark color theme palette
-    --light-100-color: #fff;
-    --light-300-color: #F7FBFF;
-    --light-500-color: #EDF#FA;
-    --light-700-color: #D5DAE0;
-    --light-900-color: #BDC1C7;
+  // dark color theme palette
+  --light-100-color: #fff;
+  --light-300-color: #f7fbff;
+  --light-500-color: #EDF#FA;
+  --light-700-color: #d5dae0;
+  --light-900-color: #bdc1c7;
 
-    // dark
-    --dark-color: #000;
-    --dark-100-color: #4C4C4C;
-    --dark-300-color: #333;
-    --dark-500-color: #171717;
-    --dark-700-color: #0D0D0D;
-    --dark-900-color: #000;
+  // dark
+  --dark-color: #000;
+  --dark-100-color: #4c4c4c;
+  --dark-300-color: #333;
+  --dark-500-color: #171717;
+  --dark-700-color: #0d0d0d;
+  --dark-900-color: #000;
 
-    // accent
-    --primary-100-color: #73A5FF;
-    --primary-300-color: #4C8DFF;
-    --primary-500-color: #397DF6;
-    --primary-700-color: #2F68CC;
-    --primary-900-color: #234E99;
+  // accent
+  --primary-100-color: #73a5ff;
+  --primary-300-color: #4c8dff;
+  --primary-500-color: #397df6;
+  --primary-700-color: #2f68cc;
+  --primary-900-color: #234e99;
 
-    // success
-    --success-100-color:#80FFBF;
-    --success-300-color:#22E584;
-    --success-500-color:#14CC70;
-    --success-700-color:#0F9954;
-    --success-900-color:#0A6638;
+  // success
+  --success-100-color: #80ffbf;
+  --success-300-color: #22e584;
+  --success-500-color: #14cc70;
+  --success-700-color: #0f9954;
+  --success-900-color: #0a6638;
 
-    // warning
-    --warning-100-color:#FFD073;
-    --warning-300-color:#E5AC39;
-    --warning-500-color:#D99000;
-    --warning-700-color:#960;
-    --warning-900-color:#640;
+  // warning
+  --warning-100-color: #ffd073;
+  --warning-300-color: #e5ac39;
+  --warning-500-color: #d99000;
+  --warning-700-color: #960;
+  --warning-900-color: #640;
 
-    // danger
-    --danger-100-color:#FF8099;
-    --danger-300-color:#F23D61;
-    --danger-500-color:#CC1439;
-    --danger-700-color:#990F2B;
-    --danger-900-color:#660A1D;
+  // danger
+  --danger-100-color: #ff8099;
+  --danger-300-color: #f23d61;
+  --danger-500-color: #cc1439;
+  --danger-700-color: #990f2b;
+  --danger-900-color: #660a1d;
 }

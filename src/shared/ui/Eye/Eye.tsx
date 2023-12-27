@@ -3,14 +3,16 @@ import CloseEye from 'shared/assets/icons/outline/eye-off-outline.svg'
 import OpenEye from 'shared/assets/icons/outline/eye-outline.svg'
 
 interface EyeProps {
-    onClick: () => void
-    isVisible: boolean
+  isVisible: boolean
+  onClick: () => void
 }
 
 export const Eye: FC<EyeProps> = ({ isVisible, onClick }) => {
-    return <>
-        <button type={'button'} onClick={onClick}>
-            {isVisible ? <CloseEye /> : <OpenEye />}
-        </button>
+  return (
+    <>
+      <button onClick={onClick} type={'button'}>
+        {isVisible ? <CloseEye /> : <OpenEye />}
+      </button>
     </>
+  )
 }

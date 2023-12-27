@@ -1,17 +1,18 @@
-.wrapperAvatar{
-    position: relative;
-    display: inline-block;
+.wrapperAvatar {
+  position: relative;
+  display: inline-block;
 
-    .avatar {
-        border-radius: 50%;
-        background-color: var(--dark-500-color);
-    }
+  .avatar {
+    background-color: var(--dark-500-color);
+    border-radius: 50%;
+  }
 
-    .icon{
-        position: absolute;
-        inset: 0;
-        margin: auto;
-        width: 36px;
-        height: 36px;
-    }
+  .icon {
+    position: absolute;
+    inset: 0;
+
+    width: 36px;
+    height: 36px;
+    margin: auto;
+  }
 }

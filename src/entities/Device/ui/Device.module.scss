@@ -1,25 +1,25 @@
-@import "app/styles/mixins/mixins";
+@import 'app/styles/mixins/mixins';
 
 .inner {
-    @include flex;
+  @include flex;
 
-    column-gap: 12px;
+  column-gap: 12px;
 }
 
 .title {
-    font: var(--font-regular-700);
+  font: var(--font-regular-700);
 
-    &:not(:last-child) {
-        margin-bottom: 12px;
-    }
+  &:not(:last-child) {
+    margin-bottom: 12px;
+  }
 }
 
 .ip {
-    &:not(:last-child) {
-        margin-bottom: 5px;
-    }
+  &:not(:last-child) {
+    margin-bottom: 5px;
+  }
 }
 
 .current {
-    color: var(--primary-500-color);
+  color: var(--primary-500-color);
 }

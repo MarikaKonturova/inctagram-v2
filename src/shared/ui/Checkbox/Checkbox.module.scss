@@ -1,9 +1,9 @@
 .checkbox {
-    width: 24px;
-    height: 24px;
-    accent-color: var(--light-100-color);
+  width: 24px;
+  height: 24px;
+  accent-color: var(--light-100-color);
 
-    &:disabled {
-        cursor: not-allowed;
-    }
+  &:disabled {
+    cursor: not-allowed;
+  }
 }

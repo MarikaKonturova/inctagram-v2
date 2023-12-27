@@ -1,42 +1,42 @@
 .cardWrapperClassName {
-    width: 50%;
-    height: 85vh;
-    object-fit: fill;
+  width: 50%;
+  height: 85vh;
+  object-fit: fill;
 }
 
 .container {
-    display: flex;
+  display: flex;
 }
 
 .modalContainer {
-    width: 80%;
+  width: 80%;
 
-    // height: 80%;
+  // height: 80%;
 }
 
 .rightBlock {
-    width: 50%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 20px;
 }
 
 .textareaContainer {
-    margin-top: 12px;
-    flex: 1;
+  flex: 1;
+  margin-top: 12px;
 }
 
 .label {
-    color: #8D9094;
-    font: var(--font-medium-400);
+  font: var(--font-medium-400);
+  color: #8d9094;
 }
 
 .info {
-    text-align: end;
-    font: var(--font-small-400);
-    color: #8D9094;
+  font: var(--font-small-400);
+  color: #8d9094;
+  text-align: end;
 }
 
 .button {
-    align-self: flex-end;
+  align-self: flex-end;
 }

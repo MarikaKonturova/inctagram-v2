@@ -1,18 +1,24 @@
-import React, { type FC, type ChangeEvent } from 'react'
+import React, { type ChangeEvent, type FC } from 'react'
 import Avatar from 'react-avatar-edit'
 
 interface PropsType {
-    width: number
-    height: number
-    onBeforeFileLoad: (e: ChangeEvent<HTMLInputElement>) => void
-    onCrop: (view: string) => void
+  height: number
+  onBeforeFileLoad: (e: ChangeEvent<HTMLInputElement>) => void
+  onCrop: (view: string) => void
+  width: number
 }
 
-const AvatarDynamicImport: FC<PropsType> = ({ height, width, onBeforeFileLoad, onCrop }) => {
-    return (
-        <Avatar width={width} height={height} onBeforeFileLoad={onBeforeFileLoad}
-                onCrop={onCrop} imageHeight={300} imageWidth={350} />
-    )
+const AvatarDynamicImport: FC<PropsType> = ({ height, onBeforeFileLoad, onCrop, width }) => {
+  return (
+    <Avatar
+      height={height}
+      imageHeight={300}
+      imageWidth={350}
+      onBeforeFileLoad={onBeforeFileLoad}
+      onCrop={onCrop}
+      width={width}
+    />
+  )
 }
 
 export default AvatarDynamicImport

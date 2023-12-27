@@ -5,14 +5,14 @@ import { Theme } from 'shared/constants/theme'
 import { Loader } from 'shared/ui/Loader/Loader'
 
 export default {
-    title: 'shared/Loader',
-    component: Loader,
-    argTypes: {
-        backgroundColor: { control: 'color' }
-    }
+  argTypes: {
+    backgroundColor: { control: 'color' },
+  },
+  component: Loader,
+  title: 'shared/Loader',
 } as ComponentMeta<typeof Loader>
 
-const Template: ComponentStory<typeof Loader> = (args) => <Loader {...args} />
+const Template: ComponentStory<typeof Loader> = args => <Loader {...args} />
 
 export const Light = Template.bind({})
 

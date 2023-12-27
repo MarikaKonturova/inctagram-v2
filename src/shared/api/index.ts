@@ -1,3 +1,5 @@
+export { $api } from './api'
+
 export { AuthService } from './auth/authService'
 
 export { DeviceService } from './devices/deviceService'
@@ -8,8 +10,6 @@ export { PostService } from './post/postService'
 
 export { ProfileService } from './profile/index'
 
-export { UsersService } from './users/index'
-
 export { SubscriptionsService } from './subscriptions/subscriptionsService'
 
-export { $api } from './api'
+export { UsersService } from './users/index'

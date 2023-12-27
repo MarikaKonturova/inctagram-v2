@@ -1,8 +1,8 @@
 export const MODALS = {
-    GetPostModal: 1,
-    EditPostModal: 2,
-    DeletePostModal: 3
+  DeletePostModal: 3,
+  EditPostModal: 2,
+  GetPostModal: 1,
 } as const
 
 export type Keys = keyof typeof MODALS
-export type Values = typeof MODALS[Keys]
+export type Values = (typeof MODALS)[Keys]

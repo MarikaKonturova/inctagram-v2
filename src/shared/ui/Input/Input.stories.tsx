@@ -3,32 +3,32 @@ import { type ComponentMeta, type ComponentStory } from '@storybook/react'
 import { Input } from './Input'
 
 export default {
-    title: 'shared/Input',
-    component: Input
+  component: Input,
+  title: 'shared/Input',
 } as ComponentMeta<typeof Input>
 
-const Template: ComponentStory<typeof Input> = (args) => <Input {...args}/>
+const Template: ComponentStory<typeof Input> = args => <Input {...args} />
 
 export const DefaultInput = Template.bind({})
 DefaultInput.args = {
-    type: 'text',
-    placeholder: 'Text Input'
+  placeholder: 'Text Input',
+  type: 'text',
 }
 
 export const EmailInput = Template.bind({})
 EmailInput.args = {
-    type: 'email',
-    placeholder: 'Email Input'
+  placeholder: 'Email Input',
+  type: 'email',
 }
 
 export const SearchInput = Template.bind({})
 SearchInput.args = {
-    type: 'search',
-    placeholder: 'Search Input'
+  placeholder: 'Search Input',
+  type: 'search',
 }
 
 export const PasswordInput = Template.bind({})
 PasswordInput.args = {
-    type: 'password',
-    placeholder: 'Password Input'
+  placeholder: 'Password Input',
+  type: 'password',
 }

@@ -4,17 +4,17 @@ import { type NextPageContext } from 'next'
 import { EmailConfirmation } from 'templates/auth'
 
 interface IProps {
-    myQuery: NextPageContext['query']
+  myQuery: NextPageContext['query']
 }
 
-export default function ConfirmEmail ({ myQuery }: IProps) {
-    const { code } = myQuery
+export default function ConfirmEmail({ myQuery }: IProps) {
+  const { code } = myQuery
 
-    return <EmailConfirmation code={code?.toString() || ''} />
+  return <EmailConfirmation code={code?.toString() || ''} />
 }
 
 ConfirmEmail.getInitialProps = async (ctx: NextPageContext) => {
-    return { myQuery: ctx.query }
+  return { myQuery: ctx.query }
 }
 
 ConfirmEmail.getLayout = getAuthLayout
