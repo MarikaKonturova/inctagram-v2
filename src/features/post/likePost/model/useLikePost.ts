@@ -9,7 +9,6 @@ export const useLikePost = (postId: number) => {
     mutationFn: ({ likeStatus }: { likeStatus: LikeStatus }) =>
       PostService.like({ likeStatus, postId }),
     onSuccess: async () => {
-      // TODO: сделать перезапрос на getPost & улучшить код (см. доп задачи Jira)
       await queryClient.invalidateQueries(['post', postId])
     },
   })
