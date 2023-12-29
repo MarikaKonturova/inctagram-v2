@@ -11,7 +11,6 @@ export default {
 } as ComponentMeta<typeof PostActions>
 
 const Template: ComponentStory<typeof PostActions> = () => {
-  // TODO: fix
   return <PostActions post={{} as PostResponse} />
 }
 

@@ -23,7 +23,6 @@ export const useCommentPost = () => {
       onOpen(error.message, 'danger', 'left')
     },
     onSuccess: async () => {
-      // TODO: сделать перезапрос на getPost & улучшить код (см. доп задачи Jira)
       setRefetch({ doRefetch: true })
       await queryClient.invalidateQueries(['postComments'])
     },

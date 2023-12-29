@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 
 import cls from './styles.module.scss'
-// TODO: export ?
+
 const filters = {
   1977: { class: 'filter-1977', name: '1977' },
   amaro: { class: 'filter-amaro', name: 'Amaro' },
