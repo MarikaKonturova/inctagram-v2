@@ -7,7 +7,7 @@ import { getTranslations } from 'shared/lib/i18n'
 export default function TermsOfService() {
   const { t } = useTranslation('terms-of-use')
 
-  return <LegalContent content={t('content')} label={t('backToSignUp')} title={t('title')} />
+  return <LegalContent content={t('content')} label={t('backToPrevPage')} title={t('title')} />
 }
 
 export const getStaticProps = async (ctx: GetServerSidePropsContext) => ({
