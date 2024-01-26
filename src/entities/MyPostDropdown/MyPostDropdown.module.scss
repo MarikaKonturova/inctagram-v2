@@ -1,0 +1,53 @@
+@import 'app/styles/mixins/mixins';
+
+.menu {
+  position: relative;
+}
+
+.menu_icon {
+  fill: var(--primary-500-color);
+}
+
+.items {
+  @include flex(column, space-between, flex-start);
+
+  position: absolute;
+  top: 13px;
+  left: -123px;
+
+  width: fit-content;
+  margin-top: 10px;
+  padding: 16px 14px;
+
+  background-color: var(--dark-500-color);
+  border: 1px solid var(--dark-100-color);
+}
+
+.item {
+  @include flex(row, flex-start, center);
+
+  gap: 10px;
+  width: 100%;
+  font: var(--font-regular-400);
+  color: var(--light-100-color);
+}
+
+.enter_from,
+.leave_to {
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.enter_to,
+.leave_from {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.enter,
+.leave {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 100ms;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke,
+    opacity, box-shadow, transform, filter, backdrop-filter;
+}

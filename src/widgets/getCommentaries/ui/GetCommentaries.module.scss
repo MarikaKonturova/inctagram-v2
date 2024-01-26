@@ -1,0 +1,53 @@
+.comments {
+  overflow-y: auto;
+  width: 100%;
+  max-height: calc(85vh - (56px + 100px + 52px));
+  padding: 15px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 5px;
+}
+
+.content {
+  display: block;
+  width: 200px;
+  font: var(--font-medium-400);
+  word-wrap: break-word;
+}
+
+.userName {
+  font: var(--font-medium-700);
+}
+
+.time {
+  font: var(--font-small-400);
+  color: var(--light-900-color);
+}
+
+.actionButton {
+  font: var(--font-small-600);
+  color: var(--light-900-color);
+}
+
+.avatarCommentGroup {
+  display: flex;
+  gap: 12px;
+  border: 1px solid deeppink;
+}
+
+.showAnswerButton {
+  cursor: pointer;
+  font: var(--font-small-600);
+  color: var(--light-900-color);
+}
+
+.commentInfo {
+  flex: 1;
+}

@@ -1,0 +1,19 @@
+.formContainer {
+  flex-basis: 60%;
+}
+
+.infoContainer {
+  display: flex;
+  gap: 36px;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background: var(--dark-300-color);
+}
+
+.button {
+  float: right;
+  margin: 1.5em 0;
+}
