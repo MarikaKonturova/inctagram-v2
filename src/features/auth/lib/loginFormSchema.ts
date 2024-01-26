@@ -7,7 +7,7 @@ export type ValidateUnion = 'confPassword' | 'email' | 'password' | 'recaptcha' 
 const passwordRegExp =
   /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/
 const specialCharactersRegExp = /^[A-Za-z0-9-_]+$/
-// eslint-disable-next-line max-len
+
 const emailRegExp =
   /^[a-zA-Z0-9.!#$%&():;'"’<>*+/=?^_`\\[\]{|}~,№\\\\<>,-]*@[a-zA-Z0-9.!#$%&():;'"’*+/=?^_`\\[\]{|}~,№\\\\<>,№{|}~-]+(\.\w+)+$/
 const passwordValidMassage =

@@ -1,8 +1,10 @@
 import { type useAuthStateType } from '.'
 
-export const SelectEmail = (state: useAuthStateType) => state.email
-export const SelectSetEmail = (state: useAuthStateType) => state.setEmail
-export const SelectUserId = (state: useAuthStateType) => state.userId
+const selectEmail = (state: useAuthStateType) => state.email
+const selectSetEmail = (state: useAuthStateType) => state.setEmail
+const selectUserId = (state: useAuthStateType) => state.userId
 
-export const SelectIsAuth = (state: useAuthStateType) => state.isAuth
-export const SelectHasBusinessAccount = (state: useAuthStateType) => state.hasBusinessAccount
+const selectIsAuth = (state: useAuthStateType) => state.isAuth
+const selectHasBusinessAccount = (state: useAuthStateType) => state.hasBusinessAccount
+
+export { selectEmail, selectHasBusinessAccount, selectIsAuth, selectSetEmail, selectUserId }

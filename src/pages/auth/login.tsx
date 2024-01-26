@@ -1,5 +1,5 @@
 import { ConfirmModal, LoginForm } from 'features/auth'
-import { getAuthLayout } from 'layouts/Layout/AuthLayout/AuthLayout'
+import { getAuthLayout } from 'layouts/AuthLayout/AuthLayout'
 import { type GetServerSidePropsContext } from 'next'
 import { useEffect, useState } from 'react'
 import { getTranslations } from 'shared/lib/i18n'

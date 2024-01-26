@@ -1,1 +1,5 @@
-export { ProfilePage } from './getProfileData/ui/ProfilePage/ProfilePage'
+export { FollowingAndFollowersModal } from './followAndUnfollow/ui/FollowingAndFollowersModal'
+
+export { DeletePostModal } from '../post/deletePost/ui/DeletePostModal'
+
+export { EditPostModal } from '../post/editPost/ui/EditPostModal'

@@ -3,13 +3,12 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { getTranslations } from 'shared/lib/i18n'
 
-import { useAuth } from '../features/auth'
-import { SelectIsAuth } from '../features/auth/model/selectors'
-import { getLayoutWithSidebar } from '../layouts/Layout/LayoutWithSidebar/LayoutWithSidebar'
+import { selectIsAuth, useAuth } from '../features/auth'
+import { getLayoutWithSidebar } from '../layouts/LayoutWithSidebar/LayoutWithSidebar'
 import { AppRoutes } from '../shared/constants/path'
 
 export default function Home() {
-  const isAuth = useAuth(SelectIsAuth)
+  const isAuth = useAuth(selectIsAuth)
   const { push } = useRouter()
 
   void (isAuth ? push(AppRoutes.PROFILE.MY_PROFILE) : push(AppRoutes.AUTH.LOGIN))

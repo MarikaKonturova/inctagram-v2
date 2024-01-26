@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { PublicationCards } from '../features/home/getHomeData/ui/PuublicationCards/PublicationCards'
-import { getLayoutWithSidebar } from '../layouts/Layout/LayoutWithSidebar/LayoutWithSidebar'
+import { getLayoutWithSidebar } from '../layouts/LayoutWithSidebar/LayoutWithSidebar'
+import { PublicationCards } from '../templates/home/getHomeData/ui/PublicationCards/PublicationCards'
 
 const Home = () => {
   return <PublicationCards />

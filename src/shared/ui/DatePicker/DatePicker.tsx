@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import { addDays, format, getYear } from 'date-fns'
-import { type GeneralInformationFormValues } from 'features/general-information-form/lib/useValidationForm'
 import { range } from 'lodash'
 import Link from 'next/link'
 import LibDatePicker from 'react-datepicker'
@@ -17,7 +16,7 @@ import { CustomHeader } from './components/CustomHeader'
 interface DatePickerProps {
   errorText?: string
   onChange?: (value: string) => void
-  setValue: UseFormSetValue<GeneralInformationFormValues>
+  setValue: UseFormSetValue<Record<string, string>>
   value?: string
 }
 const years = range(+getYear(new Date()) - 100, +getYear(new Date()) + 1, 1)
