@@ -12,7 +12,7 @@ export default function Home() {
   const isAuth = useAuth(SelectIsAuth)
   const { push } = useRouter()
 
-  void (isAuth ? push(AppRoutes.PROFILE.MY_PROFILE) : push(AppRoutes.AUTH.LOGIN))
+  void (isAuth ? push(AppRoutes.PROFILE.MY_PROFILE) : push(AppRoutes.PUBLIC))
 
   return (
     <>
