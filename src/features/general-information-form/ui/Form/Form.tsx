@@ -26,7 +26,7 @@ interface IProps {
 }
 
 export const Form: React.FC<IProps> = props => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(['profile'])
   const { control, register, setValue, validErrors, watch } = props
   const { aboutMeError, dateOfBirthError, firstNameError, lastNameError, userNameError } =
     validErrors
@@ -47,7 +47,7 @@ export const Form: React.FC<IProps> = props => {
         errorText={userNameError}
         id={'userName'}
         isRequired
-        label={'Username'}
+        label={`${t('username')}`}
         labelClassName={cls.label}
         type={'text'}
         variant={'outline'}
@@ -59,7 +59,7 @@ export const Form: React.FC<IProps> = props => {
         errorText={firstNameError}
         id={'name'}
         isRequired
-        label={'First Name'}
+        label={`${t('firstName')}`}
         labelClassName={cls.label}
         type={'text'}
         variant={'outline'}
@@ -71,7 +71,7 @@ export const Form: React.FC<IProps> = props => {
         errorText={lastNameError}
         id={'surName'}
         isRequired
-        label={'Last Name'}
+        label={`${t('lastName')}`}
         labelClassName={cls.label}
         type={'text'}
         variant={'outline'}
@@ -100,7 +100,7 @@ export const Form: React.FC<IProps> = props => {
           name={'country'}
           render={({ field: { onChange, value } }) => (
             <Select
-              label={'Select your country'}
+              label={`${t('selectCountry')}`}
               onChange={onChange}
               options={Object.keys(COUNTRIES)}
               value={value}
@@ -112,7 +112,7 @@ export const Form: React.FC<IProps> = props => {
           name={'city'}
           render={({ field }) => (
             <Select
-              label={'Select your city'}
+              label={`${t('selectCity')}`}
               options={country ? COUNTRIES[country] : []}
               {...field}
             />
@@ -124,7 +124,7 @@ export const Form: React.FC<IProps> = props => {
         className={cls.wrapper}
         errorText={aboutMeError}
         id={'aboutMe'}
-        label={'About me'}
+        label={`${t('aboutMe')}`}
         labelClassName={cls.label}
         textareaClassName={aboutMeError ? cls.error : cls.textarea}
       />

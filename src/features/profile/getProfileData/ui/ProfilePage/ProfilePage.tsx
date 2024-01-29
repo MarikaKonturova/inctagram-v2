@@ -1,5 +1,6 @@
 import { PostCards } from 'features/profile/getPosts/ui/PostCards/PostCards'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 import React, { useEffect, useState } from 'react'
 import { AppRoutes } from 'shared/constants/path'
 import { Avatar, Button } from 'shared/ui'
@@ -11,6 +12,7 @@ import { FollowingAndFollowersModal } from './modals/FollowModal/ui'
 export const ProfilePage = () => {
   const router = useRouter()
   const { response } = useGetProfileData()
+  const { t } = useTranslation('profile')
   const userData = response?.data
 
   const [isModalOpen, setModalOpen] = useState(false)
@@ -58,21 +60,21 @@ export const ProfilePage = () => {
           <div className={cls.main}>
             <div className={cls.userName}>{userData?.userName}</div>
             <Button className={cls.button} onClick={onProfileSettingsClick}>
-              Profile Settings
+              {t('settings')}
             </Button>
           </div>
           <div className={cls.info}>
             <div onClick={openSubscriptionModal}>
               <div className={cls.subscribe}>{followingCount}</div>
-              <div>Subscriptions</div>
+              <div>{t('subscriptions')}</div>
             </div>
             <div onClick={openModal}>
               <div className={cls.subscribe}>{userData?.followersCount}</div>
-              <div>Subscribers</div>
+              <div>{t('subscribers')}</div>
             </div>
             <div>
               <div className={cls.subscribe}>{userData?.publicationsCount}</div>
-              <div>Publications</div>
+              <div>{t('publications')}</div>
             </div>
           </div>
           <div className={cls.aboutMe}>{userData?.aboutMe}</div>
