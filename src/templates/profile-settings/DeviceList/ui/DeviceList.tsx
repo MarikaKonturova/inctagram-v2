@@ -1,6 +1,7 @@
 import { Device } from 'entities/Device'
 import { TerminateAllDevices, TerminateDevice } from 'features/devices'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { PageLoader } from 'shared/ui/PageLoader/PageLoader'
 
 import { useDevices } from '../model'
@@ -8,6 +9,7 @@ import cls from './DeviceList.module.scss'
 
 export const DeviceList = () => {
   const { data: devices, isError, isLoading } = useDevices()
+  const { t } = useTranslation(['profile'])
 
   if (isLoading || isError) {
     return <PageLoader />
@@ -28,7 +30,7 @@ export const DeviceList = () => {
   return (
     <>
       <div className={cls.wrapper}>
-        <h2 className={cls.title}>This Device</h2>
+        <h2 className={cls.title}>{t('thisDevice')}</h2>
         <ul>
           {currentDevice && (
             <li className={cls.device}>
@@ -40,8 +42,8 @@ export const DeviceList = () => {
       <TerminateAllDevices />
 
       <div>
-        <h2 className={cls.title}>Active sessions</h2>
-        {deviceItems.length === 1 ? <p>No active sessions</p> : <ul>{deviceItems}</ul>}
+        <h2 className={cls.title}>{t('activeSessions')}</h2>
+        {deviceItems.length === 1 ? <p>{t('noActiveSessions')}</p> : <ul>{deviceItems}</ul>}
       </div>
     </>
   )
