@@ -1,4 +1,4 @@
-import { type Comment } from './post'
+import { type IComment } from './post'
 
 export interface CommentatorInfo {
   userId: string
@@ -11,6 +11,6 @@ export interface LikesInfo {
   myStatus: string
 }
 
-export type AnswerType = Omit<Comment, 'answerCount' | 'postId'> & {
+export type AnswerType = Omit<IComment, 'answerCount' | 'postId'> & {
   commentId: number
 }

@@ -1,1 +1,1 @@
-export { FavoritesPage } from 'templates/favorites/ui/Favorites'
+export { FavoritesPage } from 'templates/favorites/Favorites'

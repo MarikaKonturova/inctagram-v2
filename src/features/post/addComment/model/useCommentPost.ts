@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
-import { useCommentStore } from 'entities/Comment/model'
+import { useCommentStore } from 'entities/Comment/model/useCommentStore'
 import { PostService } from 'shared/api'
 import { useSnackbar } from 'shared/hooks'
 

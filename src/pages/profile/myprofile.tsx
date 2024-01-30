@@ -1,5 +1,5 @@
 import { getLayoutWithSidebar } from 'layouts'
-import { ProfilePage } from 'templates/ProfilePage'
+import { ProfilePage } from 'templates/profile'
 
 export default function Profile() {
   return <ProfilePage />

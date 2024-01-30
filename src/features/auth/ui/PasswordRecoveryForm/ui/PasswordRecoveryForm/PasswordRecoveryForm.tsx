@@ -36,8 +36,6 @@ export const PasswordRecoveryForm = () => {
     }
   }
 
-  console.log({ emailError, isLoading, isValid, recaptchaError })
-
   return (
     <FormWrapper className={cls.rootWrapper} onSubmit={handleSubmit(onSubmit)}>
       <h2 className={cls.title}>{t('forgotPassword')}</h2>
@@ -66,7 +64,6 @@ export const PasswordRecoveryForm = () => {
         className={cls.recaptcha}
         hl={'en'}
         onChange={getRecaptchaValueHandler}
-        onErrored={() => setError('recaptcha')}
         sitekey={`${process.env.RECAPTCHA_SITE_KEY as string}`}
         theme={'dark'}
       />

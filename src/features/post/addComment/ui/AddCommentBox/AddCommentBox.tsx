@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useCommentStore } from 'entities/Comment/model'
+import { useCommentStore } from 'entities/Comment/model/useCommentStore'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Button, Input } from 'shared/ui'
