@@ -1,5 +1,5 @@
 'use client'
-import { getAuthLayout } from 'layouts/AuthLayout/AuthLayout'
+import { getAuthLayout } from 'layouts'
 import { type NextPageContext } from 'next'
 import { EmailConfirmation } from 'templates/auth'
 

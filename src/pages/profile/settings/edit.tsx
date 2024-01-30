@@ -1,4 +1,4 @@
-import { getLayoutWithSidebar } from 'layouts/LayoutWithSidebar/LayoutWithSidebar'
+import { getLayoutWithSidebar } from 'layouts'
 import React from 'react'
 import { ProfileSettingsPage } from 'templates/profile-settings'
 

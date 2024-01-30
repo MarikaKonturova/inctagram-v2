@@ -1,1 +1,1 @@
-// export { PuublicationCards } from './getProfileData/ui/PuublicationCards/PuublicationCards'
+export { PublicationCards } from './ui/PublicationCards/PublicationCards'

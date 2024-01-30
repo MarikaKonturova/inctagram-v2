@@ -1,11 +1,10 @@
-import { getLayoutWithoutSidebar } from 'layouts/Layout/LayoutWithoutSideBar/LayoutWithoutSidebar'
+import { getLayoutWithoutSidebar } from 'layouts'
 import { type GetServerSidePropsContext } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { getTranslations } from 'shared/lib/i18n'
 
 import { selectIsAuth, useAuth } from '../features/auth'
-import { getLayoutWithSidebar } from '../layouts/LayoutWithSidebar/LayoutWithSidebar'
 import { AppRoutes } from '../shared/constants/path'
 
 export default function Home() {

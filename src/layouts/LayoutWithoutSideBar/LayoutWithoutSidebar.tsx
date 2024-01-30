@@ -1,9 +1,8 @@
 import { AuthRedirect } from 'features/auth'
 import { type NextPage } from 'next'
 import { type PropsWithChildren, type ReactElement, Suspense } from 'react'
-import { Sidebar } from 'widgets/Sidebar'
 
-import { Layout } from '../Layout'
+import { Layout } from '../Layout/Layout'
 import cls from './LayoutWithoutSidebar.module.scss'
 
 export const LayoutWithoutSidebar: NextPage<PropsWithChildren> = ({ children }) => {

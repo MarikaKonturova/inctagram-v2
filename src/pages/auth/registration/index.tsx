@@ -1,11 +1,15 @@
 import { ConfirmModal, RegisterForm } from 'features/auth'
-import { getAuthLayout } from 'layouts/AuthLayout/AuthLayout'
+import { getAuthLayout } from 'layouts'
 import { type GetServerSidePropsContext } from 'next'
 import { getTranslations } from 'shared/lib/i18n'
 
 export default function Registration() {
-  // eslint-disable-next-line react/jsx-key
-  return [<RegisterForm />, <ConfirmModal />]
+  return (
+    <>
+      <RegisterForm />
+      <ConfirmModal />
+    </>
+  )
 }
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => ({
