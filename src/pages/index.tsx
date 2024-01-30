@@ -1,3 +1,4 @@
+import { getLayoutWithoutSidebar } from 'layouts/Layout/LayoutWithoutSideBar/LayoutWithoutSidebar'
 import { type GetServerSidePropsContext } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -29,4 +30,4 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => ({
   props: await getTranslations(ctx.locale, ['common', 'auth']),
 })
 
-Home.getLayout = getLayoutWithSidebar
+Home.getLayout = getLayoutWithoutSidebar

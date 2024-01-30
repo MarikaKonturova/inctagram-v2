@@ -10,7 +10,6 @@ export default {
 } as ComponentMeta<typeof PostModalActions>
 
 const Template: ComponentStory<typeof PostModalActions> = () => {
-  // TODO: fix
   return <PostModalActions post={{} as PostResponse} />
 }
 

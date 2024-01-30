@@ -14,7 +14,7 @@ interface PropsType {
 
 export const LegalContent: FC<PropsType> = ({ content, label, title }) => {
   const router = useRouter()
-  const goToBack = () => router.push(AppRoutes.AUTH.REGISTRATION)
+  const goToBack = () => window.history.back()
 
   return (
     <div className={cls.rootContainer}>

@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { type NextPage } from 'next'
 import { Inter } from 'next/font/google'
-import { type PropsWithChildren } from 'react'
+import { type PropsWithChildren, ReactElement } from 'react'
 import { Container, SnackBar } from 'shared/ui'
 import { Header } from 'widgets/Header'
 

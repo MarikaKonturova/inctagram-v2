@@ -2,8 +2,6 @@ import { $api } from 'shared/api'
 import { type AnswerType } from 'shared/types/comment'
 import { IComment, type ResponseType } from 'shared/types/post'
 
-// TODO: доделать API
-// TODO: сделать enum для API routes
 export const PostService = {
   answerForComment(postId: number, commentId: number, answer: Record<'content', string>) {
     return $api.post<IComment>(`/posts/${postId}/comments/${commentId}/answers`, answer)
