@@ -1,6 +1,7 @@
 import { useGetProfileData } from 'features/profile/getProfileData/model'
 import { type FC } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
@@ -21,6 +22,7 @@ export const NewPostModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick, s
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
   const { response } = useGetProfileData()
+  const { t } = useTranslation(['profile'])
   const userData = response?.data
   const {
     formState: { errors },
@@ -47,9 +49,9 @@ export const NewPostModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick, s
     <>
       <header className={cls.header}>
         <IconArrowBack fill={fill} onClick={onPrevClick} />
-        <h2>Publication</h2>
+        <h2>{t('publication')}</h2>
         <Button onClick={handleSubmit(onSubmit)} theme={'textButton'}>
-          Publish
+          {t('publish')}
         </Button>
       </header>
       <div className={cls.mainContainer}>
@@ -66,12 +68,12 @@ export const NewPostModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick, s
             )}
             <Textarea
               className={cls.textareaContainer}
-              label={'Add publication descriptions'}
+              label={`${t('addPublicationDescriptions')}`}
               labelClassName={cls.label}
-              placeholder={'Write your description here'}
+              placeholder={`${t('writeYourDescriptionHere')}`}
               textareaClassName={cls.textarea}
               {...register('description', {
-                maxLength: { message: 'Max length of description is 500 characters', value: 500 },
+                maxLength: { message: `${t('maxLengthDescription')}`, value: 500 },
               })}
             />
           </div>
@@ -80,7 +82,7 @@ export const NewPostModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick, s
             className={cls.wrapper}
             errorText={errors.description?.message}
             id={'location'}
-            label={'Location'}
+            label={`${t('location')}`}
             labelClassName={cls.label}
             type={'text'}
           />

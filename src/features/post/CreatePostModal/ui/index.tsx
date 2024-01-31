@@ -1,4 +1,5 @@
 import { type FC, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Modal } from 'shared/ui'
 
 import { useCreateMutation } from '../model'
@@ -31,7 +32,7 @@ export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
   const { isSuccess, onCreate } = useCreateMutation({ handleClose })
 
   const [currentStep, setCurrentStep] = useState<Values | null>(1)
-
+  const { t } = useTranslation(['profile'])
   const [file, setFile] = useState<File | undefined>()
   const [workingImage, setWorkingImage] = useState<File | undefined>()
   const onSubmit = async (data: INewPostInterface) => {
@@ -97,7 +98,7 @@ export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
   }, [isSuccess])
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} title={'add Photo'} withHeader={!file}>
+    <Modal isOpen={isOpen} onClose={handleClose} title={`${t('addPhoto')}`} withHeader={!file}>
       {renderStep()}
     </Modal>
   )

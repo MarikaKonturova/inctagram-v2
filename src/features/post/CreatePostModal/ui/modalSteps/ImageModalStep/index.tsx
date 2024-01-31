@@ -1,4 +1,5 @@
 import { type ChangeEvent, type FC, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import IconImg from 'shared/assets/icons/light/image.svg'
 
 import cls from './styles.module.scss'
@@ -10,6 +11,7 @@ interface IProps {
 
 export const ImageModalStep: FC<IProps> = ({ onNextClick, setFile }) => {
   const [error, setError] = useState('')
+  const { t } = useTranslation(['profile'])
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.files?.length) {
@@ -17,9 +19,9 @@ export const ImageModalStep: FC<IProps> = ({ onNextClick, setFile }) => {
       const allowedImageTypes = ['image/jpeg', 'image/png']
 
       if (file.size > 1024 * 1024 * 20) {
-        setError('Photo size must be less than 10 MB!')
+        setError(`${t('photoSizeError')}`)
       } else if (!allowedImageTypes.includes(file.type)) {
-        setError('The format of the uploaded photo must be\nPNG and JPEG')
+        setError(`${t('photoFormatError')}`)
       } else {
         setError('')
         setFile(e.target.files[0])
@@ -42,7 +44,7 @@ export const ImageModalStep: FC<IProps> = ({ onNextClick, setFile }) => {
           <div className={cls.imgContainer}>
             <IconImg />
           </div>
-          <span>Select from Computer</span>
+          <span>{t('selectFromComputer')}</span>
         </div>
       </label>
     </div>
