@@ -97,7 +97,7 @@ export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
   }, [isSuccess])
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} title={'add Photo'} withHeader={!file}>
+    <Modal isOpen={isOpen} onClose={handleClose} title={'Add Photo'} withHeader={!file}>
       {renderStep()}
     </Modal>
   )
