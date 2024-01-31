@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { LikeCommentIconButton } from 'features/post'
 import { useCommentStore } from 'features/profile/getPosts/model'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { type AnswerType } from 'shared/types/comment'
 import { type Comment } from 'shared/types/post'
 import { Avatar } from 'shared/ui'
@@ -43,6 +44,7 @@ function CommentInfo({
     likeCount,
   } = data
   const { setRepliedComment } = useCommentStore()
+  const { t } = useTranslation(['profile'])
 
   const onAnswerHandler = () => {
     setRepliedComment({ id: isRepliedComment && commentId ? commentId : id, userName })
@@ -56,9 +58,9 @@ function CommentInfo({
         <span className={cls.content}>{content}</span>
         <div className={cls.bottomInfo}>
           <p className={cls.time}>{formattedDate(createdAt)} </p>
-          <p className={cls.actionButton}>Like: {likeCount} </p>
+          <p className={cls.actionButton}>{`${t('like')}: ${likeCount}`} </p>
           <button className={cls.button} onClick={onAnswerHandler} type={'button'}>
-            Answer
+            {t('reply')}
           </button>
         </div>
         {!!answerCount && (
@@ -72,8 +74,8 @@ function CommentInfo({
             <div className={cls.line} />
             <span>
               {isOpen && (openedCommentId === id || openedCommentId === commentId)
-                ? 'Hide answers'
-                : `View answers (${answerCount})`}
+                ? `${t('hideReplies')}`
+                : `${t('viewReplies')} (${answerCount})`}
             </span>
           </button>
         )}
