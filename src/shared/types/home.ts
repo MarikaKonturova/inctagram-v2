@@ -72,3 +72,8 @@ export interface PublicationsInPagesResponse {
   prevCursor: number
   totalCount: number
 }
+
+export interface LastPublicationsResponse {
+  countUsers: number
+  lastPosts: ResponseItem[]
+}
