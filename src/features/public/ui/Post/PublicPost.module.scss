@@ -1,0 +1,65 @@
+.post {
+  width: 234px;
+  height: 391px;
+  overflow: hidden;
+  position: relative;
+}
+
+.imgWrapper {
+  overflow: hidden;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  transition: all 1s;
+  cursor: pointer;
+}
+
+.img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+}
+
+.userName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.createdAt {
+  margin: 0 0 3px;
+}
+
+.description {
+  color: var(--light-100-color);
+  font: var(--font-regular-400);
+  word-wrap: break-word;
+}
+
+.buttonWrapper {
+  z-index: +1;
+  background-color: var(--dark-700-color);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-inline: 5px;
+}
+
+.button {
+  font: var(--font-regular-400);
+  text-decoration-line: underline;
+  color: var(--primary-500-color);
+
+  padding: 0;
+}
