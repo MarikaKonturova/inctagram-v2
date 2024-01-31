@@ -1,25 +1,42 @@
 .Modal {
-  width: 380px;
+  width: 492px;
 
   .content {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 60px;
     align-items: center;
 
-    padding: 24px;
+    padding-top: 72px;
 
     .errorBox {
-      padding: 10px;
+      padding: 8px 24px;
       text-align: center;
       background: var(--danger-900-color);
       border: 1px solid var(--danger-500-color);
+
+      .errorText {
+        padding: 2px 20px;
+      }
     }
 
     .button {
       width: 219px;
       height: 36px;
-      margin: 0 auto;
+      margin-bottom: 100px;
+    }
+  }
+
+  .contentError {
+    gap: 0;
+    padding-top: 0;
+
+    .errorBox {
+      margin: 25px 25px;
+    }
+
+    .button {
+      margin-top: 60px;
     }
   }
 }
