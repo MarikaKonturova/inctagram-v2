@@ -8,7 +8,7 @@ import cls from './GetCommentaries.module.scss'
 
 interface Props {
   postId: number
-  userData: ProfileDataModel
+  userData?: ProfileDataModel
 }
 
 export const GetCommentaries: FC<Props> = ({ postId, userData }) => {
