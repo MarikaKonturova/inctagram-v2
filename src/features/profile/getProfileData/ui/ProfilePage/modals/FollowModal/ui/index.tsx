@@ -1,5 +1,6 @@
 import { useSnackbar } from 'features/common'
 import Image from 'next/image'
+import { useTranslation } from 'next-i18next'
 import React, { useEffect, useState } from 'react'
 import userPhoto from 'shared/assets/images/user.png'
 import { useDebounce } from 'shared/hooks/useDebounce'
@@ -22,6 +23,7 @@ export const FollowingAndFollowersModal: React.FC<FollowingAndFollowersModalProp
   const [searchUser, setSearchUser] = useState<string>('')
   const [count, setCount] = useState<number>(0)
   const debounceSearchUser = useDebounce(searchUser, 500)
+  const { t } = useTranslation('profile')
   const {
     data: usersData,
     isLoading: isUsersLoading,
@@ -33,7 +35,7 @@ export const FollowingAndFollowersModal: React.FC<FollowingAndFollowersModalProp
       fetchDataName === 'following' ? user.isFollowing : user.isFollowedBy
     ).length || 0
   const onOpen = useSnackbar(state => state.onOpen)
-  const title = fetchDataName === 'following' ? 'Subscription' : 'Subscribed'
+  const title = fetchDataName === 'following' ? `${t('subscriptions')}` : `${t('subscribers')}`
 
   useEffect(() => {
     void refetch()
@@ -44,7 +46,7 @@ export const FollowingAndFollowersModal: React.FC<FollowingAndFollowersModalProp
       onSuccess: () => {
         setCount(followingCount)
         onOpen(
-          `You have ${user.isFollowing ? 'unfollowed' : 'followed'} ${user.userName}!`,
+          `${user.isFollowing ? t('youHaveUnfollowed') : t('youHaveFollowed')} ${user.userName}!`,
           'success',
           'right'
         )
@@ -64,7 +66,7 @@ export const FollowingAndFollowersModal: React.FC<FollowingAndFollowersModalProp
       className={styles.modal}
       isOpen={isOpen}
       onClose={onClose}
-      title={`${title} to: ${String(followingCount)}`}
+      title={`${title}: ${String(followingCount)}`}
     >
       <Input
         className={styles.inputWrapper}
@@ -72,7 +74,7 @@ export const FollowingAndFollowersModal: React.FC<FollowingAndFollowersModalProp
         onChange={e => {
           setSearchUser(e.target.value)
         }}
-        placeholder={'Search...'}
+        placeholder={`${t('search')}`}
         type={'search'}
         value={searchUser}
       />
@@ -102,10 +104,10 @@ export const FollowingAndFollowersModal: React.FC<FollowingAndFollowersModalProp
                 }}
                 type={'button'}
               >
-                {user.isFollowing ? 'Unfollow' : 'Follow'}
+                {user.isFollowing ? `${t('unfollow')}` : `${t('follow')}`}
               </Button>
               <Button className={styles.button} theme={'secondary'} type={'button'}>
-                Delete
+                {t('delete')}
               </Button>
             </div>
           </div>
