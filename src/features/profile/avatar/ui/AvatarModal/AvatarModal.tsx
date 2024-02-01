@@ -14,7 +14,11 @@ import { useTranslation } from 'react-i18next'
 import { Button, Modal } from 'shared/ui'
 import { convertDataUrlToFile } from 'shared/utils/convertDataUrlToFile'
 
-const AVATAR_SIZE = 300
+/*const AVATAR_SIZE = 300*/
+
+const AVATAR_HEIGHT = 228
+const AVATAR_WIDTH = 222
+
 const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
 
 const AvatarDynamicImport = dynamic(
@@ -80,19 +84,19 @@ export const AvatarModal: FC<PropsType> = ({ className, isOpen, setAvatar, setIs
       onClose={onCloseHandler}
       title={`${t('addPhoto')}`}
     >
-      <div className={cls.content}>
+      <div className={errorMessage ? `${cls.content} ${cls.contentError}` : cls.content}>
         {errorMessage && (
           <div className={cls.errorBox}>
-            <p>
+            <p className={cls.errorText}>
               <strong>Error!</strong> {errorMessage}
             </p>
           </div>
         )}
         <AvatarDynamicImport
-          height={AVATAR_SIZE}
+          height={AVATAR_HEIGHT}
           onBeforeFileLoad={onBeforeFileLoad}
           onCrop={onCrop}
-          width={AVATAR_SIZE}
+          width={AVATAR_WIDTH}
         />
         <Button className={cls.button} disabled={!image} onClick={save} type={'button'}>
           {t('save')}

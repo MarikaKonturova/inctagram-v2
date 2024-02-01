@@ -35,8 +35,8 @@ export const ModalLayout: FC<PropsWithChildren<ModalLayoutProps>> = props => {
       <div className={contentClassName}>
         {withHeader && (
           <header className={cls.header}>
-            <h2>{title}</h2>
-            <button onClick={onClose} type={'button'}>
+            <h2 className={cls.title}>{title}</h2>
+            <button className={cls.buttonClose} onClick={onClose} type={'button'}>
               <CloseIcon />
             </button>
           </header>

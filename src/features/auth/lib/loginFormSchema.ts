@@ -7,9 +7,8 @@ export type ValidateUnion = 'confPassword' | 'email' | 'password' | 'recaptcha' 
 const passwordRegExp =
   /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/
 const specialCharactersRegExp = /^[A-Za-z0-9-_]+$/
-
-const emailRegExp =
-  /^[a-zA-Z0-9.!#$%&():;'"’<>*+/=?^_`\\[\]{|}~,№\\\\<>,-]*@[a-zA-Z0-9.!#$%&():;'"’*+/=?^_`\\[\]{|}~,№\\\\<>,№{|}~-]+(\.\w+)+$/
+// eslint-disable-next-line max-len
+const emailRegExp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/
 const passwordValidMassage =
   'Password should include one uppercase Latin letter, one lowercase Latin letter, one number and one special character'
 
