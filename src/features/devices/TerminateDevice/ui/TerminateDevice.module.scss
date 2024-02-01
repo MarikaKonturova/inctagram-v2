@@ -2,10 +2,14 @@
 
 .button {
   @include flex($align: center);
-
   column-gap: 12px;
+  transition: fill 0.5s;
 
   &:hover {
-    color: var(--danger-500-color);
+    color: var(--primary-500-color);
+
+    svg:only-child {
+      fill: var(--primary-500-color);
+    }
   }
 }
