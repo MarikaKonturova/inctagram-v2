@@ -1,7 +1,6 @@
-import { type FC, useEffect, useState } from 'react'
+import { type FC, useEffect, useRef, useState } from 'react'
 import { Modal } from 'shared/ui'
 
-import { useCreateMutation } from '../model'
 import { CropImageModalStep } from './modalSteps/CropImageModalStep'
 import { FilterIamgeModalStep } from './modalSteps/FilterImageModalStep'
 import { ImageModalStep } from './modalSteps/ImageModalStep'
@@ -28,76 +27,40 @@ type Keys = keyof typeof MODALSTEPS
 type Values = (typeof MODALSTEPS)[Keys]
 
 export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
-  const { isSuccess, onCreate } = useCreateMutation({ handleClose })
-
-  const [currentStep, setCurrentStep] = useState<Values | null>(1)
-
-  const [file, setFile] = useState<File | undefined>()
-  const [workingImage, setWorkingImage] = useState<File | undefined>()
-  const onSubmit = async (data: INewPostInterface) => {
-    const formData = new FormData()
-
-    if (workingImage) {
-      formData.append('files', workingImage)
-    }
-    formData.append('description', data.description)
-    onCreate(formData)
+  const [currentStep, setCurrentStep] = useState<Values>(1)
+  const onSubmitSuccess = () => {
+    setCurrentStep(1)
+    handleClose()
   }
 
   const renderStep = () => {
     const setNexStep = () => {
-      currentStep && setCurrentStep((currentStep + 1) as Values)
+      setCurrentStep((currentStep + 1) as Values)
     }
     const setPrevStep = () => {
-      currentStep && setCurrentStep((currentStep - 1) as Values)
+      setCurrentStep((currentStep - 1) as Values)
     }
 
     return (
       <>
         {currentStep === MODALSTEPS.ImageStep && (
-          <ImageModalStep onNextClick={setNexStep} setFile={setFile} />
+          <ImageModalStep onNextClick={setNexStep} onPrevClick={handleClose} />
         )}
         {currentStep === MODALSTEPS.CropImageStep && (
-          <CropImageModalStep
-            file={file}
-            onNextClick={setNexStep}
-            onPrevClick={() => {
-              setPrevStep()
-              setFile(undefined)
-            }}
-            setFile={setWorkingImage}
-          />
+          <CropImageModalStep onNextClick={setNexStep} onPrevClick={setPrevStep} />
         )}
         {currentStep === MODALSTEPS.filterImageStep && (
-          <FilterIamgeModalStep
-            file={workingImage}
-            onNextClick={setNexStep}
-            onPrevClick={setPrevStep}
-            setFile={setWorkingImage}
-          />
+          <FilterIamgeModalStep onNextClick={setNexStep} onPrevClick={setPrevStep} />
         )}
         {currentStep === MODALSTEPS.NewPostStep && (
-          <NewPostModalStep
-            file={workingImage}
-            onNextClick={onSubmit}
-            onPrevClick={setPrevStep}
-            setFile={setFile}
-          />
+          <NewPostModalStep onPrevClick={setPrevStep} onSubmitSuccess={onSubmitSuccess} />
         )}
       </>
     )
   }
 
-  useEffect(() => {
-    if (isSuccess) {
-      setFile(undefined)
-      setCurrentStep(1)
-      handleClose()
-    }
-  }, [isSuccess])
-
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} title={'add Photo'} withHeader={!file}>
+    <Modal isOpen={isOpen} onClose={handleClose} withHeader={false}>
       {renderStep()}
     </Modal>
   )

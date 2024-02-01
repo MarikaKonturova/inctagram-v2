@@ -6,7 +6,9 @@ import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
 import { Button } from 'shared/ui'
+import { shallow } from 'zustand/shallow'
 
+import { useUploadImagePostStore } from '../../../model'
 import MenuCropSize from './components/cropperRatio'
 import cls from './styles.module.scss'
 
@@ -14,12 +16,17 @@ interface IProps {
   file?: File
   onNextClick: () => void
   onPrevClick: () => void
-  setFile: (value: File) => void
+  setFile?: (value: File) => void
 }
 
 export const CropImageModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick, setFile }) => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
+
+  const { image, setImage } = useUploadImagePostStore(
+    ({ image, setImage }) => ({ image, setImage }),
+    shallow
+  )
 
   const cropperRef = useRef<FixedCropperRef>(null)
   const [aspectRatio, setAspectRatio] = useState<number>(16 / 9)
@@ -38,24 +45,30 @@ export const CropImageModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick,
         cropperRef.current.getCanvas()?.toBlob(blob => {
           const file = blob && new File([blob], 'fileName.jpg', { type: 'image/jpeg' })
 
-          file && setFile(file)
+          if (file) {
+            setImage(file)
+          }
         }, 'image/jpeg')
         resolve()
       }
     })
   }
 
-  const img = file ? URL.createObjectURL(file) : ''
+  const img = image ? URL.createObjectURL(image) : ''
 
   const onButtonClick = async () => {
     await onCrop()
     onNextClick()
   }
+  const onIconClick = () => {
+    onPrevClick()
+    setImage(null)
+  }
 
   return (
     <div className={cls.modal}>
       <header className={cls.header}>
-        <IconArrowBack fill={fill} onClick={onPrevClick} />
+        <IconArrowBack fill={fill} onClick={onIconClick} />
         <h2>Cropping</h2>
         <Button onClick={onButtonClick}>Next</Button>
       </header>
