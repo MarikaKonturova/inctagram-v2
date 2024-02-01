@@ -1,4 +1,4 @@
-import { getAuthLayout } from 'layouts/Layout/AuthLayout/AuthLayout'
+import { getAuthLayout } from 'layouts'
 import { type GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'

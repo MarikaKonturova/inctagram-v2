@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
+import { selectSetEmail } from 'features/auth'
 import { useAuth } from 'features/auth/model'
-import { SelectSetEmail } from 'features/auth/model/selectors'
 import { useState } from 'react'
 import { AuthService } from 'shared/api'
 import { useModal } from 'shared/hooks/useModal'
@@ -11,7 +11,7 @@ import { type PasswordRecoveryValidation } from '../ui/PasswordRecoveryForm/Pass
 
 export const useRecoverPassword = () => {
   const [isInfoTextShown, setIsInfoTextShown] = useState(false)
-  const setEmail = useAuth(SelectSetEmail)
+  const setEmail = useAuth(selectSetEmail)
   const { setIsOpen } = useModal()
 
   const {

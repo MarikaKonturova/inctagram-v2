@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
-import { useSnackbar } from 'features/common'
 import { ProfileService } from 'shared/api'
+import { useSnackbar } from 'shared/hooks'
 import { type UserError } from 'shared/types/auth'
 
 export const useDeleteAvatar = (

@@ -63,7 +63,7 @@ export interface AvatarPostModel {
   thumbnail: ProfileAvatarModel
 }
 
-export interface Comment {
+export interface IComment {
   answerCount: number
   content: string
   createdAt: string
@@ -78,29 +78,6 @@ export interface Comment {
   postId: number
 }
 
-interface FavoritePost {
-  avatars: AvatarVersions
-  commentCount: number
-  createdAt: string
-  description: string
-  id: number
-  images: Image[]
-  isFavorite: boolean
-  isFollowedBy: boolean
-  isFollowing: boolean
-  isLiked: boolean
-  likeCount: number
-  location: {
-    latitude: number
-    longitude: number
-    nameLocation: string
-  }
-  newLikes: Like[]
-  ownerId: number
-  updatedAt: string
-  userName: string
-}
-
 interface AvatarVersion {
   fileSize: number
   height: number
@@ -113,18 +90,11 @@ interface AvatarVersions {
   thumbnail: AvatarVersion
 }
 
-interface ImageVersion {
-  fileSize: number
-  height: number
-  url: string
-  width: number
-}
-
 interface Image {
   uploadId: string
   versions: {
-    huge: ImageVersion
-    large: ImageVersion
+    huge: ProfileAvatarModel
+    large: ProfileAvatarModel
   }
 }
 
@@ -133,12 +103,10 @@ interface Like {
   id: number
   userName: string
 }
-export interface FavoritesType {
-  items: FavoritePost[]
+
+type FavoritePostType = PostResponse & { newLikes: Like[] }
+
+export type FavoritesType = ResponseType<FavoritePostType[]> & {
   nextCursor: number
-  page: number
-  pageSize: number
-  pagesCount: number
   prevCursor: number
-  totalCount: number
 }
