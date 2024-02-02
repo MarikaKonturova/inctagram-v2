@@ -4,7 +4,7 @@ export const fnBrowserDetect = (userAgent: string) => {
       return 'Yandex'
     }
     if (userAgent.match(/edg/i)) {
-      return 'Edg'
+      return 'Edge'
     }
     if (userAgent.match(/opr\//i)) {
       return 'Opera'
