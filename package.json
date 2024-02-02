@@ -55,6 +55,7 @@
     "shared": "^0.2.0",
     "socket.io": "^4.6.1",
     "storybook-addon-next-router": "^4.0.2",
+    "swiper": "^11.0.5",
     "typescript": "*",
     "yup": "^1.1.1",
     "yup-password": "^0.2.2",
