@@ -1,6 +1,7 @@
 import { Menu } from '@headlessui/react'
 import clsx from 'clsx'
 import React, { type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import IconEdit from 'shared/assets/icons/light/edit-2.svg'
 import IconEditOutline from 'shared/assets/icons/outline/edit-2-outline.svg'
 import { Theme } from 'shared/constants/theme'
@@ -15,6 +16,7 @@ interface IProps {
 export const UpdateMyPostButton: FC<IProps> = ({ openEditPostModal }) => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
+  const { t } = useTranslation(['profile'])
 
   return (
     <Menu.Item>
@@ -25,7 +27,7 @@ export const UpdateMyPostButton: FC<IProps> = ({ openEditPostModal }) => {
           ) : (
             <IconEditOutline aria-hidden={'true'} fill={fill} />
           )}
-          Edit Post{' '}
+          {t('editPost')}{' '}
         </button>
       )}
     </Menu.Item>

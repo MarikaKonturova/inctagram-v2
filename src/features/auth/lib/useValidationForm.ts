@@ -13,20 +13,15 @@ export interface IFormValidate {
 }
 
 export const useValidationForm = (arr: ValidateUnion[]) => {
-  const {
-    clearErrors,
-    formState: { errors, isValid },
-    handleSubmit,
-    register,
-    reset,
-    setError,
-    setValue,
-    watch,
-  } = useForm<IFormValidate>({
-    mode: 'onTouched',
-    reValidateMode: 'onChange',
-    resolver: yupResolver(createValidationSchema(arr)),
-  })
+  const { clearErrors, formState, handleSubmit, register, reset, setError, setValue, watch } =
+    useForm<IFormValidate>({
+      mode: 'onTouched',
+      reValidateMode: 'onChange',
+      resolver: yupResolver(createValidationSchema(arr)),
+    })
+
+  console.log({ formState }, watch('recaptcha'))
+  const { errors, isValid } = formState
 
   const emailError = errors?.email && errors.email.message
   const passwordError = errors?.password && errors.password.message

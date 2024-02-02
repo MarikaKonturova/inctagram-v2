@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
 import { format } from 'date-fns'
-import { useSnackbar } from 'features/common'
 import { SubscriptionsService } from 'shared/api'
+import { useSnackbar } from 'shared/hooks'
 import { type CostOfSubscriptionType, type SubscriptionType } from 'shared/types/subscriptions'
 
 const formatDate = (date: string) => format(new Date(date), 'dd.MM.yyyy')

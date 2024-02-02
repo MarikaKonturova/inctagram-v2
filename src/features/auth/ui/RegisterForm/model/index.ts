@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
+import { selectEmail, selectSetEmail } from 'features/auth'
 import { useAuth } from 'features/auth/model'
-import { SelectEmail, SelectSetEmail } from 'features/auth/model/selectors'
-import { useSnackbar } from 'features/common'
 import { useCallback } from 'react'
 import { type UseFormReset, type UseFormSetError } from 'react-hook-form'
 import { AuthService } from 'shared/api'
 import { AppRoutes } from 'shared/constants/path'
+import { useSnackbar } from 'shared/hooks'
 import { useModal } from 'shared/hooks/useModal'
 import { type UserError, type UserRegistrationModel } from 'shared/types/auth'
 
@@ -21,8 +21,8 @@ export const useRegistration = (
   setError: UseFormSetError<UserRegistrationModel>,
   reset: UseFormReset<UserRegistrationModel>
 ) => {
-  const setEmail = useAuth(SelectSetEmail)
-  const email = useAuth(SelectEmail)
+  const setEmail = useAuth(selectSetEmail)
+  const email = useAuth(selectEmail)
   const onOpen = useSnackbar(state => state.onOpen)
   const { setIsOpen } = useModal()
 
