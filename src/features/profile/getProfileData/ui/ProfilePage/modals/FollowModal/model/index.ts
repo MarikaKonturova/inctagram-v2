@@ -25,6 +25,12 @@ export function useGetUsers(
   })
 }
 
+export function useGetUserByName(userName: string) {
+  return useQuery(['userByName', userName], async () => {
+    return await UsersService.getUserByName(userName)
+  })
+}
+
 export function useToggleFollowUser(debounceSearchUser: string) {
   const queryClient = useQueryClient()
   const onOpen = useSnackbar(state => state.onOpen)
