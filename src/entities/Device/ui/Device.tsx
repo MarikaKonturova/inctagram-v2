@@ -25,7 +25,7 @@ export const Device: FC<PropsType> = memo(({ device, isCurrentDevice }) => {
         <h3 className={cls.title}>{title}</h3>
         <p className={cls.ip}>IP:&nbsp;{device.ip}</p>
         <p className={clsx({ [cls.current]: isCurrentDevice })}>
-          {isCurrentDevice ? `${t('online')}` : `${t('lastVisit')} ${lastActiveDate}`}
+          {!isCurrentDevice && `${t('lastVisit')} ${lastActiveDate}`}
         </p>
       </div>
     </div>
