@@ -1,16 +1,13 @@
-import { useAuth } from 'features/auth'
-import { SelectHasBusinessAccount } from 'features/auth/model/selectors'
 import { isEmpty } from 'lodash'
 import { useRouter } from 'next/router'
-import React, { type ChangeEvent, useEffect, useState } from 'react'
+import React, { type ChangeEvent, FC, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import Paypal from 'shared/assets/icons/general/paypal.svg'
-import Stripe from 'shared/assets/icons/general/stripe.svg'
+import { Paypal, Stripe } from 'shared/assets/icons'
 import { type CostOfSubscriptionType } from 'shared/types/subscriptions'
 import { Button, Checkbox, Modal, RadioButtons } from 'shared/ui'
 
 import { useSubscriptions } from '../model'
-import cls from './styles.module.scss'
+import cls from './AccountManagementForm.module.scss'
 
 const initialState = {
   buttonLabel: '',
@@ -19,8 +16,11 @@ const initialState = {
   title: '',
 }
 
-export const AccountManagementForm = () => {
-  const hasBusinessAccount = useAuth(SelectHasBusinessAccount)
+type PropsType = {
+  hasBusinessAccount: boolean
+}
+
+export const AccountManagementForm: FC<PropsType> = ({ hasBusinessAccount }) => {
   const { query } = useRouter()
   const [modal, setModal] = useState(initialState)
   const [selected, setSelected] = useState({} as CostOfSubscriptionType)

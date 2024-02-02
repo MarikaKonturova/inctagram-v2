@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useCommentStore } from 'features/profile/getPosts/model'
+import { useCommentStore } from 'entities/Comment/model/useCommentStore'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
@@ -45,7 +45,6 @@ export const AddCommentBox = ({ className, postId }: AddCommentBoxProps) => {
     }
   }, [repliedComment.userName])
 
-  // return <div className={clsx(cls.container)}>
   return (
     <div className={clsx(cls.container, {}, [className])}>
       <Controller

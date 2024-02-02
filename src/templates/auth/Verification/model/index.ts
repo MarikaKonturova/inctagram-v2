@@ -1,16 +1,15 @@
 import { useMutation } from '@tanstack/react-query'
-import { useAuth } from 'features/auth'
-import { SelectSetEmail } from 'features/auth/model/selectors'
-import { useSnackbar } from 'features/common'
+import { selectSetEmail, useAuth } from 'features/auth'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { AuthService } from 'shared/api'
 import { AppRoutes } from 'shared/constants/path'
+import { useSnackbar } from 'shared/hooks'
 import { useModal } from 'shared/hooks/useModal'
 
 export const useResendEmailMutation = () => {
   const [emailInLocalStorage, setEmailInLocalStorage] = useState('')
-  const setEmail = useAuth(SelectSetEmail)
+  const setEmail = useAuth(selectSetEmail)
   const onOpen = useSnackbar(state => state.onOpen)
   const { setIsOpen } = useModal()
   const { push } = useRouter()

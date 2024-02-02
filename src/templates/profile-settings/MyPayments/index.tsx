@@ -18,7 +18,7 @@ const formateDate = (date: string) => format(new Date(date), 'dd.MM.yyyy')
 export const MyPayments = () => {
   const { data, isLoading } = useQuery({
     onError: error => {
-      console.log({ error })
+      console.log({ error }) // FIXME
     },
     queryFn: SubscriptionsService.getMyPayments,
     queryKey: ['my-payments'],

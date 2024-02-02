@@ -1,5 +1,5 @@
 import { type Story } from '@storybook/react'
-import 'app/styles/index.scss'
+// import 'app/styles/index.scss'
 import { type ReactElement } from 'react'
 import { type Theme } from 'shared/constants/theme'
 import ThemeProvider from 'shared/context/ThemeProvider'

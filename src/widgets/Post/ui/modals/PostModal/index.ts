@@ -1,0 +1,1 @@
+export { GetPostModal } from './PostModal'

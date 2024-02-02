@@ -1,5 +1,13 @@
 export { useAuth } from './model'
 
+export {
+  selectEmail,
+  selectHasBusinessAccount,
+  selectIsAuth,
+  selectSetEmail,
+  selectUserId,
+} from './model/selectors'
+
 export { AuthRedirect } from './ui/AuthRedirect/ui/AuthRedirect/AuthRedirect'
 
 export { ConfirmModal } from './ui/ConfirmModal/ui/ConfirmModal/ConfirmModal'

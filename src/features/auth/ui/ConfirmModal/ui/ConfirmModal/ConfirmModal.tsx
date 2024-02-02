@@ -1,6 +1,6 @@
 import clsx from 'clsx'
+import { selectEmail } from 'features/auth'
 import { useAuth } from 'features/auth/model'
-import { SelectEmail } from 'features/auth/model/selectors'
 import { useTranslation } from 'next-i18next'
 import { type FC } from 'react'
 import { useModal } from 'shared/hooks/useModal'
@@ -15,7 +15,7 @@ interface ConfirmModalProps {
 export const ConfirmModal: FC<ConfirmModalProps> = ({ className }) => {
   const { t } = useTranslation('auth')
   const { isOpen, setIsOpen } = useModal()
-  const email = useAuth(SelectEmail)
+  const email = useAuth(selectEmail)
 
   const onCloseHandler = () => {
     setIsOpen(false)

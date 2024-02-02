@@ -1,9 +1,9 @@
-import { AccountManagementForm } from 'features/account-management-form'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Tab } from 'shared/ui'
 
+import { AccountManagement } from './AccountManagement'
 import { DeviceList } from './DeviceList/ui/DeviceList'
 import GeneralInformation from './GeneralInformation'
 import { MyPayments } from './MyPayments'
@@ -12,7 +12,7 @@ import cls from './styles.module.scss'
 const PATHS = [
   { component: <GeneralInformation />, name: 'generalInfo' },
   { component: <DeviceList />, name: 'devices' },
-  { component: <AccountManagementForm />, name: 'accountManagement' },
+  { component: <AccountManagement />, name: 'accountManagement' },
   { component: <MyPayments />, name: 'myPayments' },
 ]
 

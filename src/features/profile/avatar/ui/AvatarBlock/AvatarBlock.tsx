@@ -1,12 +1,11 @@
-import { useDeleteAvatar } from 'features/profile/avatar/model/deleteAvatar'
-import cls from 'features/profile/avatar/ui/AvatarBlock/AvatarBlock.module.scss'
-import { AvatarModal } from 'features/profile/avatar/ui/AvatarModal/AvatarModal'
+import { AvatarModal, useDeleteAvatar } from 'features/profile/avatar'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import CloseIcon from 'shared/assets/icons/general/close.svg'
 import { type AvatarPostModel } from 'shared/types/post'
-import { Avatar, Button } from 'shared/ui'
-import { ConfirmationModal } from 'shared/ui/ConfirmationModal/ConfirmationModal'
+import { Avatar, Button, ConfirmationModal } from 'shared/ui'
+
+import cls from './AvatarBlock.module.scss'
 
 export const AvatarBlock = ({ avatars }: { avatars: AvatarPostModel | null | undefined }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
