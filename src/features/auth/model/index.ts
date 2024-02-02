@@ -13,6 +13,7 @@ export interface useAuthStateType {
   setUserData: (data: { hasBusinessAccount: boolean; userId: number }) => void
   userId: number
 }
+
 export const useAuth = create<useAuthStateType>(set => ({
   contentForMerge: '',
   email: '',

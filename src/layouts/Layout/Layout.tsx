@@ -1,9 +1,8 @@
 import clsx from 'clsx'
-import { SnackBar } from 'features/common'
 import { type NextPage } from 'next'
 import { Inter } from 'next/font/google'
-import { type PropsWithChildren, ReactElement } from 'react'
-import { Container } from 'shared/ui'
+import { type PropsWithChildren } from 'react'
+import { Container, SnackBar } from 'shared/ui'
 import { Header } from 'widgets/Header'
 
 import cls from './Layout.module.scss'

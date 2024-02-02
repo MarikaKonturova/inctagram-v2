@@ -1,7 +1,7 @@
 import { $api } from 'shared/api'
 
 import {
-  type Comment,
+  type IComment,
   type PostResponse,
   type PostsImage,
   type ResponseType,
@@ -31,7 +31,7 @@ export const MyPostService = {
     return $api.get<PostResponse>(`/posts/p/${postId}`)
   },
   getPostComments(postId: number) {
-    return $api.get<ResponseType<Comment[]>>(`/posts/${postId}/comments`)
+    return $api.get<ResponseType<IComment[]>>(`/posts/${postId}/comments`)
   },
   getPosts(userName: string, pageNumber: number) {
     return $api

@@ -1,8 +1,9 @@
 import clsx from 'clsx'
 import React, { type Dispatch, type FC, type SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
-import cls from 'shared/ui/ConfirmationModal/ConfirmationModal.module.scss'
-import { Button, Modal } from 'shared/ui/index'
+import { Button, Modal } from 'shared/ui'
+
+import cls from './ConfirmationModal.module.scss'
 
 interface ConfirmationModalProps {
   bodyText: string

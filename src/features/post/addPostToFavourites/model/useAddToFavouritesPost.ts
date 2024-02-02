@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
-import { useSnackbar } from 'features/common'
 import { UsersService } from 'shared/api'
+import { useSnackbar } from 'shared/hooks'
 
 export const useAddToFavouritesPost = () => {
   const queryClient = useQueryClient()

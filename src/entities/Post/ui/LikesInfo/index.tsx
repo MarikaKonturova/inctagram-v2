@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import { useTranslation } from 'react-i18next'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { Avatar } from 'shared/ui'
 
@@ -11,6 +12,7 @@ interface LikesInfoProps {
 
 export const LikesInfo = ({ likeCount, newLikes }: LikesInfoProps) => {
   const likesCountEnhance = `${likeCount?.toString()[0]} ${likeCount?.toString().slice(1)}`
+  const { t } = useTranslation(['profile'])
 
   return (
     <div className={cls.container}>
@@ -27,7 +29,9 @@ export const LikesInfo = ({ likeCount, newLikes }: LikesInfoProps) => {
           ))}
         </div>
       )}
-      <div className={cls.likes}>{likesCountEnhance} &quot;Like&quot;</div>
+      <div className={cls.likes}>
+        {likesCountEnhance} &quot;{t('like')}&quot;
+      </div>
     </div>
   )
 }

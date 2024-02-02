@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
-import { useSnackbar } from 'features/common'
 import { useRouter } from 'next/router'
 import { AuthService } from 'shared/api'
 import { AppRoutes } from 'shared/constants/path'
+import { useSnackbar } from 'shared/hooks'
 
 export const useCreatePassword = () => {
   const queryClient = useQueryClient()

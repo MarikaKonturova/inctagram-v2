@@ -1,6 +1,6 @@
+import { useGetProfileData } from 'entities/Profile'
 import { GeneralInformationForm } from 'features/general-information-form'
-import { AvatarBlock } from 'features/profile/avatar/ui/AvatarBlock/AvatarBlock'
-import { useGetProfileData } from 'features/profile/getProfileData/model'
+import { AvatarBlock } from 'features/profile/avatar'
 
 import cls from './styles.module.scss'
 

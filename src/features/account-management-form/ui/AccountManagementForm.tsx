@@ -1,15 +1,13 @@
-import { useAuth } from 'features/auth'
-import { SelectHasBusinessAccount } from 'features/auth/model/selectors'
 import { isEmpty } from 'lodash'
 import { useRouter } from 'next/router'
-import React, { type ChangeEvent, useEffect, useState } from 'react'
-import Paypal from 'shared/assets/icons/general/paypal.svg'
-import Stripe from 'shared/assets/icons/general/stripe.svg'
+import React, { type ChangeEvent, FC, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Paypal, Stripe } from 'shared/assets/icons'
 import { type CostOfSubscriptionType } from 'shared/types/subscriptions'
 import { Button, Checkbox, Modal, RadioButtons } from 'shared/ui'
 
 import { useSubscriptions } from '../model'
-import cls from './styles.module.scss'
+import cls from './AccountManagementForm.module.scss'
 
 const initialState = {
   buttonLabel: '',
@@ -18,15 +16,19 @@ const initialState = {
   title: '',
 }
 
-export const AccountManagementForm = () => {
-  const hasBusinessAccount = useAuth(SelectHasBusinessAccount)
+type PropsType = {
+  hasBusinessAccount: boolean
+}
+
+export const AccountManagementForm: FC<PropsType> = ({ hasBusinessAccount }) => {
   const { query } = useRouter()
   const [modal, setModal] = useState(initialState)
   const [selected, setSelected] = useState({} as CostOfSubscriptionType)
+  const { t } = useTranslation(['profile'])
 
   const ACCOUNT_TYPE_OPTIONS = [
-    { description: 'Personal', disabled: hasBusinessAccount },
-    { description: 'Business', disabled: !hasBusinessAccount },
+    { description: t('personal'), disabled: hasBusinessAccount },
+    { description: t('business'), disabled: !hasBusinessAccount },
   ]
 
   const {
@@ -55,18 +57,18 @@ export const AccountManagementForm = () => {
     if (isSuccess) {
       setModal({
         buttonLabel: 'Ok',
-        message: 'Payment was successful!',
+        message: `${t('successfulPayment')}`,
         modalOpen: true,
-        title: 'Success',
+        title: `${t('success')}`,
       })
     }
 
     if (isError) {
       setModal({
-        buttonLabel: 'Back to payment',
-        message: 'Transaction failed, please try again',
+        buttonLabel: `${t('backToPayment')}`,
+        message: `${t('failedPayment')}`,
         modalOpen: true,
-        title: 'Error',
+        title: `${t('error')}`,
       })
     }
   }, [query])
@@ -79,11 +81,11 @@ export const AccountManagementForm = () => {
 
   return (
     <div>
-      <h4 className={cls.label}>Current Subscription:</h4>
+      <h4 className={cls.label}>{t('currentSubscription')}</h4>
       <div className={cls.container}>
         <div className={cls.section}>
-          <div>Expire at</div>
-          <div>Next payment</div>
+          <div>{t('expireAt')}</div>
+          <div>{t('nextPayment')}</div>
         </div>
         <div className={cls.section}>
           <div>{expireAt}</div>
@@ -96,15 +98,15 @@ export const AccountManagementForm = () => {
           disabled={!hasAutoRenewal}
           onChange={onCheckboxHandler}
         />
-        <span>Auto-Renewal</span>
+        <span>{t('autoRenewal')}</span>
       </div>
       <RadioButtons
-        label={'Account type:'}
+        label={`${t('accountType')}`}
         options={ACCOUNT_TYPE_OPTIONS}
         selectedValue={hasBusinessAccount ? ACCOUNT_TYPE_OPTIONS[1] : ACCOUNT_TYPE_OPTIONS[0]}
       />
       <RadioButtons<CostOfSubscriptionType>
-        label={'Your subscription costs:'}
+        label={`${t('subscriptionCosts')}`}
         options={subscriptionCosts || []}
         selected={selected}
         selectedValue={subscriptionCosts[0]}
