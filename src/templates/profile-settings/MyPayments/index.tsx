@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { SubscriptionsService } from 'shared/api'
 import { Table } from 'shared/ui'
 
@@ -22,6 +23,15 @@ export const MyPayments = () => {
     queryFn: SubscriptionsService.getMyPayments,
     queryKey: ['my-payments'],
   })
+  const { t } = useTranslation(['profile'])
+
+  const columns = [
+    { field: 'dateOfPayment', title: t('dateOfPayment') },
+    { field: 'endDateOfSubscription', title: t('endDateOfSubscription') },
+    { field: 'price', title: t('price') },
+    { field: 'subscriptionType', title: t('subscriptionType') },
+    { field: 'paymentType', title: t('paymentType') },
+  ]
 
   const tableData = data?.data.items.map(el => ({
     ...el,

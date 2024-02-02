@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { useCommentStore } from 'entities/Comment/model/useCommentStore'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Button, Input } from 'shared/ui'
 
 import { useCommentPost } from '../../model'
@@ -22,7 +23,7 @@ export const AddCommentBox = ({ className, postId }: AddCommentBoxProps) => {
   const { addComment } = useCommentPost()
   const { addAnswerForComment } = useAnswerForComment()
   const { repliedComment, setRepliedComment } = useCommentStore()
-
+  const { t } = useTranslation(['profile'])
   const onAddCommentClick = ({ text }: { text: string }) => {
     if (repliedComment.id) {
       addAnswerForComment({
@@ -50,7 +51,7 @@ export const AddCommentBox = ({ className, postId }: AddCommentBoxProps) => {
         control={control}
         name={'text'}
         render={({ field }) => (
-          <Input {...field} className={clsx(cls.input)} placeholder={'Add a Comment...'} />
+          <Input {...field} className={clsx(cls.input)} placeholder={`${t('addComment')}`} />
         )}
       />
 
@@ -59,7 +60,7 @@ export const AddCommentBox = ({ className, postId }: AddCommentBoxProps) => {
         onClick={handleSubmit(onAddCommentClick)}
         theme={'textButton'}
       >
-        Publish
+        {t('publish')}
       </Button>
     </div>
   )

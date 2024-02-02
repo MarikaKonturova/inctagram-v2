@@ -2,6 +2,7 @@ import { type FC, useRef, useState } from 'react'
 import { Cropper, type FixedCropperRef, ImageRestriction } from 'react-advanced-cropper'
 import 'react-advanced-cropper/dist/style.css'
 import 'react-advanced-cropper/dist/themes/corners.css'
+import { useTranslation } from 'react-i18next'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
@@ -20,7 +21,7 @@ interface IProps {
 export const CropImageModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick, setFile }) => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
-
+  const { t } = useTranslation(['profile'])
   const cropperRef = useRef<FixedCropperRef>(null)
   const [aspectRatio, setAspectRatio] = useState<number>(16 / 9)
 
@@ -56,8 +57,8 @@ export const CropImageModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick,
     <div className={cls.modal}>
       <header className={cls.header}>
         <IconArrowBack fill={fill} onClick={onPrevClick} />
-        <h2>Cropping</h2>
-        <Button onClick={onButtonClick}>Next</Button>
+        <h2>{t('cropping')}</h2>
+        <Button onClick={onButtonClick}>{t('next')}</Button>
       </header>
       <Cropper
         className={cls.cropper}

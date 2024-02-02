@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 import React, { FC } from 'react'
 import { AppRoutes } from 'shared/constants/path'
 import { ProfileDataModel } from 'shared/types/auth'
@@ -20,6 +21,7 @@ export const MainInfo: FC<PropsType> = ({
   userData,
 }) => {
   const router = useRouter()
+  const { t } = useTranslation('profile')
 
   const { aboutMe, followersCount, publicationsCount, userName } = userData || {}
 
@@ -36,21 +38,21 @@ export const MainInfo: FC<PropsType> = ({
         <div className={cls.main}>
           <div className={cls.userName}>{userName}</div>
           <Button className={cls.button} onClick={onProfileSettingsClick}>
-            Profile Settings
+            {t('settings')}
           </Button>
         </div>
         <div className={cls.info}>
           <div onClick={activateFollowingMode}>
             <div className={cls.subscribe}>{followingCount}</div>
-            <div>Subscriptions</div>
+            <div>{t('subscriptions')}</div>
           </div>
           <div onClick={activateFollowersMode}>
             <div className={cls.subscribe}>{followersCount}</div>
-            <div>Subscribers</div>
+            <div>{t('subscribers')}</div>
           </div>
           <div>
             <div className={cls.subscribe}>{publicationsCount}</div>
-            <div>Publications</div>
+            <div>{t('publications')}</div>
           </div>
         </div>
         <div className={cls.aboutMe}>{aboutMe}</div>

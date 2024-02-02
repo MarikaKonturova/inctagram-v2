@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button, Modal } from 'shared/ui'
 
 import { useDeleteMutation } from '../model'
@@ -14,17 +15,18 @@ interface IProps {
 
 export function DeletePostModal({ handleClose, id, isOpen, openEditPostModal, postId }: IProps) {
   const { onDelete } = useDeleteMutation({ handleClose, postId })
+  const { t } = useTranslation(['profile'])
 
   return (
-    <Modal id={id} isOpen={isOpen} onClose={handleClose} title={'Delete Post'}>
+    <Modal id={id} isOpen={isOpen} onClose={handleClose} title={`${t('deletePost')}`}>
       <div className={cls.rootContainer}>
-        <p>Are you sure you want to delete this post?</p>
+        <p>{t('areYouSureYouWantToDeletePost')}</p>
         <div className={cls.buttonsContainer}>
           <Button onClick={onDelete} theme={'outline'} type={'submit'}>
-            Yes
+            {t('yes')}
           </Button>
           <Button onClick={openEditPostModal} theme={'primary'} type={'submit'}>
-            No
+            {t('no')}
           </Button>
         </div>
       </div>

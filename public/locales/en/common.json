@@ -3,7 +3,8 @@
   "addPhoto": "Add a Profile Photo",
   "deletePhotoHeader": "Delete the Profile Photo",
   "deletePhotoMessage": "Are you sure you want to delete the profile photo?",
-
+  "addProfilePhoto": "Add a profile photo",
+  "saveChanges": "Save Changes",
   "save": "Save",
   "home": "Home",
   "create": "Create",

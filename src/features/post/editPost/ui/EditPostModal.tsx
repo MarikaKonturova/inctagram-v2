@@ -2,6 +2,7 @@ import { Header, useGetMyPost } from 'entities/Post'
 import { useGetProfileData } from 'entities/Profile'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import catImg from 'shared/assets/images/MicrosoftTeams-image.png'
 import { Button, Card, Modal, Textarea } from 'shared/ui'
 
@@ -20,6 +21,7 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
   const userData = response?.data
   const { post } = useGetMyPost(postId)
   const { saveChanges } = useEditPost(postId)
+  const { t } = useTranslation(['profile'])
 
   const {
     formState: { errors },
@@ -42,7 +44,7 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
       id={id}
       isOpen={isOpen}
       onClose={handleClose}
-      title={'Edit Post'}
+      title={`${t('editPost')}`}
     >
       <form className={cls.container} onSubmit={handleSubmit(saveChanges)}>
         <Card
@@ -56,19 +58,19 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
           <div className={cls.textareaContainer}>
             <Textarea
               {...register('description', {
-                maxLength: { message: 'Max length of description is 500 characters', value: 500 },
+                maxLength: { message: `${t('maxLengthDescription')}`, value: 500 },
               })}
               className={cls.wrapper}
               errorText={errors.description?.message}
               id={'description'}
-              label={'Add publication descriptions'}
+              label={`${t('addPublicationDescriptions')}`}
               labelClassName={cls.label}
               textareaClassName={cls.textarea}
             />
             <div className={cls.info}>200/500</div>
           </div>
           <Button className={cls.button} theme={'primary'} type={'submit'}>
-            Save Changes
+            {t('saveChanges')}
           </Button>
         </div>
       </form>

@@ -12,7 +12,7 @@ export const AvatarBlock = ({ avatars }: { avatars: AvatarPostModel | null | und
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
   const [avatar, setAvatar] = useState<string | undefined>(avatars?.medium.url)
   const { deleteAvatar, isLoading } = useDeleteAvatar(setDeleteModalOpen, setAvatar)
-  const { t } = useTranslation('common')
+  const { t } = useTranslation(['common'])
 
   const onDeleteButtonClick = () => {
     setDeleteModalOpen(true)
@@ -54,7 +54,7 @@ export const AvatarBlock = ({ avatars }: { avatars: AvatarPostModel | null | und
         )}
       </div>
       <Button onClick={addProfilePhotoClick} theme={'outline'} type={'button'}>
-        Add a profile photo
+        {t('addProfilePhoto')}
       </Button>
     </div>
   )

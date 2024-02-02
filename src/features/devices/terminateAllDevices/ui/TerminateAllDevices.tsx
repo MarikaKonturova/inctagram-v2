@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button } from 'shared/ui'
 
 import { useTerminateAllDevices } from '../model'
@@ -6,6 +7,7 @@ import cls from './TerminateAllDevices.module.scss'
 
 export const TerminateAllDevices = () => {
   const { isDevicesLoading, onAllTerminate } = useTerminateAllDevices()
+  const { t } = useTranslation(['profile'])
 
   return (
     <Button
@@ -15,7 +17,7 @@ export const TerminateAllDevices = () => {
       theme={'outline'}
       type={'button'}
     >
-      Terminate all other session
+      {t('terminateAllOtherSession')}
     </Button>
   )
 }

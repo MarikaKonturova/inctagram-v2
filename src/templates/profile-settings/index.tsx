@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Tab } from 'shared/ui'
 
 import { AccountManagement } from './AccountManagement'
@@ -9,28 +10,29 @@ import { MyPayments } from './MyPayments'
 import cls from './styles.module.scss'
 
 const PATHS = [
-  { component: <GeneralInformation />, name: 'General Information' },
-  { component: <DeviceList />, name: 'Devices' },
-  { component: <AccountManagement />, name: 'Account Management' },
-  { component: <MyPayments />, name: 'My Payments' },
+  { component: <GeneralInformation />, name: 'generalInfo' },
+  { component: <DeviceList />, name: 'devices' },
+  { component: <AccountManagement />, name: 'accountManagement' },
+  { component: <MyPayments />, name: 'myPayments' },
 ]
 
 export function ProfileSettingsPage() {
   const { query } = useRouter()
   const isSuccess = query.success === 'true'
+  const { t } = useTranslation(['profile'])
   const [selectedTab, setSelectedTab] = useState(isSuccess ? PATHS[2] : PATHS[0])
 
   return (
     <div className={cls.rootContainer}>
       <div className={cls.tabContainer}>
-        {PATHS.map((t, index) => (
+        {PATHS.map((i, index) => (
           <Tab
-            isSelected={t === selectedTab}
+            isSelected={i === selectedTab}
             key={index}
             onClick={() => {
-              setSelectedTab(t)
+              setSelectedTab(i)
             }}
-            text={t.name}
+            text={t(`${i.name}`)}
           />
         ))}
       </div>

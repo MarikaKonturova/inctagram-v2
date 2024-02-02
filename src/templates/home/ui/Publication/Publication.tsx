@@ -4,6 +4,7 @@ import { CreationDate, Header, LikesInfo } from 'entities/Post'
 import { Description } from 'entities/Publication'
 import { AddCommentBox } from 'features/post'
 import Image, { type ImageProps } from 'next/image'
+import { useTranslation } from 'next-i18next'
 import React, { useState } from 'react'
 import { PostResponse } from 'shared/types/post'
 import { Skeleton } from 'shared/ui'
@@ -32,7 +33,7 @@ export const Publication: React.FC<PropsType> = props => {
   } = props
   const [isLoaded, setIsLoaded] = useState(true)
   const [onErrorSrc, setOnErrorSrc] = useState<string | undefined>(undefined)
-
+  const { t } = useTranslation('profile')
   const onImageLoadingComplete = () => {
     setIsLoaded(false)
   }
@@ -70,7 +71,7 @@ export const Publication: React.FC<PropsType> = props => {
       <div className={cls.likesInfo}>
         <LikesInfo likeCount={publ.likeCount} newLikes={publ.newLikes} />
       </div>
-      <div className={cls.allComments}>View All Comments ({publ.likeCount})</div>
+      <div className={cls.allComments}>{`${t('viewAllComments')} (${publ.commentCount})`}</div>
       <AddCommentBox className={clsx(cls.containerAddComment)} postId={publ.id} />
     </div>
   )

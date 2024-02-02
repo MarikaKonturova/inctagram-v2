@@ -1,4 +1,5 @@
 import { type FC, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { Button } from 'shared/ui'
 import { getInitialValues } from 'shared/utils/getInitialValues'
@@ -30,7 +31,7 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
     defaultValues
   )
   const { mutate } = useUpdateProfileData(setError)
-
+  const { t } = useTranslation(['common'])
   const onSubmit = (data: Omit<ProfileDataModel, 'avatars' | 'id'> & { country: string }) => {
     mutate(data)
   }
@@ -52,7 +53,7 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
       </div>
       <hr className={cls.line} />
       <Button className={cls.button} disabled={!isDirty} theme={'primary'} type={'submit'}>
-        Save Changes
+        {t('saveChanges')}
       </Button>
     </form>
   )

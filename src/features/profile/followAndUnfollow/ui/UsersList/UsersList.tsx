@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useTranslation } from 'next-i18next'
 import React, { FC, ReactNode } from 'react'
 import userPhoto from 'shared/assets/images/user.png'
 import { useSnackbar } from 'shared/hooks'
@@ -24,6 +25,7 @@ export const UsersList: FC<PropsType> = ({
   usersData,
 }) => {
   const onOpen = useSnackbar(state => state.onOpen)
+  const { t } = useTranslation('profile')
 
   const toggleFollowUser = useToggleFollowUser(debounceSearchUserValue)
   const handleToggleFollow = (user: User) => {
@@ -31,7 +33,7 @@ export const UsersList: FC<PropsType> = ({
       onSuccess: () => {
         setCount(followingCount)
         onOpen(
-          `You have ${user.isFollowing ? 'unfollowed' : 'followed'} ${user.userName}!`,
+          `${user.isFollowing ? t('youHaveUnfollowed') : t('youHaveFollowed')} ${user.userName}!`,
           'success',
           'right'
         )
@@ -65,10 +67,10 @@ export const UsersList: FC<PropsType> = ({
             </div>
             <div className={styles.leftBlock}>
               <Button className={styles.button} onClick={toggleHandler} type={'button'}>
-                {user.isFollowing ? 'Unfollow' : 'Follow'}
+                {user.isFollowing ? `${t('unfollow')}` : `${t('follow')}`}
               </Button>
               <Button className={styles.button} theme={'secondary'} type={'button'}>
-                Delete
+                {t('delete')}
               </Button>
             </div>
           </div>

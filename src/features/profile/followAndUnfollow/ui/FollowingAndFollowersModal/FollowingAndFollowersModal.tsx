@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useDebounce } from 'shared/hooks'
 import { type User } from 'shared/types/auth'
@@ -20,6 +21,7 @@ export const FollowingAndFollowersModal: React.FC<PropsType> = props => {
   const [searchUserValue, setSearchUserValue] = useState<string>('')
   const [count, setCount] = useState<number>(0)
   const debounceSearchUserValue = useDebounce(searchUserValue, 500)
+  const { t } = useTranslation('profile')
 
   const {
     data: usersData,
@@ -32,7 +34,7 @@ export const FollowingAndFollowersModal: React.FC<PropsType> = props => {
       fetchDataName === 'following' ? user.isFollowing : user.isFollowedBy
     ).length || 0
 
-  const title = fetchDataName === 'following' ? 'Subscription' : 'Subscribed'
+  const title = fetchDataName === 'following' ? `${t('subscriptions')}` : `${t('subscribers')}`
 
   const onSearchUserValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchUserValue(e.target.value)
@@ -47,13 +49,13 @@ export const FollowingAndFollowersModal: React.FC<PropsType> = props => {
       className={styles.modal}
       isOpen={isOpen}
       onClose={onClose}
-      title={`${title} to: ${String(followingCount)}`}
+      title={`${title}: ${String(followingCount)}`}
     >
       <Input
         className={styles.inputWrapper}
         inputClassName={styles.input}
         onChange={onSearchUserValueHandler}
-        placeholder={'Search...'}
+        placeholder={`${t('search')}`}
         type={'search'}
         value={searchUserValue}
       />
