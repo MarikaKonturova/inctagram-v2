@@ -1,17 +1,21 @@
 import { PostCards } from 'features/profile/getPosts/ui/PostCards/PostCards'
+import cls from 'features/profile/getUserProfileData/ui/ProfilePage/UserProfilePage.module.scss'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { AppRoutes } from 'shared/constants/path'
 import { Avatar, Button } from 'shared/ui'
 
-import { useGetProfileData } from '../../model'
-import cls from './ProfilePage.module.scss'
+import { useGetUserProfileData } from '../../model'
 import { FollowingAndFollowersModal } from './modals/FollowModal/ui'
 
-export const ProfilePage = () => {
+export const UserProfilePage = () => {
   const router = useRouter()
-  const { response } = useGetProfileData()
-  const userData = response?.data
+
+  const userName: any = router?.query?.userprofile
+
+  const { data } = useGetUserProfileData(userName)
+
+  const userData = data?.data
 
   const [isModalOpen, setModalOpen] = useState(false)
   const [isSubscriptionsModalOpen, setIsSubscriptionsModalOpen] = useState(false)
@@ -47,6 +51,8 @@ export const ProfilePage = () => {
   const onProfileSettingsClick = () => {
     void router.push(AppRoutes.PROFILE.SETTINGS)
   }
+
+  /* console.log(userData)*/
 
   return (
     <div className={cls.container}>

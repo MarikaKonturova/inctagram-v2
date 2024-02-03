@@ -93,8 +93,15 @@ export const FollowingAndFollowersModal: React.FC<FollowingAndFollowersModalProp
                 src={user.avatars?.medium?.url || userPhoto}
                 width={50}
               />
+
               <p className={styles.userName}>
-                <Link href={`/profile/${user.userName}`}>{user.userName}</Link>
+                <Link
+                  href={{
+                    pathname: `/profile/${user.userName}`,
+                  }}
+                >
+                  {user.userName}
+                </Link>
               </p>
             </div>
             <div className={styles.leftBlock}>

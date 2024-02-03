@@ -16,6 +16,7 @@ export const AppRoutes = {
   PROFILE: {
     MY_PROFILE: '/profile/myprofile',
     SETTINGS: '/profile/settings/edit',
+    USER_PROFILE: '/profile/userprofile/',
   },
   STATISTICS: '/statistics',
 } as const
