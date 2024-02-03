@@ -23,7 +23,13 @@
           line-height: 36px;
         }
 
+        .buttonPrimary {
+          padding: 6px 36px;
+          background: var(--primary-500-color);
+        }
+
         .button {
+          margin-left: 15px;
           padding: 6px 36px;
           background: var(--dark-300-color);
         }

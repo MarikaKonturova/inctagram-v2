@@ -28,7 +28,9 @@ export const FollowingAndFollowersModal: React.FC<FollowingAndFollowersModalProp
     isLoading: isUsersLoading,
     refetch,
   } = useGetUsers(debounceSearchUser, userName || '', fetchDataName, count)
+
   const toggleFollowUser = useToggleFollowUser(debounceSearchUser)
+
   const followingCount =
     usersData?.filter((user: User) =>
       fetchDataName === 'following' ? user.isFollowing : user.isFollowedBy

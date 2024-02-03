@@ -49,11 +49,9 @@ export const UserProfilePage = () => {
     })
   }
 
-  const onProfileSettingsClick = () => {
-    void router.push(AppRoutes.PROFILE.SETTINGS)
+  const onClick = () => {
+    alert('ok')
   }
-
-  /* console.log(userData)*/
 
   return (
     <div className={cls.container}>
@@ -64,9 +62,14 @@ export const UserProfilePage = () => {
         <div className={cls.rightSide}>
           <div className={cls.main}>
             <div className={cls.userName}>{userData?.userName}</div>
-            <Button className={cls.button} onClick={onProfileSettingsClick}>
-              Profile Settings
-            </Button>
+            <div>
+              <Button className={cls.buttonPrimary} onClick={onClick}>
+                Follow
+              </Button>
+              <Button className={cls.button} onClick={onClick}>
+                Send Message
+              </Button>
+            </div>
           </div>
           <div className={cls.info}>
             <div onClick={openSubscriptionModal}>
