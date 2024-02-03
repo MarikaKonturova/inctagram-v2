@@ -1,14 +1,14 @@
 import {CreationDate} from 'entities/Post/ui/CreationDate';
 import moment from 'moment';
 import React, {useEffect, useRef, useState} from 'react';
-import {ResponseItem} from 'shared/types/home';
+import {PostResponse} from 'shared/types/post';
 import {Avatar, Button, Card, Title} from 'shared/ui';
 
 import cls from './PublicPost.module.scss';
 
 interface PublicPostProps {
-  openModal: (post: ResponseItem) => void
-  post: ResponseItem
+  openModal: (post: PostResponse) => void
+  post: PostResponse
 }
 
 export const PublicPost = ({ openModal, post }: PublicPostProps) => {

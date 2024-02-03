@@ -1,5 +1,6 @@
 import {useState} from 'react';
-import {LastPublicationsResponse, ResponseItem} from 'shared/types/home';
+import {LastPublicationsResponse} from 'shared/types/home';
+import {PostResponse} from 'shared/types/post';
 import {PublicPostList, PublicPostModal, RegisteredUsers} from 'widgets/Public';
 
 import cls from './styles.module.scss'
@@ -10,9 +11,9 @@ export interface PublicPageProps {
 
 export const PublicPage = ({data}: PublicPageProps) => {
 
-  const [modalPost, setModalPost] = useState<ResponseItem | null>(null)
+  const [modalPost, setModalPost] = useState<PostResponse | null>(null)
 
-  const openModal = (post: ResponseItem) => {
+  const openModal = (post: PostResponse) => {
     setModalPost(post)
   }
 

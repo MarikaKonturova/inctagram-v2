@@ -19,6 +19,7 @@ export const PasswordRecoveryForm = () => {
     handleSubmit,
     isValid,
     register,
+    setError,
     setValue,
     validErrors: { emailError, recaptchaError },
   } = useValidationForm(['email', 'recaptcha'])

@@ -1,4 +1,4 @@
-import { LastPublicationsResponse, type PublicationsResponse } from '../../types/home'
+import { LastPublicationsResponse, PublicationsResponseType } from '../../types/home'
 import { $api } from '../api'
 
 export const HomeService = {
@@ -6,6 +6,8 @@ export const HomeService = {
     return $api.get<LastPublicationsResponse>(`/home/last-publications`)
   },
   getProfileData(pageParam: number) {
-    return $api.get<PublicationsResponse>(`/home/publications-followers?pageNumber=${pageParam}`)
+    return $api.get<PublicationsResponseType>(
+      `/home/publications-followers?pageNumber=${pageParam}`
+    )
   },
 }

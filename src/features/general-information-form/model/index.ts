@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
-import { useSnackbar } from 'features/common'
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 import { type UseFormSetError } from 'react-hook-form'
 import { ProfileService } from 'shared/api'
 import { AppRoutes } from 'shared/constants/path'
+import { useSnackbar } from 'shared/hooks'
 import { type ProfileDataModel, type UserError } from 'shared/types/auth'
 
 import { type ValidateUnion } from '../lib/profileFormSchema'

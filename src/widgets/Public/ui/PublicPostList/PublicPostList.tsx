@@ -1,11 +1,11 @@
 import { PublicPost } from 'features/public'
-import { ResponseItem } from 'shared/types/home'
+import { PostResponse } from 'shared/types/post'
 
 import cls from './PublicPostList.module.scss'
 
 interface PublicPostListProps {
-  openModal: (post: ResponseItem) => void
-  posts: ResponseItem[]
+  openModal: (post: PostResponse) => void
+  posts: PostResponse[]
 }
 
 export const PublicPostList = ({ openModal, posts }: PublicPostListProps) => {

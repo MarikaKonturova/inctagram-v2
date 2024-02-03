@@ -1,4 +1,4 @@
-import { getPublicLayout } from 'layouts/Layout/PublicLayout/PublicLayout'
+import { getPublicLayout } from 'layouts'
 import { LastPublicationsResponse } from 'shared/types/home'
 import { PublicPage } from 'templates/public'
 

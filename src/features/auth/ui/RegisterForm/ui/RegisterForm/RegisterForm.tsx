@@ -58,13 +58,14 @@ export const RegisterForm: FC = memo(() => {
         type={'password'}
       />
       <div className={cls.agreementField}>
-        <Checkbox {...register('isAgree')} defaultChecked={false} />I agree to the
+        <Checkbox {...register('isAgree')} defaultChecked={false} />
+        {t('iAgree')}
         <Link className={cls.link} href={AppRoutes.AUTH.TERMS_OF_SERVICE}>
-          Terms of Service
+          {t('termsOfService')}
         </Link>{' '}
-        and
+        {t('and')}
         <Link className={cls.link} href={AppRoutes.AUTH.PRIVACY_POLICY}>
-          Privacy Policy
+          {t('privacyPolicy')}
         </Link>
       </div>
       <Button

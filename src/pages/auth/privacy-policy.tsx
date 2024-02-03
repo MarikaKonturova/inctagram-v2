@@ -1,5 +1,5 @@
-import { LegalContent } from 'entities/LegalContent/ui/LegalContent'
-import { getAuthLayout } from 'layouts/Layout/AuthLayout/AuthLayout'
+import { LegalContent } from 'entities/LegalContent'
+import { getAuthLayout } from 'layouts'
 import { type GetServerSidePropsContext } from 'next'
 import { useTranslation } from 'next-i18next'
 import { getTranslations } from 'shared/lib/i18n'

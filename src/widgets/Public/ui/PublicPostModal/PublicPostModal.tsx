@@ -2,17 +2,17 @@ import { CreationDate } from 'entities/Post/ui/CreationDate'
 import { Header } from 'entities/Post/ui/Header'
 import { LikesInfo } from 'entities/Post/ui/LikesInfo'
 import { PostModal } from 'entities/Post/ui/Modal'
-import { GetCommentaries } from 'features/post'
 import moment from 'moment/moment'
-import { ResponseItem } from 'shared/types/home'
+import { PostResponse } from 'shared/types/post'
 import { Card } from 'shared/ui'
+import { Commentaries } from 'widgets/Commentaries'
 
 import cls from './PublicPostModal.module.scss'
 
 interface PublicPostModalProps {
   handleClose: () => void
   isOpen: boolean
-  post: ResponseItem
+  post: PostResponse
 }
 
 export const PublicPostModal = ({ handleClose, isOpen, post }: PublicPostModalProps) => {
@@ -32,7 +32,7 @@ export const PublicPostModal = ({ handleClose, isOpen, post }: PublicPostModalPr
             <div className={cls.header}>
               <Header avatarURL={post.avatars?.medium.url} title={post.userName} />
             </div>
-            <GetCommentaries postId={post.id} />
+            <Commentaries postId={post.id} />
             <div className={cls.bottomSection}>
               <div className={cls.wrapper}>
                 <LikesInfo likeCount={post.likeCount} newLikes={post.newLikes} />
