@@ -11,7 +11,8 @@ import { FollowingAndFollowersModal } from './modals/FollowModal/ui'
 export const UserProfilePage = () => {
   const router = useRouter()
 
-  const userName: any = router?.query?.userprofile
+  const userName: string =
+    typeof router.query.userprofile === 'string' ? router.query.userprofile : ''
 
   const { data } = useGetUserProfileData(userName)
 
