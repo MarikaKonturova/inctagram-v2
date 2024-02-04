@@ -1,3 +1,3 @@
-export { useGetProfileData } from 'entities/Profile/model/useGetProfileData'
+export { useGetProfileData } from './model/useGetProfileData'
 
-export { useGetUserProfileData } from 'entities/Profile/model/useGetUserProfileData'
+export { useGetUserProfileData } from './model/useGetUserProfileData'

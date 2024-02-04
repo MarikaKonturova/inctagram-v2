@@ -1,1 +1,1 @@
-export { ProfileMainInfo } from 'entities/Profile/MainInfo/ProfileMainInfo'
+export { ProfileMainInfo } from './ProfileMainInfo'
