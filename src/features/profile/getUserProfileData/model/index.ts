@@ -6,14 +6,6 @@ import { type UserError } from 'shared/types/auth'
 
 import { useAuth } from '../../../auth'
 
-/*
-export function useGetUserProfileData(userName: string) {
-  return useQuery(['userByName', userName], async () => {
-    return await UsersService.getUserByName(userName)
-  })
-}
-*/
-
 export function useGetUserProfileData(userName: string) {
   const { setAuth } = useAuth()
   const onOpen = useSnackbar(state => state.onOpen)
@@ -35,22 +27,3 @@ export function useGetUserProfileData(userName: string) {
     }
   )
 }
-
-/*
-export const useGetUserProfileData = (userName: string) => {
-  const onOpen = useSnackbar(state => state.onOpen)
-
-  const { data, error, isLoading } = useQuery({
-    enabled: !!userName,
-    onError: (error: AxiosError<UserError>) => {
-      onOpen(error.message || 'some error', 'danger', 'left')
-    },
-    queryFn: () => UsersService.getUserByName(userName),
-    queryKey: ['userByName'],
-  })
-
-  const response = data?.data
-
-  return { error, isLoading, response }
-}
-*/
