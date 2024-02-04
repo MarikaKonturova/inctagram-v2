@@ -1,36 +1,29 @@
 import clsx from 'clsx'
+import { PropsWithChildren } from 'react'
 
 import cls from './NumberBoard.module.scss'
 
-interface NumberBoardProps {
+interface RootProps extends PropsWithChildren {
   className?: string
-  number: number | string
 }
 
-export const NumberBoard = ({ className, number }: NumberBoardProps) => {
+const Root = ({ children, className }: RootProps) => {
   const classNames = clsx(cls.container, className)
 
-  return (
-    <div className={classNames}>
-      <Number number={0} />
-      <Separator />
-      <Number number={0} />
-      {number
-        .toString()
-        .split('')
-        .map(n => (
-          <>
-            <Separator />
-            <Number number={n} />
-          </>
-        ))}
-    </div>
-  )
+  return <div className={classNames}>{children}</div>
 }
 
-const Number = ({ number }: NumberBoardProps) => {
-  return <div className={cls.number}>{number}</div>
+interface NumberProps extends PropsWithChildren {
+  className?: string
+}
+
+const Number = ({ children, className }: NumberProps) => {
+  const classNames = clsx(cls.number, className)
+
+  return <div className={classNames}>{children}</div>
 }
 const Separator = () => {
   return <div className={cls.separator} />
 }
+
+export const NumberBoard = { Number, Root, Separator }
