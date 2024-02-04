@@ -1,1 +1,1 @@
-export { PublicPost } from 'features/public/ui/Post/PublicPost'
+export { PublicPost } from './PublicPost/PublicPost'
