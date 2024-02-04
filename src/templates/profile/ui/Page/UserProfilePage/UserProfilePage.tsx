@@ -1,9 +1,8 @@
 import { useGetUserProfileData } from 'entities/Profile'
-import { ProfileMainInfo } from 'entities/Profile/MainInfo'
+import { ProfileMainInfo } from 'entities/Profile/ProfileMainInfo'
 import { FollowingAndFollowersModal } from 'features/profile'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import { Button } from 'shared/ui'
 import { PostCards } from 'templates/profile/ui/PostCards'
 
 import cls from './UserProfilePage.module.scss'

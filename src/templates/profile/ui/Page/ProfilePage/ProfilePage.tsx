@@ -1,5 +1,5 @@
 import { useGetProfileData } from 'entities/Profile'
-import { ProfileMainInfo } from 'entities/Profile/MainInfo'
+import { ProfileMainInfo } from 'entities/Profile/ProfileMainInfo'
 import { FollowingAndFollowersModal } from 'features/profile'
 import React, { useEffect, useState } from 'react'
 import { PostCards } from 'templates/profile/ui/PostCards'
