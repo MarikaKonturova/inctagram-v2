@@ -21,6 +21,17 @@
         padding: 6px 36px;
         background: var(--dark-300-color);
       }
+
+      .buttonPrimary {
+        padding: 6px 36px;
+        background: var(--primary-500-color);
+      }
+
+      .buttonSecondary {
+        margin-left: 15px;
+        padding: 6px 36px;
+        background: var(--dark-300-color);
+      }
     }
 
     .info {
@@ -30,6 +41,10 @@
 
       .subscribe {
         font-weight: 700;
+      }
+
+      .subscribeTitle {
+        cursor: pointer;
       }
 
       & div:not(:last-child) {

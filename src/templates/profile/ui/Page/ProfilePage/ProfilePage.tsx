@@ -1,9 +1,9 @@
 import { useGetProfileData } from 'entities/Profile'
+import { ProfileMainInfo } from 'entities/Profile/MainInfo'
 import { FollowingAndFollowersModal } from 'features/profile'
 import React, { useEffect, useState } from 'react'
+import { PostCards } from 'templates/profile/ui/PostCards'
 
-import { MainInfo } from '../MainInfo'
-import { PostCards } from '../PostCards'
 import cls from './ProfilePage.module.scss'
 
 export const ProfilePage = () => {
@@ -47,9 +47,10 @@ export const ProfilePage = () => {
 
   return (
     <div className={cls.container}>
-      <MainInfo
+      <ProfileMainInfo
         activateFollowersMode={activateFollowersMode}
         activateFollowingMode={activateFollowingMode}
+        button={'myProfile'}
         followingCount={followingCount}
         userData={userData}
       />

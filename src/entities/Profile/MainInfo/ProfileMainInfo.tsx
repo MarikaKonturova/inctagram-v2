@@ -5,18 +5,20 @@ import { AppRoutes } from 'shared/constants/path'
 import { ProfileDataModel } from 'shared/types/auth'
 import { Avatar, Button } from 'shared/ui'
 
-import cls from './MainInfoStyles.module.scss'
+import cls from './ProfileMainInfoStyles.module.scss'
 
 type PropsType = {
   activateFollowersMode: () => void
   activateFollowingMode: () => void
+  button: 'myProfile' | 'userProfile'
   followingCount?: number
   userData?: ProfileDataModel
 }
 
-export const MainInfo: FC<PropsType> = ({
+export const ProfileMainInfo: FC<PropsType> = ({
   activateFollowersMode,
   activateFollowingMode,
+  button,
   followingCount,
   userData,
 }) => {
@@ -28,6 +30,26 @@ export const MainInfo: FC<PropsType> = ({
   const onProfileSettingsClick = () => {
     void router.push(AppRoutes.PROFILE.SETTINGS)
   }
+  const onClick = () => {
+    alert('Заглушка')
+  }
+
+  const userButton = (
+    <div>
+      <Button className={cls.buttonPrimary} onClick={onClick}>
+        {t('sendMessage')}
+      </Button>
+      <Button className={cls.buttonSecondary} onClick={onClick}>
+        {t('follow')}
+      </Button>
+    </div>
+  )
+
+  const myButton = (
+    <Button className={cls.button} onClick={onProfileSettingsClick}>
+      {t('settings')}
+    </Button>
+  )
 
   return (
     <div className={cls.flex}>
@@ -37,18 +59,16 @@ export const MainInfo: FC<PropsType> = ({
       <div className={cls.rightSide}>
         <div className={cls.main}>
           <div className={cls.userName}>{userName}</div>
-          <Button className={cls.button} onClick={onProfileSettingsClick}>
-            {t('settings')}
-          </Button>
+          {button === 'myProfile' ? myButton : userButton}
         </div>
         <div className={cls.info}>
           <div onClick={activateFollowingMode}>
             <div className={cls.subscribe}>{followingCount}</div>
-            <div>{t('subscriptions')}</div>
+            <div className={cls.subscribeTitle}>{t('subscriptions')}</div>
           </div>
           <div onClick={activateFollowersMode}>
             <div className={cls.subscribe}>{followersCount}</div>
-            <div>{t('subscribers')}</div>
+            <div className={cls.subscribeTitle}>{t('subscribers')}</div>
           </div>
           <div>
             <div className={cls.subscribe}>{publicationsCount}</div>

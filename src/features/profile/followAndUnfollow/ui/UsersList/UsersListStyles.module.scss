@@ -25,6 +25,11 @@
 
       .userName {
         flex-grow: 1;
+
+        a {
+          color: inherit;
+          text-decoration: inherit;
+        }
       }
 
       .userAvatar {
