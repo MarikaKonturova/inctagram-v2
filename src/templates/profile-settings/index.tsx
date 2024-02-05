@@ -22,6 +22,8 @@ export function ProfileSettingsPage() {
   const { t } = useTranslation(['profile'])
   const [selectedTab, setSelectedTab] = useState(isSuccess ? PATHS[2] : PATHS[0])
 
+  console.log('ProfileSettingsPage')
+
   return (
     <div className={cls.rootContainer}>
       <div className={cls.tabContainer}>
