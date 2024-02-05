@@ -10,6 +10,7 @@ import { PostResponse } from 'shared/types/post'
 import { Skeleton } from 'shared/ui'
 import { PostActions } from 'widgets/Post'
 
+import { Commentaries } from '../../../../widgets/Commentaries'
 import cls from './Publication.module.scss'
 
 type PropsType = ImageProps & {
@@ -33,6 +34,8 @@ export const Publication: React.FC<PropsType> = props => {
   } = props
   const [isLoaded, setIsLoaded] = useState(true)
   const [onErrorSrc, setOnErrorSrc] = useState<string | undefined>(undefined)
+  const [openComments, setOpenComments] = useState(false)
+
   const { t } = useTranslation('profile')
   const onImageLoadingComplete = () => {
     setIsLoaded(false)
@@ -40,6 +43,10 @@ export const Publication: React.FC<PropsType> = props => {
 
   const handleOnError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     e?.currentTarget?.src !== fallbackSrc && setOnErrorSrc(fallbackSrc)
+  }
+
+  const commentsHandler = () => {
+    setOpenComments(!openComments)
   }
   const creationDate = createdAt
     ? formatDistanceToNow(new Date(createdAt), { addSuffix: true, includeSeconds: true })
@@ -63,15 +70,18 @@ export const Publication: React.FC<PropsType> = props => {
         width={491}
       />
       <PostActions post={publ} />
+      <div className={cls.likesInfo}>
+        <LikesInfo likeCount={publ.likeCount} newLikes={publ.newLikes} />
+      </div>
       <Description
         avatarURL={publ.avatars?.medium.url}
         description={publ.description}
         title={publ.userName}
       />
-      <div className={cls.likesInfo}>
-        <LikesInfo likeCount={publ.likeCount} newLikes={publ.newLikes} />
+      {openComments && <Commentaries postId={publ.id} />}
+      <div className={cls.allComments} onClick={() => commentsHandler()}>
+        View All Comments ({publ.likeCount})
       </div>
-      <div className={cls.allComments}>{`${t('viewAllComments')} (${publ.commentCount})`}</div>
       <AddCommentBox className={clsx(cls.containerAddComment)} postId={publ.id} />
     </div>
   )

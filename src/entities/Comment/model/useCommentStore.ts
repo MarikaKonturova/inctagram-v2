@@ -7,6 +7,7 @@ export interface StateType {
   }
   repliedComment: {
     id: number
+    postId: number | undefined
     userName: string
   }
   setRefetch: (payload: StateType['refetch']) => void
@@ -20,6 +21,7 @@ export const useCommentStore = create(
     },
     repliedComment: {
       id: 0,
+      postId: 0,
       userName: '',
     },
     setRefetch: (payload: StateType['refetch']) => {
