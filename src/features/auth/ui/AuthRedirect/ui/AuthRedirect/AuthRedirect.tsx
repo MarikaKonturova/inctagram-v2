@@ -13,8 +13,8 @@ export const AuthRedirect = ({ children }: PropsWithChildren) => {
     return <PageLoader />
   }
 
-  if (!isAuth && isError && !pathname.includes('auth')) {
-    void push({ pathname: AppRoutes.AUTH.LOGIN })
+  if (!isAuth && isError && !pathname.includes('auth') && !pathname.includes('public')) {
+    void push({ pathname: AppRoutes.PUBLIC })
   } else if (pathname.includes('auth') && isAuth) {
     void push({ pathname: AppRoutes.PROFILE.SETTINGS })
   }

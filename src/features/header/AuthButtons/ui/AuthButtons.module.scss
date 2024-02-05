@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  gap: 24px;
+}
+
+.link {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.loginBtn {
+  color: var(--primary-500-color);
+  font: var(--font-h3);
+  padding: 6px 24px;
+}

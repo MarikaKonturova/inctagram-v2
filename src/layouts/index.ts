@@ -5,3 +5,5 @@ export { Layout } from './Layout/Layout'
 export { getLayoutWithSidebar } from './LayoutWithSidebar/LayoutWithSidebar'
 
 export { getLayoutWithoutSidebar } from './LayoutWithoutSideBar/LayoutWithoutSidebar'
+
+export { getPublicLayout } from './PublicLayout/PublicLayout'
