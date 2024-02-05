@@ -11,7 +11,7 @@ interface IProps {
 export const TerminateDevice: React.FC<IProps> = ({ deviceId }) => {
   const { isDeviceLoading, onTerminate } = useTerminateDevice()
 
-  const onClickHandler = () => onTerminate(deviceId)()
+  const onClickHandler = () => onTerminate(deviceId)
 
   return <LogoutButton className={cls.button} disabled={isDeviceLoading} onClick={onClickHandler} />
 }

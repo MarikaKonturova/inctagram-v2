@@ -16,9 +16,7 @@ export const useTerminateDevice = () => {
 
   const onTerminate = useCallback(
     (deviceId: string) => {
-      return () => {
-        terminateDevice(deviceId)
-      }
+      terminateDevice(deviceId)
     },
     [terminateDevice]
   )
