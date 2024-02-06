@@ -18,7 +18,6 @@ export function useGetUserProfileData(userName: string) {
       onError: (error: AxiosError<UserError>) => {
         onOpen(error?.response?.data.messages[0].message || 'some error', 'danger', 'left')
       },
-      onSuccess: () => {},
     }
   )
 }

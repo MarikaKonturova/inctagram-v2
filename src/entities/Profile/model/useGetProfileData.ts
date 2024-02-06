@@ -14,7 +14,6 @@ export const useGetProfileData = () => {
       onError: (error: AxiosError<UserError>) => {
         onOpen(error?.response?.data.messages[0].message || 'some error', 'danger', 'left')
       },
-      onSuccess: ({ data }) => {},
     }
   )
 
