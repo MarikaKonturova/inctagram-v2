@@ -31,6 +31,10 @@ export const UsersService = {
     return $api.get(`/users/${userName}/followers`, { params: queryParams })
   },
 
+  getUserByName(userName: string) {
+    return $api.get(`/users/${userName}`)
+  },
+
   unfollow(userId: number) {
     return $api.delete(`/users/follower/${userId}`)
   },

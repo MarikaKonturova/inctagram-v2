@@ -1,7 +1,9 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import React, { FC, ReactNode } from 'react'
 import userPhoto from 'shared/assets/images/user.png'
+import { AppRoutes } from 'shared/constants/path'
 import { useSnackbar } from 'shared/hooks'
 import { User } from 'shared/types/auth'
 import { Button } from 'shared/ui'
@@ -63,7 +65,15 @@ export const UsersList: FC<PropsType> = ({
                 src={user.avatars?.medium?.url || userPhoto}
                 width={50}
               />
-              <p className={styles.userName}>{user.userName}</p>
+              <p className={styles.userName}>
+                <Link
+                  href={{
+                    pathname: `${AppRoutes.PROFILE.PROFILE}/${user.userName}`,
+                  }}
+                >
+                  {user.userName}
+                </Link>
+              </p>
             </div>
             <div className={styles.leftBlock}>
               <Button className={styles.button} onClick={toggleHandler} type={'button'}>
