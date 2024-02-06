@@ -37,6 +37,7 @@
     .info {
       display: flex;
       flex-wrap: wrap;
+      gap: 72px;
       margin-bottom: 23px;
 
       .subscribe {
@@ -45,10 +46,6 @@
 
       .subscribeTitle {
         cursor: pointer;
-      }
-
-      & div:not(:last-child) {
-        margin-right: 72px;
       }
     }
   }

@@ -1,7 +1,11 @@
 import { useGetPosts } from 'entities/Home'
 import { useGetMyPost } from 'entities/Post'
-import { DeleteMyPostButton, UpdateMyPostButton } from 'features/post'
-import { DeletePostModal, EditPostModal } from 'features/profile'
+import {
+  DeleteMyPostButton,
+  DeletePostModal,
+  EditPostModal,
+  UpdateMyPostButton,
+} from 'features/post'
 import { type FC, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { MODALS, type Values } from 'shared/constants/post'
