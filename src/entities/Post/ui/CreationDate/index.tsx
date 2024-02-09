@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import React, { type FC } from 'react'
+import { formattedDate } from 'shared/utils'
 
 import cls from './styles.module.scss'
 
@@ -11,5 +12,5 @@ interface Props {
 export const CreationDate: FC<Props> = ({ className, date }) => {
   const classNames = clsx(cls.container, className)
 
-  return <div className={classNames}>{date}</div>
+  return <div className={classNames}>{formattedDate(date)}</div>
 }

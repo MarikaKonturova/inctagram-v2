@@ -20,7 +20,6 @@ export const useValidationForm = (arr: ValidateUnion[]) => {
       resolver: yupResolver(createValidationSchema(arr)),
     })
 
-  console.log({ formState }, watch('recaptcha'))
   const { errors, isValid } = formState
 
   const emailError = errors?.email && errors.email.message

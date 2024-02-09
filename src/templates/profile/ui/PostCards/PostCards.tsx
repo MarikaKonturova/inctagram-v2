@@ -1,5 +1,5 @@
 import { useGetPosts } from 'entities/Home'
-import { useGetMyPost } from 'entities/Post'
+import { Description, useGetMyPost } from 'entities/Post'
 import {
   DeleteMyPostButton,
   DeletePostModal,
@@ -84,7 +84,12 @@ export const PostCards: FC<Props> = ({ userData }) => {
         post && [
           <GetPostModal
             actionsSlot={<PostModalActions post={post} />}
-            content={<Commentaries postId={postId} />}
+            content={
+              <div className={cls.content}>
+                <Description post={post} />
+                <Commentaries postId={postId} />
+              </div>
+            }
             handleClose={closeModal}
             headerActions={
               <MoreOptions

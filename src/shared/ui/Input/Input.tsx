@@ -55,8 +55,6 @@ export const Input = memo(
 
     const isPassword = type === 'password' && !isVisible ? 'password' : 'text'
 
-    console.log({ errorText })
-
     return (
       <div className={clsx(cls.field, className)}>
         {label && (
