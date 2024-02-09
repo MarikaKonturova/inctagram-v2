@@ -37,7 +37,7 @@ export const Textarea = memo(
           {label}
         </label>
         <textarea
-          className={clsx(cls.textarea, [textareaClassName])}
+          className={clsx(cls.textarea, [textareaClassName], errorText && cls.error)}
           id={id}
           name={name}
           onChange={onChange}

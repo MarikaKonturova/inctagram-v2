@@ -126,7 +126,7 @@ export const Form: React.FC<IProps> = props => {
         id={'aboutMe'}
         label={`${t('aboutMe')}`}
         labelClassName={cls.label}
-        textareaClassName={aboutMeError ? cls.error : cls.textarea}
+        textareaClassName={cls.textarea}
       />
     </div>
   )
