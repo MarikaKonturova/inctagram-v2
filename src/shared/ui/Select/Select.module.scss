@@ -1,4 +1,5 @@
 .dropDownContainer {
+  box-sizing: border-box;
   width: 100%;
 }
 
@@ -14,6 +15,7 @@
 
 .dropDownHeader {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 
   width: 100%;
@@ -78,7 +80,6 @@
   overflow-y: auto;
 
   box-sizing: border-box;
-  max-height: 20vh;
   margin: 0;
 
   font: var(--font-medium-400);
