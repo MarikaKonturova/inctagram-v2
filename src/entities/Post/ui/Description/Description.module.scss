@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: flex-start;
+
+    padding: 5px 20px;
+
+    .content {
+        .info {
+            .userName {
+                font: var(--font-medium-700);
+                margin-right: 4px;
+            }
+
+            font: var(--font-medium-400);
+        }
+    }
+}

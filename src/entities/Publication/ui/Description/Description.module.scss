@@ -1,14 +1,12 @@
 .description {
   display: flex;
-  align-items: start;
+  padding: 5px 0;
+  gap: 5px;
 }
 
 .headerTitle {
   margin-right: 12px;
-}
-
-.rightBlock {
-  margin-left: 12px;
+  font-weight: bold;
 }
 
 .lessMore {

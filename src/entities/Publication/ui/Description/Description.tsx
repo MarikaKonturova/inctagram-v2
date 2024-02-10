@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Avatar } from 'shared/ui'
 
 import cls from './Description.module.scss'
 
@@ -19,9 +18,6 @@ export const Description: React.FC<IProps> = ({ avatarURL, description, title })
 
   return (
     <div className={cls.description}>
-      <div>
-        <Avatar alt={'avatar'} size={36} src={avatarURL} />
-      </div>
       <div className={cls.rightBlock}>
         <span className={cls.headerTitle}>{title}</span>
         {description && truncatedDescription}

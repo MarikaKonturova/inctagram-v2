@@ -1,19 +1,5 @@
 @import 'app/styles/mixins/mixins';
 
-.container {
-  @include flex(row, space-between, center);
-
-  width: 100%;
-  margin: 10px 0;
-}
-
-.left_group {
-  @include flex(row, flex-start, center);
-
-  flex: 11;
-  gap: 5%;
-}
-
 .cardsList {
   display: flex;
   flex-flow: row wrap;
@@ -43,6 +29,10 @@
     flex-direction: column;
     justify-content: center;
   }
+}
+
+.content {
+  flex: 1;
 }
 
 .loaderContainer {

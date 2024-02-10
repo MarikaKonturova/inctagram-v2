@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useCommentStore } from 'entities/Comment'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { type AnswerType } from 'shared/types/comment'
 import { type IComment } from 'shared/types/post'
@@ -15,7 +15,7 @@ interface PropsType {
   data: Omit<AnswerType | IComment, 'answerCount' | 'commentId' | 'postId'> & {
     answerCount?: number
     commentId?: number
-    postId?: number
+    postId?: number | undefined
   }
   isOpen: boolean
   isRepliedComment?: boolean
@@ -40,12 +40,22 @@ export function Comment({
     from: { avatars, userName },
     id,
     likeCount,
+    postId,
   } = data
   const { setRepliedComment } = useCommentStore()
   const { t } = useTranslation(['profile'])
+  const [clicked, setClicked] = useState(false)
 
   const onAnswerHandler = () => {
-    setRepliedComment({ id: isRepliedComment && commentId ? commentId : id, userName })
+    console.log(commentId, id, openedCommentId, postId)
+    setClicked(true)
+    clicked
+      ? setRepliedComment({
+          id: isRepliedComment && commentId ? commentId : id,
+          postId: postId,
+          userName,
+        })
+      : setRepliedComment({ id: 0, postId: postId, userName: '' })
   }
 
   return (
@@ -60,6 +70,7 @@ export function Comment({
           <button className={cls.button} onClick={onAnswerHandler} type={'button'}>
             {t('reply')}
           </button>
+          {clicked && <button onClick={() => setClicked(false)}>x</button>}
         </div>
         {!!answerCount && (
           <button
