@@ -10,7 +10,7 @@ interface IProps {
 
 export const Header: React.FC<IProps> = ({ avatarURL, title }) => (
   <div className={cls.header}>
-    <Avatar alt={'avatar'} size={36} src={avatarURL} />
+    <Avatar alt={'avatar'} size={36} src={avatarURL} viewBox={'-11 -11 70 70'} />
     <span className={cls.headerTitle}>{title}</span>
   </div>
 )

@@ -53,7 +53,7 @@ export const PublicPost = ({ openModal, post }: PublicPostProps) => {
 
       <div>
         <div className={cls.user}>
-          <Avatar size={36} src={post.avatars?.thumbnail?.url}/>
+          <Avatar size={36} src={post.avatars?.thumbnail?.url} viewBox={'-11 -11 70 70'}/>
           <Title as={'h3'} className={cls.userName}>{post.userName}</Title>
         </div>
 

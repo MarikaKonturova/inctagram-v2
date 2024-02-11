@@ -60,7 +60,15 @@ export function Comment({
 
   return (
     <div className={clsx(cls.avatarCommentGroup, { [cls.additionalStyle]: isRepliedComment })}>
-      <Avatar alt={'avatar'} size={avatarSize} src={avatars?.thumbnail.url} />
+      <div>
+        <Avatar
+          alt={'avatar'}
+          size={avatarSize}
+          src={avatars?.thumbnail.url}
+          viewBox={'0 -17 50 80'}
+        />
+      </div>
+
       <div className={cls.commentInfo}>
         <span className={cls.userName}>{userName} </span>
         <span className={cls.content}>{content}</span>

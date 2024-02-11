@@ -25,6 +25,7 @@ export const LikesInfo = ({ likeCount, newLikes }: LikesInfoProps) => {
               key={el?.avatars?.thumbnail?.url}
               size={24}
               src={el?.avatars?.thumbnail?.url}
+              viewBox={'-27 -26 70 100'}
             />
           ))}
         </div>
