@@ -85,7 +85,7 @@ export const AccountManagementForm: FC<PropsType> = ({ hasBusinessAccount }) => 
       <div className={cls.container}>
         <div className={cls.section}>
           <div>{t('expireAt')}</div>
-          <div>{t('nextPayment')}</div>
+          {hasAutoRenewal && <div>{t('nextPayment')}</div>}
         </div>
         <div className={cls.section}>
           <div>{expireAt}</div>
