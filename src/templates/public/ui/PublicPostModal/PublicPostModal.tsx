@@ -30,7 +30,7 @@ export const PublicPostModal = ({ handleClose, isOpen, post }: PublicPostModalPr
 
           <div className={cls.rightBlock}>
             <div className={cls.header}>
-              <Header avatarURL={post.avatars?.medium.url} title={post.userName} />
+              <Header avatarURL={post.avatars?.thumbnail.url} title={post.userName} />
             </div>
             <Commentaries postId={post.id} />
             <div className={cls.bottomSection}>

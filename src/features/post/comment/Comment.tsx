@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { useCommentStore } from 'entities/Comment'
 import React, { ReactNode, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import userPhoto from 'shared/assets/images/user.png'
 import { type AnswerType } from 'shared/types/comment'
 import { type IComment } from 'shared/types/post'
 import { Avatar } from 'shared/ui'
@@ -61,12 +62,7 @@ export function Comment({
   return (
     <div className={clsx(cls.avatarCommentGroup, { [cls.additionalStyle]: isRepliedComment })}>
       <div>
-        <Avatar
-          alt={'avatar'}
-          size={avatarSize}
-          src={avatars?.thumbnail.url}
-          viewBox={'0 -17 50 80'}
-        />
+        <Avatar alt={'avatar'} size={avatarSize} src={avatars?.thumbnail.url || userPhoto.src} />
       </div>
 
       <div className={cls.commentInfo}>

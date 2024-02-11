@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { useTranslation } from 'react-i18next'
+import userPhoto from 'shared/assets/images/user.png'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { Avatar } from 'shared/ui'
 
@@ -24,8 +25,7 @@ export const LikesInfo = ({ likeCount, newLikes }: LikesInfoProps) => {
               className={cls.avatar}
               key={el?.avatars?.thumbnail?.url}
               size={24}
-              src={el?.avatars?.thumbnail?.url}
-              viewBox={'-27 -26 70 100'}
+              src={el?.avatars?.thumbnail?.url || userPhoto.src}
             />
           ))}
         </div>
