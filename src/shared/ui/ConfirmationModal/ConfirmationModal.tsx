@@ -9,7 +9,7 @@ interface ConfirmationModalProps {
   bodyText: string
   className?: string
   headerText: string
-  isLoading?: boolean
+  isDisabled?: boolean
   isModalOpen: boolean
   onYesAction: () => void
   setModalOpen: Dispatch<SetStateAction<boolean>>
@@ -19,7 +19,7 @@ export const ConfirmationModal: FC<ConfirmationModalProps> = ({
   bodyText,
   className,
   headerText,
-  isLoading,
+  isDisabled,
   isModalOpen,
   onYesAction,
   setModalOpen,
@@ -45,7 +45,7 @@ export const ConfirmationModal: FC<ConfirmationModalProps> = ({
         <div className={cls.flex}>
           <Button
             className={cls.button}
-            disabled={isLoading}
+            disabled={isDisabled}
             onClick={onYesClickAction}
             theme={'outline'}
             type={'button'}
@@ -54,7 +54,7 @@ export const ConfirmationModal: FC<ConfirmationModalProps> = ({
           </Button>
           <Button
             className={cls.button}
-            disabled={isLoading}
+            disabled={isDisabled}
             onClick={onCloseHandler}
             type={'button'}
           >
