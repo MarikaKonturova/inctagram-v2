@@ -3,7 +3,6 @@ import { useGetProfileData } from 'entities/Profile'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import catImg from 'shared/assets/images/MicrosoftTeams-image.png'
 import { Button, Card, Modal, Textarea } from 'shared/ui'
 
 import { useEditPost } from '../model'
@@ -54,7 +53,7 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
         />
 
         <div className={cls.rightBlock}>
-          <Header avatarURL={catImg.src} title={userData?.userName || ''} />
+          <Header avatarURL={userData?.avatars?.thumbnail.url} title={userData?.userName || ''} />
           <div className={cls.textareaContainer}>
             <Textarea
               {...register('description', {
