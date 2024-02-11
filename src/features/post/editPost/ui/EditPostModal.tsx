@@ -28,11 +28,13 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
     handleSubmit,
     register,
     reset,
+    watch,
   } = useForm({
     defaultValues: {
       description: post?.description || '',
     },
   })
+  const descriptionValueLength = watch('description').length
 
   useEffect(() => {
     reset({ description: post?.description })
@@ -67,7 +69,7 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
               labelClassName={cls.label}
               textareaClassName={cls.textarea}
             />
-            <div className={cls.info}>200/500</div>
+            <div className={cls.info}>{descriptionValueLength}/500</div>
           </div>
           <Button className={cls.button} theme={'primary'} type={'submit'}>
             {t('saveChanges')}
