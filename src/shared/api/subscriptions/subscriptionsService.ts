@@ -5,6 +5,7 @@ import {
   type CreateSubscriptionFailedResponseType,
   type CreateSubscriptionSuccessResponseType,
   type GetCurrentSubscriptionType,
+  GetMyPaymentsParams,
   type PaymentsType,
   type SubscriptionType,
 } from 'shared/types/subscriptions'
@@ -25,7 +26,7 @@ export const SubscriptionsService = {
   getCurrentSubscription() {
     return $api.get<GetCurrentSubscriptionType>('subscriptions/current-subscriptions')
   },
-  getMyPayments() {
-    return $api.get<ResponseType<PaymentsType[]>>('subscriptions/my-payments')
+  getMyPayments(data?: GetMyPaymentsParams) {
+    return $api.get<ResponseType<PaymentsType[]>>('subscriptions/my-payments', { params: data })
   },
 }
