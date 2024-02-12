@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React, { type ChangeEvent, FC, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Paypal, Stripe } from 'shared/assets/icons'
-import { type CostOfSubscriptionType } from 'shared/types/subscriptions'
+import { type AccountOptionType, type CostOfSubscriptionType } from 'shared/types/subscriptions'
 import { Button, Checkbox, Modal, RadioButtons } from 'shared/ui'
 
 import { useSubscriptions } from '../model'
@@ -17,19 +17,17 @@ const initialState = {
 }
 
 type PropsType = {
+  accountOptions: AccountOptionType[]
   hasBusinessAccount: boolean
 }
 
-export const AccountManagementForm: FC<PropsType> = ({ hasBusinessAccount }) => {
+export const AccountManagementForm: FC<PropsType> = ({ accountOptions, hasBusinessAccount }) => {
   const { query } = useRouter()
   const [modal, setModal] = useState(initialState)
   const [selected, setSelected] = useState({} as CostOfSubscriptionType)
+  const [selectedAcc, setSelectedAcc] = useState({} as AccountOptionType)
+  const [businessAccount, setBusinessAccount] = useState<boolean>(hasBusinessAccount)
   const { t } = useTranslation(['profile'])
-
-  const ACCOUNT_TYPE_OPTIONS = [
-    { description: t('personal'), disabled: hasBusinessAccount },
-    { description: t('business'), disabled: !hasBusinessAccount },
-  ]
 
   const {
     cancelAutoRenewal,
@@ -77,46 +75,78 @@ export const AccountManagementForm: FC<PropsType> = ({ hasBusinessAccount }) => 
     if (isEmpty(selected)) {
       setSelected(subscriptionCosts[0])
     }
-  }, [selected, subscriptionCosts])
+  }, [selected, subscriptionCosts, t])
+
+  const selectHandler = () => {
+    if (hasBusinessAccount) {
+      if (selectedAcc.description !== t('personal')) {
+        setBusinessAccount(false)
+      } else {
+        setBusinessAccount(true)
+      }
+    } else {
+      if (selectedAcc.description !== t('business')) {
+        setBusinessAccount(true)
+      } else {
+        setBusinessAccount(false)
+      }
+    }
+  }
 
   return (
     <div>
-      <h4 className={cls.label}>{t('currentSubscription')}</h4>
-      <div className={cls.container}>
-        <div className={cls.section}>
-          <div>{t('expireAt')}</div>
-          {hasAutoRenewal && <div>{t('nextPayment')}</div>}
-        </div>
-        <div className={cls.section}>
-          <div>{expireAt}</div>
-          {hasAutoRenewal && <div>{nextPayment}</div>}
-        </div>
-      </div>
-      <div className={cls.checkboxContainer}>
-        <Checkbox
-          checked={hasAutoRenewal}
-          disabled={!hasAutoRenewal}
-          onChange={onCheckboxHandler}
-        />
-        <span>{t('autoRenewal')}</span>
-      </div>
-      <RadioButtons
+      {businessAccount && (
+        <>
+          {hasBusinessAccount && (
+            <>
+              <h4 className={cls.label}>{t('currentSubscription')}</h4>
+              <div className={cls.container}>
+                <div className={cls.section}>
+                  <div>{t('expireAt')}</div>
+                  {hasAutoRenewal && <div>{t('nextPayment')}</div>}
+                </div>
+                <div className={cls.section}>
+                  <div>{expireAt}</div>
+                  {hasAutoRenewal && <div>{nextPayment}</div>}
+                </div>
+              </div>
+              <div className={cls.checkboxContainer}>
+                <Checkbox
+                  checked={hasAutoRenewal}
+                  disabled={!hasAutoRenewal}
+                  onChange={onCheckboxHandler}
+                />
+                <span>{t('autoRenewal')}</span>
+              </div>
+            </>
+          )}
+        </>
+      )}
+
+      <RadioButtons<AccountOptionType>
         label={`${t('accountType')}`}
-        options={ACCOUNT_TYPE_OPTIONS}
-        selectedValue={hasBusinessAccount ? ACCOUNT_TYPE_OPTIONS[1] : ACCOUNT_TYPE_OPTIONS[0]}
+        options={accountOptions || []}
+        selectHandler={selectHandler}
+        selected={selectedAcc}
+        selectedValue={businessAccount ? accountOptions[1] : accountOptions[0]}
+        setSelected={setSelectedAcc}
       />
-      <RadioButtons<CostOfSubscriptionType>
-        label={`${t('subscriptionCosts')}`}
-        options={subscriptionCosts || []}
-        selected={selected}
-        selectedValue={subscriptionCosts[0]}
-        setSelected={setSelected}
-      />
-      <div className={cls.bottomBlock}>
-        <Paypal />
-        or
-        <Stripe onClick={onStripeHandler} />
-      </div>
+      {businessAccount && (
+        <>
+          <RadioButtons<CostOfSubscriptionType>
+            label={`${t('subscriptionCosts')}`}
+            options={subscriptionCosts || []}
+            selected={selected}
+            selectedValue={subscriptionCosts[0]}
+            setSelected={setSelected}
+          />
+          <div className={cls.bottomBlock}>
+            <Paypal />
+            or
+            <Stripe onClick={onStripeHandler} />
+          </div>
+        </>
+      )}
       {modal.modalOpen && (
         <Modal isOpen={modal.modalOpen} onClose={handleClose} title={modal.title}>
           <div className={cls.modal}>
