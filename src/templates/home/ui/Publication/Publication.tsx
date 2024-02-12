@@ -8,9 +8,9 @@ import { useTranslation } from 'next-i18next'
 import React, { useState } from 'react'
 import { PostResponse } from 'shared/types/post'
 import { Skeleton } from 'shared/ui'
+import { Commentaries } from 'widgets/Commentaries'
 import { PostActions } from 'widgets/Post'
 
-import { Commentaries } from '../../../../widgets/Commentaries'
 import cls from './Publication.module.scss'
 
 type PropsType = ImageProps & {
@@ -73,11 +73,7 @@ export const Publication: React.FC<PropsType> = props => {
       <div className={cls.likesInfo}>
         <LikesInfo likeCount={publ.likeCount} newLikes={publ.newLikes} />
       </div>
-      <Description
-        avatarURL={publ.avatars?.medium.url}
-        description={publ.description}
-        title={publ.userName}
-      />
+      <Description description={publ.description} title={publ.userName} />
       {openComments && <Commentaries postId={publ.id} />}
       <div className={cls.allComments} onClick={() => commentsHandler()}>
         View All Comments ({publ.likeCount})
