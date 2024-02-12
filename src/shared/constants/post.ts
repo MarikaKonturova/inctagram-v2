@@ -1,5 +1,4 @@
 export const MODALS = {
-  DeletePostModal: 3,
   EditPostModal: 2,
   GetPostModal: 1,
 } as const
