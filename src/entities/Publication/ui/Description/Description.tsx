@@ -3,12 +3,11 @@ import React, { useState } from 'react'
 import cls from './Description.module.scss'
 
 interface IProps {
-  avatarURL: string
   description: string
   title: string
 }
 
-export const Description: React.FC<IProps> = ({ avatarURL, description, title }) => {
+export const Description: React.FC<IProps> = ({ description, title }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const handleToggleExpand = () => {
     setIsExpanded(!isExpanded)

@@ -48,7 +48,6 @@ export function Comment({
   const [clicked, setClicked] = useState(false)
 
   const onAnswerHandler = () => {
-    console.log(commentId, id, openedCommentId, postId)
     setClicked(true)
     clicked
       ? setRepliedComment({

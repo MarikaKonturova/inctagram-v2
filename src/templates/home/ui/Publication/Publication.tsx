@@ -57,7 +57,7 @@ export const Publication: React.FC<PropsType> = props => {
     <div className={clsx(cls.container)}>
       {isLoaded && <Skeleton height={skeletonHeight} width={skeletonWidth} />}
       <div className={cls.header}>
-        <Header avatarURL={publ.avatars?.thumbnail.url || userPhoto.src} title={publ.userName} />
+        <Header avatarURL={publ.avatars?.medium.url || userPhoto.src} title={publ.userName} />
         <div className={cls.bullet}>•</div>
         <CreationDate date={creationDate} />
       </div>
@@ -74,11 +74,7 @@ export const Publication: React.FC<PropsType> = props => {
       <div className={cls.likesInfo}>
         <LikesInfo likeCount={publ.likeCount} newLikes={publ.newLikes} />
       </div>
-      <Description
-        avatarURL={publ.avatars?.thumbnail.url || userPhoto.src}
-        description={publ.description}
-        title={publ.userName}
-      />
+      <Description description={publ.description} title={publ.userName} />
       {openComments && <Commentaries postId={publ.id} />}
       <div className={cls.allComments} onClick={() => commentsHandler()}>
         View All Comments ({publ.likeCount})
