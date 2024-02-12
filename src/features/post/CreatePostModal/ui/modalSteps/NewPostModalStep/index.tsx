@@ -24,10 +24,10 @@ export const NewPostModalStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) =
     ({ image, setImage }) => ({ image, setImage }),
     shallow
   )
-  const workingImage = image ? URL.createObjectURL(image) : ''
+  const workingImage = image ? URL.createObjectURL(image.src) : ''
 
   const onSuccess = () => {
-    setImage(null)
+    // setImage(null)
     reset({
       description: '',
       location: '',
@@ -54,7 +54,7 @@ export const NewPostModalStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) =
     const formData = new FormData()
 
     if (image) {
-      formData.append('files', image)
+      //  formData.append('files', image)
     }
     formData.append('description', data.description)
     onCreate(formData)

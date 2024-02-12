@@ -15,3 +15,27 @@
   padding: 12px 24px;
   border-bottom: 1px solid var(--dark-100-color);
 }
+
+.swiper {
+  width: 60vw;
+  height: 100%;
+}
+
+.swiper_slide {
+  /* Center slide text vertically */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+  text-align: center;
+
+  background: #fff;
+}
+
+.swiper_slide img {
+  //display: block;
+  //width: 100%;
+  // height: 100%;
+  //object-fit: cover;
+}

@@ -25,13 +25,13 @@ export const FilterIamgeModalStep: FC<IProps> = ({ onNextClick, onPrevClick }) =
     shallow
   )
   const [imageFilter, setImageFilter] = useState('')
-  const workingImage = image ? URL.createObjectURL(image) : ''
+  const workingImage = image ? URL.createObjectURL(image.src) : ''
 
   async function handleChange() {
     const newImage = await getModifiedImageSrc()
     const newFile = dataURLtoFile(newImage, 'new-file.png')
 
-    setImage(newFile)
+    // setImage(newFile)
     onNextClick()
   }
 

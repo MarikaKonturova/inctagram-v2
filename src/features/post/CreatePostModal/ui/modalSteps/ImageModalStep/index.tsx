@@ -20,26 +20,33 @@ export const ImageModalStep: FC<IProps> = ({ onNextClick, onPrevClick }) => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
-  const { setImage, setName } = useUploadImagePostStore(
-    ({ setImage, setName }) => ({ setImage, setName }),
+  const { setImage, setImages, setName } = useUploadImagePostStore(
+    ({ setImage, setImages, setName }) => ({ setImage, setImages, setName }),
     shallow
   )
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    if (e.target.files?.length) {
-      const file = e.target.files[0]
-      const allowedImageTypes = ['image/jpeg', 'image/png']
+    const arrImages = []
 
-      if (file.size > 1024 * 1024 * 20) {
-        setError('Photo size must be less than 10 MB!')
-      } else if (!allowedImageTypes.includes(file.type)) {
-        setError('The format of the uploaded photo must be\nPNG and JPEG')
-      } else {
-        setError('')
-        setImage(e.target.files[0])
-        setName(e.target.files[0].name)
-        onNextClick()
+    if (e.target.files?.length) {
+      for (let i = 0; i < e.target.files.length; i++) {
+        const file = e.target.files[0]
+        const allowedImageTypes = ['image/jpeg', 'image/png']
+
+        if (file.size > 1024 * 1024 * 20) {
+          setError('Photo size must be less than 10 MB!')
+
+          return
+        } else if (!allowedImageTypes.includes(file.type)) {
+          setError('The format of the uploaded photo must be\nPNG and JPEG')
+
+          return
+        }
+        setImages({ src: e.target.files[i] })
       }
+      setError('')
+      // setImage(e.target.files[0])
+      onNextClick()
     }
   }
 
@@ -59,7 +66,7 @@ export const ImageModalStep: FC<IProps> = ({ onNextClick, onPrevClick }) => {
         )}
 
         <label className={cls.inputFile}>
-          <input accept={'image/png, image/jpeg'} onChange={handleChange} type={'file'} />
+          <input accept={'image/png, image/jpeg'} multiple onChange={handleChange} type={'file'} />
           <div className={cls.container}>
             <div className={cls.imgContainer}>
               <IconImg />
