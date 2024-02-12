@@ -32,7 +32,6 @@ export const GetPostModal: React.FC<IProps> = props => {
             cardWrapperClassName={cls.cardWrapperClassName}
             src={post?.images[0]?.versions.huge.url || ''}
           />
-
           <div className={cls.rightBlock}>
             <div className={cls.header}>
               <Header avatarURL={post.avatars?.medium.url} title={userName} />

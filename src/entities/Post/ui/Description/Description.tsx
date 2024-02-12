@@ -18,7 +18,7 @@ export const Description: FC<PropsType> = ({ post }) => {
           <b className={cls.userName}>{post.userName}</b>
           {post.description}
         </p>
-        <CreationDate date={post.updatedAt} />
+        <CreationDate date={post.updatedAt} type={'agoTime'} />
       </div>
     </div>
   )
