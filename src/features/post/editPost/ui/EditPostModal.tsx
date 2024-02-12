@@ -64,6 +64,10 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
 
             <div className={cls.rightBlock}>
               <Header
+                avatarURL={userData?.avatars?.thumbnail.url}
+                title={userData?.userName || ''}
+              />
+              <Header
                 avatarURL={userData?.avatars?.thumbnail.url || userPhoto.src}
                 title={userData?.userName || ''}
               />
