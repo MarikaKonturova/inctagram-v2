@@ -39,7 +39,7 @@ export const AvatarBlock = ({ avatars }: { avatars: AvatarPostModel | null | und
             <ConfirmationModal
               bodyText={`${t('deletePhotoMessage')}`}
               headerText={`${t('deletePhotoHeader')}`}
-              isLoading={isLoading}
+              isDisabled={isLoading}
               isModalOpen={deleteModalOpen}
               onYesAction={deleteAvatarConfirmationClick}
               setModalOpen={setDeleteModalOpen}
