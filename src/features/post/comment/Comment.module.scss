@@ -14,14 +14,13 @@
 }
 
 .content {
-  display: block;
-  width: 200px;
   font: var(--font-medium-400);
   word-wrap: break-word;
 }
 
 .userName {
   font: var(--font-medium-700);
+  margin-right: 5px;
 }
 
 .bottomInfo {
@@ -46,6 +45,10 @@
   gap: 12px;
 }
 
+.commentBox {
+  max-width: 345px;
+}
+
 .button {
   cursor: pointer;
   font: var(--font-small-600);
@@ -57,7 +60,7 @@
 }
 
 .additionalStyle {
-  padding-left: 40px;
+  padding-left: 50px;
 }
 
 .line {

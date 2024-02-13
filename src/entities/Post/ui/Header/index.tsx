@@ -11,6 +11,6 @@ interface IProps {
 export const Header: React.FC<IProps> = ({ avatarURL, title }) => (
   <div className={cls.header}>
     <Avatar src={avatarURL} />
-    <span className={cls.headerTitle}>{title}</span>
+    <h3 className={cls.headerTitle}>{title}</h3>
   </div>
 )

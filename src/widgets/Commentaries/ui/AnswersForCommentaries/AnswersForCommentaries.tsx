@@ -28,7 +28,7 @@ export const AnswersForCommentaries = ({ commentId, openedCommentId, postId }: P
                 postId={answer.id}
               />
             }
-            avatarSize={26}
+            avatarSize={36}
             data={answer}
             isOpen={isOpen}
             isRepliedComment
