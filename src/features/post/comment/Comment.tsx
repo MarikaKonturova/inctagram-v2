@@ -61,8 +61,10 @@ export function Comment({
     <div className={clsx(cls.avatarCommentGroup, { [cls.additionalStyle]: isRepliedComment })}>
       <Avatar size={avatarSize} src={avatars?.thumbnail.url} />
       <div className={cls.commentInfo}>
-        <span className={cls.userName}>{userName} </span>
-        <span className={cls.content}>{content}</span>
+        <div className={cls.commentBox}>
+          <span className={cls.userName}>{userName}</span>
+          <span className={cls.content}>{content}</span>
+        </div>
         <div className={cls.bottomInfo}>
           <p className={cls.time}>{formattedDate(createdAt)} </p>
           <p className={cls.actionButton}>{`${t('like')}: ${likeCount}`} </p>

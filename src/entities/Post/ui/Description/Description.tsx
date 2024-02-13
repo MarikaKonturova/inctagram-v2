@@ -15,8 +15,8 @@ export const Description: FC<PropsType> = ({ post }) => {
       <Avatar src={post.avatars?.thumbnail.url} />
       <div className={cls.content}>
         <p className={cls.info}>
-          <b className={cls.userName}>{post.userName}</b>
-          {post.description}
+          <span className={cls.userName}>{post.userName}</span>
+          <span>{post.description}</span>
         </p>
         <CreationDate date={post.updatedAt} />
       </div>
