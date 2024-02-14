@@ -30,6 +30,7 @@ export const NewPostModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick, s
     handleSubmit,
     register,
     reset,
+    watch,
   } = useForm({
     defaultValues: {
       description: '',
@@ -70,7 +71,9 @@ export const NewPostModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick, s
               </div>
             )}
             <Textarea
+              charactersCount={watch('description').length}
               className={cls.textareaContainer}
+              counterClassName={cls.counter}
               errorText={errors.description?.message}
               label={`${t('addPublicationDescriptions')}`}
               labelClassName={cls.label}
