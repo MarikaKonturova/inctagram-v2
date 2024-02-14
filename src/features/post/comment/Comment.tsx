@@ -45,16 +45,23 @@ export function Comment({
   const { setRepliedComment } = useCommentStore()
   const { t } = useTranslation(['profile'])
   const [clicked, setClicked] = useState(false)
-
   const onAnswerHandler = () => {
-    setClicked(true)
-    clicked
-      ? setRepliedComment({
+    setClicked(prevClicked => {
+      const newClicked = !prevClicked
+
+      if (newClicked) {
+        setRepliedComment({
           id: isRepliedComment && commentId ? commentId : id,
           postId: postId,
           userName,
         })
-      : setRepliedComment({ id: 0, postId: postId, userName: '' })
+        setClicked(false)
+      } else {
+        setRepliedComment({ id: 0, postId: postId, userName: '' })
+      }
+
+      return newClicked
+    })
   }
 
   return (
@@ -71,7 +78,6 @@ export function Comment({
           <button className={cls.button} onClick={onAnswerHandler} type={'button'}>
             {t('reply')}
           </button>
-          {clicked && <button onClick={() => setClicked(false)}>x</button>}
         </div>
         {!!answerCount && (
           <button
