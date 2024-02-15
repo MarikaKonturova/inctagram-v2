@@ -52,10 +52,10 @@ export const AvatarModal: FC<PropsType> = ({ className, isOpen, setAvatar, setIs
 
     if (file) {
       if (!allowedImageTypes.includes(file?.type)) {
-        setErrorMessage('The format of the uploaded photo must be PNG and JPEG')
+        setErrorMessage(`${t('photoFormatError')}`)
         e.target.value = ''
       } else if (file?.size > MAX_FILE_SIZE) {
-        setErrorMessage('Photo size must be less than 10 MB!')
+        setErrorMessage(`${t('photoSizeError')}`)
         e.target.value = ''
       } else {
         setErrorMessage('')
