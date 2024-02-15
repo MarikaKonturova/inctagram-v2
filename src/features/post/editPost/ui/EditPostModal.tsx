@@ -33,7 +33,7 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
       description: post?.description || '',
     },
   })
-  const descriptionValueLength = watch('description').length
+  const descriptionValueLength = watch('description')?.length || 0
 
   const openConfirmModal = () => setIsConfirmModalVisible(true)
 
