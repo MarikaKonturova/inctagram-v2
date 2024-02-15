@@ -49,6 +49,11 @@ interface CostOfSubscriptionType {
   typeDescription: PeriodType
 }
 
+interface AccountOptionType {
+  description: string
+  typeDescription: string
+}
+
 interface CostOfSubscriptionsType {
   data: CostOfSubscriptionType[]
 }
@@ -68,6 +73,7 @@ interface GetMyPaymentsParams {
 }
 
 export type {
+  AccountOptionType,
   CostOfSubscriptionType,
   CostOfSubscriptionsType,
   CreateSubscriptionFailedResponseType,
