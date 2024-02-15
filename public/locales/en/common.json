@@ -13,5 +13,8 @@
   "search": "Search",
   "statistics": "Statistics",
   "favorites": "Favorites",
-  "dateOfBirth": "Date of birth"
+  "dateOfBirth": "Date of birth",
+  "back": "Back",
+  "notFoundText": "Looks like the page you are looking for is not available",
+  "notFoundTitle": "404! Page not found"
 }
