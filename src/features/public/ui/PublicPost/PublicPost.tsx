@@ -1,7 +1,7 @@
 import {CreationDate} from 'entities/Post/ui/CreationDate';
 import moment from 'moment';
 import React, {useEffect, useRef, useState} from 'react';
-import {PostResponse} from 'shared/types/post';
+import {AvatarSizes, PostResponse} from 'shared/types/post';
 import {Avatar, Button, Card, Title} from 'shared/ui';
 
 import cls from './PublicPost.module.scss';
@@ -53,7 +53,7 @@ export const PublicPost = ({ openModal, post }: PublicPostProps) => {
 
       <div>
         <div className={cls.user}>
-          <Avatar size={36} src={post.avatars?.thumbnail?.url}/>
+          <Avatar size={AvatarSizes.medium} src={post.avatars?.thumbnail?.url}/>
           <Title as={'h3'} className={cls.userName}>{post.userName}</Title>
         </div>
 

@@ -1,11 +1,11 @@
 import clsx from 'clsx'
 import { useCommentStore } from 'entities/Comment'
+import { CreationDate } from 'entities/Post'
 import React, { ReactNode, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { type AnswerType } from 'shared/types/comment'
 import { type IComment } from 'shared/types/post'
 import { Avatar } from 'shared/ui'
-import { formattedDate } from 'shared/utils'
 
 import cls from './Comment.module.scss'
 
@@ -47,7 +47,6 @@ export function Comment({
   const [clicked, setClicked] = useState(false)
 
   const onAnswerHandler = () => {
-    console.log(commentId, id, openedCommentId, postId)
     setClicked(true)
     clicked
       ? setRepliedComment({
@@ -60,12 +59,14 @@ export function Comment({
 
   return (
     <div className={clsx(cls.avatarCommentGroup, { [cls.additionalStyle]: isRepliedComment })}>
-      <Avatar alt={'avatar'} size={avatarSize} src={avatars?.thumbnail.url} />
+      <Avatar size={avatarSize} src={avatars?.thumbnail.url} />
       <div className={cls.commentInfo}>
-        <span className={cls.userName}>{userName} </span>
-        <span className={cls.content}>{content}</span>
+        <div className={cls.commentBox}>
+          <span className={cls.userName}>{userName}</span>
+          <span className={cls.content}>{content}</span>
+        </div>
         <div className={cls.bottomInfo}>
-          <p className={cls.time}>{formattedDate(createdAt)} </p>
+          <CreationDate className={cls.time} date={createdAt} type={'agoTime'} />
           <p className={cls.actionButton}>{`${t('like')}: ${likeCount}`} </p>
           <button className={cls.button} onClick={onAnswerHandler} type={'button'}>
             {t('reply')}

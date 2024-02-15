@@ -1,12 +1,12 @@
 .container {
   display: flex;
   flex-direction: row;
-  gap: 12px;
   align-items: flex-start;
-
+  gap: 12px;
   padding: 5px 20px;
 
   .content {
+    max-width: 345px;
     .info {
       font: var(--font-medium-400);
 
