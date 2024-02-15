@@ -8,12 +8,12 @@
   .content {
     max-width: 345px;
     .info {
-      .userName {
-        font: var(--font-medium-700);
-        margin-right: 4px;
-      }
-
       font: var(--font-medium-400);
+
+      .userName {
+        margin-right: 4px;
+        font: var(--font-medium-700);
+      }
     }
   }
 }
