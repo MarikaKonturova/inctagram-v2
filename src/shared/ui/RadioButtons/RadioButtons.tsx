@@ -14,7 +14,7 @@ interface OptionType {
 interface PropsType<T> {
   label: string
   options: Array<T & OptionType>
-  selectHandler?: () => void
+  selectHandler?: (option: T) => void
   selected?: T
   selectedValue?: T
   setSelected?: (selected: T) => void
@@ -28,16 +28,17 @@ export const RadioButtons = <T,>({
   selectedValue,
   setSelected,
 }: PropsType<T>) => (
-  <RadioGroup
-    onChange={setSelected}
-    onClick={selectHandler}
-    value={isEmpty(selected) ? selectedValue : selected}
-  >
+  <RadioGroup onChange={setSelected} value={isEmpty(selected) ? selectedValue : selected}>
     <RadioGroup.Label className={cls.label}>{label}</RadioGroup.Label>
     <div className={cls.rootContainer}>
       {options.map(option => {
         return (
-          <RadioGroup.Option className={clsx(cls.option)} key={option.description} value={option}>
+          <RadioGroup.Option
+            className={clsx(cls.option)}
+            key={option.description}
+            onClick={() => (selectHandler ? selectHandler(option) : '')}
+            value={option}
+          >
             {state => (
               <div className={cls.optionContainer}>
                 {state.checked ? <CheckedIcon /> : <UncheckedIcon />}

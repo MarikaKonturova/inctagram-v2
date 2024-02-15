@@ -26,7 +26,7 @@ export const AccountManagementForm: FC<PropsType> = ({ accountOptions, hasBusine
   const [modal, setModal] = useState(initialState)
   const [selected, setSelected] = useState({} as CostOfSubscriptionType)
   const [selectedAcc, setSelectedAcc] = useState({} as AccountOptionType)
-  const [businessAccount, setBusinessAccount] = useState<boolean>(hasBusinessAccount)
+  const [isBusinessAccount, setIsBusinessAccount] = useState<boolean>(hasBusinessAccount)
   const { t } = useTranslation(['profile'])
 
   const {
@@ -77,25 +77,16 @@ export const AccountManagementForm: FC<PropsType> = ({ accountOptions, hasBusine
     }
   }, [selected, subscriptionCosts, t])
 
-  const selectHandler = () => {
-    if (hasBusinessAccount) {
-      if (selectedAcc.description !== t('personal')) {
-        setBusinessAccount(false)
-      } else {
-        setBusinessAccount(true)
-      }
-    } else {
-      if (selectedAcc.description !== t('business')) {
-        setBusinessAccount(true)
-      } else {
-        setBusinessAccount(false)
-      }
-    }
+  const selectHandler = (option: AccountOptionType) => {
+    const isPersonal = option.description === t('personal')
+    const isBusiness = option.description === t('business')
+
+    setIsBusinessAccount(hasBusinessAccount ? !isPersonal : isBusiness)
   }
 
   return (
     <div>
-      {businessAccount && (
+      {isBusinessAccount && (
         <>
           {hasBusinessAccount && (
             <>
@@ -128,10 +119,11 @@ export const AccountManagementForm: FC<PropsType> = ({ accountOptions, hasBusine
         options={accountOptions || []}
         selectHandler={selectHandler}
         selected={selectedAcc}
-        selectedValue={businessAccount ? accountOptions[1] : accountOptions[0]}
+        selectedValue={isBusinessAccount ? accountOptions[1] : accountOptions[0]}
         setSelected={setSelectedAcc}
       />
-      {businessAccount && (
+
+      {isBusinessAccount && (
         <>
           <RadioButtons<CostOfSubscriptionType>
             label={`${t('subscriptionCosts')}`}
