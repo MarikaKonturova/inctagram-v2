@@ -13,12 +13,21 @@ export interface IFormValidate {
 }
 
 export const useValidationForm = (arr: ValidateUnion[]) => {
-  const { clearErrors, formState, handleSubmit, register, reset, setError, setValue, watch } =
-    useForm<IFormValidate>({
-      mode: 'onTouched',
-      reValidateMode: 'onChange',
-      resolver: yupResolver(createValidationSchema(arr)),
-    })
+  const {
+    clearErrors,
+    formState,
+    getValues,
+    handleSubmit,
+    register,
+    reset,
+    setError,
+    setValue,
+    watch,
+  } = useForm<IFormValidate>({
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
+    resolver: yupResolver(createValidationSchema(arr)),
+  })
 
   const { errors, isValid } = formState
 
@@ -38,6 +47,7 @@ export const useValidationForm = (arr: ValidateUnion[]) => {
 
   return {
     clearErrors,
+    getValues,
     handleSubmit,
     isValid,
     register,

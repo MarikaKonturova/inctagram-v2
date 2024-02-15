@@ -5,6 +5,7 @@ import React, { FC, useEffect, useState } from 'react'
 import BusinessLogo from 'shared/assets/icons/general/business-logo.svg'
 import { AppRoutes } from 'shared/constants/path'
 import { ProfileDataModel } from 'shared/types/auth'
+import { AvatarSizes } from 'shared/types/post'
 import { Avatar, Button } from 'shared/ui'
 
 import { FollowingAndFollowersModal } from '../FollowingAndFollowersModal'
@@ -80,7 +81,7 @@ export const ProfileMainInfo: FC<PropsType> = ({ page, userData }) => {
   return (
     <div className={cls.flex}>
       <div className={cls.avatar}>
-        <Avatar size={192} src={userData?.avatars?.medium.url} />
+        <Avatar size={AvatarSizes.large} src={userData?.avatars?.medium.url} />
       </div>
       <div className={cls.rightSide}>
         <div className={cls.main}>

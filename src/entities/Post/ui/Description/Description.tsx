@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import userPhoto from 'shared/assets/images/user.png'
 import { PostResponse } from 'shared/types/post'
 import { Avatar } from 'shared/ui'
 
@@ -12,13 +13,13 @@ type PropsType = {
 export const Description: FC<PropsType> = ({ post }) => {
   return (
     <div className={cls.container}>
-      <Avatar alt={'avatar'} size={36} src={post.avatars.thumbnail.url} />
+      <Avatar src={post.avatars?.thumbnail.url || userPhoto.src} />
       <div className={cls.content}>
         <p className={cls.info}>
-          <b className={cls.userName}>{post.userName}</b>
-          {post.description}
+          <span className={cls.userName}>{post.userName}</span>
+          <span>{post.description}</span>
         </p>
-        <CreationDate date={post.updatedAt} />
+        <CreationDate date={post.updatedAt} type={'agoTime'} />
       </div>
     </div>
   )

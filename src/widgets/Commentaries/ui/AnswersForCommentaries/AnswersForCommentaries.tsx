@@ -1,5 +1,6 @@
 import { useGetPostAnswersForComment } from 'entities/Comment'
-import { Comment, LikeCommentIconButton } from 'features/post'
+import { Comment } from 'features/post'
+import { LikeAnswerIconButton } from 'features/post/likeAnswer/ui/LikeAnswerIconButton/LikeAnswerIconButton'
 import React, { useState } from 'react'
 
 interface PropsType {
@@ -22,13 +23,14 @@ export const AnswersForCommentaries = ({ commentId, openedCommentId, postId }: P
         answer.commentId === commentId ? (
           <Comment
             actionSlot={
-              <LikeCommentIconButton
+              <LikeAnswerIconButton
+                answerId={answer.id}
                 commentId={answer.commentId}
                 isLiked={answer.isLiked}
-                postId={answer.id}
+                postId={postId}
               />
             }
-            avatarSize={26}
+            avatarSize={36}
             data={answer}
             isOpen={isOpen}
             isRepliedComment

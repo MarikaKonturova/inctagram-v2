@@ -2,7 +2,7 @@ import { AvatarModal, useDeleteAvatar } from 'features/profile/avatar'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import CloseIcon from 'shared/assets/icons/general/close.svg'
-import { type AvatarPostModel } from 'shared/types/post'
+import { type AvatarPostModel, AvatarSizes } from 'shared/types/post'
 import { Avatar, Button, ConfirmationModal } from 'shared/ui'
 
 import cls from './AvatarBlock.module.scss'
@@ -39,18 +39,18 @@ export const AvatarBlock = ({ avatars }: { avatars: AvatarPostModel | null | und
             <ConfirmationModal
               bodyText={`${t('deletePhotoMessage')}`}
               headerText={`${t('deletePhotoHeader')}`}
-              isLoading={isLoading}
+              isDisabled={isLoading}
               isModalOpen={deleteModalOpen}
               onYesAction={deleteAvatarConfirmationClick}
               setModalOpen={setDeleteModalOpen}
             />
-            <Avatar size={192} src={avatar} />
+            <Avatar size={AvatarSizes.large} src={avatar} />
             <button className={cls.imageButton} onClick={onDeleteButtonClick} type={'button'}>
               <CloseIcon fill={'#ffffff'} heigth={'100%'} viewBox={'0 5 24 24'} width={'100%'} />
             </button>
           </div>
         ) : (
-          <Avatar size={192} src={avatar} />
+          <Avatar size={AvatarSizes.large} src={avatar} />
         )}
       </div>
       <Button onClick={addProfilePhotoClick} theme={'outline'} type={'button'}>

@@ -6,23 +6,16 @@ import { format } from 'date-fns'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SubscriptionsService } from 'shared/api'
+import { PaymentType, SubscriptionType } from 'shared/constants/payments'
 import { useSnackbar } from 'shared/hooks'
 import { GetMyPaymentsParams } from 'shared/types/subscriptions'
-import { Pagination, Table } from 'shared/ui'
+import { ColumnType, Pagination, Table } from 'shared/ui'
 
 import cls from './styles.module.scss'
 
-const columns = [
-  { field: 'dateOfPayment', title: 'Date of Payment' },
-  { field: 'endDateOfSubscription', title: 'End date of subscription' },
-  { field: 'price', title: 'Price' },
-  { field: 'subscriptionType', title: 'Subscription Type' },
-  { field: 'paymentType', title: 'Payment Type' },
-]
-
 const options = ['8', '20', '30', '50', '100']
 
-const formateDate = (date: string) => format(new Date(date), 'dd.MM.yyyy')
+const formatDate = (date: string) => format(new Date(date), 'dd.MM.yyyy')
 
 export const MyPayments = () => {
   const [params, setParams] = useState<GetMyPaymentsParams>({})
@@ -41,18 +34,21 @@ export const MyPayments = () => {
 
   const { t } = useTranslation(['profile'])
 
-  const columns = [
+  const columns: ColumnType[] = [
     { field: 'dateOfPayment', title: t('dateOfPayment') },
     { field: 'endDateOfSubscription', title: t('endDateOfSubscription') },
-    { field: 'price', title: t('price') },
+    { field: 'price', textAlign: 'right', title: t('price') },
     { field: 'subscriptionType', title: t('subscriptionType') },
     { field: 'paymentType', title: t('paymentType') },
   ]
 
   const tableData = data?.data.items.map(el => ({
     ...el,
-    dateOfPayment: formateDate(el.dateOfPayment),
-    endDateOfSubscription: formateDate(el.endDateOfSubscription),
+    dateOfPayment: formatDate(el.dateOfPayment),
+    endDateOfSubscription: formatDate(el.endDateOfSubscription),
+    paymentType: PaymentType[el.paymentType],
+    price: '$' + el.price,
+    subscriptionType: SubscriptionType[el.subscriptionType],
   }))
 
   const onChange = (pageSize: string) => {

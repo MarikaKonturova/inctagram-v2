@@ -32,7 +32,7 @@ export interface NewPost {
 }
 
 export interface PostResponse {
-  avatars: AvatarPostModel
+  avatars: AvatarPostModel | null
   commentCount: number
   createdAt: string
   description: string
@@ -61,6 +61,12 @@ export interface ResponseType<D = PostResponse[]> {
 export interface AvatarPostModel {
   medium: ProfileAvatarModel
   thumbnail: ProfileAvatarModel
+}
+
+export enum AvatarSizes {
+  large = 192,
+  medium = 36,
+  small = 24,
 }
 
 export interface IComment {
