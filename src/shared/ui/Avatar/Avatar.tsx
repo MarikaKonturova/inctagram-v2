@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import { type CSSProperties, useMemo } from 'react'
 import IconImg from 'shared/assets/icons/light/image.svg'
-import userImg from 'shared/assets/images/user.png'
 import { AvatarSizes } from 'shared/types/post'
 
 import cls from './Avatar.module.scss'
@@ -26,9 +25,9 @@ export const Avatar = (props: AvatarProps) => {
   return (
     <div className={clsx(cls.wrapperAvatar, [className])}>
       {src ? (
-        <img alt={alt} className={cls.avatar} src={src || userImg.src} style={styles} />
+        <img alt={alt} className={cls.avatar} src={src} style={styles} />
       ) : (
-        <div className={cls.Avatar} style={styles}>
+        <div className={cls.avatar} style={styles}>
           <IconImg className={clsx(cls.icon)} />
         </div>
       )}

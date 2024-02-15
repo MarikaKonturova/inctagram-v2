@@ -3,6 +3,7 @@ import { useGetProfileData } from 'entities/Profile'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Translation } from 'react-i18next'
+import userPhoto from 'shared/assets/images/user.png'
 import { Button, Card, ConfirmationModal, Modal, Textarea } from 'shared/ui'
 
 import { useEditPost } from '../model'
@@ -66,6 +67,10 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
             <div className={cls.rightBlock}>
               <Header
                 avatarURL={userData?.avatars?.thumbnail.url}
+                title={userData?.userName || ''}
+              />
+              <Header
+                avatarURL={userData?.avatars?.thumbnail.url || userPhoto.src}
                 title={userData?.userName || ''}
               />
               <div className={cls.textareaContainer}>
