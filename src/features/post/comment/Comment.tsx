@@ -3,6 +3,7 @@ import { useCommentStore } from 'entities/Comment'
 import { CreationDate } from 'entities/Post'
 import React, { ReactNode, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import userPhoto from 'shared/assets/images/user.png'
 import { type AnswerType } from 'shared/types/comment'
 import { type IComment } from 'shared/types/post'
 import { Avatar } from 'shared/ui'
@@ -45,21 +46,31 @@ export function Comment({
   const { setRepliedComment } = useCommentStore()
   const { t } = useTranslation(['profile'])
   const [clicked, setClicked] = useState(false)
-
   const onAnswerHandler = () => {
-    setClicked(true)
-    clicked
-      ? setRepliedComment({
+    setClicked(prevClicked => {
+      const newClicked = !prevClicked
+
+      if (newClicked) {
+        setRepliedComment({
           id: isRepliedComment && commentId ? commentId : id,
           postId: postId,
           userName,
         })
-      : setRepliedComment({ id: 0, postId: postId, userName: '' })
+        setClicked(false)
+      } else {
+        setRepliedComment({ id: 0, postId: postId, userName: '' })
+      }
+
+      return newClicked
+    })
   }
 
   return (
     <div className={clsx(cls.avatarCommentGroup, { [cls.additionalStyle]: isRepliedComment })}>
-      <Avatar size={avatarSize} src={avatars?.thumbnail.url} />
+      <div>
+        <Avatar size={avatarSize} src={avatars?.thumbnail.url || userPhoto.src} />
+      </div>
+
       <div className={cls.commentInfo}>
         <div className={cls.commentBox}>
           <span className={cls.userName}>{userName}</span>
@@ -71,7 +82,6 @@ export function Comment({
           <button className={cls.button} onClick={onAnswerHandler} type={'button'}>
             {t('reply')}
           </button>
-          {clicked && <button onClick={() => setClicked(false)}>x</button>}
         </div>
         {!!answerCount && (
           <button

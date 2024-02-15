@@ -9,7 +9,7 @@ export const useLikeAnswer = (postId: number, commentId: number, answerId: numbe
     mutationFn: ({ likeStatus }: { likeStatus: LikeStatus }) =>
       PostService.likeAnswer({ answerId, commentId, likeStatus, postId }),
     onSuccess: async () => {
-      await queryClient.invalidateQueries(['postAnswers', commentId])
+      await queryClient.invalidateQueries(['postAnswers'])
     },
   })
 
