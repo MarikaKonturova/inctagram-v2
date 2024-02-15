@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
+import { AvatarSizes } from 'shared/types/post'
 import { Avatar, Button, Input, Textarea } from 'shared/ui'
 
 import { type INewPostInterface } from '../..'
@@ -25,7 +26,7 @@ export const NewPostModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick, s
   const { t } = useTranslation(['profile'])
   const userData = response?.data
   const {
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
     register,
     reset,
@@ -34,6 +35,8 @@ export const NewPostModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick, s
       description: '',
       location: '',
     },
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
   })
 
   const onSubmit = (data: INewPostInterface) => {
@@ -50,7 +53,7 @@ export const NewPostModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick, s
       <header className={cls.header}>
         <IconArrowBack fill={fill} onClick={onPrevClick} />
         <h2>{t('publication')}</h2>
-        <Button onClick={handleSubmit(onSubmit)} theme={'textButton'}>
+        <Button disabled={!isValid} onClick={handleSubmit(onSubmit)} theme={'textButton'}>
           {t('publish')}
         </Button>
       </header>
@@ -62,12 +65,13 @@ export const NewPostModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick, s
           <div className={cls.profileInfoDescription}>
             {userData && (
               <div className={cls.profileInfo}>
-                <Avatar size={36} src={userData.avatars?.thumbnail.url} />
+                <Avatar size={AvatarSizes.medium} src={userData.avatars?.thumbnail.url} />
                 <p className={cls.profileName}>{userData.userName}</p>
               </div>
             )}
             <Textarea
               className={cls.textareaContainer}
+              errorText={errors.description?.message}
               label={`${t('addPublicationDescriptions')}`}
               labelClassName={cls.label}
               placeholder={`${t('writeYourDescriptionHere')}`}
@@ -80,7 +84,6 @@ export const NewPostModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick, s
           <Input
             {...register('location')}
             className={cls.wrapper}
-            errorText={errors.description?.message}
             id={'location'}
             label={`${t('location')}`}
             labelClassName={cls.label}

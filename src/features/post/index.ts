@@ -12,6 +12,10 @@ export { CreatePostModal } from './createPost/ui'
 
 export { DeleteMyPostButton } from './deleteMyPost/ui/DeleteMyPostButton/DeleteMyPostButton'
 
+export { DeletePostModal } from './deletePost/ui/DeletePostModal'
+
+export { EditPostModal } from './editPost/ui/EditPostModal'
+
 export { LikeCommentIconButton } from './likeComment/ui/LikeCommentIconButton/LikeCommentIconButton'
 
 export { LikePostIconButton } from './likePost/ui/LikePostIconButton/LikePostIconButton'

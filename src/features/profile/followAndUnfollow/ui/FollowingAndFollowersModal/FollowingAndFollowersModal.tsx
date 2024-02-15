@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react'
 import { useDebounce } from 'shared/hooks'
 import { type User } from 'shared/types/auth'
 import { Input, Loader, Modal } from 'shared/ui'

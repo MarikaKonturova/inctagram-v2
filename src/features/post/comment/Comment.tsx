@@ -1,11 +1,11 @@
 import clsx from 'clsx'
 import { useCommentStore } from 'entities/Comment'
-import React, { ReactNode } from 'react'
+import { CreationDate } from 'entities/Post'
+import React, { ReactNode, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { type AnswerType } from 'shared/types/comment'
 import { type IComment } from 'shared/types/post'
 import { Avatar } from 'shared/ui'
-import { formattedDate } from 'shared/utils'
 
 import cls from './Comment.module.scss'
 
@@ -15,7 +15,7 @@ interface PropsType {
   data: Omit<AnswerType | IComment, 'answerCount' | 'commentId' | 'postId'> & {
     answerCount?: number
     commentId?: number
-    postId?: number
+    postId?: number | undefined
   }
   isOpen: boolean
   isRepliedComment?: boolean
@@ -40,22 +40,40 @@ export function Comment({
     from: { avatars, userName },
     id,
     likeCount,
+    postId,
   } = data
   const { setRepliedComment } = useCommentStore()
   const { t } = useTranslation(['profile'])
-
+  const [clicked, setClicked] = useState(false)
   const onAnswerHandler = () => {
-    setRepliedComment({ id: isRepliedComment && commentId ? commentId : id, userName })
+    setClicked(prevClicked => {
+      const newClicked = !prevClicked
+
+      if (newClicked) {
+        setRepliedComment({
+          id: isRepliedComment && commentId ? commentId : id,
+          postId: postId,
+          userName,
+        })
+        setClicked(false)
+      } else {
+        setRepliedComment({ id: 0, postId: postId, userName: '' })
+      }
+
+      return newClicked
+    })
   }
 
   return (
     <div className={clsx(cls.avatarCommentGroup, { [cls.additionalStyle]: isRepliedComment })}>
-      <Avatar alt={'avatar'} size={avatarSize} src={avatars?.thumbnail.url} />
+      <Avatar size={avatarSize} src={avatars?.thumbnail.url} />
       <div className={cls.commentInfo}>
-        <span className={cls.userName}>{userName} </span>
-        <span className={cls.content}>{content}</span>
+        <div className={cls.commentBox}>
+          <span className={cls.userName}>{userName}</span>
+          <span className={cls.content}>{content}</span>
+        </div>
         <div className={cls.bottomInfo}>
-          <p className={cls.time}>{formattedDate(createdAt)} </p>
+          <CreationDate className={cls.time} date={createdAt} type={'agoTime'} />
           <p className={cls.actionButton}>{`${t('like')}: ${likeCount}`} </p>
           <button className={cls.button} onClick={onAnswerHandler} type={'button'}>
             {t('reply')}

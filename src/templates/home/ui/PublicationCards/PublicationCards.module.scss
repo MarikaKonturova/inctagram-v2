@@ -1,5 +1,8 @@
 .cardsList {
-  margin-left: 175px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
   .card {
     padding: 36px;

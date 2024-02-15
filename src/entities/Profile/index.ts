@@ -1,1 +1,3 @@
-export { useGetProfileData } from './model/index'
+export { useGetProfileData } from './model/useGetProfileData'
+
+export { useGetUserProfileData } from './model/useGetUserProfileData'

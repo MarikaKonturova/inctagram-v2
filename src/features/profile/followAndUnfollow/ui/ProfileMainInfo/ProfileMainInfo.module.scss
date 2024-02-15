@@ -15,9 +15,24 @@
         font-size: 20px;
         font-weight: 700;
         line-height: 36px;
+        display: flex;
+        gap: 10px;
+        flex-direction: row;
+        align-items: center;
       }
 
       .button {
+        padding: 6px 36px;
+        background: var(--dark-300-color);
+      }
+
+      .buttonPrimary {
+        padding: 6px 36px;
+        background: var(--primary-500-color);
+      }
+
+      .buttonSecondary {
+        margin-left: 15px;
         padding: 6px 36px;
         background: var(--dark-300-color);
       }
@@ -26,14 +41,15 @@
     .info {
       display: flex;
       flex-wrap: wrap;
+      gap: 72px;
       margin-bottom: 23px;
 
       .subscribe {
         font-weight: 700;
       }
 
-      & div:not(:last-child) {
-        margin-right: 72px;
+      .subscribeTitle {
+        cursor: pointer;
       }
     }
   }
