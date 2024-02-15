@@ -12,7 +12,7 @@ interface LikePostIconButtonProps {
 }
 
 export const LikePostIconButton = ({ postId, postIsLiked }: LikePostIconButtonProps) => {
-  const { like } = useLikePost(postId)
+  const { isLoading, like } = useLikePost(postId)
   const onLikeIconClick = async () => {
     like({ likeStatus: postIsLiked ? LikeStatus.DISLIKE : LikeStatus.LIKE })
   }
@@ -21,6 +21,7 @@ export const LikePostIconButton = ({ postId, postIsLiked }: LikePostIconButtonPr
     <ActionIcon
       filledIcon={<IconLike fill={'#CC1439'} />}
       initialState={postIsLiked}
+      isLoading={isLoading}
       onClick={onLikeIconClick}
       outlineIcon={<IconLikeOutline fill={'#ffffff'} />}
     />

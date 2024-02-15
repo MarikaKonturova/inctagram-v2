@@ -5,7 +5,7 @@ import { type LikeStatus } from 'shared/types/likeStatus'
 export const useLikePost = (postId: number) => {
   const queryClient = useQueryClient()
 
-  const { mutate: like } = useMutation({
+  const { isLoading, mutate: like } = useMutation({
     mutationFn: ({ likeStatus }: { likeStatus: LikeStatus }) =>
       PostService.like({ likeStatus, postId }),
     onSuccess: async () => {
@@ -13,5 +13,5 @@ export const useLikePost = (postId: number) => {
     },
   })
 
-  return { like }
+  return { isLoading, like }
 }
