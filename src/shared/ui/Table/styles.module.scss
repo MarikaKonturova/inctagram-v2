@@ -1,17 +1,18 @@
 .wrapper {
   border-collapse: collapse;
+  width: 972px;
 }
 
 .head {
-  height: 48px;
+  min-height: 48px;
   background: var(--dark-500-color);
 }
 
 .tableHeaderCell {
-  width: 200px;
+  padding: 12px 48px 12px 24px;
 
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   text-align: left;
 
   border-bottom: 1px solid var(--dark-500-color);
@@ -25,6 +26,7 @@
 }
 
 .tableCell {
-  padding: 12px;
+  padding: 12px 48px 12px 24px;
   font-size: 14px;
+  font-weight: 400;
 }
