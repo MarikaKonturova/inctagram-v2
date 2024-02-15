@@ -1,6 +1,6 @@
 import React, { type FC } from 'react'
-import IconLike from 'shared/assets/icons/light/heart.svg'
-import IconLikeOutline from 'shared/assets/icons/outline/heart-outline.svg'
+import IconLike from 'shared/assets/icons/light/heart16px.svg'
+import IconLikeOutline from 'shared/assets/icons/outline/heart-outline16px.svg'
 import { LikeStatus } from 'shared/types/likeStatus'
 import { ActionIcon } from 'shared/ui'
 
