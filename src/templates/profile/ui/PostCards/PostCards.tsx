@@ -26,6 +26,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
     useGetPosts(userData.userName)
   const [currentModal, setCurrentModal] = useState<Values | null>(null)
   const [postId, setPostId] = useState<number | undefined>(undefined)
+  const [isDelePostConfirmationModalOpen, setIsDelePostConfirmationModalOpen] = useState(false)
 
   const { post } = useGetMyPost(postId || 0)
 
@@ -67,7 +68,12 @@ export const PostCards: FC<Props> = ({ userData }) => {
   }
 
   const openDeletePostModal = () => {
-    openModal(MODALS.DeletePostModal)
+    setIsDelePostConfirmationModalOpen(true)
+  }
+
+  const closeDeletePostModal = () => {
+    setIsDelePostConfirmationModalOpen(false)
+    closeModal()
   }
 
   useEffect(() => {
@@ -115,12 +121,11 @@ export const PostCards: FC<Props> = ({ userData }) => {
             postId={postId}
           />,
           <DeletePostModal
-            handleClose={closeModal}
-            id={MODALS.DeletePostModal}
-            isOpen={currentModal === MODALS.DeletePostModal}
+            handleClose={closeDeletePostModal}
+            isOpen={isDelePostConfirmationModalOpen}
             key={'DeletePostModal'}
-            openEditPostModal={openEditPostModal}
             postId={postId}
+            setIsOpen={setIsDelePostConfirmationModalOpen}
           />,
         ]}
       {isSuccess && (

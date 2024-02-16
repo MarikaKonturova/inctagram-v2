@@ -23,7 +23,7 @@ export const Logout = ({ className }: IProps) => {
       <ConfirmationModal
         bodyText={`${t('logOutConfirmationBody')}${email ? ` "${email}"?` : '?'} `}
         headerText={`${t('logOutConfirmationHeader')}`}
-        isLoading={isLoading}
+        isDisabled={isLoading}
         isModalOpen={deleteModalOpen}
         onYesAction={logout}
         setModalOpen={setDeleteModalOpen}

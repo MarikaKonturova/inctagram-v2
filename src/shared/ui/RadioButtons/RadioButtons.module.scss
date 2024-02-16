@@ -12,6 +12,9 @@
   gap: 12px;
   align-items: center;
   justify-content: flex-start;
+
+  cursor: pointer;
+  max-width: fit-content;
 }
 
 .label {
@@ -19,6 +22,7 @@
 }
 
 .option {
+  max-width: fit-content;
   &:not(&:last-child) {
     padding-bottom: 24px;
   }

@@ -7,16 +7,12 @@
 .cardsList {
   display: flex;
   flex-flow: row wrap;
-
   box-sizing: border-box;
   width: 100%;
   min-width: 300px;
-  height: 100%;
 
   .card {
-    margin: 10px;
     padding: 10px;
-    border: 1px solid grey;
 
     .cardWrapper {
       position: relative;
