@@ -1,4 +1,5 @@
 import React from 'react'
+import userPhoto from 'shared/assets/images/user.png'
 import { Avatar } from 'shared/ui'
 
 import cls from './styled.module.scss'
@@ -10,7 +11,7 @@ interface IProps {
 
 export const Header: React.FC<IProps> = ({ avatarURL, title }) => (
   <div className={cls.header}>
-    <Avatar src={avatarURL} />
+    <Avatar src={avatarURL || userPhoto.src} />
     <h3 className={cls.headerTitle}>{title}</h3>
   </div>
 )

@@ -3,6 +3,7 @@ import { type FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
+import userPhoto from 'shared/assets/images/user.png'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
 import { AvatarSizes } from 'shared/types/post'
@@ -65,7 +66,10 @@ export const NewPostModalStep: FC<IProps> = ({ file, onNextClick, onPrevClick, s
           <div className={cls.profileInfoDescription}>
             {userData && (
               <div className={cls.profileInfo}>
-                <Avatar size={AvatarSizes.medium} src={userData.avatars?.thumbnail.url} />
+                <Avatar
+                  size={AvatarSizes.medium}
+                  src={userData.avatars?.thumbnail.url || userPhoto.src}
+                />
                 <p className={cls.profileName}>{userData.userName}</p>
               </div>
             )}

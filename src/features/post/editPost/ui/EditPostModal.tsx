@@ -3,6 +3,7 @@ import { useGetProfileData } from 'entities/Profile'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Translation } from 'react-i18next'
+import userPhoto from 'shared/assets/images/user.png'
 import { Button, Card, ConfirmationModal, Modal, Textarea } from 'shared/ui'
 
 import { useEditPost } from '../model'
@@ -27,11 +28,13 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
     handleSubmit,
     register,
     reset,
+    watch,
   } = useForm({
     defaultValues: {
       description: post?.description || '',
     },
   })
+  const descriptionValueLength = watch('description')?.length || 0
 
   const openConfirmModal = () => setIsConfirmModalVisible(true)
 
@@ -66,6 +69,10 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
                 avatarURL={userData?.avatars?.thumbnail.url}
                 title={userData?.userName || ''}
               />
+              <Header
+                avatarURL={userData?.avatars?.thumbnail.url || userPhoto.src}
+                title={userData?.userName || ''}
+              />
               <div className={cls.textareaContainer}>
                 <Textarea
                   {...register('description', {
@@ -78,7 +85,7 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
                   labelClassName={cls.label}
                   textareaClassName={cls.textarea}
                 />
-                <div className={cls.info}>200/500</div>
+                <div className={cls.info}>{descriptionValueLength}/500</div>
               </div>
               <Button className={cls.button} theme={'primary'} type={'submit'}>
                 {t('saveChanges', { ns: 'profile' })}

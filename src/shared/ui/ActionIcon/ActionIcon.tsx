@@ -6,6 +6,7 @@ interface ActionIconProps {
   className?: string
   filledIcon: ReactNode
   initialState?: boolean
+  isLoading?: boolean
   onClick: () => Promise<void> | void
   outlineIcon: ReactNode
 }
@@ -13,6 +14,7 @@ export const ActionIcon = ({
   className,
   filledIcon,
   initialState = false,
+  isLoading,
   onClick,
   outlineIcon,
 }: ActionIconProps) => {
@@ -24,8 +26,8 @@ export const ActionIcon = ({
   }
 
   return (
-    <div className={clsx(cls.icon, className)} onClick={onIconClick}>
+    <button className={clsx(cls.icon, className)} disabled={isLoading} onClick={onIconClick}>
       {fill ? filledIcon : outlineIcon}
-    </div>
+    </button>
   )
 }
