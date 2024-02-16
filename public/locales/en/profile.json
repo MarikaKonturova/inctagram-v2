@@ -46,7 +46,7 @@
     "publish": "Publish",
     "like": "Like",
     "addPhoto": "Add Photo",
-    "photoSizeError": "Photo size must be less than 10 MB!",
+    "photoSizeError": "Photo size must be less than 20 MB!",
     "photoFormatError": "The format of the uploaded photo must be\nPNG and JPEG",
     "selectFromComputer": "Select from Computer",
     "cropping": "Cropping",

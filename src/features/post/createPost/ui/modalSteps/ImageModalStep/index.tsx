@@ -17,8 +17,9 @@ export const ImageModalStep: FC<IProps> = ({ onNextClick, setFile }) => {
     if (e.target.files?.length) {
       const file = e.target.files[0]
       const allowedImageTypes = ['image/jpeg', 'image/png']
+      const imageMaxSize = 1024 * 1024 * 20
 
-      if (file.size > 1024 * 1024 * 20) {
+      if (file.size > imageMaxSize) {
         setError(`${t('photoSizeError')}`)
       } else if (!allowedImageTypes.includes(file.type)) {
         setError(`${t('photoFormatError')}`)
