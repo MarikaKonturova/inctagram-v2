@@ -28,21 +28,38 @@ export const PostCards: FC<Props> = ({ userData }) => {
   const [currentModal, setCurrentModal] = useState<Values | null>(null)
   const [postId, setPostId] = useState<number | undefined>(undefined)
   const [isDelePostConfirmationModalOpen, setIsDelePostConfirmationModalOpen] = useState(false)
+  const { inView, ref } = useInView()
+  const [currentIndex, setCurrentIndex] = useState<number>(0)
 
-  const { post } = useGetMyPost(postId || 0)
+  const [currentPost, setCurrentCurrentPost] = useState<number>(0)
 
-  /* console.log('postId', postId) */
+  const { post } = useGetMyPost(currentPost)
+
+  console.log('postId', postId)
 
   const ids = data && data.pages ? data.pages.flatMap(page => page.items.map(item => item.id)) : []
 
-  /* console.log(ids) */
+  console.log(ids)
 
-  const { inView, ref } = useInView()
+  const findIndex = ids.findIndex(id => id === postId)
 
-  const idp = postId || 2
-  const [currentIndex, setCurrentIndex] = useState(idp)
+  console.log(findIndex)
 
-  /* console.log('current', ids[currentIndex]) */
+  useEffect(() => {
+    if (ids[currentIndex]) {
+      setCurrentCurrentPost(ids[currentIndex] as number)
+    } else {
+      setCurrentCurrentPost(postId as number)
+    }
+  }, [postId, ids, currentIndex])
+
+  useEffect(() => {
+    setCurrentIndex(findIndex)
+  }, [postId])
+
+  console.log('currentIndex', currentIndex)
+
+  console.log('current', ids[currentIndex])
   const handleClick = (direction: 'back' | 'next') => {
     if (direction === 'back' && currentIndex > 0) {
       setCurrentIndex(currentIndex - 1)
