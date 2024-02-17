@@ -15,6 +15,20 @@
   text-align: center;
 }
 
+.backIconContainer {
+  align-self: center;
+
+  margin-right: 10px;
+
+  padding: 4px 6px 2px 6px;
+
+  text-align: center;
+
+  rotate: 180deg;
+
+  background: var(--dark-300-color);
+}
+
 .nextIconContainer {
   align-self: center;
 

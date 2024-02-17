@@ -9,6 +9,7 @@ import cls from './styles.module.scss'
 
 interface IProps {
   content: React.ReactNode
+  handleClick?: (direction: 'back' | 'next') => void
   handleClose: () => void
   id: number
   isOpen: boolean
@@ -25,10 +26,19 @@ export const PostModal: React.FC<IProps> = props => {
         <div className={cls.closeIconContainer} onClick={handleClose}>
           <CloseIcon fill={fill} />
         </div>
-        {content}
-        <div className={cls.nextIconContainer}>
+        <button
+          className={cls.backIconContainer}
+          onClick={() => props.handleClick && props.handleClick('back')}
+        >
           <ArrowForwardIcon fill={fill} />
-        </div>
+        </button>
+        {content}
+        <button
+          className={cls.nextIconContainer}
+          onClick={() => props.handleClick && props.handleClick('next')}
+        >
+          <ArrowForwardIcon fill={fill} />
+        </button>
       </div>
     </Modal>
   )

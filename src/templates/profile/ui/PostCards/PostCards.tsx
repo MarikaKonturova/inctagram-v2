@@ -22,15 +22,34 @@ interface Props {
 }
 
 export const PostCards: FC<Props> = ({ userData }) => {
-  const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isSuccess } =
-    useGetPosts(userData.userName)
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } = useGetPosts(
+    userData.userName
+  )
   const [currentModal, setCurrentModal] = useState<Values | null>(null)
   const [postId, setPostId] = useState<number | undefined>(undefined)
   const [isDelePostConfirmationModalOpen, setIsDelePostConfirmationModalOpen] = useState(false)
 
   const { post } = useGetMyPost(postId || 0)
 
+  /* console.log('postId', postId) */
+
+  const ids = data && data.pages ? data.pages.flatMap(page => page.items.map(item => item.id)) : []
+
+  /* console.log(ids) */
+
   const { inView, ref } = useInView()
+
+  const idp = postId || 2
+  const [currentIndex, setCurrentIndex] = useState(idp)
+
+  /* console.log('current', ids[currentIndex]) */
+  const handleClick = (direction: 'back' | 'next') => {
+    if (direction === 'back' && currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1)
+    } else if (direction === 'next' && currentIndex < ids.length - 1) {
+      setCurrentIndex(currentIndex + 1)
+    }
+  }
 
   const renderContent = (page: ResponseType) =>
     page.items.map((item: PostResponse) => {
@@ -96,6 +115,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
                 <Commentaries postId={postId} />
               </div>
             }
+            handleClick={handleClick}
             handleClose={closeModal}
             headerActions={
               <MoreOptions
