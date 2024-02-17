@@ -30,8 +30,15 @@ export const MyPostService = {
   getPost(postId: number) {
     return $api.get<PostResponse>(`/posts/p/${postId}`)
   },
-  getPostComments(postId: number) {
-    return $api.get<ResponseType<IComment[]>>(`/posts/${postId}/comments`)
+  async getPostComments(postId: number, pageNumber: number) {
+    const res = await $api.get<ResponseType<IComment[]>>(`/posts/${postId}/comments`, {
+      params: {
+        pageNumber,
+        pageSize: 10,
+      },
+    })
+
+    return res.data
   },
   getPosts(userName: string, pageNumber: number) {
     return $api

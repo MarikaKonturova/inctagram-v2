@@ -19,7 +19,7 @@ export const LikeAnswerIconButton: FC<likeAnswerType> = ({
   isLiked,
   postId,
 }) => {
-  const { likeAnswer } = useLikeAnswer(postId, commentId, answerId)
+  const { isLoading, likeAnswer } = useLikeAnswer(postId, commentId, answerId)
   const onLikeIconClick = () => {
     likeAnswer({ likeStatus: isLiked ? LikeStatus.DISLIKE : LikeStatus.LIKE })
   }
@@ -28,6 +28,7 @@ export const LikeAnswerIconButton: FC<likeAnswerType> = ({
     <ActionIcon
       filledIcon={<IconLike fill={'#CC1439'} />}
       initialState={isLiked}
+      isLoading={isLoading}
       onClick={onLikeIconClick}
       outlineIcon={<IconLikeOutline fill={'#ffffff'} />}
     />
