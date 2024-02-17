@@ -1,15 +1,10 @@
 import { useGetPostAnswersForComment } from 'entities/Comment'
 import { Comment } from 'features/post'
-import cls from 'features/post/comment/Comment.module.scss'
 import { LikeAnswerIconButton } from 'features/post/likeAnswer/ui/LikeAnswerIconButton/LikeAnswerIconButton'
-import { t } from 'i18next'
-import React, { useState } from 'react'
-import { AnswerType } from 'shared/types/comment'
-import { IComment } from 'shared/types/post'
+import React from 'react'
 
 interface PropsType {
   commentId: number
-  isOpen: boolean
   openedCommentId: number
   openedComments: {
     [id: number]: boolean
@@ -19,7 +14,6 @@ interface PropsType {
 
 export const AnswersForCommentaries = ({
   commentId,
-  isOpen,
   openedCommentId,
   openedComments,
   postId,

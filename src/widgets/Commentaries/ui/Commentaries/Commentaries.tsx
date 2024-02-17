@@ -10,36 +10,20 @@ interface Props {
 }
 
 export const Commentaries: FC<Props> = ({ postId }) => {
-  const [openedCommentId, setOpenedCommentId] = useState<number>()
-  const [isOpen, setIsOpen] = useState(false)
-
   const [openedComments, setOpenedComments] = useState<{ [id: number]: boolean }>({})
-
-  console.log(openedComments)
+  const { comments, isLoading } = useGetPostComments(postId)
 
   const idsArray = Object.keys(openedComments).map(Number)
 
-  console.log('id', idsArray)
-
-  const { comments, isLoading } = useGetPostComments(postId)
-
-  if (isLoading) {
-    return <div className={cls.comments} />
-  }
-
   const viewAnswerOnClick = (commentId: number) => {
-    setOpenedCommentId(commentId)
-    /*setIsOpen(!isOpen)*/
-
-    /*if (isOpen) {
-      setOpenedCommentId(0)
-      setIsOpen(false)
-    }*/
-
     setOpenedComments(prevState => ({
       ...prevState,
       [commentId]: !prevState[commentId],
     }))
+  }
+
+  if (isLoading) {
+    return <div className={cls.comments} />
   }
 
   return (
@@ -63,9 +47,8 @@ export const Commentaries: FC<Props> = ({ postId }) => {
           {idsArray?.map(id => (
             <AnswersForCommentaries
               commentId={comment.id}
-              isOpen={isOpen}
               key={id}
-              openedCommentId={openedCommentId as number}
+              openedCommentId={id}
               openedComments={openedComments}
               postId={postId}
             />

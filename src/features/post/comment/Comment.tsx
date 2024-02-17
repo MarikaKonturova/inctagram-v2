@@ -58,15 +58,16 @@ export function Comment({
         })
         setClicked(false)
       } else {
-        setRepliedComment({ id: 0, postId: postId, userName: '' })
+        setRepliedComment({
+          id: 0,
+          postId: postId,
+          userName: '',
+        })
       }
 
       return newClicked
     })
   }
-
-  /*  console.log(commentId, openedComments[commentId])
-  console.log(isOpen, openedComments[commentId])*/
 
   return (
     <div className={clsx(cls.avatarCommentGroup, { [cls.additionalStyle]: isRepliedComment })}>
