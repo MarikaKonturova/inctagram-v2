@@ -22,7 +22,7 @@ type PropsType = {
 }
 
 export const AccountManagementForm: FC<PropsType> = ({ accountOptions, hasBusinessAccount }) => {
-  const { query } = useRouter()
+  const { query, replace, route } = useRouter()
   const [modal, setModal] = useState(initialState)
   const [selected, setSelected] = useState({} as CostOfSubscriptionType)
   const [selectedAcc, setSelectedAcc] = useState({} as AccountOptionType)
@@ -69,7 +69,10 @@ export const AccountManagementForm: FC<PropsType> = ({ accountOptions, hasBusine
         title: `${t('error')}`,
       })
     }
-  }, [query])
+
+    replace(route, undefined, { shallow: true })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query.success, route])
 
   useEffect(() => {
     if (isEmpty(selected)) {

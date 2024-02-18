@@ -15,16 +15,15 @@ export const Commentaries: FC<Props> = ({ postId }) => {
   const { inView, ref } = useInView()
   const { comments, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isSuccess } =
     useGetPostComments(postId)
-  const [openedCommentId, setOpenedCommentId] = useState<number>()
-  const [isOpen, setIsOpen] = useState(false)
+  const [openedComments, setOpenedComments] = useState<{ [id: number]: boolean }>({})
+
+  const idsArray = Object.keys(openedComments).map(Number)
 
   const viewAnswerOnClick = (commentId: number) => {
-    setOpenedCommentId(commentId)
-    setIsOpen(!isOpen)
-    if (isOpen) {
-      setOpenedCommentId(0)
-      setIsOpen(false)
-    }
+    setOpenedComments(prevState => ({
+      ...prevState,
+      [commentId]: !prevState[commentId],
+    }))
   }
 
   useEffect(() => {
@@ -50,16 +49,20 @@ export const Commentaries: FC<Props> = ({ postId }) => {
               />
             }
             avatarSize={36}
+            commentId={comment.id}
             data={comment}
-            isOpen={isOpen}
-            openedCommentId={openedCommentId}
+            openedComments={openedComments}
             viewAnswerOnClick={viewAnswerOnClick}
           />
-          <AnswersForCommentaries
-            commentId={comment.id}
-            openedCommentId={openedCommentId as number}
-            postId={postId}
-          />
+          {idsArray?.map(id => (
+            <AnswersForCommentaries
+              commentId={comment.id}
+              key={id}
+              openedCommentId={id}
+              openedComments={openedComments}
+              postId={postId}
+            />
+          ))}
         </div>
       ))}
       {isSuccess && (
