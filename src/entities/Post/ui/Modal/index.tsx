@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import React from 'react'
-import ArrowForwardIconBack from 'shared/assets/icons/general/arrow-back.svg'
-import ArrowForwardIconNext from 'shared/assets/icons/general/arrow-forward.svg'
+import ArrowForwardBackIcon from 'shared/assets/icons/general/arrow-back.svg'
+import ArrowForwardNextIcon from 'shared/assets/icons/general/arrow-forward.svg'
 import CloseIcon from 'shared/assets/icons/general/close.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
@@ -37,7 +37,7 @@ export const PostModal: React.FC<IProps> = props => {
             visibility: !firstElement ? 'visible' : 'hidden',
           }}
         >
-          <ArrowForwardIconBack fill={fill} />
+          <ArrowForwardBackIcon fill={fill} />
         </button>
 
         {content}
@@ -49,7 +49,7 @@ export const PostModal: React.FC<IProps> = props => {
             visibility: !lastElement ? 'visible' : 'hidden',
           }}
         >
-          <ArrowForwardIconNext fill={fill} />
+          <ArrowForwardNextIcon fill={fill} />
         </button>
       </div>
     </Modal>
