@@ -77,7 +77,7 @@ export const Publication: React.FC<PropsType> = props => {
       <Description description={publ.description} title={publ.userName} />
       {openComments && <Commentaries postId={publ.id} />}
       <div className={cls.allComments} onClick={() => commentsHandler()}>
-        View All Comments ({publ.likeCount})
+        View All Comments ({publ.commentCount})
       </div>
       <AddCommentBox className={clsx(cls.containerAddComment)} postId={publ.id} />
     </div>

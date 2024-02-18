@@ -10,6 +10,7 @@ export const useLikePost = (postId: number) => {
       PostService.like({ likeStatus, postId }),
     onSuccess: async () => {
       await queryClient.invalidateQueries(['post', postId])
+      await queryClient.invalidateQueries(['publicationsData'])
     },
   })
 

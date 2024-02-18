@@ -23,7 +23,7 @@ export const useCommentPost = () => {
     },
     onSuccess: async () => {
       setRefetch({ doRefetch: true })
-      await queryClient.invalidateQueries(['postComments'])
+      await queryClient.invalidateQueries(['publicationsData'])
     },
   })
 
