@@ -103,7 +103,6 @@ export const PostCards: FC<Props> = ({ userData }) => {
 
   const closeModal = () => {
     setCurrentModal(null)
-    setPostId(0)
     setCurrentIndex(0)
   }
 
