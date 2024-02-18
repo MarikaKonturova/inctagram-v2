@@ -15,28 +15,28 @@
   text-align: center;
 }
 
-.backIconContainer {
+.iconContainer {
   align-self: center;
-
-  margin-right: 10px;
-
   padding: 4px 6px 2px 6px;
-
   text-align: center;
-
-  rotate: 180deg;
-
   background: var(--dark-300-color);
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: var(--dark-100-color);
+  }
+}
+
+.backIconContainer {
+  margin-right: 10px;
+  &:active {
+    transform: scale(0.9);
+  }
 }
 
 .nextIconContainer {
-  align-self: center;
-
   margin-left: 10px;
-  /* stylelint-disable-next-line shorthand-property-no-redundant-values */
-  padding: 4px 6px 2px 6px;
-
-  text-align: center;
-
-  background: var(--dark-300-color);
+  &:active {
+    transform: scale(0.9);
+  }
 }

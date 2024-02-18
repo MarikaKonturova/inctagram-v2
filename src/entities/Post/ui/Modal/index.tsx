@@ -1,5 +1,7 @@
+import clsx from 'clsx'
 import React from 'react'
-import ArrowForwardIcon from 'shared/assets/icons/general/arrow-forward.svg'
+import ArrowForwardIconBack from 'shared/assets/icons/general/arrow-back.svg'
+import ArrowForwardIconNext from 'shared/assets/icons/general/arrow-forward.svg'
 import CloseIcon from 'shared/assets/icons/general/close.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
@@ -9,14 +11,16 @@ import cls from './styles.module.scss'
 
 interface IProps {
   content: React.ReactNode
+  firstElement?: boolean
   handleClick?: (direction: 'back' | 'next') => void
   handleClose: () => void
   id: number
   isOpen: boolean
+  lastElement?: boolean
 }
 
 export const PostModal: React.FC<IProps> = props => {
-  const { content, handleClose, id, isOpen } = props
+  const { content, firstElement, handleClick, handleClose, id, isOpen, lastElement } = props
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
@@ -27,17 +31,25 @@ export const PostModal: React.FC<IProps> = props => {
           <CloseIcon fill={fill} />
         </div>
         <button
-          className={cls.backIconContainer}
-          onClick={() => props.handleClick && props.handleClick('back')}
+          className={clsx(cls.backIconContainer, cls.iconContainer)}
+          onClick={() => handleClick && handleClick('back')}
+          style={{
+            visibility: !firstElement ? 'visible' : 'hidden',
+          }}
         >
-          <ArrowForwardIcon fill={fill} />
+          <ArrowForwardIconBack fill={fill} />
         </button>
+
         {content}
+
         <button
-          className={cls.nextIconContainer}
-          onClick={() => props.handleClick && props.handleClick('next')}
+          className={clsx(cls.nextIconContainer, cls.iconContainer)}
+          onClick={() => handleClick && handleClick('next')}
+          style={{
+            visibility: !lastElement ? 'visible' : 'hidden',
+          }}
         >
-          <ArrowForwardIcon fill={fill} />
+          <ArrowForwardIconNext fill={fill} />
         </button>
       </div>
     </Modal>

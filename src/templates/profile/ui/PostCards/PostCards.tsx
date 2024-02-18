@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query'
 import { useGetPosts } from 'entities/Home'
 import { Description, useGetMyPost } from 'entities/Post'
 import {
@@ -6,8 +7,9 @@ import {
   EditPostModal,
   UpdateMyPostButton,
 } from 'features/post'
-import { type FC, useEffect, useState } from 'react'
+import React, { type FC, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { MyPostService } from 'shared/api'
 import { MODALS, type Values } from 'shared/constants/post'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { type PostResponse, type ResponseType } from 'shared/types/post'
@@ -22,57 +24,61 @@ interface Props {
 }
 
 export const PostCards: FC<Props> = ({ userData }) => {
+  const queryClient = useQueryClient()
+  const { inView, ref } = useInView()
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } = useGetPosts(
     userData.userName
   )
   const [currentModal, setCurrentModal] = useState<Values | null>(null)
-  const [postId, setPostId] = useState<number | undefined>(undefined)
+  const [postId, setPostId] = useState<number>(0)
   const [isDelePostConfirmationModalOpen, setIsDelePostConfirmationModalOpen] = useState(false)
-  const { inView, ref } = useInView()
   const [currentIndex, setCurrentIndex] = useState<number>(0)
-
   const [currentPost, setCurrentCurrentPost] = useState<number>(0)
 
   const { post } = useGetMyPost(currentPost)
 
-  console.log('postId', postId)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const idsArray =
+    data && data.pages ? data.pages.flatMap(page => page.items.map(item => item.id)) : []
 
-  const ids = data && data.pages ? data.pages.flatMap(page => page.items.map(item => item.id)) : []
-
-  console.log(ids)
-
-  const findIndex = ids.findIndex(id => id === postId)
-
-  console.log(findIndex)
+  const findIndex = idsArray.findIndex(id => id === postId)
+  const firstElement = idsArray[0] === idsArray[currentIndex]
+  const lastElement = idsArray[idsArray.length - 1] === idsArray[currentIndex]
 
   useEffect(() => {
-    if (ids[currentIndex]) {
-      setCurrentCurrentPost(ids[currentIndex] as number)
+    if (idsArray[currentIndex]) {
+      setCurrentCurrentPost(idsArray[currentIndex])
     } else {
-      setCurrentCurrentPost(postId as number)
+      setCurrentCurrentPost(postId)
     }
-  }, [postId, ids, currentIndex])
+  }, [postId, idsArray, currentIndex])
 
   useEffect(() => {
     setCurrentIndex(findIndex)
   }, [postId])
 
-  console.log('currentIndex', currentIndex)
+  useEffect(() => {
+    {
+      idsArray.map(id => {
+        queryClient.prefetchQuery(['post', id], () => MyPostService.getPost(id))
+      })
+    }
+  }, [idsArray])
 
-  console.log('current', ids[currentIndex])
   const handleClick = (direction: 'back' | 'next') => {
     if (direction === 'back' && currentIndex > 0) {
       setCurrentIndex(currentIndex - 1)
-    } else if (direction === 'next' && currentIndex < ids.length - 1) {
+    } else if (direction === 'next' && currentIndex < idsArray.length - 1) {
       setCurrentIndex(currentIndex + 1)
     }
   }
-
   const renderContent = (page: ResponseType) =>
     page.items.map((item: PostResponse) => {
-      const onPostCardClick = () => {
-        openModal(MODALS.GetPostModal)
+      const onPostCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation()
         setPostId(item.id)
+
+        openModal(MODALS.GetPostModal)
       }
 
       return (
@@ -97,6 +103,8 @@ export const PostCards: FC<Props> = ({ userData }) => {
 
   const closeModal = () => {
     setCurrentModal(null)
+    setPostId(0)
+    setCurrentIndex(0)
   }
 
   const openEditPostModal = () => {
@@ -122,16 +130,17 @@ export const PostCards: FC<Props> = ({ userData }) => {
     <div>
       <div className={cls.cardsList}>{data?.pages.map(page => page && renderContent(page))}</div>
 
-      {postId &&
-        post && [
+      {!!postId &&
+        !!post && [
           <GetPostModal
             actionsSlot={<PostModalActions post={post} />}
             content={
               <div className={cls.content}>
                 <Description post={post} />
-                <Commentaries postId={postId} />
+                <Commentaries postId={idsArray[currentIndex] || postId} />
               </div>
             }
+            firstElement={firstElement}
             handleClick={handleClick}
             handleClose={closeModal}
             headerActions={
@@ -147,6 +156,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
             id={MODALS.GetPostModal}
             isOpen={currentModal === MODALS.GetPostModal}
             key={'GetPostModal'}
+            lastElement={lastElement}
             post={post}
             userName={userData.userName}
           />,
