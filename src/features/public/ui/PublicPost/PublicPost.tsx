@@ -1,5 +1,4 @@
 import {CreationDate} from 'entities/Post/ui/CreationDate';
-import moment from 'moment';
 import React, {useEffect, useRef, useState} from 'react';
 import userPhoto from 'shared/assets/images/user.png'
 import {AvatarSizes, PostResponse} from 'shared/types/post';
@@ -44,8 +43,6 @@ export const PublicPost = ({ openModal, post }: PublicPostProps) => {
     hideText()
   }
 
-  const createdAt = moment(post.createdAt).fromNow()
-
   return (
     <div className={cls.post}>
       <div className={cls.imgWrapper} onClick={handleOpenModal} style={{'height': photoHeight}}>
@@ -58,7 +55,7 @@ export const PublicPost = ({ openModal, post }: PublicPostProps) => {
           <Title as={'h3'} className={cls.userName}>{post.userName}</Title>
         </div>
 
-        <CreationDate className={cls.createdAt} date={createdAt} />
+        <CreationDate className={cls.createdAt} date={post.createdAt} type={'agoTime'}/>
 
         <div className={cls.description} ref={descrRef}>{post.description}</div>
 
