@@ -65,11 +65,13 @@ type GetMyPaymentsSort =
   | 'price'
   | 'subscriptionType'
 
+type SortDirection = 'asc' | 'desc' | undefined
+
 interface GetMyPaymentsParams {
   pageNumber?: number
   pageSize?: number
   sortBy?: GetMyPaymentsSort
-  sortDirection?: 'asc' | 'desc'
+  sortDirection?: SortDirection
 }
 
 export type {
@@ -82,5 +84,6 @@ export type {
   GetMyPaymentsParams,
   GetMyPaymentsSort,
   PaymentsType,
+  SortDirection,
   SubscriptionType,
 }
