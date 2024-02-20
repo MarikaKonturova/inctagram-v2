@@ -62,7 +62,7 @@ export const MyPayments = () => {
   return (
     <div>
       <Table columns={columns} data={tableData || []} />
-      {data && (
+      {data && data.data.totalCount > 8 && (
         <Pagination
           className={cls.pagination}
           currentPage={data.data.page}
