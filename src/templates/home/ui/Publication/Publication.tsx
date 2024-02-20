@@ -19,20 +19,10 @@ type PropsType = ImageProps & {
   createdAt: string
   fallbackSrc?: string
   publ: PostResponse
-  skeletonHeight?: number | string
-  skeletonWidth?: number | string
 }
 
 export const Publication: React.FC<PropsType> = props => {
-  const {
-    alt,
-    createdAt,
-    fallbackSrc,
-    publ,
-    skeletonHeight = 'inherit',
-    skeletonWidth,
-    src,
-  } = props
+  const { alt, createdAt, fallbackSrc, publ, src } = props
   const [isLoaded, setIsLoaded] = useState(true)
   const [onErrorSrc, setOnErrorSrc] = useState<string | undefined>(undefined)
   const [openComments, setOpenComments] = useState(false)
@@ -55,7 +45,7 @@ export const Publication: React.FC<PropsType> = props => {
 
   return (
     <div className={clsx(cls.container)}>
-      {isLoaded && <Skeleton height={skeletonHeight} width={skeletonWidth} />}
+      {isLoaded && <Skeleton />}
       <div className={cls.header}>
         <Header avatarURL={publ.avatars?.medium.url || userPhoto.src} title={publ.userName} />
         <div className={cls.bullet}>•</div>
