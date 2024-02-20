@@ -8,10 +8,20 @@ import cls from './Card.module.scss'
 type PropsType = ImageProps & {
   cardWrapperClassName?: string
   fallbackSrc?: string
+  skeletonHeight?: number | string
+  skeletonWidth?: number | string
 }
 
 export const Card: React.FC<PropsType> = props => {
-  const { alt, cardWrapperClassName, fallbackSrc, sizes = '100vw', src } = props
+  const {
+    alt,
+    cardWrapperClassName,
+    fallbackSrc,
+    sizes = '100vw',
+    skeletonHeight,
+    skeletonWidth,
+    src,
+  } = props
   const [isLoaded, setIsLoaded] = useState(true)
   const [onErrorSrc, setOnErrorSrc] = useState<string | undefined>(undefined)
 
@@ -25,7 +35,7 @@ export const Card: React.FC<PropsType> = props => {
 
   return (
     <div className={clsx(cls.container, cardWrapperClassName)}>
-      {isLoaded && <Skeleton />}
+      {isLoaded && <Skeleton height={skeletonHeight} width={skeletonWidth} />}
       <Image
         alt={alt}
         className={cls.cardImg}

@@ -20,5 +20,7 @@ BasicCard.args = {
 export const CardWhenLoading = Template.bind({})
 CardWhenLoading.args = {
   alt: 'no image',
+  skeletonHeight: 300,
+  skeletonWidth: 300,
   src: '',
 }
