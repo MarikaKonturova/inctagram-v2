@@ -1,8 +1,8 @@
-import { type FC, useEffect, useRef, useState } from 'react'
+import { type FC, useState } from 'react'
 import { Modal } from 'shared/ui'
 
 import { CropImageModalStep } from './modalSteps/CropImageModalStep'
-import { FilterIamgeModalStep } from './modalSteps/FilterImageModalStep'
+import { FilterImageModalStep } from './modalSteps/FilterImageModalStep'
 import { ImageModalStep } from './modalSteps/ImageModalStep'
 import { NewPostModalStep } from './modalSteps/NewPostModalStep'
 
@@ -50,7 +50,7 @@ export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
           <CropImageModalStep onNextClick={setNexStep} onPrevClick={setPrevStep} />
         )}
         {currentStep === MODALSTEPS.filterImageStep && (
-          <FilterIamgeModalStep onNextClick={setNexStep} onPrevClick={setPrevStep} />
+          <FilterImageModalStep onNextClick={setNexStep} onPrevClick={setPrevStep} />
         )}
         {currentStep === MODALSTEPS.NewPostStep && (
           <NewPostModalStep onPrevClick={setPrevStep} onSubmitSuccess={onSubmitSuccess} />

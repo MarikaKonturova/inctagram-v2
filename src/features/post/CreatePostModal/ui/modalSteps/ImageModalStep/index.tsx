@@ -1,4 +1,9 @@
-import { useUploadImagePostStore } from 'features/post/CreatePostModal/model'
+import {
+  IImage,
+  Nullable,
+  PostImages,
+  useUploadImagePostStore,
+} from 'features/post/CreatePostModal/model'
 import { type ChangeEvent, type FC, useState } from 'react'
 import IconClose from 'shared/assets/icons/general/close.svg'
 import IconImg from 'shared/assets/icons/light/image.svg'
@@ -7,7 +12,18 @@ import { useTheme } from 'shared/hooks/useTheme'
 import { Button } from 'shared/ui'
 import { shallow } from 'zustand/shallow'
 
+import { ConvertedImageType, convertFileToBase64WithValidate } from './lib/covertFileToBase64'
 import cls from './styles.module.scss'
+
+/* if (file.size > 1024 * 1024 * 20) {
+  setError('Photo size must be less than 10 MB!')
+
+  return
+} else if (!allowedImageTypes.includes(file.type)) {
+  setError('The format of the uploaded photo must be\nPNG and JPEG')
+
+  return
+} */
 
 interface IProps {
   onNextClick: () => void
@@ -20,32 +36,47 @@ export const ImageModalStep: FC<IProps> = ({ onNextClick, onPrevClick }) => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
-  const { setImage, setImages, setName } = useUploadImagePostStore(
-    ({ setImage, setImages, setName }) => ({ setImage, setImages, setName }),
-    shallow
-  )
+  const { setImages } = useUploadImagePostStore(({ setImages }) => ({ setImages }), shallow)
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    const arrImages = []
+  async function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    const { files } = e.target
 
-    if (e.target.files?.length) {
-      for (let i = 0; i < e.target.files.length; i++) {
-        const file = e.target.files[0]
-        const allowedImageTypes = ['image/jpeg', 'image/png']
+    if (files && files.length) {
+      const images: PostImages<IImage> = {}
 
-        if (file.size > 1024 * 1024 * 20) {
-          setError('Photo size must be less than 10 MB!')
+      const results: Promise<Nullable<ConvertedImageType>>[] = []
 
-          return
-        } else if (!allowedImageTypes.includes(file.type)) {
-          setError('The format of the uploaded photo must be\nPNG and JPEG')
-
-          return
-        }
-        setImages({ src: e.target.files[i] })
+      for (let i = 0; i < files.length; i++) {
+        results.push(convertFileToBase64WithValidate(files[i]))
       }
+
+      const convertedImagesArray = await Promise.all(results)
+
+      for (let i = 0; i < convertedImagesArray.length; i++) {
+        const image = convertedImagesArray[i]
+
+        if (image) {
+          const imageId = i
+
+          images[imageId] = {
+            croppedSrc: '',
+            cropperData: {
+              aspect: image.dimensions.width / image.dimensions.height,
+              crop: { x: 0, y: 0 },
+              originalAspect: image.dimensions.width / image.dimensions.height,
+              zoom: 1,
+            },
+            dimensions: {
+              ...image.dimensions,
+            },
+            filter: '',
+            originSrc: image.src,
+          }
+        }
+      }
+
       setError('')
-      // setImage(e.target.files[0])
+      setImages(images)
       onNextClick()
     }
   }

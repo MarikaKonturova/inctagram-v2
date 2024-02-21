@@ -1,23 +1,5 @@
-import {
-  ElementRef,
-  type FC,
-  ForwardRefExoticComponent,
-  MutableRefObject,
-  RefObject,
-  forwardRef,
-  useRef,
-  useState,
-} from 'react'
-import {
-  Cropper,
-  CropperRef,
-  ExtendedSettings,
-  type FixedCropperRef,
-  ImageRestriction,
-} from 'react-advanced-cropper'
-import { AbstractCropperIntrinsicProps } from 'react-advanced-cropper/dist/components/AbstractCropper'
-import 'react-advanced-cropper/dist/style.css'
-import 'react-advanced-cropper/dist/themes/corners.css'
+import { type FC, MutableRefObject, useCallback, useEffect, useRef, useState } from 'react'
+import Cropper, { Area } from 'react-easy-crop'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
@@ -26,8 +8,10 @@ import { Button } from 'shared/ui'
 import { SwiperSlide } from 'swiper/react'
 import { shallow } from 'zustand/shallow'
 
-import { useUploadImagePostStore } from '../../../model'
-import MenuCropSize from './components/cropperRatio'
+import { IImage, Nullable, useUploadImagePostStore } from '../../../model'
+import CropperRatio from './components/cropperRatio'
+import { CropperZoom } from './components/cropperZoom'
+import { getCroppedImg } from './components/helpers'
 import cls from './styles.module.scss'
 interface IProps {
   onNextClick: () => void
@@ -38,31 +22,11 @@ export const CropImageModalStep: FC<IProps> = ({ onNextClick, onPrevClick }) => 
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
-  const { images, setImages, setReset } = useUploadImagePostStore(
-    ({ images, setImages, setReset }) => ({ images, setImages, setReset }),
+  const { images, imagesIds, setReset } = useUploadImagePostStore(
+    ({ images, imagesIds, setReset }) => ({ images, imagesIds, setReset }),
     shallow
   )
-  /*
-  const onCrop = () => {
-    return new Promise<void>((resolve, reject) => {
-      if (cropperRef.current) {
-        cropperRef.current.getCanvas()?.toBlob(blob => {
-          const file = blob && new File([blob], 'fileName.jpg', { type: 'image/jpeg' })
 
-          if (file) {
-            setImages(file)
-          }
-        }, 'image/jpeg')
-        resolve()
-      }
-    })
-  }
-   */
-
-  const onButtonClick = async () => {
-    //  await onCrop()
-    //  onNextClick()
-  }
   const onIconClick = () => {
     setReset()
     onPrevClick()
@@ -73,18 +37,14 @@ export const CropImageModalStep: FC<IProps> = ({ onNextClick, onPrevClick }) => 
       <header className={cls.header}>
         <IconArrowBack fill={fill} onClick={onIconClick} />
         <h2>Cropping</h2>
-        <Button onClick={onButtonClick}>Next</Button>
+        <Button onClick={onNextClick}>Next</Button>
       </header>
 
       <SwiperApp>
-        {images.map((image, index) => {
-          // eslint-disable-next-line react-hooks/rules-of-hooks
-          const cropperRef = useRef<any>(null)
-
+        {imagesIds.map(imageId => {
           return (
-            <SwiperSlide className={cls.swiper_slide} key={index}>
-              {/* @ts-ignore */}
-              <CropImageOneModalStep cropperRef={cropperRef} file={image.src} index={index} />
+            <SwiperSlide className={cls.swiper_slide} key={imageId}>
+              <CropImageOneModalStep image={images[imageId]} imageId={imageId} />
             </SwiperSlide>
           )
         })}
@@ -93,38 +53,102 @@ export const CropImageModalStep: FC<IProps> = ({ onNextClick, onPrevClick }) => 
   )
 }
 
-export const CropImageOneModalStep = forwardRef<any, { file: File; index: number }>(
-  ({ file, index }, cropperRef) => {
-    const { theme } = useTheme()
-    const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
-    const setImage = useUploadImagePostStore(state => state.setImage)
-    // const cropperRef = useRef<FixedCropperRef>(null)
-    const [aspectRatio, setAspectRatio] = useState<number>(16 / 9)
-    const setStencilRatioCoordinates = (value: number) => {
-      setAspectRatio(value)
-      /* @ts-ignore */
-      const cropCurr = cropperRef?.current
+const getCropSize = (containerRef: MutableRefObject<Nullable<HTMLDivElement>>) => {
+  if (containerRef && containerRef.current) {
+    const width = containerRef.current?.clientWidth
+    const height = containerRef.current?.clientHeight
 
-      if (cropCurr) {
-        cropCurr.setCoordinates(cropCurr.getCoordinates())
+    return {
+      height,
+      width,
+    }
+  }
+
+  return undefined
+}
+
+export const CropImageOneModalStep: FC<{ image: IImage; imageId: string }> = ({
+  image,
+  imageId,
+}) => {
+  const { setAspect, setCroppedImage } = useUploadImagePostStore(
+    ({ setAspect, setCroppedImage }) => ({
+      setAspect,
+      setCroppedImage,
+    }),
+    shallow
+  )
+  const [crop, setCrop] = useState({ x: 0, y: 0 })
+  const [cropperZoom, setCropperZoom] = useState(image.cropperData.zoom)
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Nullable<Area>>(null)
+
+  const containerRef = useRef<Nullable<HTMLDivElement>>(null)
+  const cropperRef = useRef<Cropper>(null)
+
+  const handleCropComplete = useCallback((croppedArea: Area, croppedAreaPixels: Area) => {
+    setCroppedAreaPixels(croppedAreaPixels)
+  }, [])
+
+  const setImage = async (croppedAreaPixels: Area) => {
+    if (croppedAreaPixels) {
+      const modifiedImage = await getCroppedImg(image.originSrc, croppedAreaPixels)
+
+      if (modifiedImage) {
+        setCroppedImage({ croppedSrc: modifiedImage.src, imageId })
       }
     }
-
-    return (
-      <div>
-        <Cropper
-          className={cls.cropper}
-          imageRestriction={ImageRestriction.fitArea}
-          key={file.name}
-          ref={cropperRef}
-          src={URL.createObjectURL(file)}
-          stencilProps={{
-            aspectRatio,
-            grid: true,
-          }}
-        />
-        <MenuCropSize onClick={setStencilRatioCoordinates} />
-      </div>
-    )
   }
-)
+
+  useEffect(() => {
+    let timeoutId: number
+
+    if (croppedAreaPixels) {
+      timeoutId = +setTimeout(() => {
+        setImage(croppedAreaPixels)
+      }, 300)
+    }
+
+    return () => clearTimeout(timeoutId)
+  }, [croppedAreaPixels])
+
+  const cropSize = getCropSize(containerRef)
+
+  return (
+    <div>
+      <div className={cls.cropper} ref={containerRef}>
+        <Cropper
+          aspect={image.cropperData.aspect}
+          crop={crop}
+          cropSize={!image.cropperData.aspect ? cropSize : undefined}
+          image={image.originSrc}
+          onCropChange={setCrop}
+          onCropComplete={handleCropComplete}
+          onWheelRequest={() => false}
+          ref={cropperRef}
+          showGrid={false}
+          style={{
+            cropAreaStyle: {
+              border: 'none',
+              color: '#333333',
+            },
+          }}
+          zoom={cropperZoom}
+        />
+      </div>
+      <CropperRatio
+        onClick={aspect => {
+          setAspect({ aspect, imageId })
+        }}
+      />
+      <CropperZoom
+        max={3}
+        min={1}
+        onChange={zoom => {
+          setCropperZoom(zoom)
+        }}
+        step={0.1}
+        value={cropperZoom}
+      />
+    </div>
+  )
+}

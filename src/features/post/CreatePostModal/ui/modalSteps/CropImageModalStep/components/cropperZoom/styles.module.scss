@@ -2,7 +2,7 @@
   position: absolute;
   bottom: 0;
   margin-bottom: 25px;
-  margin-left: 15px;
+  margin-left: 70px;
 }
 
 .icon_button {
@@ -41,7 +41,7 @@
 
 .menu_items {
   position: absolute;
-  bottom: -120px;
+  bottom: 0;
   transform: translateY(-100%);
 
   display: flex;
@@ -64,8 +64,53 @@
   justify-content: space-between;
 }
 
-.menu_item_active {
-  color: var(--light-100-color);
-  fill: var(--light-100-color);
-  stroke: var(--light-100-color);
+.range_slider {
+  width: 100px;
+}
+
+.slider {
+  cursor: pointer;
+
+  width: 100%;
+  height: 0.5em;
+
+  appearance: none;
+  background-color: transparent;
+  border-radius: 3px;
+  outline: none;
+}
+
+.slider::-webkit-slider-runnable-track {
+  background-color: black;
+}
+
+.slider::-moz-range-track {
+  background-color: black;
+}
+
+.slider::-moz-range-progress {
+  background-color: var(--primary-500-color);
+}
+
+.slider::-webkit-slider-thumb {
+  cursor: pointer;
+
+  width: 12px;
+  height: 12px;
+
+  appearance: none;
+  background: var(--light-100-color);
+  border: 5px solid var(--primary-500-color);
+  border-radius: 50%;
+}
+
+.slider::-moz-range-thumb {
+  cursor: pointer;
+
+  width: 12px;
+  height: 12px;
+
+  background: var(--light-100-color);
+  border: 5px solid var(--primary-500-color);
+  border-radius: 50%;
 }

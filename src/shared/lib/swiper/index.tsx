@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
 
+import clsx from 'clsx'
 import { ReactNode } from 'react'
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -11,15 +12,17 @@ import cls from './styles.module.scss'
 
 interface IProps {
   children: ReactNode
+  className?: string
 }
-export const SwiperApp = ({ children }: IProps) => {
+export const SwiperApp = ({ children, className, ...rest }: IProps & any) => {
   return (
     <Swiper
       allowTouchMove={false}
-      className={cls.swiper}
+      className={clsx(cls.swiper, [className])}
       modules={[Navigation, Pagination]}
       navigation
       pagination
+      {...rest}
     >
       {children}
     </Swiper>

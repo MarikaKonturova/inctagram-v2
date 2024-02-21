@@ -1,6 +1,9 @@
-import Image from 'next/image'
-import React from 'react'
+import clsx from 'clsx'
+import { IImage, useUploadImagePostStore } from 'features/post/CreatePostModal/model'
+import { SwiperClass } from 'swiper/react'
+import { shallow } from 'zustand/shallow'
 
+import { getModifiedImageSrc } from '../../lib/getModifiedImageSrc'
 import cls from './styles.module.scss'
 
 const filters = {
@@ -28,26 +31,50 @@ const filtersArray = [
 ]
 
 interface IProps {
-  image: string
-  setImageFilter: (newFilter: string) => void
+  className?: string
+  currentIndex: number
+  image: IImage
+  imageId: string
+  swiperElement: SwiperClass
 }
 
-export const Filters = ({ image, setImageFilter }: IProps) => {
+export const Filters = ({ className, currentIndex, image, imageId, swiperElement }: IProps) => {
+  const { setConvertedImages, setFilter } = useUploadImagePostStore(
+    ({ setConvertedImages, setFilter }) => ({ setConvertedImages, setFilter }),
+    shallow
+  )
+
+  const onClickHandler = async (filter: string) => {
+    if (swiperElement) {
+      setFilter({ filter, imageId })
+
+      const currentImg = swiperElement.slides[currentIndex].children[0]
+
+      const modifiedSrc = await getModifiedImageSrc(currentImg as HTMLImageElement)
+
+      const convertedImage = {
+        [imageId]: { src: modifiedSrc },
+      }
+
+      setConvertedImages(convertedImage)
+    }
+  }
+
   return (
-    <div className={cls.container}>
+    <div className={clsx(cls.container, className)}>
       {filtersArray.map((filter, index) => (
         <div
           className={cls.imageGroup}
           key={index}
           onClick={() => {
-            setImageFilter(filter.class)
+            onClickHandler(filter.class)
           }}
         >
-          <Image
+          <img
             alt={filter.name}
             className={filter.class}
             height={108}
-            src={image}
+            src={image.croppedSrc}
             style={{
               objectFit: 'cover',
             }}

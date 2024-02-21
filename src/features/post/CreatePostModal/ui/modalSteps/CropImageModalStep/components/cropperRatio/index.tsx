@@ -1,26 +1,19 @@
 import { Menu, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import { type FC } from 'react'
-import 'react-advanced-cropper/dist/style.css'
-import 'react-advanced-cropper/dist/themes/corners.css'
 import IconExpand from 'shared/assets/icons/general/expand.svg'
 import IconRectangle1to1 from 'shared/assets/icons/general/rectangle1to1.svg'
 import IconRectangle4to5 from 'shared/assets/icons/general/rectangle4to5.svg'
 import IconRectangle16to9 from 'shared/assets/icons/general/rectangle16to9.svg'
 import IconImageOutline from 'shared/assets/icons/outline/image-outline.svg'
-import { Theme } from 'shared/constants/theme'
-import { useTheme } from 'shared/hooks/useTheme'
 
 import cls from './styles.module.scss'
 
 interface IProps {
-  onClick: (value: number) => void
+  onClick: (value: number | undefined) => void
 }
 
 const MenuCropSize: FC<IProps> = ({ onClick }) => {
-  const { theme } = useTheme()
-  const stroke = theme === Theme.LIGHT ? '#000000' : '#ffffff'
-
   return (
     <div className={cls.controls}>
       <Menu>
@@ -41,14 +34,14 @@ const MenuCropSize: FC<IProps> = ({ onClick }) => {
                 <div
                   className={clsx(cls.menu_item, active && cls.menu_item_active)}
                   onClick={() => {
-                    onClick(1)
+                    onClick(undefined)
                   }}
                 >
                   <span>Оригинал</span>
                   <IconImageOutline fill={'inherit'} stroke={'none'} />
                 </div>
               )}
-            </Menu.Item>{' '}
+            </Menu.Item>
             <Menu.Item>
               {({ active }) => (
                 <div
