@@ -89,7 +89,7 @@ export const MyPayments = () => {
         sortBy={params.sortBy}
         sortDirection={params.sortDirection}
       />
-      {data && (
+      {data && data.data.totalCount > 8 && (
         <Pagination
           className={cls.pagination}
           currentPage={data.data.page}
