@@ -1,0 +1,26 @@
+.container {
+  border-radius: 2px;
+  border: 1px solid var(--dark-300-color);
+  background: var(--dark-700-color);
+  padding: 10px 12px 10px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: var(--font-h2);
+  width: 24px;
+  height: 24px;
+  padding-top: 3px;
+}
+
+.separator {
+  width: 1px;
+  height: 30px;
+  background: var(--dark-300-color);
+}

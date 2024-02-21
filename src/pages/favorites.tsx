@@ -1,10 +1,9 @@
+import { getLayoutWithSidebar } from 'layouts'
 import React from 'react'
+import { FavoritesPage } from 'templates/favorites'
 
-import Favorites from '../features/favorites/ui'
-import { getLayoutWithSidebar } from '../layouts/Layout/LayoutWithSidebar/LayoutWithSidebar'
-
-export default function FavoritesPage() {
-  return <Favorites />
+export default function Favorites() {
+  return <FavoritesPage />
 }
 
-FavoritesPage.getLayout = getLayoutWithSidebar
+Favorites.getLayout = getLayoutWithSidebar

@@ -49,16 +49,41 @@ interface CostOfSubscriptionType {
   typeDescription: PeriodType
 }
 
+interface AccountOptionType {
+  description: string
+  typeDescription: string
+}
+
 interface CostOfSubscriptionsType {
   data: CostOfSubscriptionType[]
 }
 
+type GetMyPaymentsSort =
+  | 'dateOfPayment'
+  | 'endDateOfSubscription'
+  | 'paymentType'
+  | 'price'
+  | 'subscriptionType'
+
+type SortDirection = 'asc' | 'desc' | undefined
+
+interface GetMyPaymentsParams {
+  pageNumber?: number
+  pageSize?: number
+  sortBy?: GetMyPaymentsSort
+  sortDirection?: SortDirection
+}
+
 export type {
+  AccountOptionType,
   CostOfSubscriptionType,
   CostOfSubscriptionsType,
   CreateSubscriptionFailedResponseType,
   CreateSubscriptionSuccessResponseType,
   GetCurrentSubscriptionType,
+  GetMyPaymentsParams,
+  GetMyPaymentsSort,
   PaymentsType,
+  SortDirection,
   SubscriptionType,
 }

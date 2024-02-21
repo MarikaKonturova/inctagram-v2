@@ -16,17 +16,15 @@
     margin-top: 60px;
   }
 
-  .item {
-    display: flex;
-    align-items: center;
-  }
-
   .link {
     margin-left: 15px;
-  }
-
-  p.link {
     font: var(--font-regular-400);
+
+    &:hover,
+    &:active {
+      color: var(--primary-100-color);
+      outline: none;
+    }
   }
 
   .button {
@@ -36,12 +34,38 @@
   }
 
   .icon {
-    transition: fill 0.5s;
+    transition: fill 0.1s;
   }
 
   .active {
+    color: var(--primary-100-color) !important;
+
     .icon {
       fill: var(--primary-500-color);
+    }
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    color: var(--light-100-color);
+
+    &:focus {
+      border-radius: 2px;
+      outline: 2px solid var(--primary-700-color);
+    }
+
+    &:active {
+      color: var(--primary-100-color);
+      outline: none;
+    }
+
+    &:hover {
+      text-decoration: none;
+
+      .icon {
+        fill: var(--primary-100-color);
+      }
     }
   }
 }

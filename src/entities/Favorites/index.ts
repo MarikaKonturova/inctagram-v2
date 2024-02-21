@@ -1,0 +1,1 @@
+export { useGetFavoritesData } from './model'

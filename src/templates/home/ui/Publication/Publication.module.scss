@@ -1,0 +1,42 @@
+@import 'app/styles/mixins/mixins';
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.container {
+  position: relative;
+  width: 491px;
+  min-height: 816px;
+
+  .cardImg {
+    position: relative;
+    object-fit: cover;
+  }
+}
+
+.likesInfo {
+  margin-top: 14px;
+  margin-bottom: 24px;
+  margin-left: 5px;
+}
+
+.allComments {
+  margin-bottom: 12px;
+  font: var(--font-regular-500);
+  color: var(--light-900-color);
+
+  cursor: pointer;
+}
+
+.containerAddComment {
+  @include flex(row, space-between, center);
+
+  padding: 0;
+}
+
+.bullet {
+  margin: 8px;
+}

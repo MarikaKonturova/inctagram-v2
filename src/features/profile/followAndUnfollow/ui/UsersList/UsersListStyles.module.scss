@@ -1,0 +1,48 @@
+.usersList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+
+  margin: 24px;
+  margin-top: 0;
+
+  .userCard {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    color: var(--light-100-color);
+
+    .rightBlock {
+      display: flex;
+      flex: 1;
+      gap: 12px;
+      align-items: center;
+
+      .userName {
+        flex-grow: 1;
+
+        a {
+          color: inherit;
+          text-decoration: inherit;
+        }
+      }
+
+      .userAvatar {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+
+    .leftBlock {
+      display: flex;
+      gap: 50px;
+    }
+  }
+}

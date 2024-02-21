@@ -5,7 +5,9 @@ import { type ChangeHandler } from 'react-hook-form'
 import cls from './Textarea.module.scss'
 
 interface TextareaProps {
+  charactersCount?: number
   className?: string
+  counterClassName?: string
   errorText?: string
   id?: string
   label?: string
@@ -19,7 +21,9 @@ interface TextareaProps {
 export const Textarea = memo(
   forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => {
     const {
+      charactersCount,
       className,
+      counterClassName,
       errorText,
       id,
       label,
@@ -37,7 +41,7 @@ export const Textarea = memo(
           {label}
         </label>
         <textarea
-          className={clsx(cls.textarea, [textareaClassName])}
+          className={clsx(cls.textarea, [textareaClassName], errorText && cls.error)}
           id={id}
           name={name}
           onChange={onChange}
@@ -45,6 +49,7 @@ export const Textarea = memo(
           ref={ref}
           {...otherProps}
         />
+        <div className={counterClassName}>{`${charactersCount}/500`}</div>
         {!!errorText && <span className={clsx(cls.errorText)}>{errorText}</span>}
       </div>
     )

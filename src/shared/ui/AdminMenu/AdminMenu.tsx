@@ -1,5 +1,5 @@
-import { useSnackbar } from 'features/common'
 import React from 'react'
+import { useSnackbar } from 'shared/hooks'
 import { Button } from 'shared/ui'
 
 import cls from './AdminMenu.module.scss'

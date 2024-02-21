@@ -1,5 +1,5 @@
 import { ConfirmModal, PasswordRecoveryForm } from 'features/auth'
-import { getAuthLayout } from 'layouts/Layout/AuthLayout/AuthLayout'
+import { getAuthLayout } from 'layouts'
 import { type GetServerSidePropsContext } from 'next'
 import { getTranslations } from 'shared/lib/i18n'
 

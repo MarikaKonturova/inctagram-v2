@@ -1,14 +1,15 @@
 import clsx from 'clsx'
 import React, { type Dispatch, type FC, type SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
-import cls from 'shared/ui/ConfirmationModal/ConfirmationModal.module.scss'
-import { Button, Modal } from 'shared/ui/index'
+import { Button, Modal } from 'shared/ui'
+
+import cls from './ConfirmationModal.module.scss'
 
 interface ConfirmationModalProps {
   bodyText: string
   className?: string
   headerText: string
-  isLoading?: boolean
+  isDisabled?: boolean
   isModalOpen: boolean
   onYesAction: () => void
   setModalOpen: Dispatch<SetStateAction<boolean>>
@@ -18,7 +19,7 @@ export const ConfirmationModal: FC<ConfirmationModalProps> = ({
   bodyText,
   className,
   headerText,
-  isLoading,
+  isDisabled,
   isModalOpen,
   onYesAction,
   setModalOpen,
@@ -44,7 +45,7 @@ export const ConfirmationModal: FC<ConfirmationModalProps> = ({
         <div className={cls.flex}>
           <Button
             className={cls.button}
-            disabled={isLoading}
+            disabled={isDisabled}
             onClick={onYesClickAction}
             theme={'outline'}
             type={'button'}
@@ -53,7 +54,7 @@ export const ConfirmationModal: FC<ConfirmationModalProps> = ({
           </Button>
           <Button
             className={cls.button}
-            disabled={isLoading}
+            disabled={isDisabled}
             onClick={onCloseHandler}
             type={'button'}
           >

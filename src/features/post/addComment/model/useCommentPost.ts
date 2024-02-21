@@ -1,9 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
-import { useSnackbar } from 'features/common'
+import { useCommentStore } from 'entities/Comment/model/useCommentStore'
 import { PostService } from 'shared/api'
-
-import { useCommentStore } from '../../../profile/getPosts/model'
+import { useSnackbar } from 'shared/hooks'
 
 export const useCommentPost = () => {
   const onOpen = useSnackbar(state => state.onOpen)
@@ -24,7 +23,10 @@ export const useCommentPost = () => {
     },
     onSuccess: async () => {
       setRefetch({ doRefetch: true })
-      await queryClient.invalidateQueries(['postComments'])
+      await Promise.all([
+        queryClient.invalidateQueries(['publicationsData']),
+        queryClient.invalidateQueries(['postComments']),
+      ])
     },
   })
 
@@ -51,7 +53,11 @@ export const useAnswerForComment = () => {
     },
     onSuccess: async () => {
       setRefetch({ doRefetch: true })
-      await queryClient.invalidateQueries(['postAnswers', 'postComments'])
+
+      await Promise.all([
+        queryClient.invalidateQueries(['postAnswers', 'postComments']),
+        queryClient.invalidateQueries(['postComments']),
+      ])
     },
   })
 

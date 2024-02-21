@@ -1,0 +1,83 @@
+.container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  height: 24px;
+}
+
+.item {
+  cursor: pointer;
+  user-select: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  font: var(--font-regular-400);
+  color: var(--light-100-color);
+
+  background-color: transparent;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+
+  &.dots:hover {
+    cursor: default;
+    color: var(--light-100-color);
+    background-color: transparent;
+  }
+
+  &:hover {
+    background-color: var(--dark-500-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-900-color);
+  }
+
+  &.selected {
+    cursor: pointer;
+    color: var(--dark-900-color);
+    background: var(--light-100-color);
+  }
+
+  &.disabled {
+    pointer-events: none;
+    color: var(--dark-100-color);
+
+    &:hover {
+      cursor: default;
+      background-color: transparent;
+    }
+  }
+}
+
+.selectContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  height: 100%;
+
+  white-space: nowrap;
+}
+
+.selectWrapper {
+  position: relative;
+  justify-self: start;
+  width: 52px;
+}
+
+.select {
+  position: absolute;
+  top: -12px;
+  width: 50px;
+
+  &Button,
+  &Option {
+    padding: 0 2px;
+  }
+}

@@ -1,8 +1,6 @@
 import React from 'react'
 import IconLike from 'shared/assets/icons/light/heart.svg'
 import IconLikeOutline from 'shared/assets/icons/outline/heart-outline.svg'
-import { Theme } from 'shared/constants/theme'
-import { useTheme } from 'shared/hooks/useTheme'
 import { LikeStatus } from 'shared/types/likeStatus'
 import { ActionIcon } from 'shared/ui'
 
@@ -14,21 +12,18 @@ interface LikePostIconButtonProps {
 }
 
 export const LikePostIconButton = ({ postId, postIsLiked }: LikePostIconButtonProps) => {
-  const { theme } = useTheme()
-  const { like } = useLikePost(postId)
-
-  const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
-
+  const { isLoading, like } = useLikePost(postId)
   const onLikeIconClick = async () => {
     like({ likeStatus: postIsLiked ? LikeStatus.DISLIKE : LikeStatus.LIKE })
   }
 
   return (
     <ActionIcon
-      filledIcon={<IconLike fill={fill} />}
+      filledIcon={<IconLike fill={'#CC1439'} />}
       initialState={postIsLiked}
+      isLoading={isLoading}
       onClick={onLikeIconClick}
-      outlineIcon={<IconLikeOutline fill={fill} />}
+      outlineIcon={<IconLikeOutline fill={'#ffffff'} />}
     />
   )
 }

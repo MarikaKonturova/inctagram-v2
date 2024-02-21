@@ -15,7 +15,8 @@ export interface IFormValidate {
 export const useValidationForm = (arr: ValidateUnion[]) => {
   const {
     clearErrors,
-    formState: { errors, isValid },
+    formState,
+    getValues,
     handleSubmit,
     register,
     reset,
@@ -27,6 +28,8 @@ export const useValidationForm = (arr: ValidateUnion[]) => {
     reValidateMode: 'onChange',
     resolver: yupResolver(createValidationSchema(arr)),
   })
+
+  const { errors, isValid } = formState
 
   const emailError = errors?.email && errors.email.message
   const passwordError = errors?.password && errors.password.message
@@ -44,6 +47,7 @@ export const useValidationForm = (arr: ValidateUnion[]) => {
 
   return {
     clearErrors,
+    getValues,
     handleSubmit,
     isValid,
     register,

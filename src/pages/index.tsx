@@ -1,18 +1,16 @@
-import { getLayoutWithoutSidebar } from 'layouts/Layout/LayoutWithoutSideBar/LayoutWithoutSidebar'
+import { selectIsAuth, useAuth } from 'features/auth'
+import { getLayoutWithoutSidebar } from 'layouts'
 import { type GetServerSidePropsContext } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { AppRoutes } from 'shared/constants/path'
 import { getTranslations } from 'shared/lib/i18n'
 
-import { useAuth } from '../features/auth'
-import { SelectIsAuth } from '../features/auth/model/selectors'
-import { AppRoutes } from '../shared/constants/path'
-
 export default function Home() {
-  const isAuth = useAuth(SelectIsAuth)
+  const isAuth = useAuth(selectIsAuth)
   const { push } = useRouter()
 
-  void (isAuth ? push(AppRoutes.PROFILE.MY_PROFILE) : push(AppRoutes.AUTH.LOGIN))
+  void (isAuth ? push(AppRoutes.PROFILE.MY_PROFILE) : push(AppRoutes.PUBLIC))
 
   return (
     <>

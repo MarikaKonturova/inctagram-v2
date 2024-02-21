@@ -16,8 +16,8 @@ export const PasswordRecoveryForm = () => {
   const { t } = useTranslation('auth')
   const {
     clearErrors,
+    getValues,
     handleSubmit,
-    isValid,
     register,
     setValue,
     validErrors: { emailError, recaptchaError },
@@ -27,6 +27,8 @@ export const PasswordRecoveryForm = () => {
   if (isLoading) {
     return <PageLoader />
   }
+
+  const isDisabledValidation = !!getValues().email && !!getValues().recaptcha
 
   const getRecaptchaValueHandler = (value: null | string) => {
     if (value) {
@@ -52,7 +54,7 @@ export const PasswordRecoveryForm = () => {
       )}
 
       {isInfoTextShown && <p className={cls.infoText}>{t('recoveryMessage')}</p>}
-      <Button className={cls.button} disabled={!isValid || isLoading} type={'submit'}>
+      <Button className={cls.button} disabled={!isDisabledValidation || isLoading} type={'submit'}>
         {isInfoTextShown ? t('sendLinkAgain') : t('sendLink')}
       </Button>
       <AppLink active href={AppRoutes.AUTH.LOGIN}>
@@ -63,6 +65,7 @@ export const PasswordRecoveryForm = () => {
         className={cls.recaptcha}
         hl={'en'}
         onChange={getRecaptchaValueHandler}
+        onExpired={() => setValue('recaptcha', '')}
         sitekey={`${process.env.RECAPTCHA_SITE_KEY as string}`}
         theme={'dark'}
       />

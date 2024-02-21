@@ -32,7 +32,7 @@ export const Sidebar = (props: SidebarProps) => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
   const { asPath } = useRouter()
-  const currentPath = asPath.replace(/\/[a-z]*(?=\/)/g, '')
+  const currentPath = asPath
 
   return (
     <div className={clsx(cls.Sidebar, [className])}>
@@ -61,9 +61,7 @@ export const Sidebar = (props: SidebarProps) => {
           ) : (
             <IconCreate className={cls.icon} fill={fill} />
           )}
-          <p className={cls.link} style={{ color: 'white' }}>
-            {t('create')}
-          </p>
+          <span className={cls.link}>{t('create')}</span>
         </button>
         <CreatePostModal
           handleClose={() => {

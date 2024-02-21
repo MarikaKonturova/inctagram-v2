@@ -1,6 +1,6 @@
 import React, { type FC } from 'react'
-import IconLike from 'shared/assets/icons/light/heart.svg'
-import IconLikeOutline from 'shared/assets/icons/outline/heart-outline.svg'
+import IconLike from 'shared/assets/icons/light/heart16px.svg'
+import IconLikeOutline from 'shared/assets/icons/outline/heart-outline16px.svg'
 import { LikeStatus } from 'shared/types/likeStatus'
 import { ActionIcon } from 'shared/ui'
 
@@ -19,7 +19,7 @@ export const LikeAnswerIconButton: FC<likeAnswerType> = ({
   isLiked,
   postId,
 }) => {
-  const { likeAnswer } = useLikeAnswer(postId, commentId, answerId)
+  const { isLoading, likeAnswer } = useLikeAnswer(postId, commentId, answerId)
   const onLikeIconClick = () => {
     likeAnswer({ likeStatus: isLiked ? LikeStatus.DISLIKE : LikeStatus.LIKE })
   }
@@ -28,6 +28,7 @@ export const LikeAnswerIconButton: FC<likeAnswerType> = ({
     <ActionIcon
       filledIcon={<IconLike fill={'#CC1439'} />}
       initialState={isLiked}
+      isLoading={isLoading}
       onClick={onLikeIconClick}
       outlineIcon={<IconLikeOutline fill={'#ffffff'} />}
     />

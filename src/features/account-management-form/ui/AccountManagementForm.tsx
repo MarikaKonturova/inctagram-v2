@@ -1,15 +1,13 @@
-import { useAuth } from 'features/auth'
-import { SelectHasBusinessAccount } from 'features/auth/model/selectors'
 import { isEmpty } from 'lodash'
 import { useRouter } from 'next/router'
-import React, { type ChangeEvent, useEffect, useState } from 'react'
-import Paypal from 'shared/assets/icons/general/paypal.svg'
-import Stripe from 'shared/assets/icons/general/stripe.svg'
-import { type CostOfSubscriptionType } from 'shared/types/subscriptions'
+import React, { type ChangeEvent, FC, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Paypal, Stripe } from 'shared/assets/icons'
+import { type AccountOptionType, type CostOfSubscriptionType } from 'shared/types/subscriptions'
 import { Button, Checkbox, Modal, RadioButtons } from 'shared/ui'
 
 import { useSubscriptions } from '../model'
-import cls from './styles.module.scss'
+import cls from './AccountManagementForm.module.scss'
 
 const initialState = {
   buttonLabel: '',
@@ -18,16 +16,18 @@ const initialState = {
   title: '',
 }
 
-export const AccountManagementForm = () => {
-  const hasBusinessAccount = useAuth(SelectHasBusinessAccount)
-  const { query } = useRouter()
+type PropsType = {
+  accountOptions: AccountOptionType[]
+  hasBusinessAccount: boolean
+}
+
+export const AccountManagementForm: FC<PropsType> = ({ accountOptions, hasBusinessAccount }) => {
+  const { query, replace, route } = useRouter()
   const [modal, setModal] = useState(initialState)
   const [selected, setSelected] = useState({} as CostOfSubscriptionType)
-
-  const ACCOUNT_TYPE_OPTIONS = [
-    { description: 'Personal', disabled: hasBusinessAccount },
-    { description: 'Business', disabled: !hasBusinessAccount },
-  ]
+  const [selectedAcc, setSelectedAcc] = useState({} as AccountOptionType)
+  const [isBusinessAccount, setIsBusinessAccount] = useState<boolean>(hasBusinessAccount)
+  const { t } = useTranslation(['profile'])
 
   const {
     cancelAutoRenewal,
@@ -55,66 +55,93 @@ export const AccountManagementForm = () => {
     if (isSuccess) {
       setModal({
         buttonLabel: 'Ok',
-        message: 'Payment was successful!',
+        message: `${t('successfulPayment')}`,
         modalOpen: true,
-        title: 'Success',
+        title: `${t('success')}`,
       })
     }
 
     if (isError) {
       setModal({
-        buttonLabel: 'Back to payment',
-        message: 'Transaction failed, please try again',
+        buttonLabel: `${t('backToPayment')}`,
+        message: `${t('failedPayment')}`,
         modalOpen: true,
-        title: 'Error',
+        title: `${t('error')}`,
       })
     }
-  }, [query])
+
+    replace(route, undefined, { shallow: true })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query.success, route])
 
   useEffect(() => {
     if (isEmpty(selected)) {
       setSelected(subscriptionCosts[0])
     }
-  }, [selected, subscriptionCosts])
+  }, [selected, subscriptionCosts, t])
+
+  const selectHandler = (option: AccountOptionType) => {
+    const isPersonal = option.description === t('personal')
+    const isBusiness = option.description === t('business')
+
+    setIsBusinessAccount(hasBusinessAccount ? !isPersonal : isBusiness)
+  }
 
   return (
     <div>
-      <h4 className={cls.label}>Current Subscription:</h4>
-      <div className={cls.container}>
-        <div className={cls.section}>
-          <div>Expire at</div>
-          <div>Next payment</div>
-        </div>
-        <div className={cls.section}>
-          <div>{expireAt}</div>
-          <div>{nextPayment}</div>
-        </div>
-      </div>
-      <div className={cls.checkboxContainer}>
-        <Checkbox
-          checked={hasAutoRenewal}
-          disabled={!hasAutoRenewal}
-          onChange={onCheckboxHandler}
-        />
-        <span>Auto-Renewal</span>
-      </div>
-      <RadioButtons
-        label={'Account type:'}
-        options={ACCOUNT_TYPE_OPTIONS}
-        selectedValue={hasBusinessAccount ? ACCOUNT_TYPE_OPTIONS[1] : ACCOUNT_TYPE_OPTIONS[0]}
+      {isBusinessAccount && (
+        <>
+          {hasBusinessAccount && (
+            <>
+              <h4 className={cls.label}>{t('currentSubscription')}</h4>
+              <div className={cls.container}>
+                <div className={cls.section}>
+                  <div>{t('expireAt')}</div>
+                  {hasAutoRenewal && <div>{t('nextPayment')}</div>}
+                </div>
+                <div className={cls.section}>
+                  <div>{expireAt}</div>
+                  {hasAutoRenewal && <div>{nextPayment}</div>}
+                </div>
+              </div>
+              <div className={cls.checkboxContainer}>
+                <Checkbox
+                  checked={hasAutoRenewal}
+                  disabled={!hasAutoRenewal}
+                  onChange={onCheckboxHandler}
+                />
+                <span>{t('autoRenewal')}</span>
+              </div>
+            </>
+          )}
+        </>
+      )}
+
+      <RadioButtons<AccountOptionType>
+        label={`${t('accountType')}`}
+        options={accountOptions || []}
+        selectHandler={selectHandler}
+        selected={selectedAcc}
+        selectedValue={isBusinessAccount ? accountOptions[1] : accountOptions[0]}
+        setSelected={setSelectedAcc}
       />
-      <RadioButtons<CostOfSubscriptionType>
-        label={'Your subscription costs:'}
-        options={subscriptionCosts || []}
-        selected={selected}
-        selectedValue={subscriptionCosts[0]}
-        setSelected={setSelected}
-      />
-      <div className={cls.bottomBlock}>
-        <Paypal />
-        or
-        <Stripe onClick={onStripeHandler} />
-      </div>
+
+      {isBusinessAccount && (
+        <>
+          <RadioButtons<CostOfSubscriptionType>
+            label={`${t('subscriptionCosts')}`}
+            options={subscriptionCosts || []}
+            selected={selected}
+            selectedValue={subscriptionCosts[0]}
+            setSelected={setSelected}
+          />
+          <div className={cls.bottomBlock}>
+            <Paypal />
+            or
+            <Stripe onClick={onStripeHandler} />
+          </div>
+        </>
+      )}
       {modal.modalOpen && (
         <Modal isOpen={modal.modalOpen} onClose={handleClose} title={modal.title}>
           <div className={cls.modal}>

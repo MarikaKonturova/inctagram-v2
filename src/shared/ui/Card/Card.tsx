@@ -18,7 +18,7 @@ export const Card: React.FC<PropsType> = props => {
     cardWrapperClassName,
     fallbackSrc,
     sizes = '100vw',
-    skeletonHeight = 'inherit',
+    skeletonHeight,
     skeletonWidth,
     src,
   } = props

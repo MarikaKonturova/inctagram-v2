@@ -1,6 +1,7 @@
 import { Menu } from '@headlessui/react'
 import clsx from 'clsx'
 import React, { type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import IconTrash from 'shared/assets/icons/light/trash.svg'
 import IconTrashOutline from 'shared/assets/icons/outline/trash-outline.svg'
 import { Theme } from 'shared/constants/theme'
@@ -15,6 +16,7 @@ interface IProps {
 export const DeleteMyPostButton: FC<IProps> = ({ openDeletePostModal }) => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
+  const { t } = useTranslation(['profile'])
 
   return (
     <Menu.Item>
@@ -25,7 +27,7 @@ export const DeleteMyPostButton: FC<IProps> = ({ openDeletePostModal }) => {
           ) : (
             <IconTrashOutline aria-hidden={'true'} fill={fill} />
           )}
-          Delete Post
+          {t('deletePost')}
         </button>
       )}
     </Menu.Item>

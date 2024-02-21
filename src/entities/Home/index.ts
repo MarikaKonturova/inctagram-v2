@@ -1,0 +1,1 @@
+export { useGetPosts } from './model'
