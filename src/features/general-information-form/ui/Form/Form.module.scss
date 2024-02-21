@@ -21,6 +21,16 @@ textarea.textarea {
 }
 
 .selectContainer {
-  display: flex;
-  gap: 24px;
+  width: 100%;
+  height: 100px;
+  position: relative;
+
+  .select {
+    width: 40%;
+    position: absolute;
+
+    &:nth-child(2) {
+      right: 15px;
+    }
+  }
 }

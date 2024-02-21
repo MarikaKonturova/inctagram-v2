@@ -100,6 +100,7 @@ export const Form: React.FC<IProps> = props => {
           name={'country'}
           render={({ field: { onChange, value } }) => (
             <Select
+              className={cls.select}
               label={`${t('selectCountry')}`}
               onChange={onChange}
               options={Object.keys(COUNTRIES)}
@@ -112,6 +113,7 @@ export const Form: React.FC<IProps> = props => {
           name={'city'}
           render={({ field }) => (
             <Select
+              className={cls.select}
               label={`${t('selectCity')}`}
               options={country ? COUNTRIES[country] : []}
               {...field}
