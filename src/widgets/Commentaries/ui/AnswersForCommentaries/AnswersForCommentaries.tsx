@@ -1,45 +1,48 @@
 import { useGetPostAnswersForComment } from 'entities/Comment'
 import { Comment } from 'features/post'
 import { LikeAnswerIconButton } from 'features/post/likeAnswer/ui/LikeAnswerIconButton/LikeAnswerIconButton'
-import React, { useState } from 'react'
+import React from 'react'
 
 interface PropsType {
   commentId: number
   openedCommentId: number
+  openedComments: {
+    [id: number]: boolean
+  }
   postId: number
 }
 
-export const AnswersForCommentaries = ({ commentId, openedCommentId, postId }: PropsType) => {
-  const [isOpen, setIsOpen] = useState(false)
+export const AnswersForCommentaries = ({
+  commentId,
+  openedCommentId,
+  openedComments,
+  postId,
+}: PropsType) => {
   const { answerForComment } = useGetPostAnswersForComment(postId, openedCommentId)
-
-  const viewAnswerOnClick = (commentId: number) => {
-    setIsOpen(!isOpen)
-  }
 
   return (
     <>
-      {answerForComment?.items.map(answer =>
-        answer.commentId === commentId ? (
-          <Comment
-            actionSlot={
-              <LikeAnswerIconButton
-                answerId={answer.id}
-                commentId={answer.commentId}
-                isLiked={answer.isLiked}
-                postId={postId}
+      {openedComments[commentId] !== undefined && openedComments[commentId]
+        ? answerForComment?.items.map(answer =>
+            answer.commentId === commentId ? (
+              <Comment
+                actionSlot={
+                  <LikeAnswerIconButton
+                    answerId={answer.id}
+                    commentId={answer.commentId}
+                    isLiked={answer.isLiked}
+                    postId={postId}
+                  />
+                }
+                avatarSize={36}
+                commentId={openedCommentId}
+                data={answer}
+                isRepliedComment
+                key={answer.id}
               />
-            }
-            avatarSize={36}
-            data={answer}
-            isOpen={isOpen}
-            isRepliedComment
-            key={answer.id}
-            openedCommentId={openedCommentId}
-            viewAnswerOnClick={viewAnswerOnClick}
-          />
-        ) : null
-      )}
+            ) : null
+          )
+        : null}
     </>
   )
 }

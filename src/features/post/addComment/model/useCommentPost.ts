@@ -23,7 +23,10 @@ export const useCommentPost = () => {
     },
     onSuccess: async () => {
       setRefetch({ doRefetch: true })
-      await queryClient.invalidateQueries(['postComments'])
+      await Promise.all([
+        queryClient.invalidateQueries(['publicationsData']),
+        queryClient.invalidateQueries(['postComments']),
+      ])
     },
   })
 
@@ -50,7 +53,11 @@ export const useAnswerForComment = () => {
     },
     onSuccess: async () => {
       setRefetch({ doRefetch: true })
-      await queryClient.invalidateQueries(['postAnswers', 'postComments'])
+
+      await Promise.all([
+        queryClient.invalidateQueries(['postAnswers', 'postComments']),
+        queryClient.invalidateQueries(['postComments']),
+      ])
     },
   })
 

@@ -13,29 +13,29 @@ import cls from './Comment.module.scss'
 interface PropsType {
   actionSlot: ReactNode
   avatarSize: number
+  commentId: number
   data: Omit<AnswerType | IComment, 'answerCount' | 'commentId' | 'postId'> & {
     answerCount?: number
-    commentId?: number
     postId?: number | undefined
   }
-  isOpen: boolean
   isRepliedComment?: boolean
-  openedCommentId?: number
+  openedComments?: {
+    [id: number]: boolean
+  }
   viewAnswerOnClick?: (id: number) => void
 }
 
 export function Comment({
   actionSlot,
   avatarSize,
+  commentId,
   data,
-  isOpen,
   isRepliedComment = false,
-  openedCommentId,
+  openedComments,
   viewAnswerOnClick,
 }: PropsType) {
   const {
     answerCount,
-    commentId,
     content,
     createdAt,
     from: { avatars, userName },
@@ -58,7 +58,11 @@ export function Comment({
         })
         setClicked(false)
       } else {
-        setRepliedComment({ id: 0, postId: postId, userName: '' })
+        setRepliedComment({
+          id: 0,
+          postId: postId,
+          userName: '',
+        })
       }
 
       return newClicked
@@ -87,16 +91,18 @@ export function Comment({
           <button
             className={cls.button}
             onClick={() => {
-              void viewAnswerOnClick?.(id)
+              void viewAnswerOnClick?.(commentId)
             }}
             type={'button'}
           >
+            <div>
+              <span>
+                {!openedComments || openedComments[commentId]
+                  ? `${t('hideReplies')}`
+                  : `${t('viewReplies')} (${answerCount})`}
+              </span>
+            </div>
             <div className={cls.line} />
-            <span>
-              {isOpen && (openedCommentId === id || openedCommentId === commentId)
-                ? `${t('hideReplies')}`
-                : `${t('viewReplies')} (${answerCount})`}
-            </span>
           </button>
         )}
       </div>

@@ -1,5 +1,7 @@
+import clsx from 'clsx'
 import React from 'react'
-import ArrowForwardIcon from 'shared/assets/icons/general/arrow-forward.svg'
+import ArrowForwardBackIcon from 'shared/assets/icons/general/arrow-back.svg'
+import ArrowForwardNextIcon from 'shared/assets/icons/general/arrow-forward.svg'
 import CloseIcon from 'shared/assets/icons/general/close.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
@@ -9,13 +11,16 @@ import cls from './styles.module.scss'
 
 interface IProps {
   content: React.ReactNode
+  firstElement?: boolean
+  handleClick?: (direction: 'back' | 'next') => void
   handleClose: () => void
   id: number
   isOpen: boolean
+  lastElement?: boolean
 }
 
 export const PostModal: React.FC<IProps> = props => {
-  const { content, handleClose, id, isOpen } = props
+  const { content, firstElement, handleClick, handleClose, id, isOpen, lastElement } = props
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
@@ -25,10 +30,27 @@ export const PostModal: React.FC<IProps> = props => {
         <div className={cls.closeIconContainer} onClick={handleClose}>
           <CloseIcon fill={fill} />
         </div>
+        <button
+          className={clsx(cls.backIconContainer, cls.iconContainer)}
+          onClick={() => handleClick && handleClick('back')}
+          style={{
+            visibility: !firstElement ? 'visible' : 'hidden',
+          }}
+        >
+          <ArrowForwardBackIcon fill={fill} />
+        </button>
+
         {content}
-        <div className={cls.nextIconContainer}>
-          <ArrowForwardIcon fill={fill} />
-        </div>
+
+        <button
+          className={clsx(cls.nextIconContainer, cls.iconContainer)}
+          onClick={() => handleClick && handleClick('next')}
+          style={{
+            visibility: !lastElement ? 'visible' : 'hidden',
+          }}
+        >
+          <ArrowForwardNextIcon fill={fill} />
+        </button>
       </div>
     </Modal>
   )

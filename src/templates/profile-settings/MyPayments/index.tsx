@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { SubscriptionsService } from 'shared/api'
 import { PaymentType, SubscriptionType } from 'shared/constants/payments'
 import { useSnackbar } from 'shared/hooks'
-import { GetMyPaymentsParams } from 'shared/types/subscriptions'
+import { GetMyPaymentsParams, SortDirection } from 'shared/types/subscriptions'
 import { ColumnType, Pagination, Table } from 'shared/ui'
 
 import cls from './styles.module.scss'
@@ -52,16 +52,43 @@ export const MyPayments = () => {
   }))
 
   const onChange = (pageSize: string) => {
-    setParams({ pageSize: Number(pageSize) })
+    setParams({ ...params, pageNumber: 1, pageSize: Number(pageSize) })
   }
 
   const onChangePage = (pageNumber: number) => {
     setParams({ ...params, pageNumber })
   }
 
+  const onSort = (key: string) => {
+    const { sortBy, sortDirection } = params
+
+    let newSortDirection: SortDirection = 'asc'
+
+    if (sortBy === key && sortDirection === 'desc') {
+      newSortDirection = undefined
+    }
+
+    if (sortBy === key && sortDirection === 'asc') {
+      newSortDirection = 'desc'
+    }
+
+    setParams({
+      ...params,
+      pageNumber: 1,
+      sortBy: key,
+      sortDirection: newSortDirection,
+    } as GetMyPaymentsParams)
+  }
+
   return (
     <div>
-      <Table columns={columns} data={tableData || []} />
+      <Table
+        columns={columns}
+        data={tableData || []}
+        onSort={onSort}
+        sortBy={params.sortBy}
+        sortDirection={params.sortDirection}
+      />
       {data && (
         <Pagination
           className={cls.pagination}
