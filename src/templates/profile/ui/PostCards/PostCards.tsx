@@ -86,8 +86,6 @@ export const PostCards: FC<Props> = ({ userData }) => {
           <Card
             alt={'post'}
             cardWrapperClassName={cls.cardWrapper}
-            skeletonHeight={item.images[0]?.versions.huge?.height}
-            skeletonWidth={item.images[0]?.versions.huge?.width}
             src={item.images[0]?.versions.huge?.url}
           />
         </div>
