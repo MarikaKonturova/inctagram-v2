@@ -1,12 +1,13 @@
 import clsx from 'clsx'
 import { Property } from 'csstype'
 import { get } from 'lodash'
+import { ArrowDown, ArrowUp } from 'shared/assets/icons'
+import { SortDirection } from 'shared/types/subscriptions'
 
 import cls from './styles.module.scss'
 
 export interface ColumnType {
   field: string
-  onClick?: (column: string) => void
   textAlign?: Property.TextAlign
   title: string
   width?: Property.Width
@@ -15,9 +16,12 @@ export interface ColumnType {
 interface PropsType<T> {
   columns: Array<ColumnType>
   data: T[]
+  onSort?: (column: string) => void
+  sortBy?: string
+  sortDirection?: SortDirection
 }
 
-export const Table = <T,>({ columns, data }: PropsType<T>) => (
+export const Table = <T,>({ columns, data, onSort, sortBy, sortDirection }: PropsType<T>) => (
   <table className={cls.wrapper}>
     <thead className={cls.head}>
       <tr>
@@ -26,11 +30,13 @@ export const Table = <T,>({ columns, data }: PropsType<T>) => (
             className={cls.tableHeaderCell}
             key={`table-head-cell-${columnIndex}`}
             onClick={() => {
-              column.onClick && column.onClick(column.field)
+              onSort && onSort(column.field)
             }}
             style={{ width: column.width }}
           >
             {column.title}
+            {sortBy === column.field &&
+              (sortDirection === 'asc' ? <ArrowDown /> : sortDirection === 'desc' && <ArrowUp />)}
           </th>
         ))}
       </tr>

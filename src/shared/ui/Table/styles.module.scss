@@ -9,6 +9,8 @@
 }
 
 .tableHeaderCell {
+  position: relative;
+
   padding: 12px 48px 12px 24px;
 
   font-size: 14px;
@@ -16,6 +18,10 @@
   text-align: left;
 
   border-bottom: 1px solid var(--dark-500-color);
+
+  & svg {
+    position: absolute;
+  }
 }
 
 .tableRowItem {

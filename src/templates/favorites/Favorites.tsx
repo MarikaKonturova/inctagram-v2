@@ -51,8 +51,6 @@ export const FavoritesPage = () => {
           <Card
             alt={'post'}
             cardWrapperClassName={cls.cardWrapper}
-            skeletonHeight={item.images[0]?.versions.huge?.height}
-            skeletonWidth={item.images[0]?.versions.huge?.width}
             src={item.images[0]?.versions.huge?.url}
           />
         </div>

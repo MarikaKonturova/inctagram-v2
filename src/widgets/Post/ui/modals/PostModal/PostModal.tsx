@@ -10,16 +10,31 @@ import cls from './PostModal.module.scss'
 interface IProps {
   actionsSlot: ReactNode
   content: ReactNode
+  firstElement?: boolean
+  handleClick?: (direction: 'back' | 'next') => void
   handleClose: () => void
   headerActions?: ReactNode
   id: number
   isOpen: boolean
+  lastElement?: boolean
   post: PostResponse
   userName: string
 }
 
 export const GetPostModal: React.FC<IProps> = props => {
-  const { actionsSlot, content, handleClose, headerActions, id, isOpen, post, userName } = props
+  const {
+    actionsSlot,
+    content,
+    firstElement,
+    handleClick,
+    handleClose,
+    headerActions,
+    id,
+    isOpen,
+    lastElement,
+    post,
+    userName,
+  } = props
 
   const creationDate = post?.createdAt ? format(new Date(post?.createdAt), 'MMMM d, Y') : ''
 
@@ -49,9 +64,12 @@ export const GetPostModal: React.FC<IProps> = props => {
           </div>
         </>
       }
+      firstElement={firstElement}
+      handleClick={handleClick}
       handleClose={handleClose}
       id={id}
       isOpen={isOpen}
+      lastElement={lastElement}
     />
   )
 }

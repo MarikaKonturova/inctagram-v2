@@ -27,9 +27,7 @@ export const PublicationCards: FC = () => {
             cardWrapperClassName={cls.cardWrapper}
             createdAt={item.createdAt}
             publ={item}
-            skeletonHeight={item.images[0]?.versions.large?.height}
-            skeletonWidth={item.images[0]?.versions.large?.width}
-            src={item.images[0]?.versions.large?.url}
+            src={item.images[0]?.versions.huge?.url}
           />
         </div>
       )
