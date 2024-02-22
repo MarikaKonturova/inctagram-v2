@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { type GeneralInformationFormValues } from 'features/general-information-form/lib/useValidationForm'
+import i18next from 'i18next'
 import React, { useEffect } from 'react'
 import {
   type Control,
@@ -9,7 +10,7 @@ import {
   type UseFormWatch,
 } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { COUNTRIES } from 'shared/constants/countryList'
+import { COUNTRIES_EN, COUNTRIES_RU } from 'shared/constants/countryList'
 import { DatePicker, Input, Select, Textarea } from 'shared/ui'
 
 import cls from './Form.module.scss'
@@ -27,6 +28,7 @@ interface IProps {
 
 export const Form: React.FC<IProps> = props => {
   const { t } = useTranslation(['profile'])
+  const lang = i18next.language
   const { control, register, setValue, validErrors, watch } = props
   const { aboutMeError, dateOfBirthError, firstNameError, lastNameError, userNameError } =
     validErrors
@@ -34,10 +36,25 @@ export const Form: React.FC<IProps> = props => {
   const city = watch('city')
 
   useEffect(() => {
-    if (country && city && !COUNTRIES[country]?.includes(city)) {
+    if (
+      country &&
+      city &&
+      !COUNTRIES_EN[country]?.includes(city) &&
+      !COUNTRIES_RU[country]?.includes(city)
+    ) {
       setValue('city', '')
+    } else if (country && city && COUNTRIES_EN[country]?.includes(city)) {
+      if (lang === 'ru') {
+        setValue('city', ``)
+        setValue('country', ``)
+      }
+    } else if (country && city && COUNTRIES_RU[country]?.includes(city)) {
+      if (lang === 'en') {
+        setValue('city', ``)
+        setValue('country', ``)
+      }
     }
-  }, [country, city])
+  }, [country, city, lang])
 
   return (
     <div className={cls.formsContainer}>
@@ -102,7 +119,7 @@ export const Form: React.FC<IProps> = props => {
             <Select
               label={`${t('selectCountry')}`}
               onChange={onChange}
-              options={Object.keys(COUNTRIES)}
+              options={lang === 'en' ? Object.keys(COUNTRIES_EN) : Object.keys(COUNTRIES_RU)}
               value={value}
             />
           )}
@@ -113,7 +130,14 @@ export const Form: React.FC<IProps> = props => {
           render={({ field }) => (
             <Select
               label={`${t('selectCity')}`}
-              options={country ? COUNTRIES[country] : []}
+              options={
+                // eslint-disable-next-line no-nested-ternary
+                country
+                  ? COUNTRIES_EN[country]
+                    ? COUNTRIES_EN[country]
+                    : COUNTRIES_RU[country]
+                  : []
+              }
               {...field}
             />
           )}
