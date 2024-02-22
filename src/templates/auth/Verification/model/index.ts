@@ -8,8 +8,7 @@ import { useSnackbar } from 'shared/hooks'
 import { useModal } from 'shared/hooks/useModal'
 
 export const useResendEmailMutation = () => {
-  const [emailInLocalStorage, setEmailInLocalStorage] = useState('')
-  const setEmail = useAuth(selectSetEmail)
+  const { email } = useAuth()
   const onOpen = useSnackbar(state => state.onOpen)
   const { setIsOpen } = useModal()
   const { push } = useRouter()
@@ -26,15 +25,8 @@ export const useResendEmailMutation = () => {
   })
 
   const verifyEmailHandler = () => {
-    if (emailInLocalStorage) {
-      setEmail(emailInLocalStorage)
-      resendEmail({ email: emailInLocalStorage })
-    }
+    resendEmail({ email })
   }
-
-  useEffect(() => {
-    setEmailInLocalStorage(localStorage.getItem('email') || '')
-  }, [])
 
   return { verifyEmailHandler }
 }

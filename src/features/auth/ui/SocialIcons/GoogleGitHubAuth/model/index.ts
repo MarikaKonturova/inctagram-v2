@@ -54,7 +54,7 @@ export const useGoogleGitHubAuth = ({ method, type }: GoogleAndGitHubAuthProps) 
   const { refetch } = useQuery({
     enabled: false,
     queryFn: authorizationMethod,
-    queryKey: ['gihubAuth'],
+    queryKey: ['googleAndGithubAuth'],
   })
 
   return { refetch }

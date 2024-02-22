@@ -1,14 +1,15 @@
+import { NextPageContext } from 'next'
 import React from 'react'
 import { PageLoader } from 'shared/ui/PageLoader/PageLoader'
 
 import { useConfirmEmailMutation } from '../model'
 
 interface IProps {
-  code: string
+  queryParams: NextPageContext['query']
 }
 
-export const EmailConfirmation: React.FC<IProps> = ({ code }) => {
-  useConfirmEmailMutation(code)
+export const EmailConfirmation: React.FC<IProps> = ({ queryParams }) => {
+  useConfirmEmailMutation(queryParams)
 
   return <PageLoader />
 }
