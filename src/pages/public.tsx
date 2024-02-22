@@ -13,7 +13,7 @@ export default function Public({ data }: PublicProps) {
 Public.getLayout = getPublicLayout
 
 export async function getStaticProps() {
-  const res = await fetch(`${process.env.API_URL}home/last-publications`)
+  const res = await fetch(`${process.env.API_URL}home/last-publications`, { cache: 'no-store' })
   const data = await res.json()
 
   if (!res.ok) {
