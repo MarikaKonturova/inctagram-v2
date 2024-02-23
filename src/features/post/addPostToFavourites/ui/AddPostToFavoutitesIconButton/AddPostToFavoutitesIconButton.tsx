@@ -1,4 +1,4 @@
-import React, { type FC } from 'react'
+import React, { type FC, useCallback } from 'react'
 import IconFavouritesOutline from 'shared/assets/icons/light/bookmark.svg'
 import IconFavourites from 'shared/assets/icons/outline/bookmark-outline.svg'
 import { Theme } from 'shared/constants/theme'
@@ -18,9 +18,10 @@ export const AddPostToFavoutitesIconButton: FC<IProps> = ({ postId, postIsFavour
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
   const { addToFavourites } = useAddToFavouritesPost()
 
-  const onFavouritesIconClick = () => {
+  const onFavouritesIconClick = useCallback(() => {
     addToFavourites(postId)
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [postId])
 
   return (
     <ActionIcon
