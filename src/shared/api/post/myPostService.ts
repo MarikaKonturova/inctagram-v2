@@ -7,6 +7,8 @@ import {
   type ResponseType,
 } from '../../types/post'
 
+const DEFAULT_POSTS_COUNT = 8
+
 export const MyPostService = {
   createNewPost(newPost: FormData) {
     return $api.post<PostResponse>('/posts', newPost)
@@ -45,7 +47,7 @@ export const MyPostService = {
       .get<ResponseType>(`/posts/${userName}`, {
         params: {
           pageNumber,
-          pageSize: 5,
+          pageSize: DEFAULT_POSTS_COUNT,
         },
       })
       .then(res => res.data)

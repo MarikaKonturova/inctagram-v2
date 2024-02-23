@@ -11,7 +11,7 @@ export const useCreateMutation = ({ handleClose }: Args) => {
   const { isSuccess, mutate } = useMutation({
     mutationFn: MyPostService.createNewPost,
     onSuccess: async () => {
-      await queryClient.invalidateQueries(['post'])
+      await queryClient.invalidateQueries(['post', 'getProfileData'])
     },
     retry: false,
   })

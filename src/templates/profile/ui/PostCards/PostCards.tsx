@@ -25,15 +25,18 @@ interface Props {
 
 export const PostCards: FC<Props> = ({ userData }) => {
   const queryClient = useQueryClient()
-  const { inView, ref } = useInView()
+  const { inView, ref } = useInView({
+    threshold: 1,
+  })
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } = useGetPosts(
     userData.userName
   )
+
   const [currentModal, setCurrentModal] = useState<Values | null>(null)
   const [postId, setPostId] = useState<number>(0)
   const [isDelePostConfirmationModalOpen, setIsDelePostConfirmationModalOpen] = useState(false)
   const [currentIndex, setCurrentIndex] = useState<number>(0)
-  const [currentPost, setCurrentCurrentPost] = useState<number>(0)
+  const [currentPost, setCurrentPost] = useState<number>(0)
 
   const { post } = useGetMyPost(currentPost)
 
@@ -45,26 +48,6 @@ export const PostCards: FC<Props> = ({ userData }) => {
   const firstElement = idsArray[0] === idsArray[currentIndex]
   const lastElement = idsArray[idsArray.length - 1] === idsArray[currentIndex]
 
-  useEffect(() => {
-    if (idsArray[currentIndex]) {
-      setCurrentCurrentPost(idsArray[currentIndex])
-    } else {
-      setCurrentCurrentPost(postId)
-    }
-  }, [postId, idsArray, currentIndex])
-
-  useEffect(() => {
-    setCurrentIndex(findIndex)
-  }, [postId])
-
-  useEffect(() => {
-    {
-      idsArray.map(id => {
-        queryClient.prefetchQuery(['post', id], () => MyPostService.getPost(id))
-      })
-    }
-  }, [idsArray])
-
   const handleClick = (direction: 'back' | 'next') => {
     if (direction === 'back' && currentIndex > 0) {
       setCurrentIndex(currentIndex - 1)
@@ -72,8 +55,11 @@ export const PostCards: FC<Props> = ({ userData }) => {
       setCurrentIndex(currentIndex + 1)
     }
   }
+
   const renderContent = (page: ResponseType) =>
-    page.items.map((item: PostResponse) => {
+    page.items.map((item: PostResponse, index) => {
+      const lastElement = index === page.items.length - 1
+
       const onPostCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation()
         setPostId(item.id)
@@ -82,7 +68,12 @@ export const PostCards: FC<Props> = ({ userData }) => {
       }
 
       return (
-        <div className={cls.card} key={item.id} onClick={onPostCardClick}>
+        <div
+          className={cls.card}
+          key={item.id}
+          onClick={onPostCardClick}
+          ref={lastElement ? ref : null}
+        >
           <Card
             alt={'post'}
             cardWrapperClassName={cls.cardWrapper}
@@ -118,13 +109,31 @@ export const PostCards: FC<Props> = ({ userData }) => {
   }
 
   useEffect(() => {
+    setCurrentIndex(findIndex)
+  }, [postId])
+
+  useEffect(() => {
+    if (idsArray[currentIndex]) {
+      setCurrentPost(idsArray[currentIndex])
+    } else {
+      setCurrentPost(postId)
+    }
+  }, [postId, idsArray, currentIndex])
+
+  useEffect(() => {
+    idsArray.map(id => {
+      queryClient.prefetchQuery(['post', id], () => MyPostService.getPost(id))
+    })
+  }, [idsArray])
+
+  useEffect(() => {
     if (inView && hasNextPage) {
       void fetchNextPage()
     }
-  }, [inView, hasNextPage])
+  }, [inView, hasNextPage, fetchNextPage])
 
   return (
-    <div>
+    <>
       <div className={cls.cardsList}>{data?.pages.map(page => page && renderContent(page))}</div>
 
       {!!postId &&
@@ -133,7 +142,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
             actionsSlot={<PostModalActions post={post} />}
             content={
               <div className={cls.content}>
-                <Description post={post} />
+                {post.description && <Description post={post} />}
                 <Commentaries postId={idsArray[currentIndex] || postId} />
               </div>
             }
@@ -172,11 +181,11 @@ export const PostCards: FC<Props> = ({ userData }) => {
             setIsOpen={setIsDelePostConfirmationModalOpen}
           />,
         ]}
-      {isSuccess && (
-        <div className={cls.loaderContainer} ref={ref}>
-          {isFetchingNextPage && <Loader />}
+      {isSuccess && isFetchingNextPage && (
+        <div className={cls.loaderContainer}>
+          <Loader />
         </div>
       )}
-    </div>
+    </>
   )
 }

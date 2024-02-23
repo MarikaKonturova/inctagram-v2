@@ -16,18 +16,12 @@ export const FavoritesPage = () => {
   const { response } = useGetProfileData()
   const userData = response?.data
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } = useGetFavoritesData(
-    response?.data.userName
+    userData?.userName || ''
   )
-  const { inView, ref } = useInView({ threshold: 0.0 })
+  const { inView, ref } = useInView({ threshold: 1 })
   const [currentModal, setCurrentModal] = useState<Values | null>(null)
   const [postId, setPostId] = useState<number | undefined>(undefined)
   const { post } = useGetMyPost(postId || 0)
-
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      void fetchNextPage()
-    }
-  }, [inView, hasNextPage])
 
   const openModal = (id: Values) => {
     if (currentModal !== null) {
@@ -40,14 +34,21 @@ export const FavoritesPage = () => {
     setCurrentModal(null)
   }
   const renderContent = (page: FavoritesType) => {
-    return page.items.map(item => {
+    return page.items.map((item, index) => {
+      const lastElement = index === page.items.length - 1
+
       const onPostClick = () => {
         openModal(MODALS.GetPostModal)
         setPostId(item.id)
       }
 
       return (
-        <div className={cls.card} key={item.id} onClick={onPostClick}>
+        <div
+          className={cls.card}
+          key={item.id}
+          onClick={onPostClick}
+          ref={lastElement ? ref : null}
+        >
           <Card
             alt={'post'}
             cardWrapperClassName={cls.cardWrapper}
@@ -57,6 +58,12 @@ export const FavoritesPage = () => {
       )
     })
   }
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      void fetchNextPage()
+    }
+  }, [inView, hasNextPage, fetchNextPage])
 
   return (
     <div className={cls.favoritesPage}>
@@ -77,9 +84,9 @@ export const FavoritesPage = () => {
         />
       )}
 
-      {isSuccess && (
-        <div className={cls.loaderContainer} ref={ref}>
-          {isFetchingNextPage && <Loader />}
+      {isSuccess && isFetchingNextPage && (
+        <div className={cls.loaderContainer}>
+          <Loader />
         </div>
       )}
     </div>
