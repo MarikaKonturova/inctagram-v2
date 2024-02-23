@@ -66,10 +66,6 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
 
             <div className={cls.rightBlock}>
               <Header
-                avatarURL={userData?.avatars?.thumbnail.url}
-                title={userData?.userName || ''}
-              />
-              <Header
                 avatarURL={userData?.avatars?.thumbnail.url || userPhoto.src}
                 title={userData?.userName || ''}
               />
@@ -78,6 +74,7 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
                   {...register('description', {
                     maxLength: { message: `${t('maxLengthDescription')}`, value: 500 },
                   })}
+                  charactersCount={descriptionValueLength}
                   className={cls.wrapper}
                   errorText={errors.description?.message}
                   id={'description'}
@@ -85,7 +82,6 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
                   labelClassName={cls.label}
                   textareaClassName={cls.textarea}
                 />
-                <div className={cls.info}>{descriptionValueLength}/500</div>
               </div>
               <Button className={cls.button} theme={'primary'} type={'submit'}>
                 {t('saveChanges', { ns: 'profile' })}

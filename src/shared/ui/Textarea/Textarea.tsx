@@ -49,7 +49,9 @@ export const Textarea = memo(
           ref={ref}
           {...otherProps}
         />
-        <div className={counterClassName}>{`${charactersCount}/500`}</div>
+        <div
+          className={clsx(cls.charactersCount, [counterClassName])}
+        >{`${charactersCount}/500`}</div>
         {!!errorText && <span className={clsx(cls.errorText)}>{errorText}</span>}
       </div>
     )
