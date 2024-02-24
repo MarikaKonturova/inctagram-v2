@@ -35,9 +35,6 @@ export const useRegistration = (
     onError: err => {
       const error = err.response?.data.messages[0]
 
-      if (error?.message === 'User with this email is already exist') {
-        setIsOpen(true)
-      }
       // FIX
       setError(error?.field as any, error || {})
       onOpen('Error', 'danger', 'left')
