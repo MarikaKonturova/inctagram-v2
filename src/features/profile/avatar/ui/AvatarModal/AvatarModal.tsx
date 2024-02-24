@@ -37,7 +37,7 @@ export const AvatarModal: FC<PropsType> = ({ className, isOpen, setAvatar, setIs
   const { t } = useTranslation('common')
   const [image, setImage] = useState<File>()
   const [errorMessage, setErrorMessage] = useState('')
-  const { uploadAvatar } = useUploadAvatar(setAvatar, setIsOpen)
+  const { openButton, uploadAvatar } = useUploadAvatar(setAvatar, setIsOpen)
 
   const onCrop = (view: string) => {
     const file = convertDataUrlToFile(view, 'hello.txt')
@@ -98,7 +98,13 @@ export const AvatarModal: FC<PropsType> = ({ className, isOpen, setAvatar, setIs
           onCrop={onCrop}
           width={AVATAR_WIDTH}
         />
-        <Button className={cls.button} disabled={!image} onClick={save} type={'button'}>
+        <Button
+          className={cls.button}
+          disabled={!image}
+          onClick={save}
+          style={{ display: openButton || image ? 'block' : 'none' }}
+          type={'button'}
+        >
           {t('save')}
         </Button>
       </div>

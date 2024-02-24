@@ -1,6 +1,6 @@
 import React, { type ChangeEvent, type FC } from 'react'
 import Avatar from 'react-avatar-edit'
-import IconLabel from 'shared/assets/icons/light/image.svg'
+import UploadPhoto from 'shared/assets/icons/light/upload-photo.svg'
 
 interface PropsType {
   height: number
@@ -14,7 +14,14 @@ const AvatarDynamicImport: FC<PropsType> = ({ height, onBeforeFileLoad, onCrop, 
     <Avatar
       borderStyle={{ border: 'none' }}
       height={height}
-      label={<IconLabel />}
+      label={
+        <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
+          <UploadPhoto />
+          <div style={{ fontWeight: 600, lineHeight: '20px', paddingTop: '10px' }}>
+            Upload a photo
+          </div>
+        </div>
+      }
       labelStyle={{
         alignItems: 'center',
         backgroundColor: 'var(--dark-500-color)',

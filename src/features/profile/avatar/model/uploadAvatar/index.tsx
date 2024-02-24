@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError, type AxiosResponse } from 'axios'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProfileService } from 'shared/api'
 import { useSnackbar } from 'shared/hooks'
@@ -13,11 +14,18 @@ export const useUploadAvatar = (
   const onOpen = useSnackbar(state => state.onOpen)
   const client = useQueryClient()
   const { t } = useTranslation('common')
+  const [openButton, setOpenButton] = useState(false)
 
   const { mutate: uploadAvatar } = useMutation(ProfileService.uploadAvatar, {
     mutationKey: ['uploadAvatar'],
     onError: (res: AxiosError<UserError>) => {
       onOpen(res?.response?.data.messages[0].message || `${t('generalError')}`, 'danger', 'left')
+    },
+    onMutate: async () => {
+      setOpenButton(true)
+    },
+    onSettled: () => {
+      setOpenButton(false)
     },
     onSuccess: async (data: AxiosResponse<{ avatars: AvatarPostModel }>) => {
       setAvatar(data.data.avatars.medium.url)
@@ -28,6 +36,7 @@ export const useUploadAvatar = (
   })
 
   return {
+    openButton,
     uploadAvatar,
   }
 }
