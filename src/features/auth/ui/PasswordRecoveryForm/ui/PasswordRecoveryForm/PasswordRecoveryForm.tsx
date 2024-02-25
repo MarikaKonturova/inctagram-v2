@@ -1,6 +1,6 @@
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
 import { useTranslation } from 'next-i18next'
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { AppRoutes } from 'shared/constants/path'
 import { AppLink, Button, FormWrapper, Input, PageLoader } from 'shared/ui'
@@ -22,7 +22,13 @@ export const PasswordRecoveryForm = () => {
     setValue,
     validErrors: { emailError, recaptchaError },
   } = useValidationForm(['email', 'recaptcha'])
-  const { error, isInfoTextShown, isLoading, onSubmit } = useRecoverPassword()
+  const { error, isInfoTextShown, isLoading, isSuccess, onSubmit } = useRecoverPassword()
+
+  useEffect(() => {
+    if (isSuccess) {
+      setValue('recaptcha', '')
+    }
+  }, [isSuccess])
 
   if (isLoading) {
     return <PageLoader />

@@ -17,6 +17,7 @@ export const useRecoverPassword = () => {
   const {
     error,
     isLoading,
+    isSuccess,
     mutate: passwordRecovery,
   } = useMutation<any, AxiosError<UserError>, any>({
     mutationFn: AuthService.passwordRecovery,
@@ -32,5 +33,5 @@ export const useRecoverPassword = () => {
     setEmail(data.email)
   }
 
-  return { error, isInfoTextShown, isLoading, onSubmit }
+  return { error, isInfoTextShown, isLoading, isSuccess, onSubmit }
 }
