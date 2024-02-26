@@ -1,65 +1,89 @@
-
 type PeriodType = 'MONTHLY' | 'SEMI_ANNUALLY' | 'YEARLY'
-type WalletType = 'STRIPE' | 'PAYPAL'
+type WalletType = 'PAYPAL' | 'STRIPE'
 
 interface SubscriptionType {
-    typeSubscription: PeriodType
-    paymentType: WalletType
-    amount: number
+  amount: number
+  paymentType: WalletType
+  typeSubscription: PeriodType
 }
 
 interface CreateSubscriptionSuccessResponseType {
-    url: string
+  url: string
 }
 
 interface CreateSubscriptionFailedResponseType {
-    statusCode: number
-    messages: Array<{
-        message: string
-        field: string
-    }>
-    error: string
+  error: string
+  messages: Array<{
+    field: string
+    message: string
+  }>
+  statusCode: number
 }
 
 interface CurrentSubscriptionType {
-    userId: number
-    subscriptionId: string
-    dateOfPayment: string
-    endDateOfSubscription: string
-    autoRenewal: boolean
+  autoRenewal: boolean
+  dateOfPayment: string
+  endDateOfSubscription: string
+  subscriptionId: string
+  userId: number
 }
 
 interface GetCurrentSubscriptionType {
-    data: CurrentSubscriptionType[]
-    hasAutoRenewal: boolean
+  data: CurrentSubscriptionType[]
+  hasAutoRenewal: boolean
 }
 
 interface PaymentsType {
-    userId: number
-    subscriptionId: string
-    dateOfPayment: string
-    endDateOfSubscription: string
-    price: number
-    subscriptionType: PeriodType
-    paymentType: WalletType
+  dateOfPayment: string
+  endDateOfSubscription: string
+  paymentType: WalletType
+  price: number
+  subscriptionId: string
+  subscriptionType: PeriodType
+  userId: number
 }
 
 interface CostOfSubscriptionType {
-    description: string
-    amount: number
-    typeDescription: PeriodType
+  amount: number
+  description: string
+  typeDescription: PeriodType
+}
+
+interface AccountOptionType {
+  description: string
+  typeDescription: string
 }
 
 interface CostOfSubscriptionsType {
-    data: CostOfSubscriptionType[]
+  data: CostOfSubscriptionType[]
+}
+
+type GetMyPaymentsSort =
+  | 'dateOfPayment'
+  | 'endDateOfSubscription'
+  | 'paymentType'
+  | 'price'
+  | 'subscriptionType'
+
+type SortDirection = 'asc' | 'desc' | undefined
+
+interface GetMyPaymentsParams {
+  pageNumber?: number
+  pageSize?: number
+  sortBy?: GetMyPaymentsSort
+  sortDirection?: SortDirection
 }
 
 export type {
-    SubscriptionType,
-    CreateSubscriptionSuccessResponseType,
-    CreateSubscriptionFailedResponseType,
-    GetCurrentSubscriptionType,
-    PaymentsType,
-    CostOfSubscriptionsType,
-    CostOfSubscriptionType
+  AccountOptionType,
+  CostOfSubscriptionType,
+  CostOfSubscriptionsType,
+  CreateSubscriptionFailedResponseType,
+  CreateSubscriptionSuccessResponseType,
+  GetCurrentSubscriptionType,
+  GetMyPaymentsParams,
+  GetMyPaymentsSort,
+  PaymentsType,
+  SortDirection,
+  SubscriptionType,
 }

@@ -1,20 +1,18 @@
 'use client'
-import { getAuthLayout } from 'layouts/Layout/AuthLayout/AuthLayout'
+import { getAuthLayout } from 'layouts'
 import { type NextPageContext } from 'next'
 import { EmailConfirmation } from 'templates/auth'
 
 interface IProps {
-    myQuery: NextPageContext['query']
+  queryParams: NextPageContext['query']
 }
 
-export default function ConfirmEmail ({ myQuery }: IProps) {
-    const { code } = myQuery
-
-    return <EmailConfirmation code={code?.toString() || ''} />
+export default function ConfirmEmail({ queryParams }: IProps) {
+  return <EmailConfirmation queryParams={queryParams} />
 }
 
 ConfirmEmail.getInitialProps = async (ctx: NextPageContext) => {
-    return { myQuery: ctx.query }
+  return { queryParams: ctx.query }
 }
 
 ConfirmEmail.getLayout = getAuthLayout

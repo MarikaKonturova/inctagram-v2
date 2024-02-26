@@ -1,22 +1,41 @@
 import clsx from 'clsx'
-import React, { useState, type ReactNode } from 'react'
+import React, { type ReactNode, memo, useEffect, useState } from 'react'
+
 import cls from './ActionIcon.module.scss'
 interface ActionIconProps {
-    outlineIcon: ReactNode
-    filledIcon: ReactNode
-    onClick: () => Promise<void> | void
-    initialState?: boolean
-    className?: string
+  className?: string
+  filledIcon: ReactNode
+  initialState?: boolean
+  isLoading?: boolean
+  onClick: () => Promise<void> | void
+  outlineIcon: ReactNode
 }
-export const ActionIcon = ({ onClick, filledIcon, outlineIcon, initialState = false, className }: ActionIconProps) => {
+export const ActionIcon = memo(
+  ({
+    className,
+    filledIcon,
+    initialState = false,
+    isLoading,
+    onClick,
+    outlineIcon,
+  }: ActionIconProps) => {
     const [fill, setFill] = useState(initialState)
 
     const onIconClick = async () => {
-        await onClick()
-        setFill(!fill)
+      await onClick()
+      setFill(!fill)
     }
 
-    return <div onClick={onIconClick} className={clsx(cls.icon, className)}>
-        {fill ? filledIcon : outlineIcon }
-    </div>
-}
+    useEffect(() => {
+      if (fill !== initialState) {
+        setFill(initialState)
+      }
+    }, [fill, initialState])
+
+    return (
+      <button className={clsx(cls.icon, className)} disabled={isLoading} onClick={onIconClick}>
+        {fill ? filledIcon : outlineIcon}
+      </button>
+    )
+  }
+)

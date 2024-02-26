@@ -1,12 +1,13 @@
 .modal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 20px;
-    gap: 20px
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
 }
 
 .icon:hover {
-    cursor: pointer;
+  cursor: pointer;
 }

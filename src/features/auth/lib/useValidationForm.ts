@@ -1,52 +1,60 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import { createValidationSchema, type ValidateUnion } from './loginFormSchema'
+
+import { type ValidateUnion, createValidationSchema } from './loginFormSchema'
 
 export interface IFormValidate {
-    userName: string
-    password: string
-    email: string
-    confPassword?: string
-    recaptcha?: string
+  confPassword?: string
+  email: string
+  isAgree?: boolean
+  password: string
+  recaptcha?: string
+  userName: string
 }
 
 export const useValidationForm = (arr: ValidateUnion[]) => {
-    const {
-        register,
-        handleSubmit,
-        reset,
-        setValue,
-        clearErrors,
-        setError,
-        formState: { errors, isValid }
-    } = useForm<IFormValidate>({
-        resolver: yupResolver(createValidationSchema(arr)),
-        mode: 'onTouched',
-        reValidateMode: 'onChange'
-    })
+  const {
+    clearErrors,
+    formState,
+    getValues,
+    handleSubmit,
+    register,
+    reset,
+    setError,
+    setValue,
+    watch,
+  } = useForm<IFormValidate>({
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
+    resolver: yupResolver(createValidationSchema(arr)),
+  })
 
-    const emailError = errors?.email && errors.email.message
-    const passwordError = errors?.password && errors.password.message
-    const confPasswordError = errors?.confPassword && errors.confPassword.message
-    const userNameError = errors?.userName && errors.userName.message
-    const recaptchaError = errors?.recaptcha && errors.recaptcha.message
+  const { errors, isValid } = formState
 
-    const validErrors = {
-        emailError,
-        passwordError,
-        confPasswordError,
-        userNameError,
-        recaptchaError
-    }
+  const emailError = errors?.email && errors.email.message
+  const passwordError = errors?.password && errors.password.message
+  const confPasswordError = errors?.confPassword && errors.confPassword.message
+  const userNameError = errors?.userName && errors.userName.message
+  const recaptchaError = errors?.recaptcha && errors.recaptcha.message
 
-    return {
-        validErrors,
-        register,
-        handleSubmit,
-        reset,
-        clearErrors,
-        setValue,
-        setError,
-        isValid
-    }
+  const validErrors = {
+    confPasswordError,
+    emailError,
+    passwordError,
+    recaptchaError,
+    userNameError,
+  }
+
+  return {
+    clearErrors,
+    getValues,
+    handleSubmit,
+    isValid,
+    register,
+    reset,
+    setError,
+    setValue,
+    validErrors,
+    watch,
+  }
 }

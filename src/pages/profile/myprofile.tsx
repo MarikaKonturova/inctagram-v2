@@ -1,8 +1,8 @@
-import { getLayoutWithSidebar } from 'layouts/Layout/LayoutWithSidebar/LayoutWithSidebar'
-import { ProfilePage } from 'features/profile'
+import { getLayoutWithSidebar } from 'layouts'
+import { ProfilePage } from 'templates/profile'
 
-export default function Profile () {
-    return <ProfilePage/>
+export default function Profile() {
+  return <ProfilePage />
 }
 
 Profile.getLayout = getLayoutWithSidebar

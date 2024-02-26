@@ -1,21 +1,21 @@
 .container {
-    display: flex;
-    gap: 12px;
+  display: flex;
+  gap: 12px;
 }
 
 .avatars {
-    direction: rtl;
-    text-align: left;
-    padding-left: 10px;
+  direction: rtl;
+  padding-left: 10px;
+  text-align: left;
 }
 
 .avatar {
-    position: relative;
-    margin-left: -10px;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
+  margin-left: -10px;
 }
 
 .likes {
-    font: var(--font-medium-400);
-    color: var(--light-100-color);
+  font: var(--font-medium-400);
+  color: var(--light-100-color);
 }

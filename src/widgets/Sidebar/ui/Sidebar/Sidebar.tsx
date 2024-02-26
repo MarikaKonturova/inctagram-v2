@@ -1,9 +1,9 @@
 import clsx from 'clsx'
+import { Logout } from 'features/auth'
+import { CreatePostModal } from 'features/post'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import React, { useState } from 'react'
-import { Logout } from 'features/auth'
-import { CreatePostModal } from 'features/post'
 import IconStatistics from 'shared/assets/icons/general/trending-up.svg'
 import IconFavorites from 'shared/assets/icons/light/bookmark.svg'
 import IconHome from 'shared/assets/icons/light/home.svg'
@@ -17,105 +17,97 @@ import { AppRoutes } from 'shared/constants/path'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
 import { AppLink } from 'shared/ui'
+
 import cls from './Sidebar.module.scss'
 
 interface SidebarProps {
-    className?: string
-    active?: string
+  active?: string
+  className?: string
 }
 
 export const Sidebar = (props: SidebarProps) => {
-    const [open, setOpen] = useState(false)
-    const { className } = props
-    const { t } = useTranslation('common')
-    const { theme } = useTheme()
-    const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
-    const { asPath } = useRouter()
-    const currentPath = asPath.replace(/\/[a-z]*(?=\/)/g, '')
-    return (
-        <div className={clsx(cls.Sidebar, [className])}>
-            <div className={cls.menu}>
-                <AppLink
-          href={AppRoutes.HOME}
+  const [open, setOpen] = useState(false)
+  const { className } = props
+  const { t } = useTranslation('common')
+  const { theme } = useTheme()
+  const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
+  const { asPath } = useRouter()
+  const currentPath = asPath
+
+  return (
+    <div className={clsx(cls.Sidebar, [className])}>
+      <div className={cls.menu}>
+        <AppLink
           active={currentPath === AppRoutes.HOME}
           className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.HOME })}
-                >
-                    {currentPath === AppRoutes.HOME
-                        ? (
-                            <IconHome className={cls.icon} />
-                        )
-                        : (
-                            <IconHomeOutline className={cls.icon} fill={fill} />
-                        )}
-                    <span className={cls.link}>{t('home')}</span>
-                </AppLink>
-                <button
-          type="button"
-          onClick={() => {
-              setOpen(true)
-          }}
+          href={AppRoutes.HOME}
+        >
+          {currentPath === AppRoutes.HOME ? (
+            <IconHome className={cls.icon} />
+          ) : (
+            <IconHomeOutline className={cls.icon} fill={fill} />
+          )}
+          <span className={cls.link}>{t('home')}</span>
+        </AppLink>
+        <button
           className={cls.item}
-                >
-                    {!open
-                        ? (
-                            <IconCreateOutline className={cls.icon} fill={fill} />
-                        )
-                        : (
-                            <IconCreate className={cls.icon} fill={fill} />
-                        )}
-                    <p className={cls.link} style={{ color: 'white' }}>
-                        {t('create')}
-                    </p>
-                </button>
-                <CreatePostModal
+          onClick={() => {
+            setOpen(true)
+          }}
+          type={'button'}
+        >
+          {!open ? (
+            <IconCreateOutline className={cls.icon} fill={fill} />
+          ) : (
+            <IconCreate className={cls.icon} fill={fill} />
+          )}
+          <span className={cls.link}>{t('create')}</span>
+        </button>
+        <CreatePostModal
           handleClose={() => {
-              setOpen(false)
+            setOpen(false)
           }}
           isOpen={open}
-                />
-                <AppLink
-          href={`${AppRoutes.PROFILE.MY_PROFILE}`}
+        />
+        <AppLink
           active={currentPath === AppRoutes.PROFILE.MY_PROFILE}
           className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.PROFILE.MY_PROFILE })}
-                >
-                    {currentPath === AppRoutes.PROFILE.MY_PROFILE
-                        ? (
-                            <IconProfile className={cls.icon} />
-                        )
-                        : (
-                            <IconProfileOutline className={cls.icon} fill={fill} />
-                        )}
+          href={`${AppRoutes.PROFILE.MY_PROFILE}`}
+        >
+          {currentPath === AppRoutes.PROFILE.MY_PROFILE ? (
+            <IconProfile className={cls.icon} />
+          ) : (
+            <IconProfileOutline className={cls.icon} fill={fill} />
+          )}
 
-                    <span className={cls.link}>{t('myProfile')}</span>
-                </AppLink>
-            </div>
-            <div className={cls.extra}>
-                <AppLink
-          href={AppRoutes.STATISTICS}
+          <span className={cls.link}>{t('myProfile')}</span>
+        </AppLink>
+      </div>
+      <div className={cls.extra}>
+        <AppLink
           active={currentPath === AppRoutes.STATISTICS}
           className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.STATISTICS })}
-                >
-                    <IconStatistics className={cls.icon} fill={fill} />
+          href={AppRoutes.STATISTICS}
+        >
+          <IconStatistics className={cls.icon} fill={fill} />
 
-                    <span className={cls.link}>{t('statistics')}</span>
-                </AppLink>
-                <AppLink
-          href={AppRoutes.FAVORITES}
+          <span className={cls.link}>{t('statistics')}</span>
+        </AppLink>
+        <AppLink
           active={currentPath === AppRoutes.FAVORITES}
           className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.FAVORITES })}
-                >
-                    {currentPath === AppRoutes.FAVORITES
-                        ? (
-                            <IconFavorites className={cls.icon} />
-                        )
-                        : (
-                            <IconFavoritesOutline className={cls.icon} fill={fill} />
-                        )}
+          href={AppRoutes.FAVORITES}
+        >
+          {currentPath === AppRoutes.FAVORITES ? (
+            <IconFavorites className={cls.icon} />
+          ) : (
+            <IconFavoritesOutline className={cls.icon} fill={fill} />
+          )}
 
-                    <span className={cls.link}>{t('favorites')}</span>
-                </AppLink>
-            </div>
-            <Logout className={cls.button} />
-        </div>
-    )
+          <span className={cls.link}>{t('favorites')}</span>
+        </AppLink>
+      </div>
+      <Logout className={cls.button} />
+    </div>
+  )
 }

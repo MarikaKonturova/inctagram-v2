@@ -1,109 +1,119 @@
-@import "app/styles/mixins/mixins";
+@import 'app/styles/mixins/mixins';
 
 .field {
-    text-align: left;
+  @include flex($direction: column, $justify: flex-start);
 
-    @include flex($direction: column, $justify: flex-start);
+  text-align: left;
 
-    .required {
-        color: var(--danger-500-color);
+  .required {
+    color: var(--danger-500-color);
+  }
+
+  .wrapper {
+    @include flex($align: center);
+
+    position: relative;
+    border: none;
+    border-radius: 2px;
+
+    // standard - variant
+    &.standard::before {
+      pointer-events: none;
+      content: ' ';
+
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+
+      height: 1px;
+
+      background-color: var(--card-entity-bg);
     }
 
-    .wrapper {
-        position: relative;
-        border-radius: 2px;
+    &.standard:focus-within::before {
+      opacity: 0;
+    }
+
+    &.standard.error::before {
+      background-color: var(--danger-500-color);
+    }
+
+    &.error:focus-within {
+      outline: 2px solid var(--danger-500-color);
+    }
+
+    // outline - variant
+    &.outline {
+      outline: 1px solid var(--card-entity-bg);
+
+      &.error {
+        outline: 1px solid var(--danger-500-color);
+      }
+    }
+
+    &:focus-within {
+      outline: 2px solid var(--primary-700-color);
+    }
+
+    &:focus-within.error {
+      outline: 1px solid var(--danger-500-color);
+    }
+
+    .input {
+      width: 100%;
+      padding: 8px 0;
+
+      font: var(--font-m);
+      font-weight: 400;
+      color: var(--light-100-color);
+
+      background: none;
+
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus {
+        background-color: none;
+        transition: background-color 5000s ease-in-out 0s;
+
+        -webkit-text-fill-color: var(--light-100-color);
+      }
+
+      &.search {
+        padding-left: 40px;
         border: none;
+        border-radius: 2px;
+        outline: 1px solid var(--card-entity-bg);
+      }
 
-        @include flex($align: center);
+      &.password {
+        padding-right: 40px;
+      }
 
-
-        // standard - variant
-        &.standard::before {
-            height: 1px;
-            background-color: var(--card-entity-bg);
-            left: 0;
-            bottom: -1px;
-            content: " ";
-            position: absolute;
-            right: 0;
-            pointer-events: none;
-        }
-
-        &.standard:focus-within::before {
-            opacity: 0;
-        }
-
-        &.standard.error::before {
-            background-color: var(--danger-500-color);
-        }
-
-        &.error:focus-within {
-            outline: 2px solid var(--danger-500-color);
-        }
-
-        // outline - variant
-        &.outline {
-            outline: 1px solid var(--card-entity-bg);
-
-            &.error {
-                outline: 1px solid var(--danger-500-color);
-            }
-        }
-
-        &:focus-within {
-            outline: 2px solid var(--primary-700-color);
-        }
-
-        &:focus-within.error {
-            outline: 1px solid var(--danger-500-color);
-        }
-
-        .input {
-            font: var(--font-m);
-            font-weight: 400;
-            color: var(--light-100-color);
-            background: none;
-            width: 100%;
-            padding: 8px 0;
-
-            &.search {
-                padding-left: 40px;
-                border: none;
-                border-radius: 2px;
-                outline: 1px solid var(--card-entity-bg);
-            }
-
-            &.password {
-                padding-right: 40px;
-            }
-
-            &.disabled {
-                cursor: not-allowed;
-                user-select: none;
-                color: var(--dark-100-color);
-            }
-
-        }
-
-        button {
-            width: 24px;
-            height: 24px;
-            right: 12px;
-
-            @include position(absolute)
+      &.disabled {
+        cursor: not-allowed;
+        user-select: none;
+        color: var(--dark-100-color);
+      }
     }
 
-        .icon {
-            transform: translate(50%, 50%);
+    button {
+      @include position(absolute);
 
-            @include position(absolute, 0, 50%, 0, 0);
-        }
-
-
+      right: 12px;
+      width: 24px;
+      height: 24px;
     }
 
-    .message {
-        font-size: 14px;
-        color: var(--danger-500-color);
+    .icon {
+      @include position(absolute, 0, 50%, 0, 0);
+
+      transform: translate(50%, 50%);
     }
+  }
+
+  .message {
+    font-size: 14px;
+    color: var(--danger-500-color);
+  }
 }

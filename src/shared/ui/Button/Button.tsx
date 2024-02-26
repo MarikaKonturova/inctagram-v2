@@ -1,42 +1,34 @@
 import clsx from 'clsx'
-import React, { type ButtonHTMLAttributes, memo, type ReactNode } from 'react'
+import React, { type ButtonHTMLAttributes, type ReactNode, memo } from 'react'
+
 import cls from './Button.module.scss'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    className?: string
-    theme?: 'outline' | 'secondary' | 'primary' | 'textButton' | 'clear'
-    disabled?: boolean
-    children?: ReactNode
-    onClick?: React.MouseEventHandler<HTMLButtonElement>
-    block?: boolean
+  block?: boolean
+  children?: ReactNode
+  className?: string
+  disabled?: boolean
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
+  theme?: 'clear' | 'outline' | 'primary' | 'secondary' | 'textButton'
 }
 
 export const Button = memo((props: ButtonProps) => {
-    const {
-        className,
-        children,
-        theme = 'primary',
-        disabled,
-        onClick,
-        block,
-        ...otherProps
-    } = props
+  const { block, children, className, disabled, onClick, theme = 'primary', ...otherProps } = props
 
-    const mods = {
-        [cls.disabled]: disabled,
-        [cls.block]: block
-    }
+  const mods = {
+    [cls.block]: block,
+    [cls.disabled]: disabled,
+  }
 
-    return (
-        <button
-                type='button'
-                className={clsx(cls.Button, mods, [className, cls[theme]])}
-                disabled={disabled}
-                onClick={onClick}
-                {...otherProps}
-        >
-            {children}
-        </button>
-    )
-}
-)
+  return (
+    <button
+      className={clsx(cls.Button, mods, [className, cls[theme]])}
+      disabled={disabled}
+      onClick={onClick}
+      type={'button'}
+      {...otherProps}
+    >
+      {children}
+    </button>
+  )
+})

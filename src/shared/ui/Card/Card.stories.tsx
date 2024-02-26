@@ -4,23 +4,23 @@ import congratulationsImg from 'shared/assets/images/congratulations.png'
 import { Card } from 'shared/ui/Card/Card'
 
 export default {
-    title: 'shared/Card',
-    component: Card,
-    argTypes: {}
+  argTypes: {},
+  component: Card,
+  title: 'shared/Card',
 } as ComponentMeta<typeof Card>
 
-const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />
+const Template: ComponentStory<typeof Card> = args => <Card {...args} />
 
 export const BasicCard = Template.bind({})
 BasicCard.args = {
-    src: congratulationsImg,
-    alt: 'congratulations'
+  alt: 'congratulations',
+  src: congratulationsImg,
 }
 
 export const CardWhenLoading = Template.bind({})
 CardWhenLoading.args = {
-    src: '',
-    alt: 'no image',
-    skeletonWidth: 300,
-    skeletonHeight: 300
+  alt: 'no image',
+  skeletonHeight: 300,
+  skeletonWidth: 300,
+  src: '',
 }

@@ -1,10 +1,10 @@
-@import "app/styles/mixins/mixins";
+@import 'app/styles/mixins/mixins';
 
-.item{
-    @include flex(row, flex-start, center) ;
+.item {
+  @include flex(row, flex-start, center);
 
-    font: var(--font-regular-400);
-    color: var(--light-100-color);
-    gap: 10px;
-    width: 100%;
+  gap: 10px;
+  width: 100%;
+  font: var(--font-regular-400);
+  color: var(--light-100-color);
 }

@@ -1,19 +1,33 @@
 .textarea {
-    min-width: 100%;
-    min-height: 70px;
-    padding: 10px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.2;
-    border-radius: 2px;
-    word-break: break-word;
-    border: 1px solid transparent;
-    resize: vertical;
-    background: var(--dark-color);
-    color: var(--light-900-color);
+  resize: vertical;
+
+  min-width: 100%;
+  min-height: 70px;
+  padding: 10px;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--light-900-color);
+  word-break: break-word;
+
+  background: var(--dark-color);
+  border: 1px solid transparent;
+  border-radius: 2px;
 }
 
 .errorText {
-    font-size: 14px;
-    color: var(--danger-500-color);
+  font-size: 14px;
+  color: var(--danger-500-color);
+}
+
+.error {
+  background: var(--dark-500-color);
+  border: 1px solid var(--danger-500-color);
+}
+
+.charactersCount {
+  font: var(--font-small-400);
+  color: #8d9094;
+  text-align: end;
 }

@@ -1,17 +1,21 @@
 .tab {
-    padding: 6px 45px;
-    border: none;
-    border-bottom: 1px solid var(--dark-100-color);
-    transition: ease-in-out 0.34s;
-    color: var(--dark-100-color);
-    font-size: var(--font-line-small);
-    font-weight: 600;
-    min-width: 17vw;
-    text-align: center;
-    cursor: pointer;
+  cursor: pointer;
+
+  min-width: 17vw;
+  padding: 6px 45px;
+
+  font-size: var(--font-line-small);
+  font-weight: 600;
+  color: var(--dark-100-color);
+  text-align: center;
+
+  border: none;
+  border-bottom: 1px solid var(--dark-100-color);
+
+  transition: ease-in-out 0.34s;
 }
 
-.selectedTab{
-    border-bottom: 1px solid var(--primary-500-color);
-    color: var(--primary-500-color);
+.selectedTab {
+  color: var(--primary-500-color);
+  border-bottom: 1px solid var(--primary-500-color);
 }

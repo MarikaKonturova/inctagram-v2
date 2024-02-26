@@ -1,30 +1,54 @@
 import { $api } from 'shared/api'
 import { type Post } from 'shared/types/post'
+import { IFavoritePostsParams } from 'shared/types/users'
 
-// TODO: доделать API
-// TODO: сделать enum для API routes
 export const UsersService = {
-    getFollowingUsers (userName: string, searchUser: string) {
-        const queryParams = {
-            search: searchUser,
-            pageSize: 12,
-            pageNumber: 1,
-            cursor: 0
-        }
+  addToFavourites(postId: number) {
+    return $api.post<Post>(`/users/favorite/${postId}`)
+  },
 
-        return $api.get(`/users/${userName}/followers`, { params: queryParams })
-    },
+  follow(selectedUserId: number) {
+    return $api.post('/users/following', { selectedUserId })
+  },
 
-    addToFavourites (postId: number) {
-        return $api.post<Post>(`/users/favorite/${postId}`)
-    },
+  async getFavoritesPosts({ cursor, pageParam, pageSize, userName }: IFavoritePostsParams) {
+    const res = await $api.get(
+      `/users/${userName}/favorites?cursor=${cursor || 0}&pageSize=${pageSize || 8}&pageNumber=${
+        pageParam || 1
+      }`
+    )
+    const data = res.data
 
-    follow (selectedUserId: number) {
-        return $api.post('/users/following', { selectedUserId })
-    },
+    return { ...data, pageParam }
+  },
 
-    unfollow (userId: number) {
-        return $api.delete(`/users/follower/${userId}`)
+  getFollowersUsers(userName: string, searchUser: string) {
+    const queryParams = {
+      cursor: 0,
+      pageNumber: 1,
+      pageSize: 12,
+      search: searchUser,
     }
 
+    return $api.get(`/users/${userName}/following`, { params: queryParams })
+  },
+
+  getFollowingUsers(userName: string, searchUser: string) {
+    const queryParams = {
+      cursor: 0,
+      pageNumber: 1,
+      pageSize: 12,
+      search: searchUser,
+    }
+
+    return $api.get(`/users/${userName}/followers`, { params: queryParams })
+  },
+
+  getUserByName(userName: string) {
+    return $api.get(`/users/${userName}`)
+  },
+
+  unfollow(userId: number) {
+    return $api.delete(`/users/follower/${userId}`)
+  },
 }

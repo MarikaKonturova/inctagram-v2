@@ -1,11 +1,9 @@
+import { getLayoutWithSidebar } from 'layouts'
 import React from 'react'
-import { PublicationCards } from '../features/home/getHomeData/ui/PuublicationCards/PublicationCards'
-import { getLayoutWithSidebar } from '../layouts/Layout/LayoutWithSidebar/LayoutWithSidebar'
+import { PublicationCards } from 'templates/home'
 
 const Home = () => {
-    return (
-        <PublicationCards/>
-    )
+  return <PublicationCards />
 }
 
 Home.getLayout = getLayoutWithSidebar

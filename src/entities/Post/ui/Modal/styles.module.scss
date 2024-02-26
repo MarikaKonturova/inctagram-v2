@@ -1,23 +1,42 @@
 .container {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    padding-top: 40px;
-    width: min(1000px, 80vw);
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+
+  width: min(1000px, 80vw);
+  padding-top: 40px;
 }
 
 .closeIconContainer {
-    text-align: center;
-    position: absolute;
-    top: 0;
-    right: 8px;
+  position: absolute;
+  top: 0;
+  right: 8px;
+  text-align: center;
+}
+
+.iconContainer {
+  align-self: center;
+  padding: 4px 6px 2px 6px;
+  text-align: center;
+  background: var(--dark-300-color);
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: var(--dark-100-color);
+  }
+}
+
+.backIconContainer {
+  margin-right: 10px;
+  &:active {
+    transform: scale(0.9);
+  }
 }
 
 .nextIconContainer {
-    background: var(--dark-300-color);
-    /* stylelint-disable-next-line shorthand-property-no-redundant-values */
-    padding: 4px 6px 2px 6px;
-    text-align: center;
-    align-self: center;
-    margin-left: 10px;
+  margin-left: 10px;
+  &:active {
+    transform: scale(0.9);
+  }
 }

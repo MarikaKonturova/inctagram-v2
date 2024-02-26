@@ -1,8 +1,9 @@
 .header {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .headerTitle {
-    margin-left: 12px;
+  margin-left: 12px;
+  font: var(--font-h3);
 }

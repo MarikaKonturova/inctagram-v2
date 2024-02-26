@@ -1,95 +1,109 @@
 .dropDownContainer {
-    width: 100%;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .labelClassName {
-    color: var(--light-900-color);
-    font: var(--font-medium-400);
+  font: var(--font-medium-400);
+  color: var(--light-900-color);
 }
 
 .icon {
-    fill: var(--light-900-color);
-    width: 25px;
+  width: 25px;
+  fill: var(--light-900-color);
 }
 
 .dropDownHeader {
-    background-color: var(--dark-700-color);
-    border: 1px solid var(--dark-100-color);
-    border-radius: 2px;
-    font: var(--font-medium-400);
-    color: var(--light-900-color);
-    padding: 0.4em 0.4em 0.4em 1em;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    &:hover {
-        border: 1px solid var(--light-900-color);
+  width: 100%;
+  padding: 0.4em 0.4em 0.4em 1em;
+
+  font: var(--font-medium-400);
+  color: var(--light-900-color);
+
+  background-color: var(--dark-700-color);
+  border: 1px solid var(--dark-100-color);
+  border-radius: 2px;
+
+  &:hover {
+    border: 1px solid var(--light-900-color);
+  }
+
+  &:active {
+    color: var(--light-100-color);
+    background-color: var(--dark-500-color);
+    border: 1px solid var(--light-100-color);
+
+    .Icon {
+      fill: var(--light-100-color);
     }
-
-    &:active {
-        background-color: var(--dark-500-color);
-        border: 1px solid var(--light-100-color);
-        color: var(--light-100-color);
-
-        .Icon {
-            fill: var(--light-100-color);
-        }
-    }
+  }
 }
 
 .disabled {
+  cursor: default;
+  color: var(--dark-100-color);
+  background-color: transparent;
+  border: 1px solid var(--dark-100-color);
+
+  &:hover {
+    border: 1px solid var(--dark-100-color);
+  }
+
+  &:active {
+    color: var(--dark-100-color);
     background-color: transparent;
     border: 1px solid var(--dark-100-color);
-    color: var(--dark-100-color);
-    cursor: default;
-
-    &:hover {
-        border: 1px solid var(--dark-100-color);
-    }
-
-    &:active {
-        background-color: transparent;
-        border: 1px solid var(--dark-100-color);
-        color: var(--dark-100-color);
-    }
+  }
 }
 
 .disabled.Icon {
-    display: none;
+  display: none;
 }
 
 .active {
-    border: 1px solid var(--light-100-color);
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+  border: 1px solid var(--light-100-color);
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 
-    &:hover {
-        border: 1px solid var(--light-100-color);
-    }
+  &:hover {
+    border: 1px solid var(--light-100-color);
+  }
 }
 
-
 .dropDownList {
-    background-color: var(--dark-500-color);
-    border: 1px solid var(--light-100-color);
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    font: var(--font-medium-400);
-    color: var(--light-900-color);
-    margin: 0;
-    box-sizing: border-box;
-    max-height: 20vh;
-    overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+
+  overflow-y: auto;
+
+  box-sizing: border-box;
+  margin: 0;
+  height: 150px;
+
+  font: var(--font-medium-400);
+  color: var(--light-900-color);
+
+  background-color: var(--dark-500-color);
+  border: 1px solid var(--light-100-color);
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .listItem {
-    list-style: none;
-    padding: 0.4em 1em;
+  padding: 0.4em 1em;
+  list-style: none;
+}
 
-    &:hover {
-        background-color: var(--dark-300-color);
-        color: var(--primary-500-color);
-        cursor: pointer;
-    }
+.activeListItem {
+  cursor: pointer;
+  color: var(--primary-500-color);
+  background-color: var(--dark-300-color);
 }

@@ -1,10 +1,10 @@
 .container {
-    position: relative;
-    width: 234px;
-    height: 228px;
+  position: relative;
+  width: 234px;
+  height: 228px;
 
-    .cardImg {
-        object-fit: cover;
-        background: var(--dark-300-color);
-    }
+  .cardImg {
+    object-fit: cover;
+    background: var(--dark-300-color);
+  }
 }

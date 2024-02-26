@@ -1,19 +1,23 @@
 export const AppRoutes = {
-    AUTH: {
-        LOGIN: '/auth/login',
-        REGISTRATION: '/auth/registration',
-        NEW_PASSWORD: '/auth/create-new-password',
-        FORGOT_PASSWORD: '/auth/forgot-password',
-        CONGRATULATIONS: '/auth/congratulations',
-        VERIFICATION: '/auth/verification',
-        REGISTRATION_CONFIRMATION: '/auth/registration-confirmation'
-    },
-    PROFILE: {
-        MY_PROFILE: '/profile/myprofile',
-        SETTINGS: '/profile/settings/edit'
-    },
-    HOME: '/home',
-    CREATE: '/create',
-    STATISTICS: '/statistics',
-    FAVORITES: '/favorites'
+  AUTH: {
+    CONGRATULATIONS: '/auth/congratulations',
+    FORGOT_PASSWORD: '/auth/forgot-password',
+    LOGIN: '/auth/login',
+    NEW_PASSWORD: '/auth/create-new-password',
+    PRIVACY_POLICY: '/auth/privacy-policy',
+    REGISTRATION: '/auth/registration',
+    REGISTRATION_CONFIRMATION: '/auth/registration-confirmation',
+    TERMS_OF_SERVICE: '/auth/terms-of-service',
+    VERIFICATION: '/auth/verification',
+  },
+  CREATE: '/create',
+  FAVORITES: '/favorites',
+  HOME: '/home',
+  PROFILE: {
+    MY_PROFILE: '/profile/myprofile',
+    PROFILE: '/profile',
+    SETTINGS: '/profile/settings/edit',
+  },
+  PUBLIC: '/public',
+  STATISTICS: '/statistics',
 } as const

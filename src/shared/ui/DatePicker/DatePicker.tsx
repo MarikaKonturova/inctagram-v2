@@ -1,75 +1,90 @@
 import clsx from 'clsx'
-import { format, getYear } from 'date-fns'
+import { addDays, format, getYear } from 'date-fns'
 import { range } from 'lodash'
-import { useState } from 'react'
+import Link from 'next/link'
 import LibDatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { type UseFormSetValue } from 'react-hook-form'
 import IconCalendar from 'shared/assets/icons/light/calendar.svg'
+import { AppRoutes } from 'shared/constants/path'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
-import { CustomHeader } from './components/CustomHeader'
+
 import cls from './DatePicker.module.scss'
+import { CustomHeader } from './components/CustomHeader'
 
 interface DatePickerProps {
-    value?: string
-    onChange?: (value: string) => void
+  errorText?: string
+  onChange?: (value: string) => void
+  setValue: UseFormSetValue<any>
+  value?: string
 }
-const years = range(1990, +getYear(new Date()) + 1, 1)
+const years = range(+getYear(new Date()) - 100, +getYear(new Date()) + 1, 1)
 const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ]
-export const DatePicker = ({ value, onChange }: DatePickerProps) => {
-    const { theme } = useTheme()
-    const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
-    const dateFromProps = value && new Date(Date.parse(value))
-    const [startDate, setStartDate] = useState(dateFromProps || new Date())
 
-    const onDateChange = (date: Date) => {
-        setStartDate(date)
-        onChange?.(format(date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"))
-    }
+export const DatePicker = ({ errorText, onChange, setValue, value }: DatePickerProps) => {
+  const { theme } = useTheme()
+  const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
+  const startDate = (value && new Date(Date.parse(value))) || new Date()
+  const onDateChange = (date: Date) => {
+    setValue('dateOfBirth', format(date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"), {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    })
+    onChange?.(format(date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"))
+  }
 
-    return (
-        <div className={clsx(cls.calendar_icon_group)}>
-            <LibDatePicker
-            renderCustomHeader={({
-                date,
-                changeYear,
-                changeMonth,
-                decreaseMonth,
-                increaseMonth,
-                ...rest
-            }) => (
-                <CustomHeader
-                        date={date}
-                        decreaseMonth={decreaseMonth}
-                        increaseMonth={increaseMonth}
-                        changeYear={changeYear}
-                        years={years}
-                        months={months}
-                        changeMonth={changeMonth}
-                        {...rest} />
-            )}
-            selected={startDate} onChange={onDateChange}
-            calendarClassName={cls.day}
-            dayClassName={(date) => date.getMonth() === startDate.getMonth()
-                ? clsx(cls.day, cls.dayWhite)
-                : clsx(cls.day, cls.dayGray) }
-            wrapperClassName ={clsx(cls.calendar)}
-            onKeyDown={(e) => { e.preventDefault() }}
+  return (
+    <div>
+      <div className={clsx(cls.calendarContainer, errorText && cls.calendarContainerError)}>
+        <LibDatePicker
+          calendarClassName={cls.day}
+          calendarStartDay={1}
+          className={clsx(cls.libCalendar, errorText && cls.libCalendarError)}
+          dateFormat={'dd/MM/yyyy'}
+          dayClassName={() => clsx(cls.day, cls.dayWhite)}
+          maxDate={addDays(new Date(), 0)}
+          onChange={onDateChange}
+          onKeyDown={e => {
+            e.preventDefault()
+          }}
+          renderCustomHeader={({ changeMonth, changeYear, date, decreaseMonth, increaseMonth }) => (
+            <CustomHeader
+              changeMonth={changeMonth}
+              changeYear={changeYear}
+              date={date}
+              decreaseMonth={decreaseMonth}
+              increaseMonth={increaseMonth}
+              months={months}
+              years={years}
             />
-            <IconCalendar className={clsx(cls.icon)} fill={fill}/>
+          )}
+          selected={startDate}
+        />
+        <IconCalendar className={clsx(cls.icon)} fill={fill} />
+      </div>
+      {errorText && (
+        <div className={cls.errorBlockInfo}>
+          <p>{errorText}. </p>
+          <Link className={cls.link} href={AppRoutes.AUTH.PRIVACY_POLICY}>
+            Privacy Policy
+          </Link>
         </div>
-    )
+      )}
+    </div>
+  )
 }

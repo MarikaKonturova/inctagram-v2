@@ -1,28 +1,38 @@
 .wrapper {
-    border-collapse: collapse;
+  border-collapse: collapse;
+  max-width: 972px;
 }
 
 .head {
-    background: var(--dark-500-color);
-    height: 48px;
+  min-height: 48px;
+  background: var(--dark-500-color);
 }
 
 .tableHeaderCell {
-    font-weight: 500;
-    text-align: left;
-    font-size: 14px;
-    border-bottom: 1px solid var(--dark-500-color);
-    width: 200px;
+  position: relative;
+
+  padding: 12px 48px 12px 24px;
+
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+
+  border-bottom: 1px solid var(--dark-500-color);
+
+  & svg {
+    position: absolute;
+  }
 }
 
-.tableRowItem  {
-    cursor: auto;
-    border-bottom: 1px solid var(--dark-500-color);
-    border-right: 1px solid var(--dark-500-color);
-    border-left: 1px solid var(--dark-500-color);
+.tableRowItem {
+  cursor: auto;
+  border-right: 1px solid var(--dark-500-color);
+  border-bottom: 1px solid var(--dark-500-color);
+  border-left: 1px solid var(--dark-500-color);
 }
-  
-.tableCell  {
-    padding: 12px;
-    font-size: 14px;
+
+.tableCell {
+  padding: 12px 48px 12px 24px;
+  font-size: 14px;
+  font-weight: 400;
 }

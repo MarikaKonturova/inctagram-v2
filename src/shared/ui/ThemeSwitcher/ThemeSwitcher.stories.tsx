@@ -5,14 +5,14 @@ import { Theme } from 'shared/constants/theme'
 import { ThemeSwitcher } from 'shared/ui/ThemeSwitcher/ThemeSwitcher'
 
 export default {
-    title: 'shared/ThemeSwitcher',
-    component: ThemeSwitcher,
-    argTypes: {
-        backgroundColor: { control: 'color' }
-    }
+  argTypes: {
+    backgroundColor: { control: 'color' },
+  },
+  component: ThemeSwitcher,
+  title: 'shared/ThemeSwitcher',
 } as ComponentMeta<typeof ThemeSwitcher>
 
-const Template: ComponentStory<typeof ThemeSwitcher> = (args) => <ThemeSwitcher {...args} />
+const Template: ComponentStory<typeof ThemeSwitcher> = args => <ThemeSwitcher {...args} />
 
 export const Light = Template.bind({})
 

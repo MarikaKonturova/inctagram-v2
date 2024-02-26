@@ -1,52 +1,52 @@
 :root {
-    --font-family-main: inter, sans-serif;
+  --font-family-main: inter, sans-serif;
 
-    // small text
-    --font-size-small: 12px;
-    --font-line-small: 16px;
-    --font-small-400: 400 var(--font-size-small) / var(--font-line-small) var(--font-family-main) ;
-    --font-small-600: 600 var(--font-size-small) / var(--font-line-small) var(--font-family-main) ;
+  // small text
+  --font-size-small: 12px;
+  --font-line-small: 16px;
+  --font-small-400: 400 var(--font-size-small) / var(--font-line-small) var(--font-family-main);
+  --font-small-600: 600 var(--font-size-small) / var(--font-line-small) var(--font-family-main);
 
-    // medium text
-    --font-size-medium: 14px;
-    --font-line-medium: 24px;
-    --font-medium-400: 400 var(--font-size-medium) / var(--font-line-medium) var(--font-family-main) ;
-    --font-medium-500: 500 var(--font-size-medium) / var(--font-line-medium) var(--font-family-main) ;
-    --font-medium-700: 700 var(--font-size-medium) / var(--font-line-medium) var(--font-family-main) ;
+  // medium text
+  --font-size-medium: 14px;
+  --font-line-medium: 24px;
+  --font-medium-400: 400 var(--font-size-medium) / var(--font-line-medium) var(--font-family-main);
+  --font-medium-500: 500 var(--font-size-medium) / var(--font-line-medium) var(--font-family-main);
+  --font-medium-700: 700 var(--font-size-medium) / var(--font-line-medium) var(--font-family-main);
 
-    // regular text
-    --font-size-regular: 16px;
-    --font-line-regular: 24px;
-    --font-regular-400: 400 var(--font-size-regular) / var(--font-line-regular) var(--font-family-main) ;
-    --font-regular-700: 700 var(--font-size-regular) / var(--font-line-regular) var(--font-family-main) ;
+  // regular text
+  --font-size-regular: 16px;
+  --font-line-regular: 24px;
+  --font-regular-400: 400 var(--font-size-regular) / var(--font-line-regular)
+    var(--font-family-main);
+  --font-regular-700: 700 var(--font-size-regular) / var(--font-line-regular)
+    var(--font-family-main);
 
-    // links
-    --font-small-link: 400 var(--font-size-small) / var(--font-line-small) var(--font-family-main) ;
-    --font-regular-link: 400 var(--font-size-medium) / var(--font-line-medium) var(--font-family-main) ;
+  // links
+  --font-small-link: 400 var(--font-size-small) / var(--font-line-small) var(--font-family-main);
+  --font-regular-link: 400 var(--font-size-medium) / var(--font-line-medium) var(--font-family-main);
 
+  // H
+  --font-h1: 700 20px / 36px var(--font-family-main);
+  --font-h2: 700 18px / 24px var(--font-family-main);
+  --font-h3: 600 16px / 24px var(--font-family-main);
 
-    // H
-    --font-h1: 700 20px / 36px var(--font-family-main) ;
-    --font-h2: 700 18px / 24px var(--font-family-main) ;
-    --font-h3: 600 16px / 24px var(--font-family-main) ;
+  // Large
+  --font-large: 600 26px / 36px var(--font-family-main);
 
-    // Large
-    --font-large: 600 26px / 36px var(--font-family-main) ;
+  // Размеры
+  --header-height: 60px;
 
-    // Размеры
-    --header-height: 60px;
+  // z  - индексы
+  --modal-z-index: 10;
 
-    // z  - индексы
-    --modal-z-index: 10;
+  // sidebar
 
+  --sidebar-width: 220px;
 
-    // sidebar
-
-    --sidebar-width: 220px;
-
-    // Цвета
-    --overlay-color: rgba(0 0 0 / 60%);
-    --red-light: #f00;
-    --red-dark: #ce0505;
-    --card-entity-bg: #333
+  // Цвета
+  --overlay-color: rgba(0 0 0 / 60%);
+  --red-light: #f00;
+  --red-dark: #ce0505;
+  --card-entity-bg: #333;
 }

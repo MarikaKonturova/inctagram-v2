@@ -1,77 +1,77 @@
 import { type AvatarPostModel } from './post'
 
 export interface RefreshTokenResponse {
-    accessToken: string
+  accessToken: string
 }
 
 export interface UserAuthModel {
-    email: string
-    userName: string
-    userId: number
-    hasBusinessAccount: boolean
+  email: string
+  hasBusinessAccount: boolean
+  userId: number
+  userName: string
 }
 
 export interface UserLoginModel {
-    email: string
-    password: string
+  email: string
+  password: string
 }
 
 export interface UserRegistrationModel {
-    userName: string
-    email: string
-    password: string
+  email: string
+  password: string
+  userName: string
 }
 export interface UserError {
-    messages: Array<{
-        field: string
-        message: string
-    }>
+  messages: Array<{
+    field: string
+    message: string
+  }>
 }
 
 export interface UserCreatePasswordModel {
-    recoveryCode: string
-    newPassword: string
+  newPassword: string
+  recoveryCode: string
 }
 
 export interface UseResendLinkModel {
-    email: string
+  email: string
 }
 
 export interface PasswordRecoveryModel {
-    email: string
-    recaptcha: string
+  email: string
+  recaptcha: string
 }
 
 export interface ProfileAvatarModel {
-    url: string
-    width: number
-    height: number
-    fileSize: number
+  fileSize: number
+  height: number
+  url: string
+  width: number
 }
 
 export interface ProfileDataModel {
-    id: number
-    userName: string
-    firstName: string | null
-    lastName: string | null
-    dateOfBirth: string | null
-    city: string
-    followingCount: number
-    followersCount: number
-    publicationsCount: number
-    aboutMe: string | null
-    avatars: AvatarPostModel | null
+  aboutMe: null | string
+  avatars: AvatarPostModel | null
+  city: string
+  dateOfBirth: null | string
+  firstName: null | string
+  followersCount: number
+  followingCount: number
+  id: number
+  lastName: null | string
+  publicationsCount: number
+  userName: string
 }
 
 export interface User {
-    id: number
-    userId: number
-    userName: string
-    avatars: {
-        medium: {
-            url: string
-        }
+  avatars: {
+    medium: {
+      url: string
     }
-    isFollowedBy: boolean
-    isFollowing: boolean
+  }
+  id: number
+  isFollowedBy: boolean
+  isFollowing: boolean
+  userId: number
+  userName: string
 }

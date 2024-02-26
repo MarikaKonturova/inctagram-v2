@@ -1,1 +1,1 @@
-export { ProfilePage } from './getProfileData/ui/ProfilePage/ProfilePage'
+export { ProfileMainInfo } from './followAndUnfollow/ui/ProfileMainInfo'

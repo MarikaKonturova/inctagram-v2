@@ -1,23 +1,23 @@
-@import "src/app/styles/mixins/mixins";
+@import 'src/app/styles/mixins/mixins';
 
-.AppLink{
-    color: var(--light-100-color);
-    text-decoration: none;
-    display: inline-flex;
+.AppLink {
+  display: inline-flex;
+  color: var(--light-100-color);
+  text-decoration: none;
 
-    &:hover {
-        text-decoration: underline;
-    }
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .icon {
-    margin-right: 12px;
-    fill: var(--light-100-color);
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+  fill: var(--light-100-color);
 }
 
 .active {
-    fill: var(--primary-500-color);
-    color: var(--primary-500-color);
+  color: var(--primary-500-color);
+  fill: var(--primary-500-color);
 }

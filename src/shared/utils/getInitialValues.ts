@@ -1,18 +1,26 @@
 import { isEmpty } from 'lodash'
-import { COUNTRIES } from 'shared/constants/countryList'
+import { COUNTRIES_EN, COUNTRIES_RU, CountriesType } from 'shared/constants/countryList'
 import { type ProfileDataModel } from 'shared/types/auth'
 
-export const getInitialValues = (userData?: ProfileDataModel): ProfileDataModel & { country: string } => {
-    if (isEmpty(userData)) {
-        return {} as ProfileDataModel & { country: string }
+const getCountriesLanguage = (city: string, array: CountriesType) => {
+  for (const key in array) {
+    if (array[key].includes(city)) {
+      return key
     }
-    let country = ''
+  }
+}
 
-    for (const key in COUNTRIES) {
-        if (COUNTRIES[key].includes(userData.city)) {
-            country = key
-        }
-    }
+export const getInitialValues = (
+  userData?: ProfileDataModel
+): ProfileDataModel & { country: string } => {
+  if (isEmpty(userData)) {
+    return {} as ProfileDataModel & { country: string }
+  }
 
-    return { ...userData, country }
+  const country =
+    getCountriesLanguage(userData.city, COUNTRIES_EN) ||
+    getCountriesLanguage(userData.city, COUNTRIES_RU) ||
+    ''
+
+  return { ...userData, country }
 }

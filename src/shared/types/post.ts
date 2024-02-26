@@ -1,144 +1,118 @@
 import { type ProfileAvatarModel, type ProfileDataModel } from './auth'
 
 export interface Post {
-    id: string
-    photos: string
-    description: string
-    createdAt: string
-    updatedAt: string
+  createdAt: string
+  description: string
+  id: string
+  photos: string
+  updatedAt: string
 }
 
 export interface PostImage {
-    uploadId: string
-    versions: {
-        huge: PostImageVersion
-        large: PostImageVersion
-    }
+  uploadId: string
+  versions: {
+    huge: PostImageVersion
+    large: PostImageVersion
+  }
 }
 interface PostImageVersion {
-    url: string
-    width: number
-    height: number
+  height: number
+  url: string
+  width: number
 }
 export interface PostsImage {
-    images: PostImage[]
+  images: PostImage[]
 }
 
 export interface NewPost {
-    description: string
-    childrenMetadata: Array<{
-        uploadId: string
-    }>
+  childrenMetadata: Array<{
+    uploadId: string
+  }>
+  description: string
 }
 
 export interface PostResponse {
-    id: number
-    ownerId: number
-    userName: string
-    avatars: AvatarPostModel
-    description: string
-    location: string
-    images: PostImage[]
-    createdAt: string
-    updatedAt: string
-    commentCount: number
-    likeCount: number
-    isLiked: boolean
-    newLikes: Array<Pick <ProfileDataModel, 'id' | 'avatars'> & { username: string }>
-    isFavorite: boolean
-    isFollowing: boolean
-    isFollowedBy: boolean
+  avatars: AvatarPostModel | null
+  commentCount: number
+  createdAt: string
+  description: string
+  id: number
+  images: PostImage[]
+  isFavorite: boolean
+  isFollowedBy: boolean
+  isFollowing: boolean
+  isLiked: boolean
+  likeCount: number
+  location: string
+  newLikes: Array<Pick<ProfileDataModel, 'avatars' | 'id'> & { username: string }>
+  ownerId: number
+  updatedAt: string
+  userName: string
 }
 
 export interface ResponseType<D = PostResponse[]> {
-    totalCount: number
-    pagesCount: number
-    page: number
-    pageSize: number
-    items: D
+  items: D
+  page: number
+  pageSize: number
+  pagesCount: number
+  totalCount: number
 }
 
 export interface AvatarPostModel {
-    thumbnail: ProfileAvatarModel
-    medium: ProfileAvatarModel
+  medium: ProfileAvatarModel
+  thumbnail: ProfileAvatarModel
 }
 
-export interface Comment {
-    id: number
-    postId: number
-    content: string
-    createdAt: string
-    answerCount: number
-    likeCount: number
-    isLiked: boolean
-    from: {
-        id: number
-        avatars: AvatarPostModel
-        userName: string
-    }
+export enum AvatarSizes {
+  large = 192,
+  medium = 36,
+  small = 24,
 }
 
-interface FavoritePost {
+export interface IComment {
+  answerCount: number
+  content: string
+  createdAt: string
+  from: {
+    avatars: AvatarPostModel
     id: number
-    ownerId: number
-    description: string
-    location: {
-        nameLocation: string
-        latitude: number
-        longitude: number
-    }
     userName: string
-    avatars: AvatarVersions
-    images: Image[]
-    createdAt: string
-    updatedAt: string
-    commentCount: number
-    likeCount: number
-    isLiked: boolean
-    newLikes: Like[]
-    isFavorite: boolean
-    isFollowing: boolean
-    isFollowedBy: boolean
+  }
+  id: number
+  isLiked: boolean
+  likeCount: number
+  postId: number
 }
 
 interface AvatarVersion {
-    url: string
-    width: number
-    height: number
-    fileSize: number
+  fileSize: number
+  height: number
+  url: string
+  width: number
 }
 
 interface AvatarVersions {
-    thumbnail: AvatarVersion
-    medium: AvatarVersion
-}
-
-interface ImageVersion {
-    url: string
-    width: number
-    height: number
-    fileSize: number
+  medium: AvatarVersion
+  thumbnail: AvatarVersion
 }
 
 interface Image {
-    uploadId: string
-    versions: {
-        huge: ImageVersion
-        large: ImageVersion
-    }
+  uploadId: string
+  versions: {
+    huge: ProfileAvatarModel
+    large: ProfileAvatarModel
+  }
 }
 
 interface Like {
-    id: number
-    userName: string
-    avatars: AvatarVersions
+  avatars: AvatarVersions
+  id: number
+  userName: string
 }
-export interface FavoritesType {
-    totalCount: number
-    pagesCount: number
-    page: number
-    pageSize: number
-    prevCursor: number
-    nextCursor: number
-    items: FavoritePost[]
+
+type FavoritePostType = PostResponse & { newLikes: Like[] }
+
+export type FavoritesType = ResponseType<FavoritePostType[]> & {
+  nextCursor: number
+  prevCursor: number
 }

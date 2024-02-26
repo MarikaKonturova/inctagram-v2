@@ -1,33 +1,61 @@
-
-@import "app/styles/mixins/mixins";
-
+@import 'app/styles/mixins/mixins';
 
 .header {
-    @include flex(row, space-between, center);
+  @include flex(row, space-between, center);
 
-    background-color: var(--dark-500-color);
-    font:     var(--font-small-600);
-    padding: 15px 33px;
+  padding: 15px;
+  font: var(--font-small-600);
+  background-color: var(--dark-500-color);
 }
-  
+
 .buttonBox {
-    display: flex;
-    gap: 1px;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
 }
 
-  
 .button {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 24px;
-    color: white;
-    background-color: var(--dark-100-color);
-  
-   
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  color: white;
+
+  background-color: var(--dark-100-color);
+  border-radius: 24px;
+}
+
+.selectBox {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.selectYears,
+.selectMonths {
+  position: relative;
+  font: var(--font-small-600);
+  color: var(--light-100-color);
+  background-color: var(--dark-500-color);
+
+  ul {
+    position: absolute !important;
+    z-index: 10;
+    width: 100%;
+  }
+}
+
+.selectYears {
+  width: 80px;
+}
+
+.selectMonths {
+  width: 130px;
 }

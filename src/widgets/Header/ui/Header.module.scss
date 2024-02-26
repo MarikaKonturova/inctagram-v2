@@ -1,36 +1,39 @@
 .Header {
-    box-sizing: border-box;
-    background: var(--dark-700-color);
-    border-bottom: 1px solid var(--dark-300-color);
-    height: var(--header-height);
-    padding: 12px 0;
-    transition: background-color 0.5s;
+  box-sizing: border-box;
+  height: var(--header-height);
+  padding: 12px 0;
 
-    .container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 60px;
-    }
+  background: var(--dark-700-color);
+  border-bottom: 1px solid var(--dark-300-color);
 
-    .icon{
-        fill: #fff;
-    }
+  transition: background-color 0.5s;
 
-    .button {
-        font: var(--font-medium-500);
-        display: flex;
-        gap: 15px
-    }
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+  }
 
-    .headerText {
-        text-decoration: none;
-        color: var(--light-color);
-        font: var(--font-large);
-    }
+  .icon {
+    fill: #fff;
+  }
 
-    .rightBlock {
-        display: flex;
-        gap: 48px;
-    }
+  .button {
+    display: flex;
+    gap: 15px;
+    font: var(--font-medium-500);
+  }
+
+  .headerText {
+    font: var(--font-large);
+    color: var(--light-color);
+    text-decoration: none;
+  }
+
+  .rightBlock {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+  }
 }

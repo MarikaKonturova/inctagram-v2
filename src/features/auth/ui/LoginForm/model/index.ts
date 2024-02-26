@@ -6,18 +6,23 @@ import { AppRoutes } from 'shared/constants/path'
 import { type UserError } from 'shared/types/auth'
 
 export const useLogin = () => {
-    const queryClient = useQueryClient()
-    const { push } = useRouter()
+  const queryClient = useQueryClient()
+  const { push } = useRouter()
 
-    const { mutate: login, isLoading, error } = useMutation<any, AxiosError<UserError>, any>({
-        mutationFn: AuthService.login,
-        retry: false,
-        onSuccess: async () => {
-            await queryClient.invalidateQueries(['me']).then(() => {
-                void push({ pathname: AppRoutes.PROFILE.SETTINGS })
-            })
-        }
-    })
+  const {
+    error,
+    isLoading,
+    isSuccess,
+    mutate: login,
+  } = useMutation<any, AxiosError<UserError>, any>({
+    mutationFn: AuthService.login,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(['me']).then(() => {
+        void push({ pathname: AppRoutes.PROFILE.SETTINGS })
+      })
+    },
+    retry: false,
+  })
 
-    return { login, isLoading, error }
+  return { error, isLoading, isSuccess, login }
 }

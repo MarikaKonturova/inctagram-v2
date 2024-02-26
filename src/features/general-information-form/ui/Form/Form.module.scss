@@ -1,31 +1,36 @@
 .wrapper {
-    display:block;
-    padding: 1em;
-    margin-bottom: 0.375em;
+  display: block;
+  margin-bottom: 0.375em;
+  padding: 1em;
 }
 
 .label {
-    color: var(--light-900-color);
-    font: var(--font-medium-400);
+  font: var(--font-medium-400);
+  color: var(--light-900-color);
 }
 
 .formsContainer {
-    width:100%;
-    flex: 1;
+  flex: 1;
+  width: 100%;
 }
 
 // Any additional selector will be increase priority of passed classname
 textarea.textarea {
-    border: 1px solid var(--dark-300-color);
-    background: var(--dark-500-color);
-}
-
-.error {
-    background: var(--dark-500-color);
-    border: 1px solid var(--danger-500-color);
+  background: var(--dark-500-color);
+  border: 1px solid var(--dark-300-color);
 }
 
 .selectContainer {
-    display: flex;
-    gap: 24px;
+  width: 100%;
+  height: 100px;
+  position: relative;
+
+  .select {
+    width: 40%;
+    position: absolute;
+
+    &:nth-child(2) {
+      right: 15px;
+    }
+  }
 }

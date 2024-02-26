@@ -1,80 +1,78 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
 import { format } from 'date-fns'
-import { useSnackbar } from 'features/common'
 import { SubscriptionsService } from 'shared/api'
+import { useSnackbar } from 'shared/hooks'
 import { type CostOfSubscriptionType, type SubscriptionType } from 'shared/types/subscriptions'
 
 const formatDate = (date: string) => format(new Date(date), 'dd.MM.yyyy')
 
 export const useSubscriptions = (selected: CostOfSubscriptionType) => {
-    const onOpen = useSnackbar((state) => state.onOpen)
+  const onOpen = useSnackbar(state => state.onOpen)
 
-    const { data: costOfSubscription, isLoading } = useQuery({
-        queryKey: ['cost-of-subscription'],
-        queryFn: SubscriptionsService.getCostOfSubscription,
-        onError: (error: Error) => {
-            onOpen(error.message, 'danger', 'center')
-        }
-    })
+  const { data: costOfSubscription, isLoading } = useQuery({
+    onError: (error: Error) => {
+      onOpen(error.message, 'danger', 'center')
+    },
+    queryFn: SubscriptionsService.getCostOfSubscription,
+    queryKey: ['cost-of-subscription'],
+  })
 
-    const { data: currentSubscription, refetch } = useQuery({
-        queryKey: ['current-subscription'],
-        queryFn: SubscriptionsService.getCurrentSubscription,
-        onError: (error: Error) => {
-            onOpen(error.message, 'danger', 'center')
-        }
-    })
+  const { data: currentSubscription, refetch } = useQuery({
+    onError: (error: Error) => {
+      onOpen(error.message, 'danger', 'center')
+    },
+    queryFn: SubscriptionsService.getCurrentSubscription,
+    queryKey: ['current-subscription'],
+  })
 
-    const { mutate: createSubscriptions } = useMutation({
-        mutationFn: SubscriptionsService.createSubscriptions,
-        retry: false,
-        onSuccess: async ({ data }: any) => {
-            window.location.assign(data.url)
-        },
-        onError: (err: AxiosError<{ messages: Array<{ message: string }> }>) => {
-            const error = err.response
-                ? err.response.data.messages[0].message
-                : err.message
+  const { mutate: createSubscriptions } = useMutation({
+    mutationFn: SubscriptionsService.createSubscriptions,
+    onError: (err: AxiosError<{ messages: Array<{ message: string }> }>) => {
+      const error = err.response ? err.response.data.messages[0].message : err.message
 
-            onOpen(error, 'danger', 'center')
-        }
-    })
+      onOpen(error, 'danger', 'center')
+    },
+    onSuccess: async ({ data }: any) => {
+      window.location.assign(data.url)
+    },
+    retry: false,
+  })
 
-    const { mutate: cancelAutoRenewal } = useMutation({
-        mutationFn: SubscriptionsService.cancelAutoRenewal,
-        retry: false,
-        onSuccess: async () => {
-            await refetch()
-        },
-        onError: (error: Error) => {
-            onOpen(error.message, 'danger', 'center')
-        }
-    })
+  const { mutate: cancelAutoRenewal } = useMutation({
+    mutationFn: SubscriptionsService.cancelAutoRenewal,
+    onError: (error: Error) => {
+      onOpen(error.message, 'danger', 'center')
+    },
+    onSuccess: async () => {
+      await refetch()
+    },
+    retry: false,
+  })
 
-    const onStripeHandler = () => {
-        const { typeDescription, amount } = selected
+  const onStripeHandler = () => {
+    const { amount, typeDescription } = selected
 
-        const payload: SubscriptionType = {
-            typeSubscription: typeDescription,
-            amount,
-            paymentType: 'STRIPE'
-        }
-
-        createSubscriptions(payload)
+    const payload: SubscriptionType = {
+      amount,
+      paymentType: 'STRIPE',
+      typeSubscription: typeDescription,
     }
 
-    const { endDateOfSubscription, dateOfPayment } = currentSubscription?.data.data[0] || {}
+    createSubscriptions(payload)
+  }
 
-    const expireAt = endDateOfSubscription && formatDate(endDateOfSubscription)
-    const nextPayment = dateOfPayment && formatDate(dateOfPayment)
+  const { dateOfPayment, endDateOfSubscription } = currentSubscription?.data.data[0] || {}
 
-    return {
-        expireAt,
-        nextPayment,
-        cancelAutoRenewal,
-        onStripeHandler,
-        subscriptionCosts: costOfSubscription?.data.data || [],
-        hasAutoRenewal: currentSubscription?.data.hasAutoRenewal
-    }
+  const expireAt = endDateOfSubscription && formatDate(endDateOfSubscription)
+  const nextPayment = dateOfPayment && formatDate(dateOfPayment)
+
+  return {
+    cancelAutoRenewal,
+    expireAt,
+    hasAutoRenewal: currentSubscription?.data.hasAutoRenewal,
+    nextPayment,
+    onStripeHandler,
+    subscriptionCosts: costOfSubscription?.data.data || [],
+  }
 }

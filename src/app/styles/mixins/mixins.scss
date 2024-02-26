@@ -1,11 +1,11 @@
-@mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap,) {
-    display: flex;
-    flex-flow: $direction $wrap;
-    justify-content: $justify;
-    align-items: $align;
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
+  display: flex;
+  flex-flow: $direction $wrap;
+  align-items: $align;
+  justify-content: $justify;
 }
 
 @mixin position($position: relative, $top: null, $right: null, $bottom: null, $left: null) {
-    position: $position;
-    inset: $top $right $bottom $left;
+  position: $position;
+  inset: $top $right $bottom $left;
 }

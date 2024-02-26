@@ -1,0 +1,16 @@
+.cardsList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .card {
+    padding: 36px;
+  }
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

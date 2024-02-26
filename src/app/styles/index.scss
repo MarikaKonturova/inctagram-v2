@@ -1,15 +1,24 @@
-@import "reset";
-@import "./variables/global";
-@import "./themes/normal";
-@import "./themes/dark";
+@import 'reset';
+@import './lib/filters';
+@import './variables/global';
+@import './themes/normal';
+@import './themes/dark';
 
 body {
-    font: var(--font-regular-400);
-    color: var(--light-100-color);
-    background-color: var(--dark-700-color);
-    overflow: hidden;
+  overflow: hidden;
+  font: var(--font-regular-400);
+  color: var(--light-100-color);
+  background-color: var(--dark-700-color);
+
+  .element::-webkit-scrollbar {
+    width: 0;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 .app {
-    min-height: 100vh;
+  min-height: 100vh;
 }
