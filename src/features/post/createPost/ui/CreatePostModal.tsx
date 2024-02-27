@@ -11,11 +11,6 @@ interface IProps {
   isOpen: boolean
 }
 
-export interface INewPostInterface {
-  description: string
-  location: string
-}
-
 const MODALSTEPS = {
   CropImageStep: 2,
   FilterImageStep: 3,

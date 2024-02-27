@@ -1,16 +1,16 @@
 import { useGetProfileData } from 'entities/Profile'
-import { useCreateMutation, useUploadImagePostStore } from 'features/post/createPost/model'
+import { useCreatePostMutation, useUploadImagePostStore } from 'features/post/createPost/model'
 import { type FC } from 'react'
 import { useForm } from 'react-hook-form'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
 import { SwiperApp } from 'shared/lib/swiper'
+import { INewPostInterface } from 'shared/types/post'
 import { Avatar, Button, Input, Textarea } from 'shared/ui'
 import { SwiperSlide } from 'swiper/react'
 import { shallow } from 'zustand/shallow'
 
-import { type INewPostInterface } from '../../CreatePostModal'
 import cls from './PublishPostStep.module.scss'
 
 interface IProps {
@@ -35,7 +35,7 @@ export const PublishPostStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) =>
     onSubmitSuccess()
   }
 
-  const { onCreate } = useCreateMutation({ onSuccess })
+  const { onCreate } = useCreatePostMutation({ onSuccess })
   const { response } = useGetProfileData()
   const userData = response?.data
   const {

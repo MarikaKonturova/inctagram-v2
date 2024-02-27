@@ -1,5 +1,6 @@
 import { useUploadImagePostStore } from 'features/post/createPost/model'
-import { type FC, useState } from 'react'
+import { FilterImage, Filters } from 'features/post/createPost/ui/components'
+import { useState } from 'react'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
@@ -9,15 +10,13 @@ import { SwiperClass, SwiperSlide } from 'swiper/react'
 import { shallow } from 'zustand/shallow'
 
 import cls from './FilterImageStep.module.scss'
-import { FilterImage } from './components/filterImage/FilterImage'
-import { Filters } from './components/filters/Filters'
 
 interface IProps {
   onNextClick: () => void
   onPrevClick: () => void
 }
 
-export const FilterImageStep: FC<IProps> = ({ onNextClick, onPrevClick }) => {
+export const FilterImageStep = ({ onNextClick, onPrevClick }: IProps) => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
   const [thumbsSwiper] = useState<SwiperClass>()

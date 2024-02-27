@@ -1,5 +1,5 @@
 import { useUploadImagePostStore } from 'features/post/createPost/model'
-import { type FC } from 'react'
+import { CropImage } from 'features/post/createPost/ui/components'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
@@ -9,14 +9,13 @@ import { SwiperSlide } from 'swiper/react'
 import { shallow } from 'zustand/shallow'
 
 import cls from './CropImageStep.module.scss'
-import { CropImage } from './components/croppImage/CropImage'
 
 interface IProps {
   onNextClick: () => void
   onPrevClick: () => void
 }
 
-export const CroppImageStep: FC<IProps> = ({ onNextClick, onPrevClick }) => {
+export const CroppImageStep = ({ onNextClick, onPrevClick }: IProps) => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 

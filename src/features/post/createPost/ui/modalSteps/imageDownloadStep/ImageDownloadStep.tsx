@@ -1,19 +1,14 @@
-import {
-  IImage,
-  Nullable,
-  PostImages,
-  useUploadImagePostStore,
-} from 'features/post/createPost/model'
-import { type ChangeEvent, type FC, useState } from 'react'
+import { ImageDownloadStepLib } from 'features/post/createPost/lib'
+import { useUploadImagePostStore } from 'features/post/createPost/model'
+import { type ChangeEvent, useState } from 'react'
 import IconClose from 'shared/assets/icons/general/close.svg'
 import IconImg from 'shared/assets/icons/light/image.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
+import { ConvertedImageType, IImage, Nullable, PostImages } from 'shared/types/post'
 import { Button } from 'shared/ui'
-import { shallow } from 'zustand/shallow'
 
 import cls from './ImageDownloadStep.module.scss'
-import { ConvertedImageType, convertFileToBase64WithValidate } from './lib/covertFileToBase64'
 
 /* if (file.size > 1024 * 1024 * 20) {
     setError('Photo size must be less than 10 MB!')
@@ -30,13 +25,13 @@ interface IProps {
   onPrevClick: () => void
 }
 
-export const ImageDownloadStep: FC<IProps> = ({ onNextClick, onPrevClick }) => {
+export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
   const [error, setError] = useState('')
 
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
-  const { setImages } = useUploadImagePostStore(({ setImages }) => ({ setImages }), shallow)
+  const setImages = useUploadImagePostStore(state => state.setImages)
 
   async function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const { files } = e.target
@@ -47,7 +42,7 @@ export const ImageDownloadStep: FC<IProps> = ({ onNextClick, onPrevClick }) => {
       const results: Promise<Nullable<ConvertedImageType>>[] = []
 
       for (let i = 0; i < files.length; i++) {
-        results.push(convertFileToBase64WithValidate(files[i]))
+        results.push(ImageDownloadStepLib.convertFileToBase64WithValidate(files[i]))
       }
 
       const convertedImagesArray = await Promise.all(results)

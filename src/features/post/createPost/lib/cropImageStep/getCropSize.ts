@@ -1,5 +1,5 @@
-import { Nullable } from 'features/post/createPost/model'
 import { MutableRefObject } from 'react'
+import { Nullable } from 'shared/types/post'
 
 export const getCropSize = (containerRef: MutableRefObject<Nullable<HTMLDivElement>>) => {
   if (containerRef && containerRef.current) {

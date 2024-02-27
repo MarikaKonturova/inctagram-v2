@@ -116,3 +116,44 @@ export type FavoritesType = ResponseType<FavoritePostType[]> & {
   nextCursor: number
   prevCursor: number
 }
+export interface IImage {
+  croppedSrc: string
+  cropperData: ImageCropperData
+  dimensions: {
+    height: number
+    width: number
+  }
+  filter: string
+  originSrc: string
+}
+
+export type ConvertedImage = {
+  src: string
+}
+
+export type ImageCropperData = {
+  aspect: number | undefined
+  crop: { x: number; y: number }
+  originalAspect: number
+  zoom: number
+}
+
+export type PostImages<T> = {
+  [key: string]: T
+}
+
+export type ConvertedImageType = {
+  dimensions: {
+    height: number
+    width: number
+  }
+  name: string
+  src: string
+}
+
+export interface INewPostInterface {
+  description: string
+  location: string
+}
+
+export type Nullable<T> = T | null

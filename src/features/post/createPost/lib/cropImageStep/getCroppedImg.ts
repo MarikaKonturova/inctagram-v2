@@ -1,5 +1,5 @@
-import { Nullable } from 'features/post/createPost/model'
 import { Area } from 'react-easy-crop'
+import { Nullable } from 'shared/types/post'
 
 type CroppedImageType = {
   dimensions: {
@@ -9,7 +9,7 @@ type CroppedImageType = {
   src: string
 }
 
-export const createImage = (src: string): Promise<HTMLImageElement> =>
+const createImage = (src: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
     const image = new Image()
 

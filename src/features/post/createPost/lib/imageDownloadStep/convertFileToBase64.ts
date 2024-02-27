@@ -1,24 +1,4 @@
-import { Nullable } from 'features/post/createPost/model'
-
-export type ConvertedImageType = {
-  dimensions: {
-    height: number
-    width: number
-  }
-  name: string
-  src: string
-}
-
-export const convertFileToBase64 = (file: File, callBack: (value: string) => void) => {
-  const reader = new FileReader()
-
-  reader.onloadend = () => {
-    const file64 = reader.result as string
-
-    callBack(file64)
-  }
-  reader.readAsDataURL(file)
-}
+import { ConvertedImageType, Nullable } from 'shared/types/post'
 
 export const convertFileToBase64WithValidate = async (
   file: File,

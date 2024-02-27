@@ -1,10 +1,10 @@
-import { IImage, Nullable, useUploadImagePostStore } from 'features/post/createPost/model'
+import { CroppImageStepLib } from 'features/post/createPost/lib'
+import { useUploadImagePostStore } from 'features/post/createPost/model'
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
+import { IImage, Nullable } from 'shared/types/post'
 import { shallow } from 'zustand/shallow'
 
-import { getCropSize } from '../../lib/getCropSize'
-import { getCroppedImg } from '../../lib/getCropperImg'
 import { CropperRatio } from '../cropperRatio/CropperRatio'
 import { CropperZoom } from '../cropperZoom/CropperZoom'
 import cls from './CropImage.module.scss'
@@ -28,15 +28,21 @@ export const CropImage: FC<{ image: IImage; imageId: string }> = ({ image, image
     setCroppedAreaPixels(croppedAreaPixels)
   }, [])
 
-  const setImage = async (croppedAreaPixels: Area) => {
-    if (croppedAreaPixels) {
-      const modifiedImage = await getCroppedImg(image.originSrc, croppedAreaPixels)
+  const setImage = useCallback(
+    async (croppedAreaPixels: Area) => {
+      if (croppedAreaPixels) {
+        const modifiedImage = await CroppImageStepLib.getCroppedImg(
+          image.originSrc,
+          croppedAreaPixels
+        )
 
-      if (modifiedImage) {
-        setCroppedImage({ croppedSrc: modifiedImage.src, imageId })
+        if (modifiedImage) {
+          setCroppedImage({ croppedSrc: modifiedImage.src, imageId })
+        }
       }
-    }
-  }
+    },
+    [image.originSrc, setCroppedImage, imageId]
+  )
 
   useEffect(() => {
     let timeoutId: number
@@ -48,9 +54,9 @@ export const CropImage: FC<{ image: IImage; imageId: string }> = ({ image, image
     }
 
     return () => clearTimeout(timeoutId)
-  }, [croppedAreaPixels])
+  }, [croppedAreaPixels, setImage])
 
-  const cropSize = getCropSize(containerRef)
+  const cropSize = CroppImageStepLib.getCropSize(containerRef)
 
   return (
     <div>

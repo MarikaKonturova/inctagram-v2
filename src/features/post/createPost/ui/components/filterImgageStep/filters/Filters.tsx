@@ -1,9 +1,10 @@
 import clsx from 'clsx'
-import { IImage, useUploadImagePostStore } from 'features/post/createPost/model'
+import { FilterImageStepLib } from 'features/post/createPost/lib'
+import { useUploadImagePostStore } from 'features/post/createPost/model'
+import { IImage } from 'shared/types/post'
 import { SwiperClass } from 'swiper/react'
 import { shallow } from 'zustand/shallow'
 
-import { getModifiedImageSrc } from '../../lib/getModifiedImageSrc '
 import cls from './Filters.module.scss'
 
 const filters = {
@@ -50,7 +51,9 @@ export const Filters = ({ className, currentIndex, image, imageId, swiperElement
 
       const currentImg = swiperElement.slides[currentIndex].children[0]
 
-      const modifiedSrc = await getModifiedImageSrc(currentImg as HTMLImageElement)
+      const modifiedSrc = await FilterImageStepLib.getModifiedImageSrc(
+        currentImg as HTMLImageElement
+      )
 
       const convertedImage = {
         [imageId]: { src: modifiedSrc },

@@ -6,7 +6,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Navigation, Pagination } from 'swiper/modules'
-import { Swiper } from 'swiper/react'
+import { Swiper, SwiperProps } from 'swiper/react'
 
 import cls from './styles.module.scss'
 
@@ -14,7 +14,7 @@ interface IProps {
   children: ReactNode
   className?: string
 }
-export const SwiperApp = ({ children, className, ...rest }: IProps & any) => {
+export const SwiperApp = ({ children, className, ...rest }: IProps & SwiperProps) => {
   return (
     <Swiper
       allowTouchMove={false}

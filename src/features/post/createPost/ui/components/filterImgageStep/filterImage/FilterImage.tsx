@@ -1,7 +1,7 @@
 import clsx from 'clsx'
-import { IImage } from 'features/post/createPost/model'
 import Image from 'next/image'
 import { FC } from 'react'
+import { IImage } from 'shared/types/post'
 
 import cls from './FilterImage.module.scss'
 export const FilterImage: FC<{
