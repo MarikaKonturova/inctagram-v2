@@ -4,6 +4,7 @@ import { selectEmail, selectSetEmail } from 'features/auth'
 import { useAuth } from 'features/auth/model'
 import { useCallback } from 'react'
 import { type UseFormReset, type UseFormSetError } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { AuthService } from 'shared/api'
 import { AppRoutes } from 'shared/constants/path'
 import { useSnackbar } from 'shared/hooks'
@@ -24,6 +25,7 @@ export const useRegistration = (
   const setEmail = useAuth(selectSetEmail)
   const email = useAuth(selectEmail)
   const onOpen = useSnackbar(state => state.onOpen)
+  const { t } = useTranslation('validation')
   const { setIsOpen } = useModal()
 
   const {
@@ -34,9 +36,16 @@ export const useRegistration = (
     mutationFn: AuthService.registration,
     onError: err => {
       const error = err.response?.data.messages[0]
+      const errorWithLocalization =
+        error?.field === 'userName' || error?.field === 'email'
+          ? {
+              ...error,
+              message: t('registerErrorBack', { field: error?.field || '' }),
+            }
+          : error
 
       // FIX
-      setError(error?.field as any, error || {})
+      setError(error?.field as any, errorWithLocalization || {})
       onOpen('Error', 'danger', 'left')
     },
     onSuccess: () => {
