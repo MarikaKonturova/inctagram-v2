@@ -1,50 +1,17 @@
-import { create } from 'zustand'
-import { immer } from 'zustand/middleware/immer'
+export { useAuth } from './useAuth'
+export { useAuthMe } from './useAuthMe'
+export {
+  selectEmail,
+  selectHasBusinessAccount,
+  selectIsAuth,
+  selectSetEmail,
+  selectUserId,
+} from './useAuthSelectors'
 
-export interface useAuthStateType {
-  contentForMerge: string
-  email: string
-  hasBusinessAccount: boolean
-  isAuth: boolean
-  isOpenMergePopUp: boolean
-  setAuth: (isAuth: boolean) => void
-  setEmail: (email: string) => void
-  setPopUpForMerge: (isOpenMergePopUp: boolean, contentForMerge: string) => void
-  setUserData: (data: { hasBusinessAccount: boolean; userId: number }) => void
-  userId: number
-}
-
-export const useAuth = create<useAuthStateType>(set => ({
-  contentForMerge: '',
-  email: '',
-  hasBusinessAccount: false,
-  isAuth: false,
-  isOpenMergePopUp: false,
-  setAuth: (isAuth: boolean) => {
-    set(state => ({
-      ...state,
-      isAuth,
-    }))
-  },
-  setEmail: (email: string) => {
-    set(state => ({
-      ...state,
-      email,
-    }))
-  },
-  setPopUpForMerge: (isOpenMergePopUp, contentForMerge) => {
-    set(state => ({
-      ...state,
-      contentForMerge,
-      isOpenMergePopUp,
-    }))
-  },
-  setUserData: (data: { hasBusinessAccount: boolean; userId: number }) => {
-    set(state => ({
-      ...state,
-      hasBusinessAccount: data.hasBusinessAccount,
-      userId: data.userId,
-    }))
-  },
-  userId: 0,
-}))
+export { useCreatePassword } from './useCreatePassword'
+export { useGoogleGitHubAuth } from './useGoogleGitHubAuth'
+export { useLogin } from './useLogin'
+export { useLogout } from './useLogout'
+export { useMergeAccount } from './useMergeAccount'
+export { useRecoverPassword } from './useRecoverPassword'
+export { useRegistration } from './useRegistration'

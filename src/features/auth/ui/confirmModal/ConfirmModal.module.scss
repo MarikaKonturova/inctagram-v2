@@ -1,0 +1,20 @@
+.Modal {
+  width: 380px;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 24px;
+
+    .text {
+      overflow-wrap: break-word;
+    }
+
+    .button {
+      width: 90px;
+      height: 36px;
+      margin-top: 18px;
+      margin-left: auto;
+    }
+  }
+}

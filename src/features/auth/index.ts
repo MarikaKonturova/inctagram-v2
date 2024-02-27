@@ -1,27 +1,26 @@
-export { useAuth } from './model'
-
 export {
   selectEmail,
   selectHasBusinessAccount,
   selectIsAuth,
   selectSetEmail,
   selectUserId,
-} from './model/selectors'
+  useAuth,
+} from './model'
 
-export { AuthRedirect } from './ui/AuthRedirect/ui/AuthRedirect/AuthRedirect'
+export { AuthRedirect } from './ui/authRedirect/AuthRedirect'
 
-export { ConfirmModal } from './ui/ConfirmModal/ui/ConfirmModal/ConfirmModal'
+export { ConfirmModal } from './ui/confirmModal/ConfirmModal'
 
-export { LoginForm } from './ui/LoginForm/ui/LoginForm/LoginForm'
+export { LoginForm } from './ui/loginForm/LoginForm'
 
-export { Logout } from './ui/Logout/ui/Logout/Logout'
+export { Logout } from './ui/logout/Logout'
 
-export { MergeAccount } from './ui/MergeAccount/ui/MergeAccount'
+export { MergeAccount } from './ui/mergeAccount/MergeAccount'
 
-export { NewPasswordForm } from './ui/NewPasswordForm/ui/NewPasswordForm/NewPasswordForm'
+export { NewPasswordForm } from './ui/newPasswordForm/NewPasswordForm'
 
-export { PasswordRecoveryForm } from './ui/PasswordRecoveryForm/ui/PasswordRecoveryForm/PasswordRecoveryForm'
+export { PasswordRecoveryForm } from './ui/passwordRecoveryForm/PasswordRecoveryForm'
 
-export { RegisterForm } from './ui/RegisterForm/ui/RegisterForm/RegisterForm'
+export { RegisterForm } from './ui/registerForm/RegisterForm'
 
-export { SocialIcons } from './ui/SocialIcons/SocialIcons'
+export { SocialIcons } from './ui/socialIcons/SocialIcons'
