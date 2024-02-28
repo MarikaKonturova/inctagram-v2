@@ -22,5 +22,7 @@
     "aboutMe": "aboutMe",
     "dateOfBirth": "dateOfBirth",
     "firstName": "firstName",
-    "lastName": "lastName"
+    "lastName": "lastName",
+    "registerErrorBack": "User with this {{field}} already exists",
+    "profileSettingsErrorBackUserName": "User with userName {{userName}} already exists"
 }

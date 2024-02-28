@@ -3,6 +3,7 @@ import { type AxiosError } from 'axios'
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 import { type UseFormSetError } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { ProfileService } from 'shared/api'
 import { AppRoutes } from 'shared/constants/path'
 import { useSnackbar } from 'shared/hooks'
@@ -14,8 +15,9 @@ export const useUpdateProfileData = (setError: UseFormSetError<ProfileDataModel>
   const queryClient = useQueryClient()
   const onOpen = useSnackbar(state => state.onOpen)
   const { push } = useRouter()
+  const { t } = useTranslation('validation')
 
-  const { data, error, mutate } = useMutation<
+  const { data, error, mutate, variables } = useMutation<
     any,
     AxiosError<UserError>,
     Omit<ProfileDataModel, 'avatars' | 'id'>,
@@ -24,7 +26,17 @@ export const useUpdateProfileData = (setError: UseFormSetError<ProfileDataModel>
     onError: err => {
       const error = err.response?.data.messages[0]
 
-      setError(error?.field as ValidateUnion, error || {})
+      const localizedError =
+        error?.field === 'userName'
+          ? {
+              ...error,
+              message: t('profileSettingsErrorBackUserName', {
+                userName: variables?.userName || '',
+              }),
+            }
+          : error
+
+      setError(error?.field as ValidateUnion, localizedError || {})
       onOpen('Error', 'danger', 'left')
     },
     onSuccess: async () => {

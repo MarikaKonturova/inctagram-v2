@@ -22,5 +22,7 @@
     "aboutMe": "О себе",
     "dateOfBirth": "День рождения",
     "firstName": "Имя",
-    "lastName": "Фамилия"
+    "lastName": "Фамилия",
+    "registerErrorBack": "Пользователь с этим {{field}} уже существует",
+    "profileSettingsErrorBackUserName": "Пользователь с userName {{userName}} уже существует"
 }
