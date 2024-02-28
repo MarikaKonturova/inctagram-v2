@@ -3,6 +3,7 @@ import { useGetFavoritesData } from 'entities/Favorites'
 import { useGetMyPost } from 'entities/Post'
 import { useGetProfileData } from 'entities/Profile'
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useInView } from 'react-intersection-observer'
 import { MyPostService } from 'shared/api'
 import { MODALS, type Values } from 'shared/constants/post'
@@ -17,6 +18,7 @@ export const FavoritesPage = () => {
   const queryClient = useQueryClient()
   const { response } = useGetProfileData()
   const userData = response?.data
+  const { t } = useTranslation('common')
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } = useGetFavoritesData(
     userData?.userName || ''
   )
@@ -110,6 +112,7 @@ export const FavoritesPage = () => {
 
   return (
     <div className={cls.favoritesPage}>
+      <div className={cls.title}> {t('favorites')} </div>
       <div className={cls.cardsList}>
         {(data as InfiniteData<FavoritesType>)?.pages.map(page => page && renderContent(page))}
       </div>
