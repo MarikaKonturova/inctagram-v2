@@ -1,9 +1,9 @@
-export { getAuthLayout } from './AuthLayout/AuthLayout'
+export { getAuthLayout } from './authLayout/AuthLayout'
 
-export { Layout } from './Layout/Layout'
+export { Layout } from './layout/Layout'
 
-export { getLayoutWithSidebar } from './LayoutWithSidebar/LayoutWithSidebar'
+export { getLayoutWithSidebar } from './layoutWithSidebar/LayoutWithSidebar'
 
-export { getLayoutWithoutSidebar } from './LayoutWithoutSideBar/LayoutWithoutSidebar'
+export { getLayoutWithoutSidebar } from './layoutWithoutSideBar/LayoutWithoutSidebar'
 
-export { getPublicLayout } from './PublicLayout/PublicLayout'
+export { getPublicLayout } from './publicLayout/PublicLayout'

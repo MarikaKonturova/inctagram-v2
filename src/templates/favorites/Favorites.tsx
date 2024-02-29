@@ -9,8 +9,8 @@ import { MyPostService } from 'shared/api'
 import { MODALS, type Values } from 'shared/constants/post'
 import { type FavoritesType } from 'shared/types/post'
 import { Card, Loader } from 'shared/ui'
-import { Commentaries } from 'widgets/Commentaries'
-import { GetPostModal, PostModalActions } from 'widgets/Post'
+import { Commentaries } from 'widgets/commentaries'
+import { GetPostModal, PostModalActions } from 'widgets/post'
 
 import cls from './Favorites.module.scss'
 

@@ -1,0 +1,43 @@
+.creationDate {
+  margin: 5px 0 0;
+}
+
+.cardWrapperClassName {
+  width: 50%;
+  height: 85vh;
+  object-fit: fill;
+}
+
+.rightBlock {
+  width: 50%;
+  background: var(--dark-300-color);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 20px;
+
+  border: 1px solid var(--dark-100-color);
+}
+
+.bottomSection {
+  padding: 0 20px;
+  border: 1px solid var(--dark-100-color);
+}
+
+.wrapper {
+  margin-top: 14px;
+}
+
+.actionIcons {
+  display: flex;
+  flex-direction: column;
+  align-self: self-start;
+  justify-content: space-between;
+
+  height: 40vh;
+  margin-top: 6%;
+}

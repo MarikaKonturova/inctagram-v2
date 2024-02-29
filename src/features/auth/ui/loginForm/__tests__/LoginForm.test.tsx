@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { AuthService } from 'shared/api'
 import { AppRoutes } from 'shared/constants/path'
 import { type UserLoginModel } from 'shared/types/auth'
-import { LoginForm } from '../loginForm/LoginForm'
+import { LoginForm } from '../LoginForm'
 
 jest.mock('next/router', () => jest.requireActual('next-router-mock'))
 jest.mock('shared/api/auth/authService', () => ({

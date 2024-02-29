@@ -2,9 +2,9 @@ import {RegisteredUsers} from 'entities/Public';
 import {useState} from 'react';
 import {LastPublicationsResponse} from 'shared/types/home';
 import {PostResponse} from 'shared/types/post';
-import {PublicPostList} from 'widgets/Public';
+import {PublicPostList} from 'widgets/public';
 
-import {PublicPostModal} from './PublicPostModal/PublicPostModal'
+import {PublicPostModal} from './publicPostModal/PublicPostModal'
 import cls from './styles.module.scss'
 
 export interface PublicPageProps {

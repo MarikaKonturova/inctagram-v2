@@ -1,1 +1,0 @@
-export { ProfileMainInfo } from './ProfileMainInfo'

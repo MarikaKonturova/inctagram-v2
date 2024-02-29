@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Tab } from 'shared/ui'
 
-import { AccountManagement } from './AccountManagement'
-import { DeviceList } from './DeviceList/ui/DeviceList'
-import GeneralInformation from './GeneralInformation'
-import { MyPayments } from './MyPayments'
+import { AccountManagement } from './accountManagement'
+import { DeviceList } from './deviceList/ui/DeviceList'
+import GeneralInformation from './generalInformation'
+import { MyPayments } from './myPayments'
 import cls from './styles.module.scss'
 
 const PATHS = [

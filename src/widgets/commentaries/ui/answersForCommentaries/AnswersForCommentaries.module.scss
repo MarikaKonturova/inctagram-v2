@@ -1,0 +1,38 @@
+.userName {
+  padding: 5px;
+  font: var(--font-medium-700);
+}
+
+.time {
+  padding: 5px;
+  font: var(--font-small-400);
+  color: var(--light-900-color);
+}
+
+.actionButton {
+  padding: 5px;
+  font: var(--font-small-600);
+  color: var(--light-900-color);
+}
+
+.avatarCommentGroup {
+  display: flex;
+  gap: 12px;
+}
+
+.answerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 15px;
+
+  font: var(--font-medium-400);
+}
+
+.answer {
+  display: block;
+  width: 200px;
+  padding-left: 15px;
+  word-wrap: break-word;
+}

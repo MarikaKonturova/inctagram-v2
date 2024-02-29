@@ -1,3 +1,3 @@
 export { useDeleteAvatar } from './model/deleteAvatar'
-export { AvatarBlock } from './ui/AvatarBlock/AvatarBlock'
-export { AvatarModal } from './ui/AvatarModal/AvatarModal'
+export { AvatarBlock } from './ui/avatarBlock/AvatarBlock'
+export { AvatarModal } from './ui/avatarModal/AvatarModal'

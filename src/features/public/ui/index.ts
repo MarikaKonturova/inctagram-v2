@@ -1,1 +1,1 @@
-export { PublicPost } from './PublicPost/PublicPost'
+export { PublicPost } from './publicPost/PublicPost'
