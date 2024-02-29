@@ -1,7 +1,7 @@
 import { Device } from 'entities/Device'
 import { TerminateAllDevices, TerminateDevice } from 'features/devices'
+import { useTranslation } from 'next-i18next'
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 import { PageLoader } from 'shared/ui/PageLoader/PageLoader'
 
 import { useDevices } from '../model'

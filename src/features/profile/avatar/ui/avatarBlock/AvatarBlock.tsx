@@ -1,6 +1,6 @@
 import { AvatarModal, useDeleteAvatar } from 'features/profile/avatar'
+import { useTranslation } from 'next-i18next'
 import React, { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import CloseIcon from 'shared/assets/icons/general/close.svg'
 import { type AvatarPostModel, AvatarSizes } from 'shared/types/post'
 import { Avatar, Button, ConfirmationModal } from 'shared/ui'

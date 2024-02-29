@@ -1,7 +1,7 @@
 import { Menu } from '@headlessui/react'
 import clsx from 'clsx'
+import { useTranslation } from 'next-i18next'
 import React, { type FC } from 'react'
-import { useTranslation } from 'react-i18next'
 import IconTrash from 'shared/assets/icons/light/trash.svg'
 import IconTrashOutline from 'shared/assets/icons/outline/trash-outline.svg'
 import { Theme } from 'shared/constants/theme'

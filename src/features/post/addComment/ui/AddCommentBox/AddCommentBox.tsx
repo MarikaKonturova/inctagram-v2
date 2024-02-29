@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { useCommentStore } from 'entities/Comment/model/useCommentStore'
+import { useTranslation } from 'next-i18next'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import { Button, Input } from 'shared/ui'
 
 import { useCommentPost } from '../../model'
