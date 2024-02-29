@@ -1,1 +1,0 @@
-export { GetPostModal } from './PostModal'
