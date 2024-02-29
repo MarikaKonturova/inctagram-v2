@@ -1,5 +1,5 @@
+import { useTranslation } from 'next-i18next'
 import React, { Dispatch, SetStateAction } from 'react'
-import { useTranslation } from 'react-i18next'
 import { ConfirmationModal } from 'shared/ui'
 
 import { useDeleteMutation } from '../model'

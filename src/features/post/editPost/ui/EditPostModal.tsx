@@ -1,8 +1,8 @@
 import { Header, useGetMyPost } from 'entities/Post'
 import { useGetProfileData } from 'entities/Profile'
+import { Translation } from 'next-i18next'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Translation } from 'react-i18next'
 import userPhoto from 'shared/assets/images/user.png'
 import { Button, Card, ConfirmationModal, Modal, Textarea } from 'shared/ui'
 

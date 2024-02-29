@@ -1,7 +1,7 @@
 import { AccountManagementForm } from 'features/account-management-form'
 import { selectHasBusinessAccount, useAuth } from 'features/auth'
+import { useTranslation } from 'next-i18next'
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 
 export const AccountManagement = () => {
   const { t } = useTranslation(['profile'])

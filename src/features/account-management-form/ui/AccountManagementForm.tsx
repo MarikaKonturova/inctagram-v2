@@ -1,7 +1,7 @@
 import { isEmpty } from 'lodash'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 import React, { type ChangeEvent, FC, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Paypal, Stripe } from 'shared/assets/icons'
 import { type AccountOptionType, type CostOfSubscriptionType } from 'shared/types/subscriptions'
 import { Button, Checkbox, Modal, RadioButtons } from 'shared/ui'

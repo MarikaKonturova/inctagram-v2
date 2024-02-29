@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Tab } from 'shared/ui'
 
 import { AccountManagement } from './accountManagement'

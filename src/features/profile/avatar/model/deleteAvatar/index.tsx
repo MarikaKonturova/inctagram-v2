@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import { ProfileService } from 'shared/api'
 import { useSnackbar } from 'shared/hooks'
 import { type UserError } from 'shared/types/auth'
