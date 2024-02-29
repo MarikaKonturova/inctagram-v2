@@ -1,11 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
-import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import { useMemo } from 'react'
 import { type UseFormSetError } from 'react-hook-form'
 import { ProfileService } from 'shared/api'
-import { AppRoutes } from 'shared/constants/path'
 import { useSnackbar } from 'shared/hooks'
 import { type ProfileDataModel, type UserError } from 'shared/types/auth'
 
@@ -14,7 +12,7 @@ import { type ValidateUnion } from '../lib/profileFormSchema'
 export const useUpdateProfileData = (setError: UseFormSetError<ProfileDataModel>) => {
   const queryClient = useQueryClient()
   const onOpen = useSnackbar(state => state.onOpen)
-  const { push } = useRouter()
+
   const { t } = useTranslation('validation')
 
   const { data, error, mutate, variables } = useMutation<
@@ -42,7 +40,6 @@ export const useUpdateProfileData = (setError: UseFormSetError<ProfileDataModel>
     onSuccess: async () => {
       await queryClient.invalidateQueries(['getProfileData'])
       onOpen('Your settings are saved', 'success', 'left')
-      void push(AppRoutes.PROFILE.MY_PROFILE)
     },
   })
 
