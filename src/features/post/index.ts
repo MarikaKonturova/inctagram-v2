@@ -8,7 +8,7 @@ export { Comment } from './comment/Comment'
 
 export { CopyToClipboard } from './copyToClipboard/ui/CopyToClipboard/CopyToClipboard'
 
-export { CreatePostModal } from './createPost/ui'
+export { CreatePostModal } from './createPost/ui/CreatePostModal'
 
 export { DeleteMyPostButton } from './deleteMyPost/ui/DeleteMyPostButton/DeleteMyPostButton'
 

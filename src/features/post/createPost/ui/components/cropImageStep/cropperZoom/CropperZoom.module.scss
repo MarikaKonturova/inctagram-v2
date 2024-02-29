@@ -1,0 +1,116 @@
+.controls {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 25px;
+  margin-left: 70px;
+}
+
+.icon_button {
+  position: absolute;
+  bottom: 0;
+
+  width: 36px;
+  height: 36px;
+
+  background-color: rgba(#171717, 0.8);
+}
+
+%transition {
+  transition-timing-function: cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  transition-duration: 100ms;
+  transition-property: all;
+}
+
+.enterForm,
+.leaveTo {
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.enterTo,
+.leavefrom {
+  transform: scale(1);
+  opacity: 100;
+}
+
+.leave {
+  @extend %transition;
+
+  transition-duration: 75ms;
+}
+
+.menu_items {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(-100%);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  width: 150px;
+  padding: 15px;
+
+  color: var(--light-900-color);
+
+  background-color: rgba(#171717, 0.8);
+
+  fill: var(--light-900-color);
+  stroke: var(--light-900-color);
+}
+
+.menu_item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.range_slider {
+  width: 100px;
+}
+
+.slider {
+  cursor: pointer;
+
+  width: 100%;
+  height: 0.5em;
+
+  appearance: none;
+  background-color: transparent;
+  border-radius: 3px;
+  outline: none;
+}
+
+.slider::-webkit-slider-runnable-track {
+  background-color: black;
+}
+
+.slider::-moz-range-track {
+  background-color: black;
+}
+
+.slider::-moz-range-progress {
+  background-color: var(--primary-500-color);
+}
+
+.slider::-webkit-slider-thumb {
+  cursor: pointer;
+
+  width: 12px;
+  height: 12px;
+
+  appearance: none;
+  background: var(--light-100-color);
+  border: 5px solid var(--primary-500-color);
+  border-radius: 50%;
+}
+
+.slider::-moz-range-thumb {
+  cursor: pointer;
+
+  width: 12px;
+  height: 12px;
+
+  background: var(--light-100-color);
+  border: 5px solid var(--primary-500-color);
+  border-radius: 50%;
+}
