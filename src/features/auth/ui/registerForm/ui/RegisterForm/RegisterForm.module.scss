@@ -1,0 +1,52 @@
+.register {
+  .title {
+    font: var(--font-h1);
+
+    &:not(:last-child) {
+      margin-bottom: 13px;
+    }
+  }
+
+  .input {
+    &:not(:last-child) {
+      margin-bottom: 24px;
+    }
+
+    &.confirmation {
+      &:not(:last-child) {
+        margin-bottom: 36px;
+      }
+    }
+  }
+
+  .agreementField {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    padding: 6px;
+
+    font: var(--font-small-link);
+    line-height: 1rem;
+
+    .link {
+      color: var(--primary-300-color);
+      text-decoration: underline;
+    }
+  }
+
+  .button {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-top: 12px;
+      margin-bottom: 24px;
+    }
+  }
+
+  .text {
+    &:not(:last-child) {
+      margin-bottom: 6px;
+    }
+  }
+}
