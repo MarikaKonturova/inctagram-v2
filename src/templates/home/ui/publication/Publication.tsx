@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import { formatDistanceToNow } from 'date-fns'
 import { CreationDate, Header, LikesInfo } from 'entities/Post'
 import { Description } from 'entities/Publication'
 import { AddCommentBox } from 'features/post'
@@ -39,9 +38,6 @@ export const Publication: React.FC<PropsType> = props => {
   const commentsHandler = () => {
     setOpenComments(!openComments)
   }
-  const creationDate = createdAt
-    ? formatDistanceToNow(new Date(createdAt), { addSuffix: true, includeSeconds: true })
-    : ''
 
   return (
     <div className={clsx(cls.container)}>
@@ -49,7 +45,7 @@ export const Publication: React.FC<PropsType> = props => {
       <div className={cls.header}>
         <Header avatarURL={publ.avatars?.medium.url || userPhoto.src} title={publ.userName} />
         <div className={cls.bullet}>•</div>
-        <CreationDate date={creationDate} />
+        <CreationDate date={createdAt} type={'agoTime'} />
       </div>
       <Image
         alt={alt}
