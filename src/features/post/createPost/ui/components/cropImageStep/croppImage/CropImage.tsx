@@ -10,9 +10,10 @@ import { CropperZoom } from '../cropperZoom/CropperZoom'
 import cls from './CropImage.module.scss'
 
 export const CropImage: FC<{ image: IImage; imageId: string }> = ({ image, imageId }) => {
-  const { setAspect, setCroppedImage } = useUploadImagePostStore(
-    ({ setAspect, setCroppedImage }) => ({
+  const { setAspect, setConvertedImages, setCroppedImage } = useUploadImagePostStore(
+    ({ setAspect, setConvertedImages, setCroppedImage }) => ({
       setAspect,
+      setConvertedImages,
       setCroppedImage,
     }),
     shallow
@@ -38,10 +39,15 @@ export const CropImage: FC<{ image: IImage; imageId: string }> = ({ image, image
 
         if (modifiedImage) {
           setCroppedImage({ croppedSrc: modifiedImage.src, imageId })
+          const convertedImage = {
+            [imageId]: { src: modifiedImage.src },
+          }
+
+          setConvertedImages(convertedImage)
         }
       }
     },
-    [image.originSrc, setCroppedImage, imageId]
+    [image.originSrc, setCroppedImage, imageId, setConvertedImages]
   )
 
   useEffect(() => {
