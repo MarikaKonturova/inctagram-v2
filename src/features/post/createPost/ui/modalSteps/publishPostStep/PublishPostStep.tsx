@@ -1,5 +1,6 @@
 import { useGetProfileData } from 'entities/Profile'
 import { useCreatePostMutation, useUploadImagePostStore } from 'features/post/createPost/model'
+import { useTranslation } from 'next-i18next'
 import { type FC } from 'react'
 import { useForm } from 'react-hook-form'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
@@ -21,6 +22,7 @@ interface IProps {
 export const PublishPostStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
+  const { t } = useTranslation(['profile'])
 
   const { convertedImages, imagesIds } = useUploadImagePostStore(
     ({ convertedImages, imagesIds }) => ({ convertedImages, imagesIds }),
@@ -80,9 +82,9 @@ export const PublishPostStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) =>
     <>
       <header className={cls.header}>
         <IconArrowBack fill={fill} onClick={onPrevClick} />
-        <h2>Publication</h2>
+        <h2>{t('publication')}</h2>
         <Button onClick={handleSubmit(onSubmit)} theme={'textButton'}>
-          Publish
+          {t('publish')}
         </Button>
       </header>
       <div className={cls.mainContainer}>
@@ -104,12 +106,12 @@ export const PublishPostStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) =>
             )}
             <Textarea
               className={cls.textareaContainer}
-              label={'Add publication descriptions'}
+              label={`${t('addPublicationDescriptions')}`}
               labelClassName={cls.label}
-              placeholder={'Write your description here'}
+              placeholder={`${t('writeYourDescriptionHere')}`}
               textareaClassName={cls.textarea}
               {...register('description', {
-                maxLength: { message: 'Max length of description is 500 characters', value: 500 },
+                maxLength: { message: t('maxLengthDescription'), value: 500 },
               })}
             />
           </div>
@@ -118,7 +120,7 @@ export const PublishPostStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) =>
             className={cls.wrapper}
             errorText={errors.description?.message}
             id={'location'}
-            label={'Location'}
+            label={`${t('location')}`}
             labelClassName={cls.label}
             type={'text'}
           />
