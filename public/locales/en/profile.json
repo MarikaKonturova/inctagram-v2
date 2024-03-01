@@ -53,6 +53,7 @@
     "next": "Next",
     "filter": "Filter",
     "publication": "Publication",
+    "normal": "Normal",
     "addPublicationDescriptions": "Add publication descriptions",
     "writeYourDescriptionHere": "Write your description here",
     "maxLengthDescription": "Max length of description is 500 characters",
@@ -70,5 +71,12 @@
     "delete": "Delete",
     "search": "Search...",
     "youHaveUnfollowed": "You have unfollowed",
-    "youHaveFollowed": "You have followed"
+    "youHaveFollowed": "You have followed",
+    "uploadPhoto": "Upload a photo",
+    "per": "per",
+    "MONTHLY": "1 month",
+    "SEMI_ANNUALLY": "6 months",
+    "YEARLY": "1 year",
+    "show": "Show",
+    "onPage": "on page"
 }
