@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useTranslation } from 'next-i18next'
 import React from 'react'
 import { NumberBoard, Title } from 'shared/ui'
 
@@ -11,6 +12,7 @@ interface RegisteredUsersProps {
 
 export const RegisteredUsers = ({ className, userCount = 0 }: RegisteredUsersProps) => {
   const classNames = clsx(cls.container, className)
+  const { t } = useTranslation('common')
 
   const displayCount =
     userCount >= 1000000 ? userCount : '0'.repeat(6 - userCount.toString().length) + userCount
@@ -20,7 +22,7 @@ export const RegisteredUsers = ({ className, userCount = 0 }: RegisteredUsersPro
   return (
     <div className={classNames}>
       <Title as={'h2'} className={cls.title}>
-        Registered users:
+        {t('registeredUsers')}
       </Title>
 
       <NumberBoard.Root>

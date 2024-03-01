@@ -42,9 +42,7 @@ export const LoginForm = () => {
         placeholder={t('password') ?? ''}
         type={'password'}
       />
-      {error ? (
-        <div className={cls.error}>The email or password are incorrect. Try again please</div>
-      ) : null}
+      {error ? <div className={cls.error}>{t('error')}</div> : null}
       <p className={cls.link}>
         <AppLink href={'/auth/password-recovery'}>{t('forgotPassword')}</AppLink>
       </p>
