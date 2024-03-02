@@ -13,7 +13,7 @@ import { ColumnType, Pagination, Table } from 'shared/ui'
 
 import cls from './styles.module.scss'
 
-const options = ['8', '20', '30', '50', '100']
+const options = ['10', '20', '30', '50', '100']
 
 const formatDate = (date: string) => format(new Date(date), 'dd.MM.yyyy')
 
