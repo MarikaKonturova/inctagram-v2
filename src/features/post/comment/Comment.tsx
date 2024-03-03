@@ -46,7 +46,24 @@ export function Comment({
   const { setRepliedComment } = useCommentStore()
   const { t } = useTranslation(['profile'])
   const [clicked, setClicked] = useState(false)
+
   const onAnswerHandler = () => {
+    /*    setClicked(true)
+    clicked
+      ? setRepliedComment({
+          id: isRepliedComment && commentId ? commentId : id,
+          postId: postId,
+          userName,
+        })
+      : setRepliedComment({ id: 0, postId: postId, userName: '' })*/
+    setRepliedComment({
+      id: isRepliedComment && commentId ? commentId : id,
+      postId: postId,
+      userName,
+    })
+  }
+
+  /*  const onAnswerHandler = () => {
     setClicked(prevClicked => {
       const newClicked = !prevClicked
 
@@ -61,13 +78,14 @@ export function Comment({
         setRepliedComment({
           id: 0,
           postId: postId,
-          userName: '',
+          userName: undefined,
         })
+        setClicked(false)
       }
 
       return newClicked
     })
-  }
+  }*/
 
   return (
     <div className={clsx(cls.avatarCommentGroup, { [cls.additionalStyle]: isRepliedComment })}>
