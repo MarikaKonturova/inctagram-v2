@@ -28,14 +28,14 @@ export const useUpdateProfileData = (setError: UseFormSetError<ProfileDataModel>
         error?.field === 'userName'
           ? {
               ...error,
-              message: t('profileSettingsErrorBackUserName', {
+              message: t('busyUserNameError', {
                 userName: variables?.userName || '',
               }),
             }
           : error
 
       setError(error?.field as ValidateUnion, localizedError || {})
-      onOpen('Error', 'danger', 'left')
+      onOpen(error?.message || 'Some error occured', 'danger', 'left')
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries(['getProfileData'])

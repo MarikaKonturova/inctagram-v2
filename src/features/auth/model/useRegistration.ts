@@ -40,7 +40,7 @@ export const useRegistration = (
         error?.field === 'userName' || error?.field === 'email'
           ? {
               ...error,
-              message: t('registerErrorBack', { field: error?.field || '' }),
+              message: t('busyUserNameError', { field: error?.field || '' }),
             }
           : error
 

@@ -23,6 +23,5 @@
     "dateOfBirth": "День рождения",
     "firstName": "Имя",
     "lastName": "Фамилия",
-    "registerErrorBack": "Пользователь с этим {{field}} уже существует",
-    "profileSettingsErrorBackUserName": "Пользователь с userName {{userName}} уже существует"
+    "busyUserNameError": "Пользователь с userName {{userName}} уже существует"
 }
