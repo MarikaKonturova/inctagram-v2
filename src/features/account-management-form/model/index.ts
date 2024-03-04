@@ -12,14 +12,22 @@ export const useSubscriptions = (selected: CostOfSubscriptionType) => {
   const onOpen = useSnackbar(state => state.onOpen)
   const { t } = useTranslation('profile')
 
-  const { data: costOfSubscription, isLoading } = useQuery({
+  const {
+    data: costOfSubscription,
+    isLoading,
+    isSuccess,
+  } = useQuery({
     onError: (error: Error) => {
       onOpen(error.message, 'danger', 'center')
+    },
+    onSuccess: data => {
+      data.data.data.map((el: CostOfSubscriptionType) => {
+        el['description_ru'] = `${el.amount}$ ${t('per')} ${t(`${el.typeDescription}`)}`
+      })
     },
     queryFn: SubscriptionsService.getCostOfSubscription,
     queryKey: ['cost-of-subscription'],
   })
-
   const { data: currentSubscription, refetch } = useQuery({
     onError: (error: Error) => {
       onOpen(error.message, 'danger', 'center')
@@ -69,16 +77,12 @@ export const useSubscriptions = (selected: CostOfSubscriptionType) => {
   const expireAt = endDateOfSubscription && formatDate(endDateOfSubscription)
   const nextPayment = dateOfPayment && formatDate(dateOfPayment)
 
-  const localizedCostOfSubscription = costOfSubscription?.data.data.map(el => {
-    return { ...el, description: `${el.amount}$ ${t('per')} ${t(`${el.typeDescription}`)}` }
-  })
-
   return {
     cancelAutoRenewal,
     expireAt,
     hasAutoRenewal: currentSubscription?.data.hasAutoRenewal,
     nextPayment,
     onStripeHandler,
-    subscriptionCosts: localizedCostOfSubscription || [],
+    subscriptionCosts: costOfSubscription?.data.data || [],
   }
 }
