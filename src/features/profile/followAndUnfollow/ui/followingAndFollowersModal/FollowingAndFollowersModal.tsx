@@ -1,8 +1,8 @@
 import { useTranslation } from 'next-i18next'
-import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useDebounce } from 'shared/hooks'
 import { type User } from 'shared/types/auth'
-import { Input, Loader, Modal } from 'shared/ui'
+import { Input, Loader, Modal, Pagination } from 'shared/ui'
 
 import { useGetUsers } from '../../model'
 import { UsersList } from '../usersList/UsersList'
@@ -22,15 +22,20 @@ export const FollowingAndFollowersModal: React.FC<PropsType> = props => {
   const [count, setCount] = useState<number>(0)
   const debounceSearchUserValue = useDebounce(searchUserValue, 500)
   const { t } = useTranslation('profile')
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page)
+  }
 
   const {
     data: usersData,
     isLoading: isUsersLoading,
     refetch,
-  } = useGetUsers(debounceSearchUserValue, userName || '', fetchDataName, count)
+  } = useGetUsers(debounceSearchUserValue, userName || '', fetchDataName, count, currentPage)
 
   const followingCount =
-    usersData?.filter((user: User) =>
+    usersData?.items?.filter((user: User) =>
       fetchDataName === 'following' ? user.isFollowing : user.isFollowedBy
     ).length || 0
 
@@ -66,11 +71,22 @@ export const FollowingAndFollowersModal: React.FC<PropsType> = props => {
       )}
       <UsersList
         debounceSearchUserValue={debounceSearchUserValue}
+        fetchDataName={fetchDataName}
         followingCount={followingCount}
         onFollowingChange={onFollowingChange}
         setCount={setCount}
-        usersData={usersData}
+        usersData={usersData?.items}
       />
+      {usersData?.pagesCount > 1 && (
+        <Pagination
+          className={styles.pagination}
+          currentPage={currentPage}
+          onChangePage={onPageChange}
+          pageSize={usersData?.pageSize}
+          totalCount={usersData?.totalCount}
+          value={usersData?.pageSize}
+        />
+      )}
     </Modal>
   )
 }

@@ -22,10 +22,10 @@ export const UsersService = {
     return { ...data, pageParam }
   },
 
-  getFollowersUsers(userName: string, searchUser: string) {
+  getFollowersUsers(userName: string, searchUser: string, pageNumber: number) {
     const queryParams = {
       cursor: 0,
-      pageNumber: 1,
+      pageNumber,
       pageSize: 12,
       search: searchUser,
     }

@@ -7,21 +7,22 @@ export function useGetUsers(
   searchUser: string,
   userName: string,
   fetchDataName: string,
-  count: number
+  count: number,
+  pageNumber: number
 ) {
   const onOpen = useSnackbar(state => state.onOpen)
 
-  return useQuery(['users', searchUser, fetchDataName, count], async () => {
+  return useQuery(['users', pageNumber, searchUser, fetchDataName, count], async () => {
     const response =
       fetchDataName === 'following'
-        ? await UsersService.getFollowersUsers(userName, searchUser)
+        ? await UsersService.getFollowersUsers(userName, searchUser, pageNumber)
         : await UsersService.getFollowingUsers(userName, searchUser)
 
     if (response.status !== 200) {
       onOpen('Network response was not ok', 'danger', 'right')
     }
 
-    return response.data.items
+    return response.data
   })
 }
 

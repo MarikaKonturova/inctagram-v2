@@ -80,18 +80,20 @@ export const Pagination = ({
       <button className={classNames.buttonRight} disabled={isLastPage} onClick={onNextHandler}>
         <ArrowForward />
       </button>
-      <div className={cls.selectContainer}>
-        Show
-        <div className={cls.selectWrapper}>
-          <Select
-            {...restProps}
-            buttonClassName={cls.selectButton}
-            className={cls.select}
-            optionClassName={cls.selectOption}
-          />
+      {restProps.options?.length && (
+        <div className={cls.selectContainer}>
+          Show
+          <div className={cls.selectWrapper}>
+            <Select
+              {...restProps}
+              buttonClassName={cls.selectButton}
+              className={cls.select}
+              optionClassName={cls.selectOption}
+            />
+          </div>
+          on page
         </div>
-        on page
-      </div>
+      )}
     </div>
   )
 }
