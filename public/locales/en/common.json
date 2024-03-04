@@ -20,6 +20,8 @@
   "photoFormatError": "The format of the uploaded photo must be PNG and JPEG",
   "photoSizeError": "Photo size must be less than 10 MB!",
   "generalError": "Some error occurred",
-  "success": "Success"
+  "success": "Success",
+  "registeredUsers": "Registered users:",
+  "error": "Error!"
 
 }

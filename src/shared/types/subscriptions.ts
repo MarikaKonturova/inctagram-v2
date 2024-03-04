@@ -46,6 +46,7 @@ interface PaymentsType {
 interface CostOfSubscriptionType {
   amount: number
   description: string
+  description_ru: string
   typeDescription: PeriodType
 }
 

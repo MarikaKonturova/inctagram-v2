@@ -1,7 +1,9 @@
 import clsx from 'clsx'
 import { addDays, format, getYear } from 'date-fns'
+import i18next from 'i18next'
 import { range } from 'lodash'
 import Link from 'next/link'
+import { useTranslation } from 'next-i18next'
 import LibDatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { type UseFormSetValue } from 'react-hook-form'
@@ -35,8 +37,24 @@ const months = [
   'December',
 ]
 
+const months_ru = [
+  'Январь',
+  'Февраль',
+  'Март',
+  'Апрель',
+  'Может',
+  'Июнь',
+  'Июль',
+  'Август',
+  'Сентябрь',
+  'Октябрь',
+  'Ноябрь',
+  'Декабрь',
+]
+
 export const DatePicker = ({ errorText, onChange, setValue, value }: DatePickerProps) => {
   const { theme } = useTheme()
+  const { t } = useTranslation('privacy-policy')
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
   const startDate = (value && new Date(Date.parse(value))) || new Date()
   const onDateChange = (date: Date) => {
@@ -69,7 +87,7 @@ export const DatePicker = ({ errorText, onChange, setValue, value }: DatePickerP
               date={date}
               decreaseMonth={decreaseMonth}
               increaseMonth={increaseMonth}
-              months={months}
+              months={i18next.language === 'ru' ? months_ru : months}
               years={years}
             />
           )}
@@ -81,7 +99,7 @@ export const DatePicker = ({ errorText, onChange, setValue, value }: DatePickerP
         <div className={cls.errorBlockInfo}>
           <p>{errorText}. </p>
           <Link className={cls.link} href={AppRoutes.AUTH.PRIVACY_POLICY}>
-            Privacy Policy
+            {t('title')}
           </Link>
         </div>
       )}

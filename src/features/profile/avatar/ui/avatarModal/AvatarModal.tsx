@@ -89,7 +89,7 @@ export const AvatarModal: FC<PropsType> = ({ className, isOpen, setAvatar, setIs
         {errorMessage && (
           <div className={cls.errorBox}>
             <p className={cls.errorText}>
-              <strong>Error!</strong> {errorMessage}
+              <strong>{t('error')}</strong> {errorMessage}
             </p>
           </div>
         )}

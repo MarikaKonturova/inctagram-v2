@@ -1,4 +1,5 @@
 import {CreationDate} from 'entities/Post/ui/CreationDate';
+import { useTranslation } from "next-i18next";
 import React, {useEffect, useRef, useState} from 'react';
 import userPhoto from 'shared/assets/images/user.png'
 import {AvatarSizes, PostResponse} from 'shared/types/post';
@@ -16,7 +17,7 @@ export const PublicPost = ({ openModal, post }: PublicPostProps) => {
   const [hidden, setHidden] = useState(true)
   const [height, setHeight] = useState(0);
   const [photoHeight, setPhotoHeight] = useState(240);
-
+  const {t} = useTranslation('post')
   const descrRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -63,13 +64,13 @@ export const PublicPost = ({ openModal, post }: PublicPostProps) => {
 
       {(height > 24) && hidden && (
         <div className={cls.buttonWrapper}>...
-          <Button className={cls.button} onClick={showMoreText} theme={'clear'} >Show more</Button>
+          <Button className={cls.button} onClick={showMoreText} theme={'clear'} >{t('showMore')}</Button>
         </div>
       )}
 
       {!hidden && (
         <div className={cls.buttonWrapper}>...
-          <Button className={cls.button} onClick={hideText} theme={'clear'} >Hide</Button>
+          <Button className={cls.button} onClick={hideText} theme={'clear'} >{t('hide')}</Button>
         </div>
       )}
     </div>
