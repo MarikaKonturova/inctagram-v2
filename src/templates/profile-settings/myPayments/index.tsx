@@ -19,7 +19,6 @@ const formatDate = (date: string) => format(new Date(date), 'dd.MM.yyyy')
 
 export const MyPayments = () => {
   const [params, setParams] = useState<GetMyPaymentsParams>({})
-
   const onOpen = useSnackbar(state => state.onOpen)
 
   const { data } = useQuery(
@@ -48,7 +47,7 @@ export const MyPayments = () => {
     endDateOfSubscription: formatDate(el.endDateOfSubscription),
     paymentType: PaymentType[el.paymentType],
     price: '$' + el.price,
-    subscriptionType: SubscriptionType[el.subscriptionType],
+    subscriptionType: t(`${el.subscriptionType}`),
   }))
 
   const onChange = (pageSize: string) => {

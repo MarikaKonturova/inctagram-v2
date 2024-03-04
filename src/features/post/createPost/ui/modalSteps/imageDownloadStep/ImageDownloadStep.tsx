@@ -1,5 +1,6 @@
 import { ImageDownloadStepLib } from 'features/post/createPost/lib'
 import { useUploadImagePostStore } from 'features/post/createPost/model'
+import { useTranslation } from 'next-i18next'
 import { type ChangeEvent, useState } from 'react'
 import IconClose from 'shared/assets/icons/general/close.svg'
 import IconImg from 'shared/assets/icons/light/image.svg'
@@ -12,11 +13,11 @@ import cls from './ImageDownloadStep.module.scss'
 
 /* if (file.size > 1024 * 1024 * 20) {
     setError('Photo size must be less than 10 MB!')
-  
+
     return
   } else if (!allowedImageTypes.includes(file.type)) {
     setError('The format of the uploaded photo must be\nPNG and JPEG')
-  
+
     return
   } */
 
@@ -27,7 +28,7 @@ interface IProps {
 
 export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
   const [error, setError] = useState('')
-
+  const { t } = useTranslation('profile')
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
@@ -79,7 +80,7 @@ export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
   return (
     <div className={cls.modal}>
       <header className={cls.header}>
-        <h2>Add Photo</h2>
+        <h2>{t('addPhoto')}</h2>
         <Button onClick={onPrevClick} theme={'clear'}>
           <IconClose fill={fill} />
         </Button>
@@ -97,7 +98,7 @@ export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
             <div className={cls.imgContainer}>
               <IconImg />
             </div>
-            <span>Select from Computer</span>
+            <span>{t('selectFromComputer')}</span>
           </div>
         </label>
       </div>

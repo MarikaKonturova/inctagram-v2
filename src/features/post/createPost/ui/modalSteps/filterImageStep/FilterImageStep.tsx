@@ -1,5 +1,6 @@
 import { useUploadImagePostStore } from 'features/post/createPost/model'
 import { FilterImage, Filters } from 'features/post/createPost/ui/components'
+import { useTranslation } from 'next-i18next'
 import { useState } from 'react'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import { Theme } from 'shared/constants/theme'
@@ -20,6 +21,7 @@ export const FilterImageStep = ({ onNextClick, onPrevClick }: IProps) => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
   const [thumbsSwiper] = useState<SwiperClass>()
+  const { t } = useTranslation(['profile'])
   const [swiperInstance, setSwiperInstance] = useState<SwiperClass>()
   const [currentIndexSlide, setCurrentIndexSlide] = useState<number>(0)
   const { images, imagesIds } = useUploadImagePostStore(
@@ -34,8 +36,8 @@ export const FilterImageStep = ({ onNextClick, onPrevClick }: IProps) => {
     <div className={cls.modal}>
       <header className={cls.header}>
         <IconArrowBack fill={fill} onClick={onPrevClick} />
-        <h2>Filter</h2>
-        <Button onClick={onNextClick}>Next</Button>
+        <h2>{t('filter')}</h2>
+        <Button onClick={onNextClick}>{t('next')}</Button>
       </header>
       <div className={cls.container}>
         <SwiperApp

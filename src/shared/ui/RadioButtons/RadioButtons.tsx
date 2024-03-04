@@ -1,5 +1,6 @@
 import { RadioGroup } from '@headlessui/react'
 import clsx from 'clsx'
+import i18next from 'i18next'
 import { isEmpty } from 'lodash'
 import CheckedIcon from 'shared/assets/icons/general/radio-button-checked.svg'
 import UncheckedIcon from 'shared/assets/icons/general/radio-button-unchecked.svg'
@@ -8,6 +9,7 @@ import cls from './RadioButtons.module.scss'
 
 interface OptionType {
   description: string
+  description_ru?: string
   disabled?: boolean
 }
 
@@ -42,7 +44,14 @@ export const RadioButtons = <T,>({
             {state => (
               <div className={cls.optionContainer}>
                 {state.checked ? <CheckedIcon /> : <UncheckedIcon />}
-                <RadioGroup.Label as={'p'}>{option.description}</RadioGroup.Label>
+                <RadioGroup.Label as={'p'}>
+                  {/* eslint-disable-next-line no-nested-ternary */}
+                  {i18next.language === 'ru'
+                    ? option.description_ru
+                      ? option.description_ru
+                      : option.description
+                    : option.description}
+                </RadioGroup.Label>
               </div>
             )}
           </RadioGroup.Option>

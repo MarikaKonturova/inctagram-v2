@@ -6,7 +6,9 @@
     "latin_letters_numbers_etc": "Разрешены только латинские буквы, цифры, тире и подчеркивания",
     "confPassword":  "Код подтверждения",
     "atLeast6Char": "должно содержать не менее 6 символов",
+    "atLeast6CharPass": "должен содержать не менее 6 символов",
     "noMoreThan30Char": "должно содержать не более 30 символов",
+    "noMoreThan30CharPass": "должен содержать не более 30 символов",
     "noMoreThan20Char": "должно содержать не более 20 символов",
     "recaptcha": "Recaptcha",
     "email_val": "Email должен соответсвовать формату",
@@ -23,6 +25,7 @@
     "dateOfBirth": "День рождения",
     "firstName": "Имя",
     "lastName": "Фамилия",
-    "registerErrorBack": "Пользователь с этим {{field}} уже существует",
-    "profileSettingsErrorBackUserName": "Пользователь с userName {{userName}} уже существует"
+    "registerUserNameErrorBack": "Пользователь с таким именем пользователя уже существует",
+    "registerEmailErrorBack": "Пользователь с таким email уже существует",
+    "profileSettingsErrorBackUserName": "Пользователь с именем пользователя {{userName}} уже существует"
 }

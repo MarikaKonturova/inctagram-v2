@@ -24,7 +24,7 @@ export const ConfirmModal = ({ className }: ConfirmModalProps) => {
       className={clsx(cls.Modal, {}, [className])}
       isOpen={isOpen}
       onClose={onCloseHandler}
-      title={`${t('Email sent')}`}
+      title={`${t('emailSent')}`}
     >
       <div className={cls.content}>
         <div className={cls.text}>
