@@ -30,7 +30,7 @@ export const Pagination = ({
     totalCount,
   })
 
-  const { t } = useTranslation()
+  const { t } = useTranslation('profile')
   const onNextHandler = () => {
     onChangePage(currentPage + 1)
   }
