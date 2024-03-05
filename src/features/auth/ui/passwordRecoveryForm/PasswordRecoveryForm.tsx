@@ -1,5 +1,6 @@
 import { useValidationForm } from 'features/auth/lib/useValidationForm'
 import { useRecoverPassword } from 'features/auth/model'
+import i18next from 'i18next'
 import { useTranslation } from 'next-i18next'
 import React from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
@@ -22,12 +23,11 @@ export const PasswordRecoveryForm = () => {
     setValue,
     validErrors: { emailError, recaptchaError },
   } = useValidationForm(['email', 'recaptcha'])
-  const { error, isInfoTextShown, isLoading, onSubmit } = useRecoverPassword()
+  const { isInfoTextShown, isLoading, localizedError: error, onSubmit } = useRecoverPassword()
 
   if (isLoading) {
     return <PageLoader />
   }
-
   const isDisabledValidation = !!getValues().email && !!getValues().recaptcha
 
   const getRecaptchaValueHandler = (value: null | string) => {
@@ -49,9 +49,7 @@ export const PasswordRecoveryForm = () => {
       />
       <p className={cls.helperText}>{t('passwordRecovery')}</p>
 
-      {!!error?.response?.data.messages.length && (
-        <p className={cls.error}>{error.response.data.messages[0].message}</p>
-      )}
+      {error && <p className={cls.error}>{error[0].message}</p>}
 
       {isInfoTextShown && <p className={cls.infoText}>{t('recoveryMessage')}</p>}
       <Button className={cls.button} disabled={!isDisabledValidation || isLoading} type={'submit'}>
@@ -63,7 +61,7 @@ export const PasswordRecoveryForm = () => {
       <ReCAPTCHA
         {...register('recaptcha')}
         className={cls.recaptcha}
-        hl={'en'}
+        hl={i18next.language}
         onChange={getRecaptchaValueHandler}
         onExpired={() => setValue('recaptcha', '')}
         sitekey={`${process.env.RECAPTCHA_SITE_KEY as string}`}

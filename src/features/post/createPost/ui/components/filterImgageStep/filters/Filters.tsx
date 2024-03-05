@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { FilterImageStepLib } from 'features/post/createPost/lib'
 import { useUploadImagePostStore } from 'features/post/createPost/model'
+import { useTranslation } from 'next-i18next'
 import { IImage } from 'shared/types/post'
 import { SwiperClass } from 'swiper/react'
 import { shallow } from 'zustand/shallow'
@@ -45,6 +46,7 @@ export const Filters = ({ className, currentIndex, image, imageId, swiperElement
     shallow
   )
 
+  const { t } = useTranslation('profile')
   const onClickHandler = async (filter: string) => {
     if (swiperElement) {
       setFilter({ filter, imageId })
@@ -83,7 +85,7 @@ export const Filters = ({ className, currentIndex, image, imageId, swiperElement
             }}
             width={108}
           />
-          <p>{filter.name}</p>
+          <p>{filter.name === 'Normal' ? `${t('normal')}` : filter.name}</p>
         </div>
       ))}
     </div>
