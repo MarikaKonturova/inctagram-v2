@@ -1,7 +1,9 @@
 import { getLayoutWithSidebar } from 'layouts'
 import React from 'react'
+
+import { SearchPage } from '../templates/search'
 export default function Search() {
-  return <div> Search Search Search</div>
+  return <SearchPage />
 }
 
 Search.getLayout = getLayoutWithSidebar
