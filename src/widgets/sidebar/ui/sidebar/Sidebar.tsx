@@ -9,10 +9,12 @@ import IconFavorites from 'shared/assets/icons/light/bookmark.svg'
 import IconHome from 'shared/assets/icons/light/home.svg'
 import IconProfile from 'shared/assets/icons/light/person.svg'
 import IconCreate from 'shared/assets/icons/light/plus-square.svg'
+import IconSearch from 'shared/assets/icons/light/search.svg'
 import IconFavoritesOutline from 'shared/assets/icons/outline/bookmark-outline.svg'
 import IconHomeOutline from 'shared/assets/icons/outline/home-outline.svg'
 import IconProfileOutline from 'shared/assets/icons/outline/person-outline.svg'
 import IconCreateOutline from 'shared/assets/icons/outline/plus-square-outline.svg'
+import IconSearchOutline from 'shared/assets/icons/outline/search-outline.svg'
 import { AppRoutes } from 'shared/constants/path'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
@@ -81,6 +83,19 @@ export const Sidebar = (props: SidebarProps) => {
           )}
 
           <span className={cls.link}>{t('myProfile')}</span>
+        </AppLink>
+        <AppLink
+          active={currentPath === AppRoutes.SEARCH}
+          className={clsx(cls.item, { [cls.active]: currentPath === AppRoutes.SEARCH })}
+          href={`${AppRoutes.SEARCH}`}
+        >
+          {currentPath === AppRoutes.SEARCH ? (
+            <IconSearch className={cls.icon} />
+          ) : (
+            <IconSearchOutline className={cls.icon} fill={fill} />
+          )}
+
+          <span className={cls.link}>{t('search')}</span>
         </AppLink>
       </div>
       <div className={cls.extra}>
