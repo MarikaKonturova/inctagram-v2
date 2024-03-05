@@ -6,8 +6,10 @@
   "latin_letters_numbers_etc": "Only Latin letters, numbers, dashes and underscores are allowed",
   "confPassword": "confPassword",
   "atLeast6Char": "must be at least 6 characters",
+  "atLeast6CharPass": "must be at least 6 characters",
   "noMoreThan30Char": "must be no more than 30 characters",
   "noMoreThan20Char": "must be no more than 20 characters",
+  "noMoreThan30CharPass": "must be no more than 30 characters",
   "recaptcha": "Recaptcha",
   "email_val": "The email must match the format",
   "email_max": "Enter an email address under 320 characters.",
@@ -23,5 +25,6 @@
   "dateOfBirth": "dateOfBirth",
   "firstName": "firstName",
   "lastName": "lastName",
-  "busyUserNameError": "User with userName {{userName}} already exists"
+  "busyUserNameError": "User with userName {{userName}} already exists",
+  "registerEmailErrorBack": "User with this userName already exists"
 }

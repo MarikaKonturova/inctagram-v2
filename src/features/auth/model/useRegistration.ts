@@ -36,13 +36,20 @@ export const useRegistration = (
     mutationFn: AuthService.registration,
     onError: err => {
       const error = err.response?.data.messages[0]
-      const errorWithLocalization =
-        error?.field === 'userName' || error?.field === 'email'
-          ? {
-              ...error,
-              message: t('busyUserNameError', { field: error?.field || '' }),
-            }
-          : error
+      let errorWithLocalization = error
+
+      if (error?.field === 'userName') {
+        errorWithLocalization = {
+          ...error,
+          message: t('busyUserNameError', { field: error?.field || '' }),
+        }
+      }
+      if (error?.field === 'email') {
+        errorWithLocalization = {
+          ...error,
+          message: t('registerEmailErrorBack'),
+        }
+      }
 
       // FIX
       setError(error?.field as any, errorWithLocalization || {})

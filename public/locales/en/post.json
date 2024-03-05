@@ -1,4 +1,15 @@
 {
-    "saveConfirmationMessage": "Do you really want to finish editing? If you close the changes you have made will not be saved.",
-    "alert": "Alert"
+  "saveConfirmationMessage": "Do you really want to close the edition of the publication? If you close changes won't be saved.",
+  "alert": "Close Post",
+  "lessThanAMinuteAgo": "less than a minute ago",
+  "minute": "minute",
+  "ago": " ago",
+  "hour": "hour",
+  "day": "day",
+  "week": "week",
+  "month": "month",
+  "year": "year",
+  "ending": "s",
+  "showMore": "Show more",
+  "hide": "Hide"
 }

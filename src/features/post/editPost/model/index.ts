@@ -1,10 +1,26 @@
 import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { MyPostService } from 'shared/api'
+import { useSnackbar } from 'shared/hooks'
 
-export const useEditPost = (postId: number) => {
+type ParamsType = {
+  handleClose: () => void
+  postId: number
+}
+
+export const useEditPost = ({ handleClose, postId }: ParamsType) => {
+  const onOpen = useSnackbar(state => state.onOpen)
+
   const { mutate } = useMutation({
     mutationFn: ({ data, postId }: { data: Record<'description', string>; postId: number }) =>
       MyPostService.editPost(postId, data),
+    onError: (error: AxiosError<{ message: string }>) => {
+      onOpen(error.message, 'danger', 'left')
+    },
+    onSuccess: () => {
+      onOpen('Your changes are saved', 'success', 'left')
+      handleClose()
+    },
     retry: false,
   })
 
