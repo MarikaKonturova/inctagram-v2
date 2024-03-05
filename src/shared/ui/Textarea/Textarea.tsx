@@ -12,6 +12,7 @@ interface TextareaProps {
   id?: string
   label?: string
   labelClassName?: string
+  maxCharactersCount?: number
   name?: string
   onChange: ChangeHandler
   placeholder?: string
@@ -28,6 +29,7 @@ export const Textarea = memo(
       id,
       label,
       labelClassName,
+      maxCharactersCount,
       name,
       onChange,
       placeholder,
@@ -49,9 +51,11 @@ export const Textarea = memo(
           ref={ref}
           {...otherProps}
         />
-        <div
-          className={clsx(cls.charactersCount, [counterClassName])}
-        >{`${charactersCount}/500`}</div>
+        {maxCharactersCount && (
+          <div
+            className={clsx(cls.charactersCount, [counterClassName])}
+          >{`${charactersCount}/${maxCharactersCount}`}</div>
+        )}
         {!!errorText && <span className={clsx(cls.errorText)}>{errorText}</span>}
       </div>
     )
