@@ -16,11 +16,21 @@ interface IProps {
   handleClose: () => void
   id: number
   isOpen: boolean
+  isPublic?: boolean
   lastElement?: boolean
 }
 
 export const PostModal: React.FC<IProps> = props => {
-  const { content, firstElement, handleClick, handleClose, id, isOpen, lastElement } = props
+  const {
+    content,
+    firstElement,
+    handleClick,
+    handleClose,
+    id,
+    isOpen,
+    isPublic = false,
+    lastElement,
+  } = props
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
@@ -30,27 +40,31 @@ export const PostModal: React.FC<IProps> = props => {
         <div className={cls.closeIconContainer} onClick={handleClose}>
           <CloseIcon fill={fill} />
         </div>
-        <button
-          className={clsx(cls.backIconContainer, cls.iconContainer)}
-          onClick={() => handleClick && handleClick('back')}
-          style={{
-            visibility: !firstElement ? 'visible' : 'hidden',
-          }}
-        >
-          <ArrowForwardBackIcon fill={fill} />
-        </button>
+        {!isPublic && (
+          <button
+            className={clsx(cls.backIconContainer, cls.iconContainer)}
+            onClick={() => handleClick && handleClick('back')}
+            style={{
+              visibility: !firstElement ? 'visible' : 'hidden',
+            }}
+          >
+            <ArrowForwardBackIcon fill={fill} />
+          </button>
+        )}
 
         {content}
 
-        <button
-          className={clsx(cls.nextIconContainer, cls.iconContainer)}
-          onClick={() => handleClick && handleClick('next')}
-          style={{
-            visibility: !lastElement ? 'visible' : 'hidden',
-          }}
-        >
-          <ArrowForwardNextIcon fill={fill} />
-        </button>
+        {!isPublic && (
+          <button
+            className={clsx(cls.nextIconContainer, cls.iconContainer)}
+            onClick={() => handleClick && handleClick('next')}
+            style={{
+              visibility: !lastElement ? 'visible' : 'hidden',
+            }}
+          >
+            <ArrowForwardNextIcon fill={fill} />
+          </button>
+        )}
       </div>
     </Modal>
   )
