@@ -19,7 +19,7 @@ export const PublicPostModal = ({ handleClose, isOpen, post }: PublicPostModalPr
   const creationDate = moment(post.createdAt).format('LL')
 
   return (
-    <PostModal
+    <PostModal 
       content={
         <>
           <Card
@@ -45,6 +45,7 @@ export const PublicPostModal = ({ handleClose, isOpen, post }: PublicPostModalPr
       handleClose={handleClose}
       id={post.id}
       isOpen={isOpen}
+      isPublic
     />
   )
 }
