@@ -12,6 +12,7 @@ interface TextareaProps {
   id?: string
   label?: string
   labelClassName?: string
+  maximumCharactersCount?: number
   name?: string
   onChange: ChangeHandler
   placeholder?: string
@@ -21,13 +22,14 @@ interface TextareaProps {
 export const Textarea = memo(
   forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => {
     const {
-      charactersCount,
+      charactersCount = 0,
       className,
       counterClassName,
       errorText,
       id,
       label,
       labelClassName,
+      maximumCharactersCount = 500,
       name,
       onChange,
       placeholder,
@@ -41,7 +43,7 @@ export const Textarea = memo(
           {label}
         </label>
         <textarea
-          className={clsx(cls.textarea, [textareaClassName], errorText && cls.error)}
+          className={clsx(cls.textarea, [errorText ? cls.error : textareaClassName])}
           id={id}
           name={name}
           onChange={onChange}
@@ -51,7 +53,7 @@ export const Textarea = memo(
         />
         <div
           className={clsx(cls.charactersCount, [counterClassName])}
-        >{`${charactersCount}/500`}</div>
+        >{`${charactersCount}/${maximumCharactersCount}`}</div>
         {!!errorText && <span className={clsx(cls.errorText)}>{errorText}</span>}
       </div>
     )
