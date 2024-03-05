@@ -147,11 +147,13 @@ export const Form: React.FC<IProps> = props => {
       </div>
       <Textarea
         {...register('aboutMe')}
+        charactersCount={watch('aboutMe')?.length}
         className={cls.wrapper}
         errorText={aboutMeError}
         id={'aboutMe'}
         label={`${t('aboutMe')}`}
         labelClassName={cls.label}
+        maxCharactersCount={200}
         textareaClassName={cls.textarea}
       />
     </div>
