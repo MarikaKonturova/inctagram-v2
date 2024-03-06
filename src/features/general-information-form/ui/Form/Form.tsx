@@ -154,7 +154,7 @@ export const Form: React.FC<IProps> = props => {
         id={'aboutMe'}
         label={`${t('aboutMe')}`}
         labelClassName={cls.label}
-        maximumCharactersCount={200}
+        maxCharactersCount={200}
         textareaClassName={cls.textarea}
       />
     </div>
