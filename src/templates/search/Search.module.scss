@@ -1,0 +1,27 @@
+.searchPage {
+  height: 100vh;
+
+  .title {
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .inputWrapper {
+    padding: 24px;
+  }
+
+  .input.input.input.input {
+    border: 1px solid var(--dark-100-color);
+  }
+
+  .button {
+    min-width: 116px;
+    color: var(--light-100-color);
+  }
+
+  .loader {
+    text-align: center;
+  }
+}

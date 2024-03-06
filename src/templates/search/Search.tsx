@@ -1,14 +1,15 @@
+import { useGetUserProfileData } from 'entities/Profile'
 import { useTranslation } from 'next-i18next'
 import React, { ChangeEvent, useState } from 'react'
+import { useDebounce } from 'shared/hooks'
+import { Input, Loader } from 'shared/ui'
 
-import { useGetUserProfileData } from '../../entities/Profile'
 import styles from '../../features/profile/followAndUnfollow/ui/followingAndFollowersModal/FollowingAndFollowersModal.module.scss'
-import cls from '../../features/profile/followAndUnfollow/ui/usersList/UsersList.module.scss'
-import { useDebounce } from '../../shared/hooks'
-import { Input, Loader } from '../../shared/ui'
+import cls from './Search.module.scss'
 
 export const SearchPage = () => {
   const { t } = useTranslation('profile')
+  const { t: tr } = useTranslation('common')
   const [searchUserValue, setSearchUserValue] = useState<string>('')
   const debounceSearchUserValue = useDebounce(searchUserValue, 500)
 
@@ -19,12 +20,12 @@ export const SearchPage = () => {
   }
 
   return (
-    <div>
-      <p> SearchPage SearchPage SearchPage SearchPage SearchPage SearchPage </p>
+    <div className={cls.searchPage}>
+      <div className={cls.title}> {tr('search')} </div>
 
       <Input
-        className={styles.inputWrapper}
-        inputClassName={styles.input}
+        className={cls.inputWrapper}
+        inputClassName={cls.input}
         onChange={onSearchUserValueHandler}
         placeholder={`${t('search')}`}
         type={'search'}
