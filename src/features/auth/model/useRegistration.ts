@@ -41,7 +41,7 @@ export const useRegistration = (
       if (error?.field === 'userName') {
         errorWithLocalization = {
           ...error,
-          message: t('registerUserNameErrorBack'),
+          message: t('busyUserNameError', { field: error?.field || '' }),
         }
       }
       if (error?.field === 'email') {

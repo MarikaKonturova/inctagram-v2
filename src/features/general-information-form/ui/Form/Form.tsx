@@ -34,6 +34,7 @@ export const Form: React.FC<IProps> = props => {
     validErrors
   const country = watch('country')
   const city = watch('city')
+  const aboutMeFieldLength = watch('aboutMe')?.length || 0
 
   useEffect(() => {
     if (
@@ -147,7 +148,7 @@ export const Form: React.FC<IProps> = props => {
       </div>
       <Textarea
         {...register('aboutMe')}
-        charactersCount={watch('aboutMe')?.length}
+        charactersCount={aboutMeFieldLength}
         className={cls.wrapper}
         errorText={aboutMeError}
         id={'aboutMe'}
