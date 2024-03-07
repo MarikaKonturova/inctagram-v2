@@ -1,5 +1,5 @@
 import { $api } from 'shared/api'
-import { type Post } from 'shared/types/post'
+import { IComment, type Post, ResponseType } from 'shared/types/post'
 import { IFavoritePostsParams } from 'shared/types/users'
 
 export const UsersService = {
@@ -46,6 +46,18 @@ export const UsersService = {
 
   getUserByName(userName: string) {
     return $api.get(`/users/${userName}`)
+  },
+
+  async getUserSearch(search: string, pageNumber: number) {
+    const res = await $api.get<any>(`/users`, {
+      params: {
+        pageNumber,
+        pageSize: 10,
+        search,
+      },
+    })
+
+    return res.data
   },
 
   unfollow(userId: number) {
