@@ -1,5 +1,5 @@
 import { $api } from 'shared/api'
-import { IComment, type Post, ResponseType } from 'shared/types/post'
+import { type Post } from 'shared/types/post'
 import { IFavoritePostsParams } from 'shared/types/users'
 
 export const UsersService = {
@@ -51,6 +51,7 @@ export const UsersService = {
   async getUserSearch(search: string, pageNumber: number) {
     const res = await $api.get<any>(`/users`, {
       params: {
+        cursor: 0,
         pageNumber,
         pageSize: 10,
         search,

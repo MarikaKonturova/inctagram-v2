@@ -18,8 +18,6 @@ export const SearchPage = () => {
   const [searchUserValue, setSearchUserValue] = useState<string>()
   const debounceSearchUserValue = useDebounce(searchUserValue, 500)
 
-  console.log(debounceSearchUserValue)
-
   const {
     dataUsers: usersData,
     fetchNextPage,
@@ -27,10 +25,7 @@ export const SearchPage = () => {
     isFetchingNextPage,
     isLoading: isUsersLoading,
     isSuccess,
-    status,
   } = useGetSearchUsers(debounceSearchUserValue)
-
-  console.log(usersData)
   const onSearchUserValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchUserValue(e.target.value)
   }
@@ -53,14 +48,21 @@ export const SearchPage = () => {
         type={'search'}
         value={searchUserValue}
       />
+      <p className={cls.titleList}>{'Recent requests'} </p>
       {isUsersLoading && (
         <div className={cls.loader}>
           <Loader />
         </div>
       )}
-      <p className={cls.titleList}>{'Recent requests'} </p>
+
       <div className={cls.usersList}>
-        {usersData &&
+        {!debounceSearchUserValue && (
+          <div className={cls.emptyList}>
+            <h3>Oops! This place looks empty!</h3>
+            <p>No recent requests</p>
+          </div>
+        )}
+        {debounceSearchUserValue &&
           usersData?.map((user: any) => {
             return (
               <div className={cls.userCard} key={user.id}>
