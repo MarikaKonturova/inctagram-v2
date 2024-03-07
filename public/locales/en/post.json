@@ -11,5 +11,7 @@
   "year": "year",
   "ending": "s",
   "showMore": "Show more",
-  "hide": "Hide"
+  "hide": "Hide",
+  "more": "More",
+  "less": "Less"
 }
