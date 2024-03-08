@@ -39,7 +39,6 @@ export const SearchPage = () => {
   return (
     <div className={cls.searchPage}>
       <h2 className={cls.title}> {tr('search')} </h2>
-
       <Input
         className={cls.inputWrapper}
         inputClassName={cls.input}
@@ -54,7 +53,6 @@ export const SearchPage = () => {
           <Loader />
         </div>
       )}
-
       <div className={cls.usersList}>
         {!debounceSearchUserValue && (
           <div className={cls.emptyList}>
@@ -83,7 +81,6 @@ export const SearchPage = () => {
                       >
                         {user.userName}
                       </Link>
-
                       <p className={cls.userInfo}>
                         {user.firstName} {user.lastName}
                       </p>

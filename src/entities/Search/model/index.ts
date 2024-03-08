@@ -8,7 +8,7 @@ export const useGetSearchUsers = (searchUser: string) => {
   const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isSuccess } =
     useInfiniteQuery(
       ['postComments', searchUser],
-      ({ pageParam = 1 }) => UsersService.getUserSearch(searchUser, pageParam),
+      ({ pageParam = 1 }) => UsersService.getSearchUsers(searchUser, pageParam),
       {
         getNextPageParam: lastPage => {
           return lastPage.page < lastPage.pagesCount ? lastPage.page + 1 : undefined

@@ -44,11 +44,7 @@ export const UsersService = {
     return $api.get(`/users/${userName}/followers`, { params: queryParams })
   },
 
-  getUserByName(userName: string) {
-    return $api.get(`/users/${userName}`)
-  },
-
-  async getUserSearch(search: string, pageNumber: number) {
+  async getSearchUsers(search: string, pageNumber: number) {
     const res = await $api.get<ResponseType<User[]>>(`/users`, {
       params: {
         cursor: 0,
@@ -59,6 +55,10 @@ export const UsersService = {
     })
 
     return res.data
+  },
+
+  getUserByName(userName: string) {
+    return $api.get(`/users/${userName}`)
   },
 
   unfollow(userId: number) {
