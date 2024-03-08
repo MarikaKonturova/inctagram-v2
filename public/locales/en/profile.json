@@ -1,6 +1,6 @@
 {
-    "subscriptions": "Subscriptions",
-    "subscribers": "Subscribers",
+    "subscriptions": "Following",
+    "subscribers": "Followers",
     "publications": "Publications",
     "settings": "Profile Settings",
     "sendMessage": "Send Message",
