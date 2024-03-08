@@ -1,8 +1,8 @@
 import { Header, useGetMyPost } from 'entities/Post'
 import { useGetProfileData } from 'entities/Profile'
+import { Translation } from 'next-i18next'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Translation } from 'react-i18next'
 import userPhoto from 'shared/assets/images/user.png'
 import { Button, Card, ConfirmationModal, Modal, Textarea } from 'shared/ui'
 
@@ -20,11 +20,11 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
   const { response } = useGetProfileData()
   const userData = response?.data
   const { post } = useGetMyPost(postId)
-  const { saveChanges } = useEditPost(postId)
+  const { saveChanges } = useEditPost({ handleClose, postId })
   const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false)
 
   const {
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
     register,
     reset,
@@ -33,6 +33,8 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
     defaultValues: {
       description: post?.description || '',
     },
+    mode: 'onTouched' || 'onSubmit',
+    reValidateMode: 'onChange',
   })
   const descriptionValueLength = watch('description')?.length || 0
 
@@ -72,7 +74,10 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
               <div className={cls.textareaContainer}>
                 <Textarea
                   {...register('description', {
-                    maxLength: { message: `${t('maxLengthDescription')}`, value: 500 },
+                    maxLength: {
+                      message: `${t('maxLengthDescription', { ns: 'profile' })}`,
+                      value: 500,
+                    },
                   })}
                   charactersCount={descriptionValueLength}
                   className={cls.wrapper}
@@ -83,7 +88,7 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
                   textareaClassName={cls.textarea}
                 />
               </div>
-              <Button className={cls.button} theme={'primary'} type={'submit'}>
+              <Button className={cls.button} disabled={!isValid} theme={'primary'} type={'submit'}>
                 {t('saveChanges', { ns: 'profile' })}
               </Button>
             </div>

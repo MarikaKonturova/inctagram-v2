@@ -22,7 +22,7 @@ interface IProps {
 export const PublishPostStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
-
+  const { t } = useTranslation(['profile'])
   const { description, images, imagesIds, location, setDescription, setLocation } =
     useUploadImagePostStore(
       ({ description, images, imagesIds, location, setDescription, setLocation }) => ({
@@ -36,8 +36,6 @@ export const PublishPostStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) =>
       shallow
     )
 
-  console.log(description)
-  const { t } = useTranslation(['profile'])
   const onSuccess = () => {
     reset({
       description: '',

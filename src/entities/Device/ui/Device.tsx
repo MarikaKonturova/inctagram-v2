@@ -1,6 +1,6 @@
 import clsx from 'clsx'
+import { useTranslation } from 'next-i18next'
 import { type FC, memo } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Icons } from 'shared/assets/icons/browsers'
 import { type DeviceScheme } from 'shared/types/device'
 import { fnBrowserDetect } from 'shared/utils/browser-detect'

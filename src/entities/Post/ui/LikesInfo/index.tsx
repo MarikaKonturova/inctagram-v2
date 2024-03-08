@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import userPhoto from 'shared/assets/images/user.png'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { AvatarSizes } from 'shared/types/post'

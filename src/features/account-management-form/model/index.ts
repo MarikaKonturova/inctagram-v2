@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
 import { format } from 'date-fns'
+import { useTranslation } from 'next-i18next'
 import { SubscriptionsService } from 'shared/api'
 import { useSnackbar } from 'shared/hooks'
 import { type CostOfSubscriptionType, type SubscriptionType } from 'shared/types/subscriptions'
@@ -9,15 +10,24 @@ const formatDate = (date: string) => format(new Date(date), 'dd.MM.yyyy')
 
 export const useSubscriptions = (selected: CostOfSubscriptionType) => {
   const onOpen = useSnackbar(state => state.onOpen)
+  const { t } = useTranslation('profile')
 
-  const { data: costOfSubscription, isLoading } = useQuery({
+  const {
+    data: costOfSubscription,
+    isLoading,
+    isSuccess,
+  } = useQuery({
     onError: (error: Error) => {
       onOpen(error.message, 'danger', 'center')
+    },
+    onSuccess: data => {
+      data.data.data.map((el: CostOfSubscriptionType) => {
+        el['description_ru'] = `${el.amount}$ ${t('per')} ${t(`${el.typeDescription}`)}`
+      })
     },
     queryFn: SubscriptionsService.getCostOfSubscription,
     queryKey: ['cost-of-subscription'],
   })
-
   const { data: currentSubscription, refetch } = useQuery({
     onError: (error: Error) => {
       onOpen(error.message, 'danger', 'center')

@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { useUploadAvatar } from 'features/profile/avatar/model/uploadAvatar'
 import dynamic from 'next/dynamic'
+import { useTranslation } from 'next-i18next'
 import {
   type ChangeEvent,
   type Dispatch,
@@ -9,7 +10,6 @@ import {
   type SetStateAction,
   useState,
 } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Button, Modal } from 'shared/ui'
 import { convertDataUrlToFile } from 'shared/utils/convertDataUrlToFile'
 
@@ -89,7 +89,7 @@ export const AvatarModal: FC<PropsType> = ({ className, isOpen, setAvatar, setIs
         {errorMessage && (
           <div className={cls.errorBox}>
             <p className={cls.errorText}>
-              <strong>Error!</strong> {errorMessage}
+              <strong>{t('error')}</strong> {errorMessage}
             </p>
           </div>
         )}

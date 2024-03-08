@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 import { useMemo } from 'react'
 import { type UseFormSetError } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import { ProfileService } from 'shared/api'
 import { AppRoutes } from 'shared/constants/path'
 import { useSnackbar } from 'shared/hooks'
@@ -15,6 +15,7 @@ export const useUpdateProfileData = (setError: UseFormSetError<ProfileDataModel>
   const queryClient = useQueryClient()
   const onOpen = useSnackbar(state => state.onOpen)
   const { push } = useRouter()
+
   const { t } = useTranslation('validation')
 
   const { data, error, mutate, variables } = useMutation<
@@ -30,19 +31,19 @@ export const useUpdateProfileData = (setError: UseFormSetError<ProfileDataModel>
         error?.field === 'userName'
           ? {
               ...error,
-              message: t('profileSettingsErrorBackUserName', {
+              message: t('busyUserNameError', {
                 userName: variables?.userName || '',
               }),
             }
           : error
 
       setError(error?.field as ValidateUnion, localizedError || {})
-      onOpen('Error', 'danger', 'left')
+      onOpen(error?.message || 'Some error occured', 'danger', 'left')
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries(['getProfileData'])
       onOpen('Your settings are saved', 'success', 'left')
-      void push(AppRoutes.PROFILE.MY_PROFILE)
+      push(AppRoutes.PROFILE.MY_PROFILE)
     },
   })
 

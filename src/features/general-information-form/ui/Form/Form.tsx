@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { type GeneralInformationFormValues } from 'features/general-information-form/lib/useValidationForm'
 import i18next from 'i18next'
+import { useTranslation } from 'next-i18next'
 import React, { useEffect } from 'react'
 import {
   type Control,
@@ -9,7 +10,6 @@ import {
   type UseFormSetValue,
   type UseFormWatch,
 } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import { COUNTRIES_EN, COUNTRIES_RU } from 'shared/constants/countryList'
 import { DatePicker, Input, Select, Textarea } from 'shared/ui'
 
@@ -34,6 +34,7 @@ export const Form: React.FC<IProps> = props => {
     validErrors
   const country = watch('country')
   const city = watch('city')
+  const aboutMeFieldLength = watch('aboutMe')?.length || 0
 
   useEffect(() => {
     if (
@@ -147,11 +148,13 @@ export const Form: React.FC<IProps> = props => {
       </div>
       <Textarea
         {...register('aboutMe')}
+        charactersCount={aboutMeFieldLength}
         className={cls.wrapper}
         errorText={aboutMeError}
         id={'aboutMe'}
         label={`${t('aboutMe')}`}
         labelClassName={cls.label}
+        maxCharactersCount={200}
         textareaClassName={cls.textarea}
       />
     </div>

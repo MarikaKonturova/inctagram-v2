@@ -18,8 +18,9 @@ interface IProps {
 
 export const CroppImageStep = ({ onNextClick, onPrevClick }: IProps) => {
   const { theme } = useTheme()
-  const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
   const { t } = useTranslation(['profile'])
+  const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
+
   const { images, imagesIds, setReset } = useUploadImagePostStore(
     ({ images, imagesIds, setReset }) => ({ images, imagesIds, setReset }),
     shallow

@@ -1,6 +1,6 @@
 import { useLogout } from 'features/auth/model'
+import { useTranslation } from 'next-i18next'
 import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { LogoutButton } from 'shared/ui'
 import { ConfirmationModal } from 'shared/ui/ConfirmationModal/ConfirmationModal'
 

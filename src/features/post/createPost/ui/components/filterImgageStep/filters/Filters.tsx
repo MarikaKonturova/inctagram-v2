@@ -83,6 +83,7 @@ export const Filters = ({ className, currentIndex, image, imageId, swiperElement
             }}
             width={108}
           />
+
           <p>{filter.name === 'Normal' ? `${t('normal')}` : filter.name}</p>
         </div>
       ))}

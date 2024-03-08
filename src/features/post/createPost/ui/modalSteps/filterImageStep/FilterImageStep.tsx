@@ -22,6 +22,7 @@ export const FilterImageStep = ({ onNextClick, onPrevClick }: IProps) => {
   const { t } = useTranslation(['profile'])
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
   const [thumbsSwiper] = useState<SwiperClass>()
+
   const [swiperInstance, setSwiperInstance] = useState<SwiperClass>()
   const [currentIndexSlide, setCurrentIndexSlide] = useState<number>(0)
   const { images, imagesIds } = useUploadImagePostStore(

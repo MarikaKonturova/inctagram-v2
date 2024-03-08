@@ -2,9 +2,9 @@ import { useMutation } from '@tanstack/react-query'
 import { type AxiosError } from 'axios'
 import { selectEmail, selectSetEmail } from 'features/auth'
 import { useAuth } from 'features/auth/model/useAuth'
+import { useTranslation } from 'next-i18next'
 import { useCallback } from 'react'
 import { type UseFormReset, type UseFormSetError } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import { AuthService } from 'shared/api'
 import { AppRoutes } from 'shared/constants/path'
 import { useSnackbar } from 'shared/hooks'
@@ -36,13 +36,20 @@ export const useRegistration = (
     mutationFn: AuthService.registration,
     onError: err => {
       const error = err.response?.data.messages[0]
-      const errorWithLocalization =
-        error?.field === 'userName' || error?.field === 'email'
-          ? {
-              ...error,
-              message: t('registerErrorBack', { field: error?.field || '' }),
-            }
-          : error
+      let errorWithLocalization = error
+
+      if (error?.field === 'userName') {
+        errorWithLocalization = {
+          ...error,
+          message: t('busyUserNameError', { field: error?.field || '' }),
+        }
+      }
+      if (error?.field === 'email') {
+        errorWithLocalization = {
+          ...error,
+          message: t('registerEmailErrorBack'),
+        }
+      }
 
       // FIX
       setError(error?.field as any, errorWithLocalization || {})

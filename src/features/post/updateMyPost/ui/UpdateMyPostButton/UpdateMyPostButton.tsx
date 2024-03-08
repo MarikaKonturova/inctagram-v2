@@ -1,7 +1,7 @@
 import { Menu } from '@headlessui/react'
 import clsx from 'clsx'
+import { useTranslation } from 'next-i18next'
 import React, { type FC } from 'react'
-import { useTranslation } from 'react-i18next'
 import IconEdit from 'shared/assets/icons/light/edit-2.svg'
 import IconEditOutline from 'shared/assets/icons/outline/edit-2-outline.svg'
 import { Theme } from 'shared/constants/theme'

@@ -43,8 +43,8 @@ export const createValidationSchema = (arr: ValidateUnion[]): any => {
           })
           .minLowercase(1)
           .minUppercase(1)
-          .min(6, `${t(`${type}`)} ${t('atLeast6Char')}`)
-          .max(20, `${t(`${type}`)} ${t('noMoreThan30Char')}`)
+          .min(6, `${t(`${type}`)} ${t('atLeast6CharPass')}`)
+          .max(20, `${t(`${type}`)} ${t('noMoreThan30CharPass')}`)
           .required(`${t('field_required')}`)
 
         return accum

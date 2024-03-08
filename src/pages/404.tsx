@@ -1,5 +1,5 @@
 import { getAuthLayout } from 'layouts'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import NotFoundImg from 'shared/assets/images/404error.png'
 import { Info } from 'shared/ui'
 

@@ -3,8 +3,8 @@ import type { UserError } from 'shared/types/auth'
 
 import { useQuery } from '@tanstack/react-query'
 import { format } from 'date-fns'
+import { useTranslation } from 'next-i18next'
 import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { SubscriptionsService } from 'shared/api'
 import { PaymentType, SubscriptionType } from 'shared/constants/payments'
 import { useSnackbar } from 'shared/hooks'
@@ -13,13 +13,12 @@ import { ColumnType, Pagination, Table } from 'shared/ui'
 
 import cls from './styles.module.scss'
 
-const options = ['8', '20', '30', '50', '100']
+const options = ['10', '20', '30', '50', '100']
 
 const formatDate = (date: string) => format(new Date(date), 'dd.MM.yyyy')
 
 export const MyPayments = () => {
   const [params, setParams] = useState<GetMyPaymentsParams>({})
-
   const onOpen = useSnackbar(state => state.onOpen)
 
   const { data } = useQuery(
@@ -48,7 +47,7 @@ export const MyPayments = () => {
     endDateOfSubscription: formatDate(el.endDateOfSubscription),
     paymentType: PaymentType[el.paymentType],
     price: '$' + el.price,
-    subscriptionType: SubscriptionType[el.subscriptionType],
+    subscriptionType: t(`${el.subscriptionType}`),
   }))
 
   const onChange = (pageSize: string) => {

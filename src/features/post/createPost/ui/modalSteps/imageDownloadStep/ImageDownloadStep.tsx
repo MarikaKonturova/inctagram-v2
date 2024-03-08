@@ -14,11 +14,11 @@ import cls from './ImageDownloadStep.module.scss'
 
 /* if (file.size > 1024 * 1024 * 20) {
     setError('Photo size must be less than 10 MB!')
-  
+
     return
   } else if (!allowedImageTypes.includes(file.type)) {
     setError('The format of the uploaded photo must be\nPNG and JPEG')
-  
+
     return
   } */
 
