@@ -60,7 +60,7 @@ export const Publication: React.FC<PropsType> = props => {
       <div className={cls.likesInfo}>
         <LikesInfo likeCount={publ.likeCount} newLikes={publ.newLikes} />
       </div>
-      <Description description={publ.description} title={publ.userName} />
+      <Description avatar={publ.avatars} description={publ.description} title={publ.userName} />
       {openComments && <Commentaries postId={publ.id} />}
       <div className={cls.allComments} onClick={() => commentsHandler()}>
         {t('viewAllComments')} ({publ.commentCount})
