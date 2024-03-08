@@ -1,1 +1,1 @@
-export { SearchPage } from 'templates/search/Search'
+export { SearchPage } from './ui/Search'
