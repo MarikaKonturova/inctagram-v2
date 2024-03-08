@@ -2,7 +2,6 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { UsersService } from 'shared/api'
 import { useSnackbar } from 'shared/hooks'
-
 export const useGetSearchUsers = (searchUser: string) => {
   const onOpen = useSnackbar(state => state.onOpen)
 

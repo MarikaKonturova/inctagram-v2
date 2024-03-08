@@ -1,6 +1,6 @@
 import { $api } from 'shared/api'
-import { type Post } from 'shared/types/post'
-import { IFavoritePostsParams } from 'shared/types/users'
+import { type Post, ResponseType } from 'shared/types/post'
+import { IFavoritePostsParams, User } from 'shared/types/users'
 
 export const UsersService = {
   addToFavourites(postId: number) {
@@ -49,7 +49,7 @@ export const UsersService = {
   },
 
   async getUserSearch(search: string, pageNumber: number) {
-    const res = await $api.get<any>(`/users`, {
+    const res = await $api.get<ResponseType<User[]>>(`/users`, {
       params: {
         cursor: 0,
         pageNumber,
