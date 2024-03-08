@@ -1,6 +1,7 @@
 import { useGetProfileData } from 'entities/Profile'
 import { useCreatePostMutation, useUploadImagePostStore } from 'features/post/createPost/model'
-import { type FC } from 'react'
+import { useTranslation } from 'next-i18next'
+import { type FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import { Theme } from 'shared/constants/theme'
@@ -22,11 +23,21 @@ export const PublishPostStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) =>
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
-  const { convertedImages, imagesIds } = useUploadImagePostStore(
-    ({ convertedImages, imagesIds }) => ({ convertedImages, imagesIds }),
-    shallow
-  )
+  const { description, images, imagesIds, location, setDescription, setLocation } =
+    useUploadImagePostStore(
+      ({ description, images, imagesIds, location, setDescription, setLocation }) => ({
+        description,
+        images,
+        imagesIds,
+        location,
+        setDescription,
+        setLocation,
+      }),
+      shallow
+    )
 
+  console.log(description)
+  const { t } = useTranslation(['profile'])
   const onSuccess = () => {
     reset({
       description: '',
@@ -43,10 +54,11 @@ export const PublishPostStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) =>
     handleSubmit,
     register,
     reset,
+    watch,
   } = useForm({
     defaultValues: {
-      description: '',
-      location: '',
+      description,
+      location,
     },
   })
 
@@ -57,7 +69,7 @@ export const PublishPostStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) =>
 
     for (const imageId of imagesIds) {
       results.push(
-        fetch(convertedImages[imageId].src)
+        fetch(images[imageId].filteredSrc)
           .then(res => {
             const blob = res.blob()
 
@@ -76,20 +88,30 @@ export const PublishPostStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) =>
     onCreate(formData)
   }
 
+  const { description: descriptionWatch, location: locationWatch } = watch()
+
+  useEffect(() => {
+    setDescription(descriptionWatch)
+  }, [descriptionWatch, setDescription])
+
+  useEffect(() => {
+    setLocation(locationWatch)
+  }, [locationWatch, setLocation])
+
   return (
     <>
       <header className={cls.header}>
         <IconArrowBack fill={fill} onClick={onPrevClick} />
-        <h2>Publication</h2>
+        <h2>{t('publication')}</h2>
         <Button onClick={handleSubmit(onSubmit)} theme={'textButton'}>
-          Publish
+          {t('publish')}
         </Button>
       </header>
       <div className={cls.mainContainer}>
         <SwiperApp className={cls.imgContainer}>
           {imagesIds.map(imageId => (
             <SwiperSlide key={imageId}>
-              <img alt={'post image'} src={convertedImages[imageId].src} />
+              <img alt={'post image'} src={images[imageId].filteredSrc} />
             </SwiperSlide>
           ))}
         </SwiperApp>
@@ -103,13 +125,14 @@ export const PublishPostStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) =>
               </div>
             )}
             <Textarea
+              charactersCount={descriptionWatch.length}
               className={cls.textareaContainer}
-              label={'Add publication descriptions'}
+              label={`${t('addPublicationDescriptions')}`}
               labelClassName={cls.label}
-              placeholder={'Write your description here'}
+              placeholder={`${t('writeYourDescriptionHere')}`}
               textareaClassName={cls.textarea}
               {...register('description', {
-                maxLength: { message: 'Max length of description is 500 characters', value: 500 },
+                maxLength: { message: t('maxLengthDescription'), value: 500 },
               })}
             />
           </div>
@@ -118,7 +141,7 @@ export const PublishPostStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) =>
             className={cls.wrapper}
             errorText={errors.description?.message}
             id={'location'}
-            label={'Location'}
+            label={`${t('location')}`}
             labelClassName={cls.label}
             type={'text'}
           />

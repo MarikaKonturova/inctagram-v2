@@ -18,7 +18,7 @@ export { EditPostModal } from './editPost/ui/EditPostModal'
 
 export { LikeCommentIconButton } from './likeComment/ui/LikeCommentIconButton/LikeCommentIconButton'
 
-export { LikePostIconButton } from './likePost/ui/LikePostIconButton/LikePostIconButton'
+export { LikePostIconButton } from './likePost/ui/likePostIconButton/LikePostIconButton'
 
 export { Report } from './report/ui/Report/Report'
 

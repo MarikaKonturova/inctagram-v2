@@ -1,4 +1,9 @@
 {
-    "saveConfirmationMessage": "Do you really want to finish editing? If you close the changes you have made will not be saved.",
-    "alert": "Alert"
+  "saveConfirmationMessage": "Do you really want to finish editing? If you close the changes you have made will not be saved.",
+  "alert": "Alert",
+  "doYouReallyWantToCloseTheCreationOfAPublication": "Do you really want to close the creation of a publication?",
+  "ifYouCloseEverythingWillBeDeleted": "If you close everything will be deleted",
+  "discard": "Discard",
+  "saveDraft": "Save Draft", 
+  "close" : "Close"
 }

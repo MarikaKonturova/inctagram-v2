@@ -39,11 +39,8 @@ export const CropImage: FC<{ image: IImage; imageId: string }> = ({ image, image
 
         if (modifiedImage) {
           setCroppedImage({ croppedSrc: modifiedImage.src, imageId })
-          const convertedImage = {
-            [imageId]: { src: modifiedImage.src },
-          }
 
-          setConvertedImages(convertedImage)
+          setConvertedImages({ filteredSrc: modifiedImage.src, imageId })
         }
       }
     },
