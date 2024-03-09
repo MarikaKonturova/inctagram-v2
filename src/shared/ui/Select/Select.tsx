@@ -10,9 +10,9 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLInputElement>
   buttonClassName?: string
   disabled?: boolean
   label?: string
-  onChange: (value: string) => void
+  onChange?: (value: string) => void
   optionClassName?: string
-  options: string[]
+  options?: string[]
   value: string
 }
 
@@ -45,7 +45,7 @@ export const Select = memo(
             </Listbox.Button>
 
             <Listbox.Options className={clsx(cls.dropDownList)}>
-              {options.map(option => (
+              {options?.map(option => (
                 <Listbox.Option
                   className={({ active }) =>
                     clsx(cls.listItem, active && cls.activeListItem, props.optionClassName)
