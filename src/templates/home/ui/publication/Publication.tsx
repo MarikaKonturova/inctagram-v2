@@ -51,7 +51,11 @@ export const Publication: React.FC<PropsType> = props => {
         <MoreOptions
           content={
             <>
-              <SubscribeOrUnsubscribeButton isFollowed={publ.isFollowedBy} userId={publ.ownerId} />
+              <SubscribeOrUnsubscribeButton
+                isFollowed={publ.isFollowedBy}
+                userId={publ.ownerId}
+                userName={publ.userName}
+              />
               <CopyToClipboard />
             </>
           }
