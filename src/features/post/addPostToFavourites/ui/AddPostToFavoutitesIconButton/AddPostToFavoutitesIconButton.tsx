@@ -16,7 +16,7 @@ export const AddPostToFavoutitesIconButton: FC<IProps> = ({ postId, postIsFavour
   const { theme } = useTheme()
 
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
-  const { addToFavourites } = useAddToFavouritesPost()
+  const { addToFavourites, isLoading } = useAddToFavouritesPost()
 
   const onFavouritesIconClick = useCallback(() => {
     addToFavourites(postId)
@@ -27,6 +27,7 @@ export const AddPostToFavoutitesIconButton: FC<IProps> = ({ postId, postIsFavour
     <ActionIcon
       filledIcon={<IconFavouritesOutline fill={fill} />}
       initialState={postIsFavourite}
+      isLoading={isLoading}
       onClick={onFavouritesIconClick}
       outlineIcon={<IconFavourites fill={fill} />}
     />
