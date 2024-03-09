@@ -11,10 +11,11 @@ import { useSubscribeOrUnsubscribe } from '../../model'
 import cls from './SubscribeOrUnsubscribeButton.module.scss'
 
 interface IProps {
+  isFollowed?: boolean
   userId: number
 }
 
-export const SubscribeOrUnsubscribeButton: FC<IProps> = ({ userId }) => {
+export const SubscribeOrUnsubscribeButton: FC<IProps> = ({ isFollowed, userId }) => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
   const { t } = useTranslation('profile')
@@ -33,7 +34,7 @@ export const SubscribeOrUnsubscribeButton: FC<IProps> = ({ userId }) => {
           ) : (
             <IconUnsubscribeOutline aria-hidden={'true'} fill={fill} />
           )}
-          {t('unsubscribe')}
+          {isFollowed ? t('unsubscribe') : t('subscribe')}
         </button>
       )}
     </Menu.Item>
