@@ -4,6 +4,11 @@
   display: flex;
   align-items: center;
   margin-bottom: 12px;
+  justify-content: space-between;
+}
+.headerBox {
+  display: flex;
+  align-items: center;
 }
 
 .container {

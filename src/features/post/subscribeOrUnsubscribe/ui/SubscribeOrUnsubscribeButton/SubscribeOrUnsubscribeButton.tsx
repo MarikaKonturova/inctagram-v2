@@ -11,7 +11,7 @@ import { useSubscribeOrUnsubscribe } from '../../model'
 import cls from './SubscribeOrUnsubscribeButton.module.scss'
 
 interface IProps {
-  userId: string
+  userId: number
 }
 
 export const SubscribeOrUnsubscribeButton: FC<IProps> = ({ userId }) => {

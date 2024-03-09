@@ -66,6 +66,7 @@
     "hideReplies": "Hide replies",
     "viewReplies": "View replies",
     "viewAllComments": "View All Comments",
+
     "follow": "Follow",
     "unfollow": "Unfollow",
     "delete": "Delete",
@@ -78,5 +79,8 @@
     "SEMI_ANNUALLY": "6 months",
     "YEARLY": "1 year",
     "show": "Show",
-    "onPage": "on page"
+    "onPage": "on page",
+    "copyLink": "Copy Link",
+    "subscribe": "Subscribe",
+    "unsubscribe": "Unsubscribe"
 }

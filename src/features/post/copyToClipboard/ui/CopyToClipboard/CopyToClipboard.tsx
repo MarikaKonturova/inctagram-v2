@@ -1,5 +1,6 @@
 import { Menu } from '@headlessui/react'
 import clsx from 'clsx'
+import { useTranslation } from 'next-i18next'
 import React from 'react'
 import IconCopy from 'shared/assets/icons/light/copy.svg'
 import IconCopyOutline from 'shared/assets/icons/outline/copy-outline.svg'
@@ -10,6 +11,7 @@ import { copyToClipboard } from 'shared/utils/copyToClipboard'
 import cls from './CopyToClipboard.module.scss'
 
 export const CopyToClipboard = () => {
+  const { t } = useTranslation('profile')
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
@@ -22,7 +24,7 @@ export const CopyToClipboard = () => {
           ) : (
             <IconCopyOutline aria-hidden={'true'} fill={fill} />
           )}
-          Copy Link
+          {t('copyLink')}
         </button>
       )}
     </Menu.Item>
