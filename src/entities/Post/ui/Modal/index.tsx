@@ -14,7 +14,7 @@ interface IProps {
   firstElement?: boolean
   handleClick?: (direction: 'back' | 'next') => void
   handleClose: () => void
-  id: number
+  id?: number
   isOpen: boolean
   lastElement?: boolean
 }
