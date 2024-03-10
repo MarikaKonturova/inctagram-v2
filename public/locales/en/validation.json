@@ -25,6 +25,6 @@
   "dateOfBirth": "dateOfBirth",
   "firstName": "firstName",
   "lastName": "lastName",
-  "busyUserNameError": "User with userName {{userName}} already exists",
-  "registerEmailErrorBack": "User with this userName already exists"
+  "registerEmailErrorBack": "User with email {{email}} already exists",
+  "registerUserNameError": "User with userName {{userName}} already exists"
 }

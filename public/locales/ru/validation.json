@@ -25,6 +25,6 @@
   "dateOfBirth": "День рождения",
   "firstName": "Имя",
   "lastName": "Фамилия",
-  "registerEmailErrorBack": "Пользователь с таким email уже существует",
-  "busyUserNameError": "Пользователь с userName {{userName}} уже существует"
+  "registerEmailErrorBack": "Пользователь с email {{email}} уже существует",
+  "registerUserNameError": "Пользователь с именем пользователя {{userName}} уже существует"
 }

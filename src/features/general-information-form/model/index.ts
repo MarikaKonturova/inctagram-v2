@@ -31,7 +31,7 @@ export const useUpdateProfileData = (setError: UseFormSetError<ProfileDataModel>
         error?.field === 'userName'
           ? {
               ...error,
-              message: t('busyUserNameError', {
+              message: t('registerUserNameError', {
                 userName: variables?.userName || '',
               }),
             }

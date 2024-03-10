@@ -57,13 +57,13 @@ export const Publication: React.FC<PropsType> = props => {
         width={491}
       />
       <PostActions post={publ} />
+      <Description description={publ.description} title={publ.userName} />
       <div className={cls.likesInfo}>
         <LikesInfo likeCount={publ.likeCount} newLikes={publ.newLikes} />
       </div>
-      <Description description={publ.description} title={publ.userName} />
       {openComments && <Commentaries postId={publ.id} />}
       <div className={cls.allComments} onClick={() => commentsHandler()}>
-        {t('viewAllComments')} ({publ.commentCount})
+        {openComments ? t('hideAllComments') : t('viewAllComments')} ({publ.commentCount})
       </div>
       <AddCommentBox className={clsx(cls.containerAddComment)} postId={publ.id} />
     </div>
