@@ -1,37 +1,47 @@
-import { ImageDownloadStepLib } from 'features/post/createPost/lib'
+import { ImageDownloadStepLib, IndexedDBLib } from 'features/post/createPost/lib'
 import { useUploadImagePostStore } from 'features/post/createPost/model'
-import { type ChangeEvent, useState } from 'react'
+import { useTranslation } from 'next-i18next'
+import { type ChangeEvent, useEffect, useState } from 'react'
 import IconClose from 'shared/assets/icons/general/close.svg'
 import IconImg from 'shared/assets/icons/light/image.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
 import { ConvertedImageType, IImage, Nullable, PostImages } from 'shared/types/post'
 import { Button } from 'shared/ui'
+import { shallow } from 'zustand/shallow'
 
 import cls from './ImageDownloadStep.module.scss'
 
-/* if (file.size > 1024 * 1024 * 20) {
-    setError('Photo size must be less than 10 MB!')
-  
-    return
-  } else if (!allowedImageTypes.includes(file.type)) {
-    setError('The format of the uploaded photo must be\nPNG and JPEG')
-  
-    return
-  } */
-
 interface IProps {
+  onDraftButtonClick: () => void
   onNextClick: () => void
   onPrevClick: () => void
 }
 
-export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
+export const ImageDownloadStep = ({ onDraftButtonClick, onNextClick, onPrevClick }: IProps) => {
   const [error, setError] = useState('')
-
+  const [imageDbCount, setImageDbCount] = useState(0)
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
+  const { t } = useTranslation('profile')
 
-  const setImages = useUploadImagePostStore(state => state.setImages)
+  const { setDescription, setImages, setLocation } = useUploadImagePostStore(
+    ({ setDescription, setImages, setLocation }) => ({
+      setDescription,
+      setImages,
+      setLocation,
+    }),
+    shallow
+  )
+  const onOpenDraftClick = async () => {
+    //@ts-ignore
+    const { descriptionDraft, imagesDraft, locationDraft } = await IndexedDBLib.getDraftPost()
+
+    setImages(imagesDraft)
+    setDescription(descriptionDraft)
+    setLocation(locationDraft)
+    onDraftButtonClick()
+  }
 
   async function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const { files } = e.target
@@ -42,6 +52,22 @@ export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
       const results: Promise<Nullable<ConvertedImageType>>[] = []
 
       for (let i = 0; i < files.length; i++) {
+        const regEx = /\.(jpe?g|png)$/i
+
+        if (i > 9) {
+          setError(t('photoAmoutError') as string)
+
+          return
+        } else if (files[i].size > 1024 * 1024 * 20) {
+          setError(t('photoSizeError') as string)
+
+          return
+        } else if (!regEx.test(files[i].name)) {
+          setError(t('photoFormatError') as string)
+
+          return
+        }
+
         results.push(ImageDownloadStepLib.convertFileToBase64WithValidate(files[i]))
       }
 
@@ -65,6 +91,7 @@ export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
               ...image.dimensions,
             },
             filter: '',
+            filteredSrc: '',
             originSrc: image.src,
           }
         }
@@ -75,11 +102,20 @@ export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
       onNextClick()
     }
   }
+  const checkCountDB = async () => {
+    const count = await IndexedDBLib.indexedDBDraftPost.checkCountDraftPost()
+
+    setImageDbCount(count)
+  }
+
+  useEffect(() => {
+    checkCountDB()
+  }, [])
 
   return (
     <div className={cls.modal}>
       <header className={cls.header}>
-        <h2>Add Photo</h2>
+        <h2>{t('addPhoto')}</h2>
         <Button onClick={onPrevClick} theme={'clear'}>
           <IconClose fill={fill} />
         </Button>
@@ -87,7 +123,7 @@ export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
       <div className={cls.mainContainer}>
         {error && (
           <p className={cls.errorBox}>
-            <strong>Error!</strong> {error}
+            <strong>{t('error')}!</strong> {error}
           </p>
         )}
 
@@ -97,9 +133,14 @@ export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
             <div className={cls.imgContainer}>
               <IconImg />
             </div>
-            <span>Select from Computer</span>
+            <span>{t('selectFromComputer')}</span>
           </div>
         </label>
+        {imageDbCount > 0 && (
+          <Button onClick={onOpenDraftClick} theme={'outline'}>
+            {t('openDraft')}
+          </Button>
+        )}
       </div>
     </div>
   )

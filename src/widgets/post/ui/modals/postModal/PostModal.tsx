@@ -17,6 +17,7 @@ interface IProps {
   headerActions?: ReactNode
   id?: number
   isOpen: boolean
+  isPublic?: boolean
   lastElement?: boolean
   post: PostResponse
   userName: string
@@ -32,14 +33,13 @@ export const GetPostModal: React.FC<IProps> = props => {
     headerActions,
     id,
     isOpen,
+    isPublic = false,
     lastElement,
     post,
     userName,
   } = props
   const { isAuth } = useAuth()
   const creationDate = post?.createdAt ? format(new Date(post?.createdAt), 'MMMM d, Y') : ''
-
-  console.log({ post })
 
   return (
     <PostModal
@@ -72,6 +72,7 @@ export const GetPostModal: React.FC<IProps> = props => {
       handleClose={handleClose}
       id={id}
       isOpen={isOpen}
+      isPublic={isPublic}
       lastElement={lastElement}
     />
   )

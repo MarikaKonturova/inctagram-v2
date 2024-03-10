@@ -40,6 +40,15 @@
       }
     }
 
+    .deleteButton {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .invisible {
+      visibility: hidden;
+    }
+
     .leftBlock {
       display: flex;
       gap: 50px;

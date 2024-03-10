@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { FilterImageStepLib } from 'features/post/createPost/lib'
 import { useUploadImagePostStore } from 'features/post/createPost/model'
+import { useTranslation } from 'next-i18next'
 import { IImage } from 'shared/types/post'
 import { SwiperClass } from 'swiper/react'
 import { shallow } from 'zustand/shallow'
@@ -41,25 +42,24 @@ interface IProps {
 
 export const Filters = ({ className, currentIndex, image, imageId, swiperElement }: IProps) => {
   const { setConvertedImages, setFilter } = useUploadImagePostStore(
-    ({ setConvertedImages, setFilter }) => ({ setConvertedImages, setFilter }),
+    ({ setConvertedImages, setFilter }) => ({
+      setConvertedImages,
+      setFilter,
+    }),
     shallow
   )
-
+  const { t } = useTranslation('profile')
   const onClickHandler = async (filter: string) => {
     if (swiperElement) {
       setFilter({ filter, imageId })
 
       const currentImg = swiperElement.slides[currentIndex].children[0]
 
-      const modifiedSrc = await FilterImageStepLib.getModifiedImageSrc(
+      const filteredSrc = await FilterImageStepLib.getModifiedImageSrc(
         currentImg as HTMLImageElement
       )
 
-      const convertedImage = {
-        [imageId]: { src: modifiedSrc },
-      }
-
-      setConvertedImages(convertedImage)
+      setConvertedImages({ filteredSrc, imageId })
     }
   }
 
@@ -83,7 +83,8 @@ export const Filters = ({ className, currentIndex, image, imageId, swiperElement
             }}
             width={108}
           />
-          <p>{filter.name}</p>
+
+          <p>{filter.name === 'Normal' ? `${t('normal')}` : filter.name}</p>
         </div>
       ))}
     </div>

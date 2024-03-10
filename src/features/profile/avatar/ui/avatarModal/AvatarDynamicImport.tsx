@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import React, { type ChangeEvent, type FC } from 'react'
 import Avatar from 'react-avatar-edit'
 import UploadPhoto from 'shared/assets/icons/light/upload-photo.svg'
@@ -10,6 +11,8 @@ interface PropsType {
 }
 
 const AvatarDynamicImport: FC<PropsType> = ({ height, onBeforeFileLoad, onCrop, width }) => {
+  const { t } = useTranslation('profile')
+
   return (
     <Avatar
       borderStyle={{ border: 'none' }}
@@ -18,7 +21,7 @@ const AvatarDynamicImport: FC<PropsType> = ({ height, onBeforeFileLoad, onCrop, 
         <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
           <UploadPhoto />
           <div style={{ fontWeight: 600, lineHeight: '20px', paddingTop: '10px' }}>
-            Upload a photo
+            {t('uploadPhoto')}
           </div>
         </div>
       }

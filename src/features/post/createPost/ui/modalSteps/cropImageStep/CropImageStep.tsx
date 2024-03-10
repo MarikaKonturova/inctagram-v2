@@ -1,5 +1,6 @@
 import { useUploadImagePostStore } from 'features/post/createPost/model'
 import { CropImage } from 'features/post/createPost/ui/components'
+import { useTranslation } from 'next-i18next'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
@@ -17,6 +18,7 @@ interface IProps {
 
 export const CroppImageStep = ({ onNextClick, onPrevClick }: IProps) => {
   const { theme } = useTheme()
+  const { t } = useTranslation(['profile'])
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
   const { images, imagesIds, setReset } = useUploadImagePostStore(
@@ -33,8 +35,10 @@ export const CroppImageStep = ({ onNextClick, onPrevClick }: IProps) => {
     <div className={cls.modal}>
       <header className={cls.header}>
         <IconArrowBack fill={fill} onClick={onIconClick} />
-        <h2>Cropping</h2>
-        <Button onClick={onNextClick}>Next</Button>
+        <h2>{t('cropping')}</h2>
+        <Button onClick={onNextClick} theme={'textButton'}>
+          {t('next')}
+        </Button>
       </header>
 
       <SwiperApp>
