@@ -12,22 +12,13 @@ import { shallow } from 'zustand/shallow'
 
 import cls from './ImageDownloadStep.module.scss'
 
-/* if (file.size > 1024 * 1024 * 20) {
-    setError('Photo size must be less than 10 MB!')
-
-    return
-  } else if (!allowedImageTypes.includes(file.type)) {
-    setError('The format of the uploaded photo must be\nPNG and JPEG')
-
-    return
-  } */
-
 interface IProps {
+  onDraftButtonClick: () => void
   onNextClick: () => void
   onPrevClick: () => void
 }
 
-export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
+export const ImageDownloadStep = ({ onDraftButtonClick, onNextClick, onPrevClick }: IProps) => {
   const [error, setError] = useState('')
   const [imageDbCount, setImageDbCount] = useState(0)
   const { theme } = useTheme()
@@ -49,7 +40,7 @@ export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
     setImages(imagesDraft)
     setDescription(descriptionDraft)
     setLocation(locationDraft)
-    onNextClick()
+    onDraftButtonClick()
   }
 
   async function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -61,6 +52,22 @@ export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
       const results: Promise<Nullable<ConvertedImageType>>[] = []
 
       for (let i = 0; i < files.length; i++) {
+        const regEx = /\.(jpe?g|png)$/i
+
+        if (i > 9) {
+          setError(t('photoAmoutError') as string)
+
+          return
+        } else if (files[i].size > 1024 * 1024 * 20) {
+          setError(t('photoSizeError') as string)
+
+          return
+        } else if (!regEx.test(files[i].name)) {
+          setError(t('photoFormatError') as string)
+
+          return
+        }
+
         results.push(ImageDownloadStepLib.convertFileToBase64WithValidate(files[i]))
       }
 
@@ -116,7 +123,7 @@ export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
       <div className={cls.mainContainer}>
         {error && (
           <p className={cls.errorBox}>
-            <strong>Error!</strong> {error}
+            <strong>{t('error')}!</strong> {error}
           </p>
         )}
 

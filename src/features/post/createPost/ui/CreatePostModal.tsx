@@ -1,5 +1,6 @@
 import { type FC, useState } from 'react'
 import { Modal } from 'shared/ui'
+import { shallow } from 'zustand/shallow'
 
 import { IndexedDBLib } from '../lib'
 import { useUploadImagePostStore } from '../model'
@@ -27,9 +28,13 @@ type Values = (typeof MODALSTEPS)[Keys]
 export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
   const [currentStep, setCurrentStep] = useState<Values>(1)
   const [isOpenSaveDraftPostModal, setIsOpenSaveDraftPostModal] = useState(false)
-  const setReset = useUploadImagePostStore(state => state.setReset)
+  const { description, images, location, setReset } = useUploadImagePostStore(
+    ({ description, images, location, setReset }) => ({ description, images, location, setReset }),
+    shallow
+  )
 
   const onSubmitSuccess = () => {
+    IndexedDBLib.clearDraftPost()
     setCurrentStep(MODALSTEPS.ImageDownloadStep)
     handleClose()
   }
@@ -37,8 +42,9 @@ export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
     setIsOpenSaveDraftPostModal(true)
   }
   const onSaveDraftPost = () => {
+    IndexedDBLib.saveDraftPost(images, description, location)
     setIsOpenSaveDraftPostModal(false)
-    setCurrentStep(MODALSTEPS.PublishPostStep)
+    setCurrentStep(MODALSTEPS.ImageDownloadStep)
     handleClose()
   }
   const onCancelDraftPost = () => {
@@ -61,11 +67,18 @@ export const CreatePostModal: FC<IProps> = ({ handleClose, isOpen }) => {
     const setPrevStep = () => {
       setCurrentStep((currentStep - 1) as Values)
     }
+    const setInitialSep = () => {
+      setCurrentStep(MODALSTEPS.PublishPostStep)
+    }
 
     return (
       <>
         {currentStep === MODALSTEPS.ImageDownloadStep && (
-          <ImageDownloadStep onNextClick={setNexStep} onPrevClick={handleClose} />
+          <ImageDownloadStep
+            onDraftButtonClick={setInitialSep}
+            onNextClick={setNexStep}
+            onPrevClick={handleClose}
+          />
         )}
         {currentStep === MODALSTEPS.CropImageStep && (
           <CroppImageStep onNextClick={setNexStep} onPrevClick={setPrevStep} />
