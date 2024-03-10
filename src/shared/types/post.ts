@@ -124,11 +124,8 @@ export interface IImage {
     width: number
   }
   filter: string
+  filteredSrc: string
   originSrc: string
-}
-
-export type ConvertedImage = {
-  src: string
 }
 
 export type ImageCropperData = {

@@ -79,5 +79,6 @@
     "SEMI_ANNUALLY": "6 months",
     "YEARLY": "1 year",
     "show": "Show",
-    "onPage": "on page"
+    "onPage": "on page",
+    "openDraft": "Open Draft"
 }

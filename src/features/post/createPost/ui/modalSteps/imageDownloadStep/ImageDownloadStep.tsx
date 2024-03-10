@@ -1,13 +1,14 @@
-import { ImageDownloadStepLib } from 'features/post/createPost/lib'
+import { ImageDownloadStepLib, IndexedDBLib } from 'features/post/createPost/lib'
 import { useUploadImagePostStore } from 'features/post/createPost/model'
 import { useTranslation } from 'next-i18next'
-import { type ChangeEvent, useState } from 'react'
+import { type ChangeEvent, useEffect, useState } from 'react'
 import IconClose from 'shared/assets/icons/general/close.svg'
 import IconImg from 'shared/assets/icons/light/image.svg'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
 import { ConvertedImageType, IImage, Nullable, PostImages } from 'shared/types/post'
 import { Button } from 'shared/ui'
+import { shallow } from 'zustand/shallow'
 
 import cls from './ImageDownloadStep.module.scss'
 
@@ -28,11 +29,28 @@ interface IProps {
 
 export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
   const [error, setError] = useState('')
-  const { t } = useTranslation('profile')
+  const [imageDbCount, setImageDbCount] = useState(0)
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
+  const { t } = useTranslation('profile')
 
-  const setImages = useUploadImagePostStore(state => state.setImages)
+  const { setDescription, setImages, setLocation } = useUploadImagePostStore(
+    ({ setDescription, setImages, setLocation }) => ({
+      setDescription,
+      setImages,
+      setLocation,
+    }),
+    shallow
+  )
+  const onOpenDraftClick = async () => {
+    //@ts-ignore
+    const { descriptionDraft, imagesDraft, locationDraft } = await IndexedDBLib.getDraftPost()
+
+    setImages(imagesDraft)
+    setDescription(descriptionDraft)
+    setLocation(locationDraft)
+    onNextClick()
+  }
 
   async function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const { files } = e.target
@@ -66,6 +84,7 @@ export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
               ...image.dimensions,
             },
             filter: '',
+            filteredSrc: '',
             originSrc: image.src,
           }
         }
@@ -76,6 +95,15 @@ export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
       onNextClick()
     }
   }
+  const checkCountDB = async () => {
+    const count = await IndexedDBLib.indexedDBDraftPost.checkCountDraftPost()
+
+    setImageDbCount(count)
+  }
+
+  useEffect(() => {
+    checkCountDB()
+  }, [])
 
   return (
     <div className={cls.modal}>
@@ -101,6 +129,11 @@ export const ImageDownloadStep = ({ onNextClick, onPrevClick }: IProps) => {
             <span>{t('selectFromComputer')}</span>
           </div>
         </label>
+        {imageDbCount > 0 && (
+          <Button onClick={onOpenDraftClick} theme={'outline'}>
+            {t('openDraft')}
+          </Button>
+        )}
       </div>
     </div>
   )
