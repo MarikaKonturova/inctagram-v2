@@ -7,15 +7,16 @@ export const useAddToFavouritesPost = () => {
   const queryClient = useQueryClient()
   const onOpen = useSnackbar(state => state.onOpen)
 
-  const { mutate: addToFavourites } = useMutation({
+  const { isLoading, mutate: addToFavourites } = useMutation({
     mutationFn: (postId: number) => UsersService.addToFavourites(postId),
     onError: (error: AxiosError<{ message: string }>) => {
       onOpen(error.message, 'danger', 'left')
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries(['post'])
+      await queryClient.invalidateQueries(['publicationsData'])
     },
   })
 
-  return { addToFavourites }
+  return { addToFavourites, isLoading }
 }

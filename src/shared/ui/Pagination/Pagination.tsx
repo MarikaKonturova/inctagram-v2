@@ -1,4 +1,5 @@
 import { clsx } from 'clsx'
+import { useTranslation } from 'next-i18next'
 import { ArrowBack, ArrowForward } from 'shared/assets/icons'
 import { Select, SelectProps } from 'shared/ui/Select/Select'
 
@@ -29,6 +30,7 @@ export const Pagination = ({
     totalCount,
   })
 
+  const { t } = useTranslation('profile')
   const onNextHandler = () => {
     onChangePage(currentPage + 1)
   }
@@ -80,18 +82,20 @@ export const Pagination = ({
       <button className={classNames.buttonRight} disabled={isLastPage} onClick={onNextHandler}>
         <ArrowForward />
       </button>
-      <div className={cls.selectContainer}>
-        Show
-        <div className={cls.selectWrapper}>
-          <Select
-            {...restProps}
-            buttonClassName={cls.selectButton}
-            className={cls.select}
-            optionClassName={cls.selectOption}
-          />
+      {restProps.options?.length && (
+        <div className={cls.selectContainer}>
+          {t('show')}
+          <div className={cls.selectWrapper}>
+            <Select
+              {...restProps}
+              buttonClassName={cls.selectButton}
+              className={cls.select}
+              optionClassName={cls.selectOption}
+            />
+          </div>
+          {t('onPage')}
         </div>
-        on page
-      </div>
+      )}
     </div>
   )
 }

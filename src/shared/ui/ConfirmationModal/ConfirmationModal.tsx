@@ -8,9 +8,12 @@ import cls from './ConfirmationModal.module.scss'
 interface ConfirmationModalProps {
   bodyText: string
   className?: string
+  confirmText?: string
   headerText: string
   isDisabled?: boolean
   isModalOpen: boolean
+  noText?: string
+  onNoAction?: () => void
   onYesAction: () => void
   setModalOpen: Dispatch<SetStateAction<boolean>>
 }
@@ -18,9 +21,12 @@ interface ConfirmationModalProps {
 export const ConfirmationModal: FC<ConfirmationModalProps> = ({
   bodyText,
   className,
+  confirmText,
   headerText,
   isDisabled,
   isModalOpen,
+  noText,
+  onNoAction,
   onYesAction,
   setModalOpen,
 }) => {
@@ -50,15 +56,15 @@ export const ConfirmationModal: FC<ConfirmationModalProps> = ({
             theme={'outline'}
             type={'button'}
           >
-            {`${t('yesConfirm')}`}
+            {confirmText ?? `${t('yesConfirm')}`}
           </Button>
           <Button
             className={cls.button}
             disabled={isDisabled}
-            onClick={onCloseHandler}
+            onClick={onNoAction ?? onCloseHandler}
             type={'button'}
           >
-            {`${t('no')}`}
+            {noText ?? `${t('no')}`}
           </Button>
         </div>
       </div>

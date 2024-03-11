@@ -32,17 +32,25 @@ export const useRegistration = (
     error,
     isLoading,
     mutate: registration,
+    variables,
   } = useMutation<any, AxiosError<UserError>, UserRegistrationModel, unknown>({
     mutationFn: AuthService.registration,
     onError: err => {
       const error = err.response?.data.messages[0]
-      const errorWithLocalization =
-        error?.field === 'userName' || error?.field === 'email'
-          ? {
-              ...error,
-              message: t('registerErrorBack', { field: error?.field || '' }),
-            }
-          : error
+      let errorWithLocalization = error
+
+      if (error?.field === 'userName') {
+        errorWithLocalization = {
+          ...error,
+          message: t('registerUserNameError', { userName: variables?.userName || '' }),
+        }
+      }
+      if (error?.field === 'email') {
+        errorWithLocalization = {
+          ...error,
+          message: t('registerEmailErrorBack', { email: variables?.email || '' }),
+        }
+      }
 
       // FIX
       setError(error?.field as any, errorWithLocalization || {})

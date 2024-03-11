@@ -13,6 +13,7 @@ import cls from './UsersList.module.scss'
 
 type PropsType = {
   debounceSearchUserValue: string
+  fetchDataName: string
   followingCount: number
   onFollowingChange?: (action: 'follow' | 'unfollow') => void
   setCount: (count: number) => void
@@ -21,6 +22,7 @@ type PropsType = {
 
 export const UsersList: FC<PropsType> = ({
   debounceSearchUserValue,
+  fetchDataName,
   followingCount,
   onFollowingChange,
   setCount,
@@ -58,13 +60,19 @@ export const UsersList: FC<PropsType> = ({
         return (
           <div className={cls.userCard} key={user.id}>
             <div className={cls.rightBlock}>
-              <Image
-                alt={user.userName}
-                className={cls.userAvatar}
-                height={50}
-                src={user.avatars?.medium?.url || userPhoto}
-                width={50}
-              />
+              <Link
+                href={{
+                  pathname: `${AppRoutes.PROFILE.PROFILE}/${user.userName}`,
+                }}
+              >
+                <Image
+                  alt={user.userName}
+                  className={cls.userAvatar}
+                  height={50}
+                  src={user.avatars?.medium?.url || userPhoto}
+                  width={50}
+                />
+              </Link>
               <p className={cls.userName}>
                 <Link
                   href={{
@@ -76,12 +84,25 @@ export const UsersList: FC<PropsType> = ({
               </p>
             </div>
             <div className={cls.leftBlock}>
-              <Button className={cls.button} onClick={toggleHandler} type={'button'}>
-                {user.isFollowing ? `${t('unfollow')}` : `${t('follow')}`}
-              </Button>
-              <Button className={cls.button} theme={'secondary'} type={'button'}>
-                {t('delete')}
-              </Button>
+              {fetchDataName === 'following' && (
+                <Button className={cls.button} onClick={toggleHandler} type={'button'}>
+                  {user.isFollowing ? `${t('unfollow')}` : `${t('follow')}`}
+                </Button>
+              )}
+              {fetchDataName === 'followers' && (
+                <>
+                  <Button
+                    className={user.isFollowing ? cls.invisible : cls.button}
+                    onClick={toggleHandler}
+                    type={'button'}
+                  >
+                    {t('follow')}
+                  </Button>
+                  <Button className={cls.deleteButton} theme={'secondary'} type={'button'}>
+                    {t('delete')}
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         )
