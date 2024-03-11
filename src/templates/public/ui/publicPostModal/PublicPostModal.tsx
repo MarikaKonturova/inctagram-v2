@@ -1,8 +1,10 @@
+import {Description} from "entities/Post";
 import { CreationDate } from 'entities/Post/ui/CreationDate'
 import { Header } from 'entities/Post/ui/Header'
 import { LikesInfo } from 'entities/Post/ui/LikesInfo'
 import { PostModal } from 'entities/Post/ui/Modal'
 import moment from 'moment/moment'
+import React from "react";
 import { PostResponse } from 'shared/types/post'
 import { Card } from 'shared/ui'
 import { Commentaries } from 'widgets/commentaries'
@@ -32,7 +34,10 @@ export const PublicPostModal = ({ handleClose, isOpen, post }: PublicPostModalPr
             <div className={cls.header}>
               <Header avatarURL={post.avatars?.thumbnail.url} title={post.userName} />
             </div>
-            <Commentaries postId={post.id} />
+            <div className={cls.content}>
+              {post.description && <Description post={post} />}
+              <Commentaries postId={post.id} />
+            </div>
             <div className={cls.bottomSection}>
               <div className={cls.wrapper}>
                 <LikesInfo likeCount={post.likeCount} newLikes={post.newLikes} />
