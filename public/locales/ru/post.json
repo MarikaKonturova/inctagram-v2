@@ -11,5 +11,12 @@
   "year": "г.",
   "ending": "",
   "showMore": "Развернуть",
-  "hide": "Скрыть"
+  "hide": "Скрыть",
+  "doYouReallyWantToCloseTheCreationOfAPublication": "Вы действительно не хотите создать пост?",
+  "ifYouCloseEverythingWillBeDeleted": "При закрытии все будет удалено",
+  "discard": "Сброс",
+  "saveDraft": "Сохранить черновик",
+  "close": "Закрытие",
+  "more": "Развернуть",
+  "less": "Скрыть"
 }

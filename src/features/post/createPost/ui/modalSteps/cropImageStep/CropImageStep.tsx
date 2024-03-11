@@ -36,7 +36,9 @@ export const CroppImageStep = ({ onNextClick, onPrevClick }: IProps) => {
       <header className={cls.header}>
         <IconArrowBack fill={fill} onClick={onIconClick} />
         <h2>{t('cropping')}</h2>
-        <Button onClick={onNextClick}>{t('next')}</Button>
+        <Button onClick={onNextClick} theme={'textButton'}>
+          {t('next')}
+        </Button>
       </header>
 
       <SwiperApp>

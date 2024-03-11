@@ -19,9 +19,10 @@ interface IProps {
 
 export const FilterImageStep = ({ onNextClick, onPrevClick }: IProps) => {
   const { theme } = useTheme()
+  const { t } = useTranslation(['profile'])
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
   const [thumbsSwiper] = useState<SwiperClass>()
-  const { t } = useTranslation(['profile'])
+
   const [swiperInstance, setSwiperInstance] = useState<SwiperClass>()
   const [currentIndexSlide, setCurrentIndexSlide] = useState<number>(0)
   const { images, imagesIds } = useUploadImagePostStore(
@@ -37,7 +38,9 @@ export const FilterImageStep = ({ onNextClick, onPrevClick }: IProps) => {
       <header className={cls.header}>
         <IconArrowBack fill={fill} onClick={onPrevClick} />
         <h2>{t('filter')}</h2>
-        <Button onClick={onNextClick}>{t('next')}</Button>
+        <Button onClick={onNextClick} theme={'textButton'}>
+          {t('next')}
+        </Button>
       </header>
       <div className={cls.container}>
         <SwiperApp
