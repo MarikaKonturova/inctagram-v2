@@ -29,7 +29,7 @@ export const Textarea = memo(
       id,
       label,
       labelClassName,
-      maxCharactersCount,
+      maxCharactersCount = 500,
       name,
       onChange,
       placeholder,
@@ -51,7 +51,7 @@ export const Textarea = memo(
           ref={ref}
           {...otherProps}
         />
-        {maxCharactersCount && (
+        {charactersCount && (
           <div
             className={clsx(cls.charactersCount, [counterClassName])}
           >{`${charactersCount}/${maxCharactersCount}`}</div>
