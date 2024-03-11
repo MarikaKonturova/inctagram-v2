@@ -8,7 +8,7 @@ export interface StateType {
   repliedComment: {
     id: number
     postId: number | undefined
-    userName: string | undefined
+    userName: string
   }
   setRefetch: (payload: StateType['refetch']) => void
   setRepliedComment: (payload: StateType['repliedComment']) => void
