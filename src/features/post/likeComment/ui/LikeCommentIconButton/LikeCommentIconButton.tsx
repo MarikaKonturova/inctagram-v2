@@ -26,7 +26,7 @@ export const LikeCommentIconButton: FC<likeCommentType> = ({ commentId, isLiked,
       initialState={isLiked}
       isLoading={isLoading}
       onClick={onLikeIconClick}
-      outlineIcon={<IconLikeOutline className={cls.likeIcon} fill={'#ffffff'} />}
+      outlineIcon={<IconLikeOutline className={cls.outLine} />}
     />
   )
 }
