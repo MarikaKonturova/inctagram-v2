@@ -2,10 +2,11 @@ import { useValidationForm } from 'features/auth/lib/useValidationForm'
 import { useRecoverPassword } from 'features/auth/model'
 import i18next from 'i18next'
 import { useTranslation } from 'next-i18next'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { AppRoutes } from 'shared/constants/path'
-import { ThemeContext } from 'shared/context/ThemeProvider'
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
 import { AppLink, Button, FormWrapper, Input, PageLoader } from 'shared/ui'
 
 import cls from './PasswordRecoveryForm.module.scss'
@@ -24,9 +25,8 @@ export const PasswordRecoveryForm = () => {
     setValue,
     validErrors: { emailError, recaptchaError },
   } = useValidationForm(['email', 'recaptcha'])
-  const theme = useContext(ThemeContext).theme
+  const { theme } = useTheme()
   const { isInfoTextShown, isLoading, localizedError: error, onSubmit } = useRecoverPassword()
-  const [themeApp, setThemeApp] = useState(theme)
 
   if (isLoading) {
     return <PageLoader />
@@ -68,7 +68,7 @@ export const PasswordRecoveryForm = () => {
         onChange={getRecaptchaValueHandler}
         onExpired={() => setValue('recaptcha', '')}
         sitekey={`${process.env.RECAPTCHA_SITE_KEY as string}`}
-        theme={themeApp.split('_').includes('light') ? 'light' : 'dark'}
+        theme={theme === Theme.LIGHT ? 'light' : 'dark'}
       />
       {recaptchaError && <p className={cls.error}>{recaptchaError}</p>}
     </FormWrapper>

@@ -1,10 +1,28 @@
 .app_dark_theme {
   // custom color
   --secondary-color: rgb(78 135 255 / 48%);
+  --accent-color: #171717;
+  --accent-100-color: #fff;
 
   // skeleton
   --skeleton-color: #d9d9ff;
   --skeleton-shadow: #a6a6ff;
+
+  //modal
+  --modal-100-color: #4c4c4c;
+  --modal-300-color: #333;
+
+  //button
+  --button-300-color: #333;
+  --button-600-color: #333;
+
+  //text-color
+  --text-color: #000;
+  --text-100-color: #fff;
+  --text-300-color: #333;
+  --text-500-color: #171717;
+  --text-700-color: #0d0d0d;
+  --text-900-color: #bdc1c7;
 
   // dark color theme palette
   --light-100-color: #fff;
