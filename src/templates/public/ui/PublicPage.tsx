@@ -21,19 +21,23 @@ export const PublicPage = ({data}: PublicPageProps) => {
   
   const openPost = (post: PostResponse) => {
     setPost(post)
-    router.replace(`${router.route}?postId=${post.id}`)
+    router.query.postId = String(post.id)
+    router.push(router)
   }
 
   const handleClose = () => {
     setPost(null)
-    router.replace(`${router.route}`)
+    if (router.query.postId) {
+      delete router.query.postId
+      router.push(router, undefined, { shallow: true })
+    }
   }
 
-    useEffect(() => {
-      if(postData) {
-        setPost(postData)
-      }
-    }, [postData])
+  useEffect(() => {
+    if(postData) {
+      setPost(postData)
+    }
+  }, [postData])
 
   return (
     <div className={cls.container}>
@@ -48,6 +52,7 @@ export const PublicPage = ({data}: PublicPageProps) => {
               }
               handleClose={handleClose}
               isOpen={post !== null}
+              isPublic
               key={'GetPostModal'}
               post={post}
             />}
