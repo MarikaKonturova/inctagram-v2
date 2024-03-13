@@ -44,7 +44,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
   const idsArray =
     data && data.pages ? data.pages.flatMap(page => page.items.map(item => item.id)) : []
 
-  const findIndex = idsArray.findIndex(id => id === postId)
+  const foundIndex = idsArray.findIndex(id => id === postId)
   const firstElement = idsArray[0] === idsArray[currentIndex]
   const lastElement = idsArray[idsArray.length - 1] === idsArray[currentIndex]
 
@@ -92,7 +92,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
 
   const closeModal = () => {
     setCurrentModal(null)
-    setCurrentIndex(0)
+    setCurrentIndex(foundIndex)
   }
 
   const openEditPostModal = () => {
@@ -109,7 +109,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
   }
 
   useEffect(() => {
-    setCurrentIndex(findIndex)
+    setCurrentIndex(foundIndex)
   }, [postId])
 
   useEffect(() => {
@@ -118,7 +118,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
     } else {
       setCurrentPost(postId)
     }
-  }, [postId, idsArray, currentIndex])
+  }, [currentIndex, idsArray, postId])
 
   useEffect(() => {
     idsArray.map(id => {
@@ -164,7 +164,6 @@ export const PostCards: FC<Props> = ({ userData }) => {
             key={'GetPostModal'}
             lastElement={lastElement}
             post={post}
-            userName={userData.userName}
           />,
           <EditPostModal
             handleClose={closeModal}

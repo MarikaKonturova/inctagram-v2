@@ -1,0 +1,1 @@
+export { useGetSearchUsers } from './model'
