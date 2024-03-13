@@ -2,21 +2,23 @@ import { useGetPostComments } from 'entities/Comment'
 import { Comment, LikeCommentIconButton } from 'features/post'
 import React, { type FC, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { PostResponse } from 'shared/types/post'
 import { Loader } from 'shared/ui'
 
 import { AnswersForCommentaries } from '../answersForCommentaries/AnswersForCommentaries'
 import cls from './Commentaries.module.scss'
 
 interface Props {
+  post?: PostResponse
   postId: number
 }
 
-export const Commentaries: FC<Props> = ({ postId }) => {
+export const Commentaries: FC<Props> = ({ post, postId }) => {
   const { inView, ref } = useInView()
   const { comments, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isSuccess } =
     useGetPostComments(postId)
   const [openedComments, setOpenedComments] = useState<{ [id: number]: boolean }>({})
-
+  const [height, setHeight] = useState<number | undefined>()
   const idsArray = Object.keys(openedComments).map(Number)
 
   const viewAnswerOnClick = (commentId: number) => {
@@ -32,12 +34,25 @@ export const Commentaries: FC<Props> = ({ postId }) => {
     }
   }, [inView, hasNextPage])
 
+  useEffect(() => {
+    const descriptionElement = document.getElementById('descriptionHeight')
+
+    if (descriptionElement) {
+      const height = descriptionElement.offsetHeight
+
+      setHeight(height)
+    }
+  }, [postId, post])
+
   if (isLoading) {
     return <div className={cls.comments} />
   }
 
   return (
-    <div className={cls.comments}>
+    <div
+      className={cls.comments}
+      style={{ maxHeight: `calc(85vh - (58px + ${height}px + 100px + 52px))` }}
+    >
       {comments?.map(comment => (
         <div className={cls.comment} key={comment.id}>
           <Comment

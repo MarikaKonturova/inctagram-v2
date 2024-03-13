@@ -32,7 +32,7 @@ export const PublicPostModal = ({ handleClose, isOpen, post }: PublicPostModalPr
             <div className={cls.header}>
               <Header avatarURL={post.avatars?.thumbnail.url} title={post.userName} />
             </div>
-            <Commentaries postId={post.id} />
+            <Commentaries post={post} postId={post.id} />
             <div className={cls.bottomSection}>
               <div className={cls.wrapper}>
                 <LikesInfo likeCount={post.likeCount} newLikes={post.newLikes} />

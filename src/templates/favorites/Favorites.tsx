@@ -120,7 +120,9 @@ export const FavoritesPage = () => {
       {!!postId && !!post && !!userData && (
         <GetPostModal
           actionsSlot={<PostModalActions post={post} />}
-          content={<Commentaries key={postId} postId={idsArray[currentIndex] || postId} />}
+          content={
+            <Commentaries key={postId} post={post} postId={idsArray[currentIndex] || postId} />
+          }
           firstElement={firstElement}
           handleClick={handleClick}
           handleClose={closeModal}
