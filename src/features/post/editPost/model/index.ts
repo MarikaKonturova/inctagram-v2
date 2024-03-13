@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { MyPostService } from 'shared/api'
 import { useSnackbar } from 'shared/hooks'
@@ -9,6 +9,7 @@ type ParamsType = {
 }
 
 export const useEditPost = ({ handleClose, postId }: ParamsType) => {
+  const queryClient = useQueryClient()
   const onOpen = useSnackbar(state => state.onOpen)
 
   const { mutate } = useMutation({
@@ -20,6 +21,7 @@ export const useEditPost = ({ handleClose, postId }: ParamsType) => {
     onSuccess: () => {
       onOpen('Your changes are saved', 'success', 'left')
       handleClose()
+      queryClient.invalidateQueries(['post', postId])
     },
     retry: false,
   })

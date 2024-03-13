@@ -109,7 +109,6 @@ export const FavoritesPage = () => {
           key={postId}
           lastElement={lastElement}
           post={post}
-          userName={response?.data.userName}
         />
       )}
 

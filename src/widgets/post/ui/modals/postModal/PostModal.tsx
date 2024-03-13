@@ -20,7 +20,6 @@ interface IProps {
   isPublic?: boolean
   lastElement?: boolean
   post: PostResponse
-  userName: string
 }
 
 export const GetPostModal: React.FC<IProps> = props => {
@@ -36,7 +35,6 @@ export const GetPostModal: React.FC<IProps> = props => {
     isPublic = false,
     lastElement,
     post,
-    userName,
   } = props
   const { isAuth } = useAuth()
   const creationDate = post?.createdAt ? format(new Date(post?.createdAt), 'MMMM d, Y') : ''
@@ -52,7 +50,7 @@ export const GetPostModal: React.FC<IProps> = props => {
           />
           <div className={cls.rightBlock}>
             <div className={cls.header}>
-              <Header avatarURL={post.avatars?.medium.url} title={userName} />
+              <Header avatarURL={post.avatars?.medium.url} title={post.userName} />
               {isAuth && <div>{headerActions}</div>}
             </div>
             {content}

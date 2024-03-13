@@ -23,7 +23,7 @@ export const useInfiniteScroll = ({ data, fetchNextPage, hasNextPage, postId }: 
       ? data.pages.flatMap(page => page.items.map((item: { id: number }) => item.id))
       : []
 
-  const findIndex = idsArray.findIndex(id => id === postId)
+  const foundIndex = idsArray.findIndex(id => id === postId)
   const firstElement = idsArray[0] === idsArray[currentIndex]
   const lastElement = idsArray[idsArray.length - 1] === idsArray[currentIndex]
 
@@ -36,7 +36,7 @@ export const useInfiniteScroll = ({ data, fetchNextPage, hasNextPage, postId }: 
   }, [postId, idsArray, currentIndex])
 
   useEffect(() => {
-    setCurrentIndex(findIndex)
+    setCurrentIndex(foundIndex)
   }, [postId])
 
   useEffect(() => {
@@ -53,5 +53,14 @@ export const useInfiniteScroll = ({ data, fetchNextPage, hasNextPage, postId }: 
     }
   }, [inView, hasNextPage, fetchNextPage])
 
-  return { currentIndex, currentPost, firstElement, idsArray, lastElement, ref, setCurrentIndex }
+  return {
+    currentIndex,
+    currentPost,
+    firstElement,
+    foundIndex,
+    idsArray,
+    lastElement,
+    ref,
+    setCurrentIndex,
+  }
 }

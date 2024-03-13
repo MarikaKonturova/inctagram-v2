@@ -50,7 +50,6 @@ export const PublicPage = ({data}: PublicPageProps) => {
               isOpen={post !== null}
               key={'GetPostModal'}
               post={post}
-              userName={post.userName}
             />}
     </div>
   )

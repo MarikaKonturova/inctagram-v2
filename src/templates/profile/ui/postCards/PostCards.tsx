@@ -31,13 +31,21 @@ export const PostCards: FC<Props> = ({ userData }) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } = useGetPosts(
     userData.userName
   )
-  const { currentIndex, currentPost, firstElement, idsArray, lastElement, ref, setCurrentIndex } =
-    useInfiniteScroll({
-      data,
-      fetchNextPage,
-      hasNextPage: hasNextPage || false,
-      postId,
-    })
+  const {
+    currentIndex,
+    currentPost,
+    firstElement,
+    foundIndex,
+    idsArray,
+    lastElement,
+    ref,
+    setCurrentIndex,
+  } = useInfiniteScroll({
+    data,
+    fetchNextPage,
+    hasNextPage: hasNextPage || false,
+    postId,
+  })
   const { post } = useGetMyPost(currentPost)
 
   const handleClick = (direction: 'back' | 'next') => {
@@ -86,7 +94,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
 
   const closeModal = () => {
     setCurrentModal(null)
-    setCurrentIndex(0)
+    setCurrentIndex(foundIndex)
     router.replace(`${router.route}`)
   }
 
@@ -143,7 +151,6 @@ export const PostCards: FC<Props> = ({ userData }) => {
             key={'GetPostModal'}
             lastElement={lastElement}
             post={post}
-            userName={userData.userName}
           />,
           <EditPostModal
             handleClose={closeModal}
