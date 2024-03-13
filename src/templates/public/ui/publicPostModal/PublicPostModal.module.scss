@@ -9,8 +9,14 @@
 }
 
 .rightBlock {
+  display: flex;
+  flex-direction: column;
   width: 50%;
   background: var(--dark-300-color);
+}
+
+.content {
+  flex: 1;
 }
 
 .header {
