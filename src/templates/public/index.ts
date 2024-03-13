@@ -1,2 +1,2 @@
-export { PublicPage } from './ui'
+export { PublicPage } from './ui/PublicPage'
  

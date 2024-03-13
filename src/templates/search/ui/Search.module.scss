@@ -1,0 +1,104 @@
+.searchPage {
+  height: 100vh;
+
+  .title {
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .titleList {
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .inputWrapper {
+    padding: 10px;
+  }
+
+  .input.input.input.input {
+    border: 1px solid var(--dark-100-color);
+  }
+
+  .button {
+    min-width: 116px;
+    color: var(--light-100-color);
+  }
+
+  .loader {
+    text-align: center;
+  }
+}
+
+.usersList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+
+  margin: 24px;
+  margin-top: 0;
+
+  .emptyList {
+    color: var(--light-900-color);
+    text-align: center;
+    margin-top: 70px;
+
+    h3 {
+      font: var(--font-medium-700);
+    }
+
+    p {
+      padding: 5px 0;
+      font: var(--font-small-400);
+    }
+  }
+
+  .userCard {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    color: var(--light-100-color);
+
+    .userBlock {
+      display: flex;
+      flex: 1;
+      gap: 12px;
+      align-items: center;
+
+      .userName {
+        flex-grow: 1;
+        display: flex;
+
+        a {
+          padding: 5px 0;
+          color: inherit;
+          text-decoration: inherit;
+        }
+      }
+
+      .userAvatar {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+      .userInfoBox {
+        margin-left: 20px;
+      }
+
+      .userInfo {
+        padding: 5px 0;
+        color: var(--light-900-color);
+      }
+    }
+  }
+}

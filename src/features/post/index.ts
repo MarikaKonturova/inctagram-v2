@@ -16,6 +16,8 @@ export { DeletePostModal } from './deletePost/ui/DeletePostModal'
 
 export { EditPostModal } from './editPost/ui/EditPostModal'
 
+export { LikeAnswerIconButton } from './likeAnswer/ui/LikeAnswerIconButton/LikeAnswerIconButton'
+
 export { LikeCommentIconButton } from './likeComment/ui/LikeCommentIconButton/LikeCommentIconButton'
 
 export { LikePostIconButton } from './likePost/ui/LikePostIconButton/LikePostIconButton'

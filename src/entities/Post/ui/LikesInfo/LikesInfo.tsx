@@ -5,7 +5,7 @@ import { type ProfileDataModel } from 'shared/types/auth'
 import { AvatarSizes } from 'shared/types/post'
 import { Avatar } from 'shared/ui'
 
-import cls from './styles.module.scss'
+import cls from './LikesInfo.module.scss'
 
 interface LikesInfoProps {
   likeCount: number

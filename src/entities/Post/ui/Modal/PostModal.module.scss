@@ -17,7 +17,9 @@
 
 .iconContainer {
   align-self: center;
-  padding: 4px 6px 2px 6px;
+
+  padding: 4px 6px 2px;
+
   text-align: center;
   background: var(--modal-300-color);
   transition: background 0.3s ease;
@@ -29,6 +31,7 @@
 
 .backIconContainer {
   margin-right: 10px;
+
   &:active {
     transform: scale(0.9);
   }
@@ -36,6 +39,7 @@
 
 .nextIconContainer {
   margin-left: 10px;
+
   &:active {
     transform: scale(0.9);
   }

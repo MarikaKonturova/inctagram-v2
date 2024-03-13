@@ -1,10 +1,14 @@
 .container {
-  padding: 24px 0;
   width: 100%;
   max-width: 972px;
   margin: 0 auto;
+  padding: 24px 0;
 }
 
 .users {
   margin-bottom: 36px;
+}
+
+.content {
+  flex: 1;
 }

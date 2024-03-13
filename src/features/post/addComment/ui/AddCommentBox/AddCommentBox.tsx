@@ -46,7 +46,7 @@ export const AddCommentBox = ({ className, postId }: AddCommentBoxProps) => {
   }, [repliedComment.userName])
 
   return (
-    <div className={clsx(cls.container, {}, [className])}>
+    <div className={clsx(cls.container, {}, [className])} id={'addCommentHeight'}>
       <Controller
         control={control}
         name={'text'}
