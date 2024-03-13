@@ -5,6 +5,7 @@ import { LikeStatus } from 'shared/types/likeStatus'
 import { ActionIcon } from 'shared/ui'
 
 import { useLikePost } from '../../model'
+import cls from './LikePostIconButton.module.scss'
 
 interface LikePostIconButtonProps {
   postId: number
@@ -23,7 +24,7 @@ export const LikePostIconButton = ({ postId, postIsLiked }: LikePostIconButtonPr
       initialState={postIsLiked}
       isLoading={isLoading}
       onClick={onLikeIconClick}
-      outlineIcon={<IconLikeOutline fill={'#ffffff'} />}
+      outlineIcon={<IconLikeOutline className={cls.outLine} fill={'#ffffff'} />}
     />
   )
 }
