@@ -1,4 +1,4 @@
-import { InfiniteData, useQueryClient } from '@tanstack/react-query'
+import { InfiniteData } from '@tanstack/react-query'
 import { useGetFavoritesData } from 'entities/Favorites'
 import { useGetMyPost } from 'entities/Post'
 import { useGetProfileData } from 'entities/Profile'
@@ -100,7 +100,9 @@ export const FavoritesPage = () => {
       {!!postId && !!post && !!userData && (
         <GetPostModal
           actionsSlot={<PostModalActions post={post} />}
-          content={<Commentaries key={postId} postId={idsArray[currentIndex] || postId} />}
+          content={
+            <Commentaries key={postId} post={post} postId={idsArray[currentIndex] || postId} />
+          }
           firstElement={firstElement}
           handleClick={handleClick}
           handleClose={closeModal}

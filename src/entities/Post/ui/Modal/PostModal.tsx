@@ -34,8 +34,6 @@ export const PostModal: React.FC<IProps> = props => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
-  console.log({ isPublic })
-
   return (
     <Modal id={id} isOpen={isOpen} onClose={handleClose} withHeader={false} withStyles={false}>
       <div className={cls.container}>

@@ -130,7 +130,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
             content={
               <div className={cls.content}>
                 {post.description && <Description post={post} />}
-                <Commentaries postId={idsArray[currentIndex] || postId} />
+                <Commentaries post={post} postId={idsArray[currentIndex] || postId} />
               </div>
             }
             firstElement={firstElement}

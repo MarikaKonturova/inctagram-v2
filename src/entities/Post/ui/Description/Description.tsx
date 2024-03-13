@@ -12,7 +12,7 @@ type PropsType = {
 
 export const Description: FC<PropsType> = ({ post }) => {
   return (
-    <div className={cls.container}>
+    <div className={cls.container} id={'descriptionHeight'}>
       <Avatar src={post.avatars?.thumbnail.url || userPhoto.src} />
       <div className={cls.content}>
         <p className={cls.info}>
