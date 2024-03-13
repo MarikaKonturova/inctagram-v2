@@ -1,4 +1,4 @@
-import {CreationDate} from 'entities/Post/ui/CreationDate';
+import {CreationDate} from 'entities/Post/ui/CreationDate/CreationDate';
 import { useTranslation } from "next-i18next";
 import React, {useEffect, useRef, useState} from 'react';
 import userPhoto from 'shared/assets/images/user.png'

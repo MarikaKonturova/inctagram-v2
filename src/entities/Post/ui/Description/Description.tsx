@@ -3,7 +3,7 @@ import userPhoto from 'shared/assets/images/user.png'
 import { PostResponse } from 'shared/types/post'
 import { Avatar } from 'shared/ui'
 
-import { CreationDate } from '../CreationDate'
+import { CreationDate } from '../CreationDate/CreationDate'
 import cls from './Description.module.scss'
 
 type PropsType = {
@@ -12,7 +12,7 @@ type PropsType = {
 
 export const Description: FC<PropsType> = ({ post }) => {
   return (
-    <div className={cls.container}>
+    <div className={cls.container} id={'descriptionHeight'}>
       <Avatar src={post.avatars?.thumbnail.url || userPhoto.src} />
       <div className={cls.content}>
         <p className={cls.info}>
