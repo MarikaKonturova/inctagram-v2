@@ -37,11 +37,13 @@ export const FavoritesPage = () => {
   const handleClick = (direction: 'back' | 'next') => {
     if (direction === 'back' && currentIndex > 0) {
       setCurrentIndex(currentIndex - 1)
-      router.replace(`${router.route}?postId=${idsArray[currentIndex] + 1}`)
+      router.query.postId = String(idsArray[currentIndex] + 1)
     } else if (direction === 'next' && currentIndex < idsArray.length - 1) {
       setCurrentIndex(currentIndex + 1)
-      router.replace(`${router.route}?postId=${idsArray[currentIndex] - 1}`)
+      router.query.postId = String(idsArray[currentIndex] - 1)
     }
+
+    router.push(router)
   }
 
   const openModal = (id: Values) => {
@@ -54,6 +56,10 @@ export const FavoritesPage = () => {
   const closeModal = () => {
     setCurrentModal(null)
     setCurrentIndex(0)
+    if (router.query.postId) {
+      delete router.query.postId
+      router.push(router, undefined, { shallow: true })
+    }
   }
 
   const renderContent = (page: FavoritesType) => {
@@ -62,6 +68,8 @@ export const FavoritesPage = () => {
 
       const onPostClick = () => {
         openModal(MODALS.GetPostModal)
+        router.query.postId = String(item.id)
+        router.push(router)
         setPostId(item.id)
       }
 
