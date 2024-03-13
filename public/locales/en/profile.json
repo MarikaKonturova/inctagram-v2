@@ -48,6 +48,7 @@
     "addPhoto": "Add Photo",
     "photoSizeError": "Photo size must be less than 20 MB!",
     "photoFormatError": "The format of the uploaded photo must be\nPNG and JPEG",
+    "photoAmoutError": "The ammount of photos should be less than 10!",
     "selectFromComputer": "Select from Computer",
     "cropping": "Cropping",
     "next": "Next",
@@ -79,8 +80,9 @@
     "SEMI_ANNUALLY": "6 months",
     "YEARLY": "1 year",
     "show": "Show",
-    "onPage": "on page",
     "copyLink": "Copy Link",
     "subscribe": "Subscribe",
-    "unsubscribe": "Unsubscribe"
+    "unsubscribe": "Unsubscribe",
+    "onPage": "on page",
+    "openDraft": "Open Draft"
 }
