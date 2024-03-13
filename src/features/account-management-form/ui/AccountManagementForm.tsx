@@ -136,9 +136,9 @@ export const AccountManagementForm: FC<PropsType> = ({ accountOptions, hasBusine
             setSelected={setSelected}
           />
           <div className={cls.bottomBlock}>
-            <Paypal />
+            <Paypal className={cls.icon} />
             or
-            <Stripe onClick={onStripeHandler} />
+            <Stripe className={cls.icon} onClick={onStripeHandler} />
           </div>
         </>
       )}
