@@ -10,6 +10,7 @@
 
 .calendarContainer {
   @include flex(row, space-between, flex-start);
+  border: 1px solid var(--modal-100-color);
 
   position: relative;
 

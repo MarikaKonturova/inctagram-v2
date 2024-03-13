@@ -25,7 +25,7 @@
   color: var(--light-900-color);
 
   background-color: var(--dark-700-color);
-  border: 1px solid var(--dark-100-color);
+  border: 1px solid var(--modal-100-color);
   border-radius: 2px;
 
   &:hover {
@@ -86,7 +86,7 @@
   color: var(--light-900-color);
 
   background-color: var(--dark-500-color);
-  border: 1px solid var(--light-100-color);
+  border: 1px solid var(--modal-100-color);
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 2px;
 
@@ -104,5 +104,5 @@
 .activeListItem {
   cursor: pointer;
   color: var(--primary-500-color);
-  background-color: var(--dark-300-color);
+  background-color: var(--modal-300-color);
 }
