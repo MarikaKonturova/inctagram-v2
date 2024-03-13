@@ -164,7 +164,6 @@ export const PostCards: FC<Props> = ({ userData }) => {
             key={'GetPostModal'}
             lastElement={lastElement}
             post={post}
-            userName={userData.userName}
           />,
           <EditPostModal
             handleClose={closeModal}

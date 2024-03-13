@@ -10,9 +10,13 @@
 
 .rightBlock {
   display: flex;
-  flex-direction: column ;
+  flex-direction: column;
   width: 50%;
   background: var(--dark-300-color);
+}
+
+.content {
+  flex: 1;
 }
 
 .header {
@@ -24,12 +28,6 @@
 
   border: 1px solid var(--dark-100-color);
 }
-
-.content{
-  flex: 1;
-}
-
-
 
 .bottomSection {
   padding: 0 20px;

@@ -2,16 +2,20 @@
   display: flex;
   padding: 5px 0;
   gap: 5px;
-}
 
-.headerTitle {
-  margin-right: 12px;
-  font-weight: bold;
-}
+  .rightBlock {
+    margin-left: 5px;
 
-.lessMore {
-  cursor: pointer;
-  margin-top: 5px;
-  font: var(--font-regular-500);
-  color: var(--light-900-color);
+    .headerTitle {
+      margin-right: 12px;
+      font-weight: bold;
+    }
+
+    .lessMore {
+      cursor: pointer;
+      margin-top: 5px;
+      font: var(--font-regular-500);
+      color: var(--light-900-color);
+    }
+  }
 }
