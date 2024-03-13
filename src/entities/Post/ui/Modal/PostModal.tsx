@@ -7,14 +7,14 @@ import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
 import { Modal } from 'shared/ui'
 
-import cls from './styles.module.scss'
+import cls from './PostModal.module.scss'
 
 interface IProps {
   content: React.ReactNode
   firstElement?: boolean
   handleClick?: (direction: 'back' | 'next') => void
   handleClose: () => void
-  id: number
+  id?: number
   isOpen: boolean
   isPublic?: boolean
   lastElement?: boolean

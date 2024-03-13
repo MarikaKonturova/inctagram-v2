@@ -3,7 +3,7 @@ import React, { type FC } from 'react'
 import { formattedDate } from 'shared/utils'
 import { formatCommentTime } from 'shared/utils/formatCommentTime'
 
-import cls from './styles.module.scss'
+import cls from './CreationDate.module.scss'
 
 interface Props {
   className?: string

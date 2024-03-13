@@ -1,12 +1,12 @@
-import { InfiniteData, useQueryClient } from '@tanstack/react-query'
+import { InfiniteData } from '@tanstack/react-query'
 import { useGetFavoritesData } from 'entities/Favorites'
 import { useGetMyPost } from 'entities/Post'
 import { useGetProfileData } from 'entities/Profile'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import React, { useEffect, useState } from 'react'
-import { useInView } from 'react-intersection-observer'
-import { MyPostService } from 'shared/api'
 import { MODALS, type Values } from 'shared/constants/post'
+import { useInfiniteScroll } from 'shared/hooks/useInfiniteScroll'
 import { type FavoritesType } from 'shared/types/post'
 import { Card, Loader } from 'shared/ui'
 import { Commentaries } from 'widgets/commentaries'
@@ -15,55 +15,32 @@ import { GetPostModal, PostModalActions } from 'widgets/post'
 import cls from './Favorites.module.scss'
 
 export const FavoritesPage = () => {
-  const queryClient = useQueryClient()
+  const [currentModal, setCurrentModal] = useState<Values | null>(null)
+  const [postId, setPostId] = useState<number>(0)
+
+  const router = useRouter()
+  const { t } = useTranslation('common')
   const { response } = useGetProfileData()
   const userData = response?.data
-  const { t } = useTranslation('common')
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } = useGetFavoritesData(
     userData?.userName || ''
   )
-  const { inView, ref } = useInView({ threshold: 1 })
-  const [currentModal, setCurrentModal] = useState<Values | null>(null)
-  const [postId, setPostId] = useState<number>(0)
-  const [currentIndex, setCurrentIndex] = useState<number>(0)
-  const [currentPost, setCurrentCurrentPost] = useState<number>(0)
+  const { currentIndex, currentPost, firstElement, idsArray, lastElement, ref, setCurrentIndex } =
+    useInfiniteScroll({
+      data,
+      fetchNextPage,
+      hasNextPage: hasNextPage || false,
+      postId,
+    })
   const { post } = useGetMyPost(currentPost)
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const idsArray: number[] =
-    data && data.pages
-      ? data.pages.flatMap(page => page.items.map((item: { id: number }) => item.id))
-      : []
-
-  const findIndex = idsArray.findIndex(id => id === postId)
-  const firstElement = idsArray[0] === idsArray[currentIndex]
-  const lastElement = idsArray[idsArray.length - 1] === idsArray[currentIndex]
-
-  useEffect(() => {
-    if (idsArray[currentIndex]) {
-      setCurrentCurrentPost(idsArray[currentIndex])
-    } else {
-      setCurrentCurrentPost(postId)
-    }
-  }, [postId, idsArray, currentIndex])
-
-  useEffect(() => {
-    setCurrentIndex(findIndex)
-  }, [postId])
-
-  useEffect(() => {
-    {
-      idsArray.map(id => {
-        queryClient.prefetchQuery(['post', id], () => MyPostService.getPost(id))
-      })
-    }
-  }, [idsArray])
 
   const handleClick = (direction: 'back' | 'next') => {
     if (direction === 'back' && currentIndex > 0) {
       setCurrentIndex(currentIndex - 1)
+      router.replace(`${router.route}?postId=${idsArray[currentIndex] + 1}`)
     } else if (direction === 'next' && currentIndex < idsArray.length - 1) {
       setCurrentIndex(currentIndex + 1)
+      router.replace(`${router.route}?postId=${idsArray[currentIndex] - 1}`)
     }
   }
 
@@ -78,6 +55,7 @@ export const FavoritesPage = () => {
     setCurrentModal(null)
     setCurrentIndex(0)
   }
+
   const renderContent = (page: FavoritesType) => {
     return page.items.map((item, index) => {
       const lastElement = index === page.items.length - 1
@@ -105,10 +83,12 @@ export const FavoritesPage = () => {
   }
 
   useEffect(() => {
-    if (inView && hasNextPage) {
-      void fetchNextPage()
+    if (router.query.postId) {
+      setPostId(Number(router.query.postId))
+      openModal(MODALS.GetPostModal)
     }
-  }, [inView, hasNextPage, fetchNextPage])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className={cls.favoritesPage}>

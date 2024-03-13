@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import { CreationDate, Header, LikesInfo, PostModal } from 'entities/Post'
+import { useAuth } from 'features/auth'
 import { AddCommentBox } from 'features/post'
 import React, { ReactNode } from 'react'
 import { type PostResponse } from 'shared/types/post'
@@ -8,14 +9,15 @@ import { Card } from 'shared/ui'
 import cls from './PostModal.module.scss'
 
 interface IProps {
-  actionsSlot: ReactNode
+  actionsSlot?: ReactNode
   content: ReactNode
   firstElement?: boolean
   handleClick?: (direction: 'back' | 'next') => void
   handleClose: () => void
   headerActions?: ReactNode
-  id: number
+  id?: number
   isOpen: boolean
+  isPublic?: boolean
   lastElement?: boolean
   post: PostResponse
 }
@@ -30,10 +32,11 @@ export const GetPostModal: React.FC<IProps> = props => {
     headerActions,
     id,
     isOpen,
+    isPublic = false,
     lastElement,
     post,
   } = props
-
+  const { isAuth } = useAuth()
   const creationDate = post?.createdAt ? format(new Date(post?.createdAt), 'MMMM d, Y') : ''
 
   return (
@@ -48,18 +51,17 @@ export const GetPostModal: React.FC<IProps> = props => {
           <div className={cls.rightBlock}>
             <div className={cls.header}>
               <Header avatarURL={post.avatars?.medium.url} title={post.userName} />
-              <div>{headerActions}</div>
+              {isAuth && <div>{headerActions}</div>}
             </div>
             <div className={cls.content}>{content}</div>
-
             <div className={cls.bottomSection} id={'bottomSection'}>
-              {actionsSlot}
+              {isAuth && actionsSlot}
               <div className={cls.wrapper}>
                 <LikesInfo likeCount={post.likeCount} newLikes={post.newLikes} />
                 <CreationDate date={creationDate} />
               </div>
             </div>
-            <AddCommentBox postId={post.id} />
+            {isAuth && <AddCommentBox postId={post.id} />}
           </div>
         </>
       }
@@ -68,6 +70,7 @@ export const GetPostModal: React.FC<IProps> = props => {
       handleClose={handleClose}
       id={id}
       isOpen={isOpen}
+      isPublic={isPublic}
       lastElement={lastElement}
     />
   )
