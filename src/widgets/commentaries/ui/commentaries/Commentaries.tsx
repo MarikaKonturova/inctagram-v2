@@ -1,4 +1,5 @@
 import { useGetPostComments } from 'entities/Comment'
+import { useAuth } from 'features/auth'
 import { Comment, LikeCommentIconButton } from 'features/post'
 import React, { type FC, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
@@ -13,6 +14,7 @@ interface Props {
 
 export const Commentaries: FC<Props> = ({ postId }) => {
   const { inView, ref } = useInView()
+  const { isAuth } = useAuth()
   const { comments, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isSuccess } =
     useGetPostComments(postId)
   const [openedComments, setOpenedComments] = useState<{ [id: number]: boolean }>({})
@@ -51,6 +53,7 @@ export const Commentaries: FC<Props> = ({ postId }) => {
             avatarSize={36}
             commentId={comment.id}
             data={comment}
+            isAuth={isAuth}
             openedComments={openedComments}
             viewAnswerOnClick={viewAnswerOnClick}
           />

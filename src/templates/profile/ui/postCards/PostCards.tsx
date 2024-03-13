@@ -1,4 +1,3 @@
-import { useQueryClient } from '@tanstack/react-query'
 import { useGetPosts } from 'entities/Home'
 import { Description, useGetMyPost } from 'entities/Post'
 import {
@@ -7,10 +6,10 @@ import {
   EditPostModal,
   UpdateMyPostButton,
 } from 'features/post'
+import { useRouter } from 'next/router'
 import React, { type FC, useEffect, useState } from 'react'
-import { useInView } from 'react-intersection-observer'
-import { MyPostService } from 'shared/api'
 import { MODALS, type Values } from 'shared/constants/post'
+import { useInfiniteScroll } from 'shared/hooks/useInfiniteScroll'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { type PostResponse, type ResponseType } from 'shared/types/post'
 import { Card, Loader, MoreOptions } from 'shared/ui'
@@ -24,35 +23,38 @@ interface Props {
 }
 
 export const PostCards: FC<Props> = ({ userData }) => {
-  const queryClient = useQueryClient()
-  const { inView, ref } = useInView({
-    threshold: 1,
-  })
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } = useGetPosts(
-    userData.userName
-  )
-
   const [currentModal, setCurrentModal] = useState<Values | null>(null)
   const [postId, setPostId] = useState<number>(0)
   const [isDelePostConfirmationModalOpen, setIsDelePostConfirmationModalOpen] = useState(false)
-  const [currentIndex, setCurrentIndex] = useState<number>(0)
-  const [currentPost, setCurrentPost] = useState<number>(0)
 
+  const router = useRouter()
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } = useGetPosts(
+    userData.userName
+  )
+  const {
+    currentIndex,
+    currentPost,
+    firstElement,
+    foundIndex,
+    idsArray,
+    lastElement,
+    ref,
+    setCurrentIndex,
+  } = useInfiniteScroll({
+    data,
+    fetchNextPage,
+    hasNextPage: hasNextPage || false,
+    postId,
+  })
   const { post } = useGetMyPost(currentPost)
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const idsArray =
-    data && data.pages ? data.pages.flatMap(page => page.items.map(item => item.id)) : []
-
-  const foundIndex = idsArray.findIndex(id => id === postId)
-  const firstElement = idsArray[0] === idsArray[currentIndex]
-  const lastElement = idsArray[idsArray.length - 1] === idsArray[currentIndex]
 
   const handleClick = (direction: 'back' | 'next') => {
     if (direction === 'back' && currentIndex > 0) {
       setCurrentIndex(currentIndex - 1)
+      router.replace(`${router.route}?postId=${idsArray[currentIndex] + 1}`)
     } else if (direction === 'next' && currentIndex < idsArray.length - 1) {
       setCurrentIndex(currentIndex + 1)
+      router.replace(`${router.route}?postId=${idsArray[currentIndex] - 1}`)
     }
   }
 
@@ -63,7 +65,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
       const onPostCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation()
         setPostId(item.id)
-
+        router.replace(`${router.route}?postId=${item.id}`)
         openModal(MODALS.GetPostModal)
       }
 
@@ -93,6 +95,7 @@ export const PostCards: FC<Props> = ({ userData }) => {
   const closeModal = () => {
     setCurrentModal(null)
     setCurrentIndex(foundIndex)
+    router.replace(`${router.route}`)
   }
 
   const openEditPostModal = () => {
@@ -109,28 +112,12 @@ export const PostCards: FC<Props> = ({ userData }) => {
   }
 
   useEffect(() => {
-    setCurrentIndex(foundIndex)
-  }, [postId])
-
-  useEffect(() => {
-    if (idsArray[currentIndex]) {
-      setCurrentPost(idsArray[currentIndex])
-    } else {
-      setCurrentPost(postId)
+    if (router.query.postId) {
+      setPostId(Number(router.query.postId))
+      openModal(MODALS.GetPostModal)
     }
-  }, [currentIndex, idsArray, postId])
-
-  useEffect(() => {
-    idsArray.map(id => {
-      queryClient.prefetchQuery(['post', id], () => MyPostService.getPost(id))
-    })
-  }, [idsArray])
-
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      void fetchNextPage()
-    }
-  }, [inView, hasNextPage, fetchNextPage])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>

@@ -2,7 +2,7 @@ import React from 'react'
 import userPhoto from 'shared/assets/images/user.png'
 import { Avatar } from 'shared/ui'
 
-import cls from './styled.module.scss'
+import cls from './Header.module.scss'
 
 interface IProps {
   avatarURL?: string
