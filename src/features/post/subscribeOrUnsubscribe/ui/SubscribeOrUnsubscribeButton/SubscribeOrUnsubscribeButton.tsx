@@ -35,7 +35,7 @@ export const SubscribeOrUnsubscribeButton: FC<IProps> = ({ isFollowed, userId, u
           ) : (
             <IconUnsubscribeOutline aria-hidden={'true'} fill={fill} />
           )}
-          {isFollowed ? t('unsubscribe') : t('subscribe')}
+          {t('unsubscribe')}
         </button>
       )}
     </Menu.Item>

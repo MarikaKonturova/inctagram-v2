@@ -1,5 +1,6 @@
 import { Menu } from '@headlessui/react'
 import clsx from 'clsx'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import React from 'react'
 import IconCopy from 'shared/assets/icons/light/copy.svg'
@@ -14,6 +15,11 @@ export const CopyToClipboard = () => {
   const { t } = useTranslation('profile')
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
+
+  const router = useRouter()
+  const { asPath } = router
+
+  /*  console.log(asPath) */
 
   return (
     <Menu.Item>
