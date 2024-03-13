@@ -52,8 +52,9 @@ export const GetPostModal: React.FC<IProps> = props => {
               <Header avatarURL={post.avatars?.medium.url} title={userName} />
               <div>{headerActions}</div>
             </div>
-            {content}
-            <div className={cls.bottomSection}>
+            <div className={cls.content}>{content}</div>
+
+            <div className={cls.bottomSection} id={'bottomSection'}>
               {actionsSlot}
               <div className={cls.wrapper}>
                 <LikesInfo likeCount={post.likeCount} newLikes={post.newLikes} />

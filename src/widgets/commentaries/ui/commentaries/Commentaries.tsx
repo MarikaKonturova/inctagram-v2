@@ -18,7 +18,9 @@ export const Commentaries: FC<Props> = ({ post, postId }) => {
   const { comments, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isSuccess } =
     useGetPostComments(postId)
   const [openedComments, setOpenedComments] = useState<{ [id: number]: boolean }>({})
-  const [height, setHeight] = useState<number | undefined>()
+  const [heightDescription, setHeightDescription] = useState<number>()
+  const [heightAddComment, setHeightAddComment] = useState<number>()
+  const [heightBottomSection, setHeightBottomSection] = useState<number>()
   const idsArray = Object.keys(openedComments).map(Number)
 
   const viewAnswerOnClick = (commentId: number) => {
@@ -36,12 +38,20 @@ export const Commentaries: FC<Props> = ({ post, postId }) => {
 
   useEffect(() => {
     const descriptionElement = document.getElementById('descriptionHeight')
+    const addCommentElement = document.getElementById('addCommentHeight')
+    const bottomSectionElement = document.getElementById('bottomSection')
 
-    if (descriptionElement) {
-      const height = descriptionElement.offsetHeight
+    const descriptionHeight = descriptionElement?.offsetHeight || 0
 
-      setHeight(height)
-    }
+    setHeightDescription(descriptionHeight)
+
+    const addCommentHeight = addCommentElement?.offsetHeight || 0
+
+    setHeightAddComment(addCommentHeight)
+
+    const bottomSectionHeight = bottomSectionElement?.offsetHeight || 0
+
+    setHeightBottomSection(bottomSectionHeight)
   }, [postId, post])
 
   if (isLoading) {
@@ -51,7 +61,9 @@ export const Commentaries: FC<Props> = ({ post, postId }) => {
   return (
     <div
       className={cls.comments}
-      style={{ maxHeight: `calc(85vh - (58px + ${height}px + 100px + 52px))` }}
+      style={{
+        maxHeight: `calc(85vh - (58px + ${heightDescription}px + ${heightBottomSection}px + ${heightAddComment}px))`,
+      }}
     >
       {comments?.map(comment => (
         <div className={cls.comment} key={comment.id}>

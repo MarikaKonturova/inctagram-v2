@@ -32,8 +32,11 @@ export const PublicPostModal = ({ handleClose, isOpen, post }: PublicPostModalPr
             <div className={cls.header}>
               <Header avatarURL={post.avatars?.thumbnail.url} title={post.userName} />
             </div>
-            <Commentaries post={post} postId={post.id} />
-            <div className={cls.bottomSection}>
+            <div className={cls.content}>
+              <Commentaries post={post} postId={post.id} />
+            </div>
+
+            <div className={cls.bottomSection} id={'bottomSection'}>
               <div className={cls.wrapper}>
                 <LikesInfo likeCount={post.likeCount} newLikes={post.newLikes} />
                 <CreationDate className={cls.creationDate} date={creationDate} />
