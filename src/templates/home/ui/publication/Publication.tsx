@@ -57,7 +57,9 @@ export const Publication: React.FC<PropsType> = props => {
         width={491}
       />
       <PostActions post={publ} />
-      <Description avatar={publ.avatars} description={publ.description} title={publ.userName} />
+      {publ.description?.length && (
+        <Description avatar={publ.avatars} description={publ.description} title={publ.userName} />
+      )}
       <div className={cls.likesInfo}>
         <LikesInfo likeCount={publ.likeCount} newLikes={publ.newLikes} />
       </div>
