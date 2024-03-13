@@ -12,6 +12,12 @@
   "ending": "s",
   "showMore": "Show more",
   "hide": "Hide",
+  "doYouReallyWantToCloseTheCreationOfAPublication": "Do you really want to close the creation of a publication?",
+  "ifYouCloseEverythingWillBeDeleted": "If you close everything will be deleted",
+  "discard": "Discard",
+  "saveDraft": "Save Draft", 
+  "close" : "Close",
   "more": "More",
   "less": "Less"
 }
+

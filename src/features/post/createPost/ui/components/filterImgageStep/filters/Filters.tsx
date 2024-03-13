@@ -42,10 +42,12 @@ interface IProps {
 
 export const Filters = ({ className, currentIndex, image, imageId, swiperElement }: IProps) => {
   const { setConvertedImages, setFilter } = useUploadImagePostStore(
-    ({ setConvertedImages, setFilter }) => ({ setConvertedImages, setFilter }),
+    ({ setConvertedImages, setFilter }) => ({
+      setConvertedImages,
+      setFilter,
+    }),
     shallow
   )
-
   const { t } = useTranslation('profile')
   const onClickHandler = async (filter: string) => {
     if (swiperElement) {
@@ -53,15 +55,11 @@ export const Filters = ({ className, currentIndex, image, imageId, swiperElement
 
       const currentImg = swiperElement.slides[currentIndex].children[0]
 
-      const modifiedSrc = await FilterImageStepLib.getModifiedImageSrc(
+      const filteredSrc = await FilterImageStepLib.getModifiedImageSrc(
         currentImg as HTMLImageElement
       )
 
-      const convertedImage = {
-        [imageId]: { src: modifiedSrc },
-      }
-
-      setConvertedImages(convertedImage)
+      setConvertedImages({ filteredSrc, imageId })
     }
   }
 
@@ -85,6 +83,7 @@ export const Filters = ({ className, currentIndex, image, imageId, swiperElement
             }}
             width={108}
           />
+
           <p>{filter.name === 'Normal' ? `${t('normal')}` : filter.name}</p>
         </div>
       ))}

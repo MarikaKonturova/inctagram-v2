@@ -1,6 +1,7 @@
 .Modal {
   width: 438px;
-  height: 220px;
+  height: fit-content;
+  min-height: 220px;
 
   .content {
     display: flex;
@@ -21,7 +22,8 @@
       justify-content: center;
 
       .button {
-        width: 96px;
+        width: fit-content;
+        min-width: 96px;
         height: 36px;
       }
     }

@@ -1,6 +1,6 @@
 import { useGetPostAnswersForComment } from 'entities/Comment'
-import { Comment } from 'features/post'
-import { LikeAnswerIconButton } from 'features/post/likeAnswer/ui/LikeAnswerIconButton/LikeAnswerIconButton'
+import { useAuth } from 'features/auth'
+import { Comment, LikeAnswerIconButton } from 'features/post'
 import React from 'react'
 
 interface PropsType {
@@ -19,6 +19,7 @@ export const AnswersForCommentaries = ({
   postId,
 }: PropsType) => {
   const { answerForComment } = useGetPostAnswersForComment(postId, openedCommentId)
+  const { isAuth } = useAuth()
 
   return (
     <>
@@ -37,6 +38,7 @@ export const AnswersForCommentaries = ({
                 avatarSize={36}
                 commentId={openedCommentId}
                 data={answer}
+                isAuth={isAuth}
                 isRepliedComment
                 key={answer.id}
               />

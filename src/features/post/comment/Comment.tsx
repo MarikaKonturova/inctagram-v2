@@ -18,6 +18,7 @@ interface PropsType {
     answerCount?: number
     postId?: number | undefined
   }
+  isAuth?: boolean
   isRepliedComment?: boolean
   openedComments?: {
     [id: number]: boolean
@@ -30,6 +31,7 @@ export function Comment({
   avatarSize,
   commentId,
   data,
+  isAuth = false,
   isRepliedComment = false,
   openedComments,
   viewAnswerOnClick,
@@ -69,6 +71,10 @@ export function Comment({
     })
   }
 
+  const onViewAnswerClick = () => {
+    void viewAnswerOnClick?.(commentId)
+  }
+
   return (
     <div className={clsx(cls.avatarCommentGroup, { [cls.additionalStyle]: isRepliedComment })}>
       <div>
@@ -83,18 +89,14 @@ export function Comment({
         <div className={cls.bottomInfo}>
           <CreationDate className={cls.time} date={createdAt} type={'agoTime'} />
           <p className={cls.actionButton}>{`${t('like')}: ${likeCount}`} </p>
-          <button className={cls.button} onClick={onAnswerHandler} type={'button'}>
-            {t('reply')}
-          </button>
+          {isAuth && (
+            <button className={cls.button} onClick={onAnswerHandler} type={'button'}>
+              {t('reply')}
+            </button>
+          )}
         </div>
         {!!answerCount && (
-          <button
-            className={cls.button}
-            onClick={() => {
-              void viewAnswerOnClick?.(commentId)
-            }}
-            type={'button'}
-          >
+          <button className={cls.button} onClick={onViewAnswerClick} type={'button'}>
             <div>
               <span>
                 {!openedComments || openedComments[commentId]
@@ -106,7 +108,7 @@ export function Comment({
           </button>
         )}
       </div>
-      {actionSlot}
+      {isAuth && actionSlot}
     </div>
   )
 }
