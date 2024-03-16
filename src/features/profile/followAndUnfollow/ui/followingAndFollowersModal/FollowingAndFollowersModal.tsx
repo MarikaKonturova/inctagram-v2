@@ -1,7 +1,7 @@
+import { usePathname } from 'next/navigation'
 import { useTranslation } from 'next-i18next'
-import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useDebounce } from 'shared/hooks'
-import { type User } from 'shared/types/auth'
 import { Input, Loader, Modal, Pagination } from 'shared/ui'
 
 import { useGetUsers } from '../../model'
@@ -23,6 +23,10 @@ export const FollowingAndFollowersModal: React.FC<PropsType> = props => {
   const debounceSearchUserValue = useDebounce(searchUserValue, 500)
   const { t } = useTranslation('profile')
   const [currentPage, setCurrentPage] = useState(1)
+  const pathname = usePathname()
+
+  const currentUserName =
+    pathname.split('/').at(-1) === 'myprofile' ? userName : pathname.split('/').at(-1)
 
   const onPageChange = (page: number) => {
     setCurrentPage(page)
@@ -32,12 +36,9 @@ export const FollowingAndFollowersModal: React.FC<PropsType> = props => {
     data: usersData,
     isLoading: isUsersLoading,
     refetch,
-  } = useGetUsers(debounceSearchUserValue, userName || '', fetchDataName, count, currentPage)
+  } = useGetUsers(debounceSearchUserValue, currentUserName || '', fetchDataName, count, currentPage)
 
-  const followingCount =
-    usersData?.items?.filter((user: User) =>
-      fetchDataName === 'following' ? user.isFollowing : user.isFollowedBy
-    ).length || 0
+  const followingCount = usersData?.totalCount
 
   const title = fetchDataName === 'following' ? `${t('subscriptions')}` : `${t('subscribers')}`
 
@@ -47,7 +48,7 @@ export const FollowingAndFollowersModal: React.FC<PropsType> = props => {
 
   useEffect(() => {
     void refetch()
-  }, [count])
+  }, [currentUserName])
 
   return (
     <Modal
