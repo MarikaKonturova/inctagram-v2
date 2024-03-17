@@ -40,7 +40,7 @@ export const Publication: React.FC<PropsType> = props => {
   }
 
   return (
-    <div className={clsx(cls.container)}>
+    <div className={clsx(cls.container)} id={publ.id.toString()}>
       {isLoaded && <Skeleton />}
       <div className={cls.header}>
         <div className={cls.headerBox}>
@@ -56,7 +56,7 @@ export const Publication: React.FC<PropsType> = props => {
                 userId={publ.ownerId}
                 userName={publ.userName}
               />
-              <CopyToClipboard />
+              <CopyToClipboard publ={publ} />
             </>
           }
         />

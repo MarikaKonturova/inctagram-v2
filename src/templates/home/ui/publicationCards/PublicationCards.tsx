@@ -18,6 +18,18 @@ export const PublicationCards: FC = () => {
     }
   }, [inView])
 
+  const queryString = window.location.search
+  const urlParams = new URLSearchParams(queryString)
+  const postId = urlParams.get('postid')
+
+  if (postId) {
+    const postElement = document.getElementById(postId)
+
+    if (postElement) {
+      postElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
   const renderContent = (page: PublicationsResponseType) =>
     page.items.map(item => {
       return (

@@ -1,30 +1,47 @@
 import { Menu } from '@headlessui/react'
 import clsx from 'clsx'
-import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import React from 'react'
 import IconCopy from 'shared/assets/icons/light/copy.svg'
 import IconCopyOutline from 'shared/assets/icons/outline/copy-outline.svg'
 import { Theme } from 'shared/constants/theme'
+import { useSnackbar } from 'shared/hooks'
 import { useTheme } from 'shared/hooks/useTheme'
-import { copyToClipboard } from 'shared/utils/copyToClipboard'
+import { PostResponse } from 'shared/types/post'
 
 import cls from './CopyToClipboard.module.scss'
 
-export const CopyToClipboard = () => {
+type PropsType = {
+  publ: PostResponse
+}
+
+export const CopyToClipboard: React.FC<PropsType> = props => {
+  const onOpen = useSnackbar(state => state.onOpen)
   const { t } = useTranslation('profile')
   const { theme } = useTheme()
-  const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
+  const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff' + ''
 
-  const router = useRouter()
-  const { asPath } = router
+  const copyUrl = () => {
+    const currentUrl = new URL(window.location.href)
+    const postId = props.publ.id
 
-  /*  console.log(asPath) */
+    currentUrl.searchParams.set('postid', postId.toString())
+    const newUrl = currentUrl.toString()
+
+    navigator.clipboard
+      .writeText(newUrl)
+      .then(() => {
+        onOpen(`URL скопирован успешно`, 'success', 'right')
+      })
+      .catch(() => {
+        onOpen('Ошибка копирования URL', 'danger', 'right')
+      })
+  }
 
   return (
     <Menu.Item>
       {({ active }) => (
-        <button className={clsx(cls.item)} onClick={copyToClipboard} type={'button'}>
+        <button className={clsx(cls.item)} onClick={copyUrl} type={'button'}>
           {active ? (
             <IconCopy aria-hidden={'true'} fill={fill} />
           ) : (

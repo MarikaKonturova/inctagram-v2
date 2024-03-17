@@ -12,7 +12,7 @@ export const PostDropdown = ({ postId, userId, ...restProps }: PostDropdownProps
       <>
         <SubscribeOrUnsubscribeButton userId={userId} />
         <Report />
-        <CopyToClipboard />
+        {/*<CopyToClipboard />*/}
       </>
     }
   />
