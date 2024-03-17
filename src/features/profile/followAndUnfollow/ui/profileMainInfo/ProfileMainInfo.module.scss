@@ -23,7 +23,8 @@
 
       .button {
         padding: 6px 36px;
-        background: var(--dark-300-color);
+        background: var(--button-300-color);
+        color: var(--light-300-color);
       }
 
       .buttonPrimary {
@@ -34,7 +35,7 @@
       .buttonSecondary {
         margin-left: 15px;
         padding: 6px 36px;
-        background: var(--dark-300-color);
+        background: var(--button-600-color);
       }
     }
 

@@ -51,12 +51,12 @@
   width: 150px;
   padding: 15px;
 
-  color: var(--light-900-color);
+  color: var(--text-900-color);
 
   background-color: rgba(#171717, 0.8);
 
-  fill: var(--light-900-color);
-  stroke: var(--light-900-color);
+  fill: var(--text-900-color);
+  stroke: var(--text-900-color);
 }
 
 .menu_item {
@@ -65,7 +65,7 @@
 }
 
 .menu_item_active {
-  color: var(--light-100-color);
-  fill: var(--light-100-color);
-  stroke: var(--light-100-color);
+  color: var(--text-100-color);
+  fill: var(--text-100-color);
+  stroke: var(--text-100-color);
 }

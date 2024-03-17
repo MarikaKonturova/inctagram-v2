@@ -77,7 +77,6 @@ export const CropImage: FC<{ image: IImage; imageId: string }> = ({ image, image
           style={{
             cropAreaStyle: {
               border: 'none',
-              color: '#333333',
             },
           }}
           zoom={cropperZoom}

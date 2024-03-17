@@ -69,7 +69,7 @@
 }
 
 .primary {
-  color: var(--light-100-color);
+  color: var(--text-100-color);
   background: var(--primary-500-color);
   border: none;
 
@@ -83,7 +83,7 @@
 }
 
 .primary.disabled {
-  color: var(--light-900-color);
+  color: var(--text-900-color);
   background: var(--primary-900-color);
 }
 

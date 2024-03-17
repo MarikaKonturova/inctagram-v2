@@ -2,9 +2,11 @@ import { useValidationForm } from 'features/auth/lib/useValidationForm'
 import { useRecoverPassword } from 'features/auth/model'
 import i18next from 'i18next'
 import { useTranslation } from 'next-i18next'
-import React from 'react'
+import React, { useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { AppRoutes } from 'shared/constants/path'
+import { Theme } from 'shared/constants/theme'
+import { useTheme } from 'shared/hooks/useTheme'
 import { AppLink, Button, FormWrapper, Input, PageLoader } from 'shared/ui'
 
 import cls from './PasswordRecoveryForm.module.scss'
@@ -23,6 +25,7 @@ export const PasswordRecoveryForm = () => {
     setValue,
     validErrors: { emailError, recaptchaError },
   } = useValidationForm(['email', 'recaptcha'])
+  const { theme } = useTheme()
   const { isInfoTextShown, isLoading, localizedError: error, onSubmit } = useRecoverPassword()
 
   if (isLoading) {
@@ -65,7 +68,7 @@ export const PasswordRecoveryForm = () => {
         onChange={getRecaptchaValueHandler}
         onExpired={() => setValue('recaptcha', '')}
         sitekey={`${process.env.RECAPTCHA_SITE_KEY as string}`}
-        theme={'dark'}
+        theme={theme === Theme.LIGHT ? 'light' : 'dark'}
       />
       {recaptchaError && <p className={cls.error}>{recaptchaError}</p>}
     </FormWrapper>

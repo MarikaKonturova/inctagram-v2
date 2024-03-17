@@ -9,7 +9,7 @@
   @include flex($justify: space-between, $align: center);
 
   padding: 12px 24px;
-  border-bottom: 1px solid var(--dark-100-color);
+  border-bottom: 1px solid var(--modal-100-color);
 }
 
 .imgContainer {

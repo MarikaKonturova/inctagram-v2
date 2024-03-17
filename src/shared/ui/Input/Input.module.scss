@@ -6,7 +6,7 @@
   text-align: left;
 
   .required {
-    color: var(--danger-500-color);
+    color: var(--danger-700-color);
   }
 
   .wrapper {
@@ -36,11 +36,11 @@
     }
 
     &.standard.error::before {
-      background-color: var(--danger-500-color);
+      background-color: var(--danger-700-color);
     }
 
     &.error:focus-within {
-      outline: 2px solid var(--danger-500-color);
+      outline: 2px solid var(--danger-700-color);
     }
 
     // outline - variant
@@ -48,7 +48,7 @@
       outline: 1px solid var(--card-entity-bg);
 
       &.error {
-        outline: 1px solid var(--danger-500-color);
+        outline: 1px solid var(--danger-700-color);
       }
     }
 
@@ -57,7 +57,7 @@
     }
 
     &:focus-within.error {
-      outline: 1px solid var(--danger-500-color);
+      outline: 1px solid var(--danger-700-color);
     }
 
     .input {
@@ -114,6 +114,6 @@
 
   .message {
     font-size: 14px;
-    color: var(--danger-500-color);
+    color: var(--danger-700-color);
   }
 }
