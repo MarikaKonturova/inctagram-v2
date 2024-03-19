@@ -51,11 +51,13 @@ export const PostCards: FC<Props> = ({ userData }) => {
   const handleClick = (direction: 'back' | 'next') => {
     if (direction === 'back' && currentIndex > 0) {
       setCurrentIndex(currentIndex - 1)
-      router.replace(`${router.route}?postId=${idsArray[currentIndex] + 1}`)
+      router.query.postId = String(idsArray[currentIndex] + 1)
     } else if (direction === 'next' && currentIndex < idsArray.length - 1) {
       setCurrentIndex(currentIndex + 1)
-      router.replace(`${router.route}?postId=${idsArray[currentIndex] - 1}`)
+      router.query.postId = String(idsArray[currentIndex] - 1)
     }
+
+    router.push(router)
   }
 
   const renderContent = (page: ResponseType) =>
@@ -65,7 +67,8 @@ export const PostCards: FC<Props> = ({ userData }) => {
       const onPostCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation()
         setPostId(item.id)
-        router.replace(`${router.route}?postId=${item.id}`)
+        router.query.postId = String(item.id)
+        router.push(router)
         openModal(MODALS.GetPostModal)
       }
 
@@ -95,7 +98,10 @@ export const PostCards: FC<Props> = ({ userData }) => {
   const closeModal = () => {
     setCurrentModal(null)
     setCurrentIndex(foundIndex)
-    router.replace(`${router.route}`)
+    if (router.query.postId) {
+      delete router.query.postId
+      router.push(router, undefined, { shallow: true })
+    }
   }
 
   const openEditPostModal = () => {
