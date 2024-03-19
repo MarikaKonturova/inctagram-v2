@@ -17,7 +17,7 @@ export const Description: FC<PropsType> = ({ post }) => {
       <div className={cls.content}>
         <p className={cls.info}>
           <span className={cls.userName}>{post.userName}</span>
-          <span>{post.description}</span>
+          <span className={cls.title}>{post.description}</span>
         </p>
         <CreationDate date={post.updatedAt} type={'agoTime'} />
       </div>
