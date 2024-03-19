@@ -5,6 +5,7 @@ import { LikeStatus } from 'shared/types/likeStatus'
 import { ActionIcon } from 'shared/ui'
 
 import { useLikeAnswer } from '../../model/useLikeAnswer'
+import styles from './LikeAnswerIcon.module.scss'
 
 interface likeAnswerType {
   answerId: number
@@ -30,7 +31,7 @@ export const LikeAnswerIconButton: FC<likeAnswerType> = ({
       initialState={isLiked}
       isLoading={isLoading}
       onClick={onLikeIconClick}
-      outlineIcon={<IconLikeOutline fill={'#ffffff'} />}
+      outlineIcon={<IconLikeOutline className={styles.outLine} />}
     />
   )
 }
