@@ -36,6 +36,8 @@ export const SearchPage = () => {
     }
   }, [inView, hasNextPage])
 
+  console.log(usersData)
+
   return (
     <div className={cls.searchPage}>
       <h2 className={cls.title}> {tr('search')} </h2>
@@ -47,12 +49,16 @@ export const SearchPage = () => {
         type={'search'}
         value={searchUserValue}
       />
-      <p className={cls.titleList}>{'Recent requests'} </p>
-      {isUsersLoading && (
+      {usersData && usersData.length > 0 && !isUsersLoading && (
+        <p className={cls.titleList}>Recent requests</p>
+      )}
+      {usersData && usersData.length == 0 && <p className={cls.noResults}>No results found</p>}
+
+      {/*    {isUsersLoading && (
         <div className={cls.loader}>
           <Loader />
         </div>
-      )}
+      )}*/}
       <div className={cls.usersList}>
         {!debounceSearchUserValue && (
           <div className={cls.emptyList}>

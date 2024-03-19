@@ -10,6 +10,8 @@ export const useGetSearchUsers = (searchUser: string) => {
       ['postComments', searchUser],
       ({ pageParam = 1 }) => UsersService.getSearchUsers(searchUser, pageParam),
       {
+        enabled: !!searchUser,
+
         getNextPageParam: lastPage => {
           return lastPage.page < lastPage.pagesCount ? lastPage.page + 1 : undefined
         },
