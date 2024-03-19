@@ -66,13 +66,19 @@ export const SearchPage = () => {
               <div className={cls.userCard} key={user.id}>
                 <div className={cls.userBlock}>
                   <p className={cls.userName}>
-                    <Image
-                      alt={user.userName}
-                      className={cls.userAvatar}
-                      height={50}
-                      src={user.avatars?.medium?.url || userPhoto}
-                      width={50}
-                    />
+                    <Link
+                      href={{
+                        pathname: `${AppRoutes.PROFILE.PROFILE}/${user.userName}`,
+                      }}
+                    >
+                      <Image
+                        alt={user.userName}
+                        className={cls.userAvatar}
+                        height={50}
+                        src={user.avatars?.medium?.url || userPhoto}
+                        width={50}
+                      />
+                    </Link>
                     <div className={cls.userInfoBox}>
                       <Link
                         href={{
