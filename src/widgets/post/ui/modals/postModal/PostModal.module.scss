@@ -7,6 +7,7 @@
 .rightBlock {
   display: flex;
   flex-direction: column;
+  border: 1px solid var(--modal-100-color);
   width: 50%;
   background: var(--modal-300-color);
 }
@@ -17,8 +18,7 @@
   justify-content: space-between;
 
   padding: 10px 20px;
-
-  border: 1px solid var(--modal-100-color);
+  border-bottom: 1px solid var(--modal-100-color);
 }
 
 .content {
@@ -27,7 +27,8 @@
 
 .bottomSection {
   padding: 0 20px;
-  border: 1px solid var(--modal-100-color);
+  border-top: 1px solid var(--modal-100-color);
+  border-bottom: 1px solid var(--modal-100-color);
 }
 
 .wrapper {

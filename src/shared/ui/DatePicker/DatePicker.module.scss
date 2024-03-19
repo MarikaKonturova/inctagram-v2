@@ -86,7 +86,7 @@
     }
 
     &:global(.react-datepicker__day--weekend) {
-      color: var(--danger-300-color);
+      color: var(--danger-500-color);
     }
 
     &:global(.react-datepicker__day--outside-month) {
@@ -105,20 +105,20 @@
 // error
 
 .calendarContainerError {
-  border: 1px solid var(--danger-500-color);
+  border: 1px solid var(--danger-700-color);
 }
 
 .libCalendarError {
-  color: var(--danger-500-color);
+  color: var(--danger-700-color);
 }
 
 .errorBlockInfo {
   display: flex;
   gap: 1px;
   align-items: flex-end;
-  color: var(--danger-500-color);
+  color: var(--danger-700-color);
 
   a {
-    color: var(--danger-500-color);
+    color: var(--danger-700-color);
   }
 }

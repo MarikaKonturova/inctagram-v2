@@ -38,7 +38,7 @@ export const PostModal: React.FC<IProps> = props => {
     <Modal id={id} isOpen={isOpen} onClose={handleClose} withHeader={false} withStyles={false}>
       <div className={cls.container}>
         <div className={cls.closeIconContainer} onClick={handleClose}>
-          <CloseIcon fill={fill} />
+          <CloseIcon fill={'#ffffff'} />
         </div>
         {!isPublic && (
           <button
