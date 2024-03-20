@@ -26,10 +26,21 @@
         background: var(--button-300-color);
         color: var(--light-300-color);
       }
+      .buttonWrapper{
+        display: flex;
+        gap: 15px;
+      }
 
       .buttonPrimary {
         padding: 6px 36px;
         background: var(--primary-500-color);
+      }
+
+      .buttonOutlined {
+        padding: 6px 36px;
+        background: var(--dark-700-color);
+        outline: 2px solid var(--primary-500-color);
+        color: var(--primary-500-color);
       }
 
       .buttonSecondary {

@@ -54,19 +54,25 @@ export const ProfileMainInfo: FC<PropsType> = ({ page, userData }) => {
     void router.push(AppRoutes.PROFILE.SETTINGS)
   }
   const onClick = () => {
-    alert('Заглушка')
+    alert('Заглушка222')
   }
 
   const userButton = (
-    <div>
-      <Button className={cls.buttonPrimary} onClick={onClick}>
-        {t('sendMessage')}
+    <div className={cls.buttonWrapper}>
+      <Button
+        className={userData && userData.isFollowing ? cls.buttonOutlined : cls.buttonPrimary}
+        onClick={onClick}
+        type={'button'}
+      >
+        {userData && userData.isFollowing ? `${t('unfollow')}` : `${t('follow')}`}
       </Button>
       <Button className={cls.buttonSecondary} onClick={onClick}>
-        {t('follow')}
+        {t('sendMessage')}
       </Button>
     </div>
   )
+
+  console.log(userData?.isFollowing)
 
   const myButton = (
     <Button className={cls.button} onClick={onProfileSettingsClick}>
