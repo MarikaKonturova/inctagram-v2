@@ -20,23 +20,6 @@
         flex-direction: row;
         align-items: center;
       }
-
-      .button {
-        padding: 6px 36px;
-        background: var(--button-300-color);
-        color: var(--light-300-color);
-      }
-
-      .buttonPrimary {
-        padding: 6px 36px;
-        background: var(--primary-500-color);
-      }
-
-      .buttonSecondary {
-        margin-left: 15px;
-        padding: 6px 36px;
-        background: var(--button-600-color);
-      }
     }
 
     .info {

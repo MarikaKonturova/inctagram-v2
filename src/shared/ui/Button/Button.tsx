@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import React, { type ButtonHTMLAttributes, type ReactNode, memo } from 'react'
+import { BUTTON_VARIANTS } from 'shared/constants'
 
 import cls from './Button.module.scss'
 
@@ -9,7 +10,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
   disabled?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement>
-  theme?: 'clear' | 'outline' | 'primary' | 'secondary' | 'textButton'
+  theme?: BUTTON_VARIANTS
 }
 
 export const Button = memo((props: ButtonProps) => {

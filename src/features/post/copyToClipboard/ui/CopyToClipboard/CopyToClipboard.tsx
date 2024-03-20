@@ -17,7 +17,6 @@ type PropsType = {
 
 export const CopyToClipboard: React.FC<PropsType> = props => {
   const onOpen = useSnackbar(state => state.onOpen)
-  const { t } = useTranslation('profile')
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff' + ''
 
@@ -37,15 +36,16 @@ export const CopyToClipboard: React.FC<PropsType> = props => {
         onOpen('Ошибка копирования URL', 'danger', 'right')
       })
   }
+  const { t } = useTranslation(['post'])
 
   return (
     <Menu.Item>
       {({ active }) => (
         <button className={clsx(cls.item)} onClick={copyUrl} type={'button'}>
           {active ? (
-            <IconCopy aria-hidden={'true'} fill={fill} />
-          ) : (
             <IconCopyOutline aria-hidden={'true'} fill={fill} />
+          ) : (
+            <IconCopy aria-hidden={'true'} fill={fill} />
           )}
           {t('copyLink')}
         </button>

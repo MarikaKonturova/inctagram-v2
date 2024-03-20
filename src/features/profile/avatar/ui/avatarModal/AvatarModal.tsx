@@ -23,7 +23,7 @@ const AVATAR_WIDTH = 222
 const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
 
 const AvatarDynamicImport = dynamic(
-  () => import('features/profile/avatar/ui/avatarModal/AvatarDynamicImport'),
+  () => import('features/profile/avatar/ui/AvatarModal/AvatarDynamicImport'),
   { ssr: false }
 )
 
