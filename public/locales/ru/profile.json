@@ -58,8 +58,8 @@
     "writeYourDescriptionHere": "Добавьте описание публикации...",
     "maxLengthDescription": "Описание не должно превышать 500 знаков",
     "location": "Местоположение",
-    "subscribe": "Subscribe",
-    "unsubscribe": "Unsubscribe",
+    "subscribe": "Подписаться",
+    "unsubscribe": "Отписаться",
     "areYouSureYouWantToDeletePost": "Вы действительно хотите удалить публикацию?",
     "yes": "Да",
     "no": "Нет",
@@ -83,5 +83,6 @@
     "show": "Показать",
     "onPage": "на странице",
     "sendMessage": "Отправить сообщение",
-    "openDraft": "Загрузить черновик"
+    "openDraft": "Загрузить черновик",
+    "copyLink": "Копировать ссылку"
 }

@@ -11,14 +11,16 @@ import { useSubscribeOrUnsubscribe } from '../../model'
 import cls from './SubscribeOrUnsubscribeButton.module.scss'
 
 interface IProps {
-  userId: string
+  isFollowed?: boolean
+  userId: number
+  userName?: string
 }
 
-export const SubscribeOrUnsubscribeButton: FC<IProps> = ({ userId }) => {
+export const SubscribeOrUnsubscribeButton: FC<IProps> = ({ isFollowed, userId, userName }) => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
   const { t } = useTranslation('profile')
-  const { subscribeOrUnsubscribe } = useSubscribeOrUnsubscribe(userId)
+  const { subscribeOrUnsubscribe } = useSubscribeOrUnsubscribe(userId, userName, isFollowed)
 
   const onUnsubscribePersonClick = useCallback(async () => {
     subscribeOrUnsubscribe()

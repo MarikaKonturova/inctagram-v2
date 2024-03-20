@@ -80,6 +80,9 @@
     "SEMI_ANNUALLY": "6 months",
     "YEARLY": "1 year",
     "show": "Show",
+    "copyLink": "Copy Link",
+    "subscribe": "Subscribe",
+    "unsubscribe": "Unsubscribe",
     "onPage": "on page",
     "openDraft": "Open Draft"
 }

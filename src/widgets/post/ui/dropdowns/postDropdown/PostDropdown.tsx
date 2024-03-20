@@ -2,8 +2,8 @@ import { CopyToClipboard, Report, SubscribeOrUnsubscribeButton } from 'features/
 import { MoreOptions } from 'shared/ui'
 
 interface PostDropdownProps {
-  postId: string
-  userId: string
+  postId: number
+  userId: number
 }
 
 export const PostDropdown = ({ postId, userId, ...restProps }: PostDropdownProps) => (
@@ -12,7 +12,7 @@ export const PostDropdown = ({ postId, userId, ...restProps }: PostDropdownProps
       <>
         <SubscribeOrUnsubscribeButton userId={userId} />
         <Report />
-        <CopyToClipboard />
+        {/*<CopyToClipboard />*/}
       </>
     }
   />
