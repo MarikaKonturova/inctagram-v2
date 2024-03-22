@@ -1,10 +1,9 @@
 import { useGetUserProfileData } from 'entities/Profile'
 import { FollowingAndFollowersModal } from 'features/profile'
-import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, ReactNode, useEffect, useState } from 'react'
 import BusinessLogo from 'shared/assets/icons/general/business-logo.svg'
-import { AppRoutes } from 'shared/constants/path'
+import { BUTTON_VARIANTS } from 'shared/constants'
 import { ProfileDataModel } from 'shared/types/auth'
 import { AvatarSizes } from 'shared/types/post'
 import { Avatar, Button } from 'shared/ui'
@@ -12,16 +11,16 @@ import { Avatar, Button } from 'shared/ui'
 import cls from './ProfileMainInfo.module.scss'
 
 type PropsType = {
-  page: 'myProfile' | 'userProfile'
+  actionsSlot: ReactNode
   userData?: ProfileDataModel
 }
 
-export const ProfileMainInfo: FC<PropsType> = ({ page, userData }) => {
+export const ProfileMainInfo: FC<PropsType> = ({ actionsSlot, userData }) => {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [mode, setMode] = useState<'followers' | 'following'>('followers')
   const [followingCount, setFollowingCount] = useState<number | undefined>(userData?.followingCount)
   const { data } = useGetUserProfileData(userData?.userName ?? '')
-  const router = useRouter()
+
   const { t } = useTranslation('profile')
   const userNameData = data?.data
 
@@ -50,30 +49,6 @@ export const ProfileMainInfo: FC<PropsType> = ({ page, userData }) => {
     })
   }
 
-  const onProfileSettingsClick = () => {
-    void router.push(AppRoutes.PROFILE.SETTINGS)
-  }
-  const onClick = () => {
-    alert('Заглушка')
-  }
-
-  const userButton = (
-    <div>
-      <Button className={cls.buttonPrimary} onClick={onClick}>
-        {t('sendMessage')}
-      </Button>
-      <Button className={cls.buttonSecondary} onClick={onClick}>
-        {t('follow')}
-      </Button>
-    </div>
-  )
-
-  const myButton = (
-    <Button className={cls.button} onClick={onProfileSettingsClick}>
-      {t('settings')}
-    </Button>
-  )
-
   useEffect(() => {
     setFollowingCount(userData?.followingCount)
   }, [userData])
@@ -88,14 +63,14 @@ export const ProfileMainInfo: FC<PropsType> = ({ page, userData }) => {
           <div className={cls.userName}>
             {userName} {userNameData?.hasBusinessAccount ? <BusinessLogo /> : ''}
           </div>
-          {page === 'myProfile' ? myButton : userButton}
+          {actionsSlot}
         </div>
         <div className={cls.info}>
-          <Button onClick={activateFollowingMode} theme={'clear'}>
+          <Button onClick={activateFollowingMode} theme={BUTTON_VARIANTS.CLEAR}>
             <div className={cls.subscribe}>{followingCount}</div>
             <div className={cls.subscribeTitle}>{t('subscriptions')}</div>
           </Button>
-          <Button onClick={activateFollowersMode} theme={'clear'}>
+          <Button onClick={activateFollowersMode} theme={BUTTON_VARIANTS.CLEAR}>
             <div className={cls.subscribe}>{followersCount}</div>
             <div className={cls.subscribeTitle}>{t('subscribers')}</div>
           </Button>

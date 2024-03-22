@@ -26,6 +26,4 @@ export { Report } from './report/ui/Report/Report'
 
 export { SharePostIconButton } from './sharePost/ui/SharePostIconButton/SharePostIconButton'
 
-export { SubscribeOrUnsubscribeButton } from './subscribeOrUnsubscribe/ui/SubscribeOrUnsubscribeButton/SubscribeOrUnsubscribeButton'
-
 export { UpdateMyPostButton } from './updateMyPost/ui/UpdateMyPostButton/UpdateMyPostButton'

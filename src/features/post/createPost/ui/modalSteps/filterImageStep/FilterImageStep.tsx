@@ -3,6 +3,7 @@ import { FilterImage, Filters } from 'features/post/createPost/ui/components'
 import { useTranslation } from 'next-i18next'
 import { useState } from 'react'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
+import { BUTTON_VARIANTS } from 'shared/constants'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
 import { SwiperApp } from 'shared/lib/swiper'
@@ -38,7 +39,7 @@ export const FilterImageStep = ({ onNextClick, onPrevClick }: IProps) => {
       <header className={cls.header}>
         <IconArrowBack fill={fill} onClick={onPrevClick} />
         <h2>{t('filter')}</h2>
-        <Button onClick={onNextClick} theme={'textButton'}>
+        <Button onClick={onNextClick} theme={BUTTON_VARIANTS.TEXTBUTTON}>
           {t('next')}
         </Button>
       </header>

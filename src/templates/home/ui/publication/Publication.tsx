@@ -1,7 +1,8 @@
 import clsx from 'clsx'
 import { CreationDate, Header, LikesInfo } from 'entities/Post'
 import { Description } from 'entities/Publication'
-import { AddCommentBox, CopyToClipboard, SubscribeOrUnsubscribeButton } from 'features/post'
+import { AddCommentBox, CopyToClipboard } from 'features/post'
+import { FollowAndUnfollowMenuItemButton } from 'features/profile'
 import Image, { type ImageProps } from 'next/image'
 import { useTranslation } from 'next-i18next'
 import React, { useState } from 'react'
@@ -51,8 +52,8 @@ export const Publication: React.FC<PropsType> = props => {
         <MoreOptions
           content={
             <>
-              <SubscribeOrUnsubscribeButton
-                isFollowed={publ.isFollowedBy}
+              <FollowAndUnfollowMenuItemButton
+                isFollowing={publ.isFollowedBy}
                 userId={publ.ownerId}
                 userName={publ.userName}
               />

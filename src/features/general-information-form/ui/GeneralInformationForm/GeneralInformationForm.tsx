@@ -1,5 +1,6 @@
 import { useTranslation } from 'next-i18next'
 import { type FC, useEffect } from 'react'
+import { BUTTON_VARIANTS } from 'shared/constants'
 import { type ProfileDataModel } from 'shared/types/auth'
 import { Button } from 'shared/ui'
 import { getInitialValues } from 'shared/utils/getInitialValues'
@@ -52,7 +53,12 @@ export const GeneralInformationForm: FC<IProps> = ({ userData }) => {
         />
       </div>
       <hr className={cls.line} />
-      <Button className={cls.button} disabled={!isDirty} theme={'primary'} type={'submit'}>
+      <Button
+        className={cls.button}
+        disabled={!isDirty}
+        theme={BUTTON_VARIANTS.PRIMARY}
+        type={'submit'}
+      >
         {t('saveChanges')}
       </Button>
     </form>

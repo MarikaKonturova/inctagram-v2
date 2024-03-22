@@ -2,6 +2,7 @@ import {CreationDate} from 'entities/Post/ui/CreationDate/CreationDate';
 import { useTranslation } from "next-i18next";
 import React, {useEffect, useRef, useState} from 'react';
 import userPhoto from 'shared/assets/images/user.png'
+import { BUTTON_VARIANTS } from 'shared/constants';
 import {AvatarSizes, PostResponse} from 'shared/types/post';
 import {Avatar, Button, Card, Title} from 'shared/ui';
 
@@ -64,13 +65,13 @@ export const PublicPost = ({ openModal, post }: PublicPostProps) => {
 
       {(height > 24) && hidden && (
         <div className={cls.buttonWrapper}>...
-          <Button className={cls.button} onClick={showMoreText} theme={'clear'} >{t('showMore')}</Button>
+          <Button className={cls.button} onClick={showMoreText} theme={BUTTON_VARIANTS.CLEAR} >{t('showMore')}</Button>
         </div>
       )}
 
       {!hidden && (
         <div className={cls.buttonWrapper}>...
-          <Button className={cls.button} onClick={hideText} theme={'clear'} >{t('hide')}</Button>
+          <Button className={cls.button} onClick={hideText} theme={BUTTON_VARIANTS.CLEAR} >{t('hide')}</Button>
         </div>
       )}
     </div>

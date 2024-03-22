@@ -1,18 +1,24 @@
-import { CopyToClipboard, Report, SubscribeOrUnsubscribeButton } from 'features/post'
+import { Report } from 'features/post'
+import { FollowAndUnfollowMenuItemButton } from 'features/profile'
 import { MoreOptions } from 'shared/ui'
 
 interface PostDropdownProps {
+  isFollowing: boolean
   postId: number
   userId: number
+  userName: string
 }
 
-export const PostDropdown = ({ postId, userId, ...restProps }: PostDropdownProps) => (
+export const PostDropdown = ({ isFollowing, postId, userId, userName }: PostDropdownProps) => (
   <MoreOptions
     content={
       <>
-        <SubscribeOrUnsubscribeButton userId={userId} />
+        <FollowAndUnfollowMenuItemButton
+          isFollowing={isFollowing}
+          userId={userId}
+          userName={userName}
+        />
         <Report />
-        {/*<CopyToClipboard />*/}
       </>
     }
   />
