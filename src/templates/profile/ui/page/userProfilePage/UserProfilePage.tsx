@@ -34,13 +34,13 @@ export const UserProfilePage = () => {
   )
 
   const userActions = (
-    <div>
-      <SendMessageButton />
+    <div className={cls.actionsWrapper}>
       <FollowAndUnfollowButton
         isFollowing={userData?.isFollowing}
         userId={userData?.id}
         userName={userData?.userName}
       />
+      <SendMessageButton />
     </div>
   )
 

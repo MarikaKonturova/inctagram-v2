@@ -10,3 +10,8 @@
   color: var(--light-300-color);
   background: var(--button-300-color);
 }
+
+.actionsWrapper {
+  display: flex;
+  gap: 15px;
+}
