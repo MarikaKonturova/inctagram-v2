@@ -4,6 +4,7 @@ import { Translation } from 'next-i18next'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import userPhoto from 'shared/assets/images/user.png'
+import { BUTTON_VARIANTS } from 'shared/constants'
 import { Button, Card, ConfirmationModal, Modal, Textarea } from 'shared/ui'
 
 import { useEditPost } from '../model'
@@ -88,7 +89,12 @@ export function EditPostModal({ handleClose, id, isOpen, postId }: IProps) {
                   textareaClassName={cls.textarea}
                 />
               </div>
-              <Button className={cls.button} disabled={!isValid} theme={'primary'} type={'submit'}>
+              <Button
+                className={cls.button}
+                disabled={!isValid}
+                theme={BUTTON_VARIANTS.PRIMARY}
+                type={'submit'}
+              >
                 {t('saveChanges', { ns: 'profile' })}
               </Button>
             </div>

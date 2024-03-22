@@ -3,26 +3,31 @@ import { useTranslation } from 'next-i18next'
 import { ProfileService } from 'shared/api'
 import { useSnackbar } from 'shared/hooks'
 
-export const useSubscribeOrUnsubscribe = (
-  selectedUserId: number,
-  userName: string | undefined,
-  isFollowed: boolean | undefined
-) => {
+interface ParamsType {
+  isFollowing: boolean
+  userId: number
+  userName: string
+}
+
+export const useSubscribeOrUnsubscribe = ({ isFollowing, userId, userName }: ParamsType) => {
   const { t } = useTranslation('profile')
   const onOpen = useSnackbar(state => state.onOpen)
   const queryClient = useQueryClient()
+
   const { mutate: subscribeOrUnsubscribe } = useMutation({
-    mutationFn: () => ProfileService.subscribeOrUnsubscribe(selectedUserId),
+    mutationFn: () => ProfileService.subscribeOrUnsubscribe(userId),
     onError: () => {
       onOpen('Error while toggling follow/unfollow', 'danger', 'right')
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries(['publicationsData'])
       onOpen(
-        `${isFollowed ? t('youHaveUnfollowed') : t('youHaveFollowed')} ${userName}!`,
+        `${isFollowing ? t('youHaveUnfollowed') : t('youHaveFollowed')} ${userName}!`,
         'success',
         'right'
       )
+      await queryClient.invalidateQueries(['publicationsData'])
+      await queryClient.invalidateQueries(['getProfileData'])
+      await queryClient.invalidateQueries(['userByName'])
     },
   })
 

@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
+import { BUTTON_VARIANTS } from 'shared/constants'
 import { Button, Portal } from 'shared/ui'
 
 import { useSnackbar } from '../../hooks/useSnackbar'
@@ -50,7 +51,7 @@ export const SnackBar = (props: SnackBarProps) => {
       {isOpen && (
         <div className={clsx(cls.container, cls[type], cls[position], { [cls.close]: close })}>
           <p>{message}</p>
-          <Button className={clsx(cls.button)} onClick={handleClose} theme={'clear'}>
+          <Button className={clsx(cls.button)} onClick={handleClose} theme={BUTTON_VARIANTS.CLEAR}>
             X
           </Button>
         </div>

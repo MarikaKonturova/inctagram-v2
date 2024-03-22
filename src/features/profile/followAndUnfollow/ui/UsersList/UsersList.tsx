@@ -1,8 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import React, { FC, ReactNode } from 'react'
 import userPhoto from 'shared/assets/images/user.png'
+import { BUTTON_VARIANTS } from 'shared/constants'
 import { AppRoutes } from 'shared/constants/path'
 import { useSnackbar } from 'shared/hooks'
 import { User } from 'shared/types/auth'
@@ -15,6 +17,7 @@ type PropsType = {
   debounceSearchUserValue: string
   fetchDataName: string
   followingCount: number
+  onClose: () => void
   onFollowingChange?: (action: 'follow' | 'unfollow') => void
   setCount: (count: number) => void
   usersData: User[]
@@ -24,12 +27,14 @@ export const UsersList: FC<PropsType> = ({
   debounceSearchUserValue,
   fetchDataName,
   followingCount,
+  onClose,
   onFollowingChange,
   setCount,
   usersData,
 }) => {
   const onOpen = useSnackbar(state => state.onOpen)
   const { t } = useTranslation('profile')
+  const router = useRouter()
 
   const toggleFollowUser = useToggleFollowUser(debounceSearchUserValue)
   const handleToggleFollow = (user: User) => {
@@ -57,13 +62,19 @@ export const UsersList: FC<PropsType> = ({
       {usersData?.map((user: User) => {
         const toggleHandler = () => handleToggleFollow(user)
 
+        const navigateToUsersPage = () => {
+          router.push(`${AppRoutes.PROFILE.PROFILE}/${user.userName}`)
+          onClose()
+        }
+
         return (
           <div className={cls.userCard} key={user.id}>
             <div className={cls.rightBlock}>
-              <Link
-                href={{
-                  pathname: `${AppRoutes.PROFILE.PROFILE}/${user.userName}`,
-                }}
+              <Button
+                className={cls.navigateButton}
+                onClick={navigateToUsersPage}
+                theme={BUTTON_VARIANTS.CLEAR}
+                type={'button'}
               >
                 <Image
                   alt={user.userName}
@@ -72,16 +83,8 @@ export const UsersList: FC<PropsType> = ({
                   src={user.avatars?.medium?.url || userPhoto}
                   width={50}
                 />
-              </Link>
-              <p className={cls.userName}>
-                <Link
-                  href={{
-                    pathname: `${AppRoutes.PROFILE.PROFILE}/${user.userName}`,
-                  }}
-                >
-                  {user.userName}
-                </Link>
-              </p>
+                {user.userName}
+              </Button>
             </div>
             <div className={cls.leftBlock}>
               {fetchDataName === 'following' && (
@@ -98,7 +101,11 @@ export const UsersList: FC<PropsType> = ({
                   >
                     {t('follow')}
                   </Button>
-                  <Button className={cls.deleteButton} theme={'secondary'} type={'button'}>
+                  <Button
+                    className={cls.deleteButton}
+                    theme={BUTTON_VARIANTS.SECONDARY}
+                    type={'button'}
+                  >
                     {t('delete')}
                   </Button>
                 </>

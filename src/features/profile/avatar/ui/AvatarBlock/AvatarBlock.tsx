@@ -2,6 +2,7 @@ import { AvatarModal, useDeleteAvatar } from 'features/profile/avatar'
 import { useTranslation } from 'next-i18next'
 import React, { useEffect, useState } from 'react'
 import CloseIcon from 'shared/assets/icons/general/close.svg'
+import { BUTTON_VARIANTS } from 'shared/constants'
 import { type AvatarPostModel, AvatarSizes } from 'shared/types/post'
 import { Avatar, Button, ConfirmationModal } from 'shared/ui'
 
@@ -53,7 +54,7 @@ export const AvatarBlock = ({ avatars }: { avatars: AvatarPostModel | null | und
           <Avatar size={AvatarSizes.large} src={avatar} />
         )}
       </div>
-      <Button onClick={addProfilePhotoClick} theme={'outline'} type={'button'}>
+      <Button onClick={addProfilePhotoClick} theme={BUTTON_VARIANTS.OUTLINE} type={'button'}>
         {t('addProfilePhoto')}
       </Button>
     </div>

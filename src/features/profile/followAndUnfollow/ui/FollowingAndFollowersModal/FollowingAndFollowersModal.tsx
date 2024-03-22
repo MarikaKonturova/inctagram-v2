@@ -5,7 +5,7 @@ import { useDebounce } from 'shared/hooks'
 import { Input, Loader, Modal, Pagination } from 'shared/ui'
 
 import { useGetUsers } from '../../model'
-import { UsersList } from '../usersList/UsersList'
+import { UsersList } from '../UsersList/UsersList'
 import styles from './FollowingAndFollowersModal.module.scss'
 
 interface PropsType {
@@ -38,7 +38,7 @@ export const FollowingAndFollowersModal: React.FC<PropsType> = props => {
     refetch,
   } = useGetUsers(debounceSearchUserValue, currentUserName || '', fetchDataName, count, currentPage)
 
-  const followingCount = usersData?.totalCount
+  const followingCount = usersData?.totalCount || 0
 
   const title = fetchDataName === 'following' ? `${t('subscriptions')}` : `${t('subscribers')}`
 
@@ -74,6 +74,7 @@ export const FollowingAndFollowersModal: React.FC<PropsType> = props => {
         debounceSearchUserValue={debounceSearchUserValue}
         fetchDataName={fetchDataName}
         followingCount={followingCount}
+        onClose={onClose}
         onFollowingChange={onFollowingChange}
         setCount={setCount}
         usersData={usersData?.items}
