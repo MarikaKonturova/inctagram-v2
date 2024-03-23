@@ -5,10 +5,14 @@
 
   .rightBlock {
     margin-left: 5px;
-
+    max-width: 445px;
     .headerTitle {
       margin-right: 12px;
       font-weight: bold;
+    }
+
+    .title {
+      overflow-wrap: break-word;
     }
 
     .lessMore {
