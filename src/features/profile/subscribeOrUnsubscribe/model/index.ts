@@ -17,13 +17,13 @@ export const useSubscribeOrUnsubscribe = ({ isFollowing, userId, userName }: Par
   const { mutate: subscribeOrUnsubscribe } = useMutation({
     mutationFn: () => ProfileService.subscribeOrUnsubscribe(userId),
     onError: () => {
-      onOpen('Error while toggling follow/unfollow', 'danger', 'right')
+      onOpen('Error while toggling follow/unfollow', 'danger', 'left')
     },
     onSuccess: async () => {
       onOpen(
         `${isFollowing ? t('youHaveUnfollowed') : t('youHaveFollowed')} ${userName}!`,
         'success',
-        'right'
+        'left'
       )
       await queryClient.invalidateQueries(['publicationsData'])
       await queryClient.invalidateQueries(['getProfileData'])
