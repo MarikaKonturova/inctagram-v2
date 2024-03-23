@@ -23,13 +23,10 @@
       gap: 12px;
       align-items: center;
 
-      .userName {
-        flex-grow: 1;
-
-        a {
-          color: inherit;
-          text-decoration: inherit;
-        }
+      .navigateButton {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
       }
 
       .userAvatar {

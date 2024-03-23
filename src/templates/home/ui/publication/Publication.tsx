@@ -1,13 +1,14 @@
 import clsx from 'clsx'
 import { CreationDate, Header, LikesInfo } from 'entities/Post'
 import { Description } from 'entities/Publication'
-import { AddCommentBox } from 'features/post'
+import { AddCommentBox, CopyToClipboard } from 'features/post'
+import { FollowAndUnfollowMenuItemButton } from 'features/profile'
 import Image, { type ImageProps } from 'next/image'
 import { useTranslation } from 'next-i18next'
 import React, { useState } from 'react'
 import userPhoto from 'shared/assets/images/user.png'
 import { PostResponse } from 'shared/types/post'
-import { Skeleton } from 'shared/ui'
+import { MoreOptions, Skeleton } from 'shared/ui'
 import { Commentaries } from 'widgets/commentaries'
 import { PostActions } from 'widgets/post'
 
@@ -40,12 +41,26 @@ export const Publication: React.FC<PropsType> = props => {
   }
 
   return (
-    <div className={clsx(cls.container)}>
+    <div className={clsx(cls.container)} id={publ.id.toString()}>
       {isLoaded && <Skeleton />}
       <div className={cls.header}>
-        <Header avatarURL={publ.avatars?.medium.url || userPhoto.src} title={publ.userName} />
-        <div className={cls.bullet}>•</div>
-        <CreationDate date={createdAt} type={'agoTime'} />
+        <div className={cls.headerBox}>
+          <Header avatarURL={publ.avatars?.medium.url || userPhoto.src} title={publ.userName} />
+          <span className={cls.bullet}>•</span>
+          <CreationDate date={createdAt} type={'agoTime'} />
+        </div>
+        <MoreOptions
+          content={
+            <>
+              <FollowAndUnfollowMenuItemButton
+                isFollowing={publ.isFollowedBy}
+                userId={publ.ownerId}
+                userName={publ.userName}
+              />
+              <CopyToClipboard publ={publ} />
+            </>
+          }
+        />
       </div>
       <Image
         alt={alt}

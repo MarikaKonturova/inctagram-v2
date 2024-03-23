@@ -58,6 +58,8 @@ export interface ProfileDataModel {
   followersCount: number
   followingCount: number
   id: number
+  isFollowedBy: boolean
+  isFollowing: boolean
   lastName: null | string
   publicationsCount: number
   userName: string

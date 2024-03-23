@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React, { type FC } from 'react'
 import ArrowBackOutlineIcon from 'shared/assets/icons/outline/arrow-back-outline.svg'
-import { AppRoutes } from 'shared/constants/path'
+import { BUTTON_VARIANTS } from 'shared/constants'
 import { Button } from 'shared/ui'
 
 import cls from './LegalContent.module.scss'
@@ -18,7 +18,12 @@ export const LegalContent: FC<PropsType> = ({ content, label, title }) => {
 
   return (
     <div className={cls.rootContainer}>
-      <Button className={cls.button} onClick={goToBack} theme={'clear'} type={'button'}>
+      <Button
+        className={cls.button}
+        onClick={goToBack}
+        theme={BUTTON_VARIANTS.CLEAR}
+        type={'button'}
+      >
         <ArrowBackOutlineIcon className={cls.icon} />
         {label}
       </Button>

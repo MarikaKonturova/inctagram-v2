@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next'
 import { type ChangeEvent, useEffect, useState } from 'react'
 import IconClose from 'shared/assets/icons/general/close.svg'
 import IconImg from 'shared/assets/icons/light/image.svg'
+import { BUTTON_VARIANTS } from 'shared/constants'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
 import { ConvertedImageType, IImage, Nullable, PostImages } from 'shared/types/post'
@@ -116,7 +117,7 @@ export const ImageDownloadStep = ({ onDraftButtonClick, onNextClick, onPrevClick
     <div className={cls.modal}>
       <header className={cls.header}>
         <h2>{t('addPhoto')}</h2>
-        <Button onClick={onPrevClick} theme={'clear'}>
+        <Button onClick={onPrevClick} theme={BUTTON_VARIANTS.CLEAR}>
           <IconClose fill={fill} />
         </Button>
       </header>
@@ -137,7 +138,7 @@ export const ImageDownloadStep = ({ onDraftButtonClick, onNextClick, onPrevClick
           </div>
         </label>
         {imageDbCount > 0 && (
-          <Button onClick={onOpenDraftClick} theme={'outline'}>
+          <Button onClick={onOpenDraftClick} theme={BUTTON_VARIANTS.OUTLINE}>
             {t('openDraft')}
           </Button>
         )}

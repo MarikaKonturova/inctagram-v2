@@ -3,6 +3,7 @@ import { useCommentStore } from 'entities/Comment/model/useCommentStore'
 import { useTranslation } from 'next-i18next'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { BUTTON_VARIANTS } from 'shared/constants'
 import { Button, Input } from 'shared/ui'
 
 import { useCommentPost } from '../../model'
@@ -58,7 +59,7 @@ export const AddCommentBox = ({ className, postId }: AddCommentBoxProps) => {
       <Button
         className={clsx(cls.button)}
         onClick={handleSubmit(onAddCommentClick)}
-        theme={'textButton'}
+        theme={BUTTON_VARIANTS.TEXTBUTTON}
       >
         {t('publish')}
       </Button>

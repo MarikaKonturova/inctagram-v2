@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { useTranslation } from 'next-i18next'
 import React, { type Dispatch, type FC, type SetStateAction } from 'react'
+import { BUTTON_VARIANTS } from 'shared/constants'
 import { Button, Modal } from 'shared/ui'
 
 import cls from './ConfirmationModal.module.scss'
@@ -53,7 +54,7 @@ export const ConfirmationModal: FC<ConfirmationModalProps> = ({
             className={cls.button}
             disabled={isDisabled}
             onClick={onYesClickAction}
-            theme={'outline'}
+            theme={BUTTON_VARIANTS.OUTLINE}
             type={'button'}
           >
             {confirmText ?? `${t('yesConfirm')}`}

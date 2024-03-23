@@ -10,8 +10,8 @@ export const ProfileService = {
     return $api.get<ProfileDataModel>('/users/profile')
   },
 
-  subscribeOrUnsubscribe(userId: string) {
-    return $api.patch<ProfileDataModel>(`/users/${userId}/subscribe`)
+  subscribeOrUnsubscribe(selectedUserId: number) {
+    return $api.post('/users/following', { selectedUserId })
   },
 
   updateProfileData(body: Omit<ProfileDataModel, 'avatars' | 'id'>) {

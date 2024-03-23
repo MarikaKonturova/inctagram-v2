@@ -1,11 +1,13 @@
 import { useGetPosts } from 'entities/Home'
 import { Description, useGetMyPost } from 'entities/Post'
 import {
+  CopyToClipboard,
   DeleteMyPostButton,
   DeletePostModal,
   EditPostModal,
   UpdateMyPostButton,
 } from 'features/post'
+import { FollowAndUnfollowMenuItemButton } from 'features/profile'
 import { useRouter } from 'next/router'
 import React, { type FC, useEffect, useState } from 'react'
 import { MODALS, type Values } from 'shared/constants/post'
@@ -19,10 +21,11 @@ import { GetPostModal, PostModalActions } from 'widgets/post'
 import cls from './PostCards.module.scss'
 
 interface Props {
+  isMyProfile: boolean
   userData: ProfileDataModel
 }
 
-export const PostCards: FC<Props> = ({ userData }) => {
+export const PostCards: FC<Props> = ({ isMyProfile, userData }) => {
   const [currentModal, setCurrentModal] = useState<Values | null>(null)
   const [postId, setPostId] = useState<number>(0)
   const [isDelePostConfirmationModalOpen, setIsDelePostConfirmationModalOpen] = useState(false)
@@ -145,10 +148,21 @@ export const PostCards: FC<Props> = ({ userData }) => {
             headerActions={
               <MoreOptions
                 content={
-                  <>
-                    <UpdateMyPostButton openEditPostModal={openEditPostModal} />
-                    <DeleteMyPostButton openDeletePostModal={openDeletePostModal} />
-                  </>
+                  isMyProfile ? (
+                    <>
+                      <UpdateMyPostButton openEditPostModal={openEditPostModal} />
+                      <DeleteMyPostButton openDeletePostModal={openDeletePostModal} />
+                    </>
+                  ) : (
+                    <>
+                      <FollowAndUnfollowMenuItemButton
+                        isFollowing={userData.isFollowing}
+                        userId={userData.id}
+                        userName={userData.userName}
+                      />
+                      <CopyToClipboard publ={post} />
+                    </>
+                  )
                 }
               />
             }

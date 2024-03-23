@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next'
 import { type FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import IconArrowBack from 'shared/assets/icons/general/arrow-back.svg'
+import { BUTTON_VARIANTS } from 'shared/constants'
 import { Theme } from 'shared/constants/theme'
 import { useTheme } from 'shared/hooks/useTheme'
 import { SwiperApp } from 'shared/lib/swiper'
@@ -101,7 +102,7 @@ export const PublishPostStep: FC<IProps> = ({ onPrevClick, onSubmitSuccess }) =>
       <header className={cls.header}>
         <IconArrowBack fill={fill} onClick={onPrevClick} />
         <h2>{t('publication')}</h2>
-        <Button onClick={handleSubmit(onSubmit)} theme={'textButton'}>
+        <Button onClick={handleSubmit(onSubmit)} theme={BUTTON_VARIANTS.TEXTBUTTON}>
           {t('publish')}
         </Button>
       </header>

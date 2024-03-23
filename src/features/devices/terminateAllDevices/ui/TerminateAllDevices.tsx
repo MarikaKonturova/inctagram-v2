@@ -1,5 +1,6 @@
 import { useTranslation } from 'next-i18next'
 import React from 'react'
+import { BUTTON_VARIANTS } from 'shared/constants'
 import { Button } from 'shared/ui'
 
 import { useTerminateAllDevices } from '../model'
@@ -14,7 +15,7 @@ export const TerminateAllDevices = () => {
       className={cls.button}
       disabled={isDevicesLoading}
       onClick={onAllTerminate}
-      theme={'outline'}
+      theme={BUTTON_VARIANTS.OUTLINE}
       type={'button'}
     >
       {t('terminateAllOtherSession')}
