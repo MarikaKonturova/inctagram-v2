@@ -6,7 +6,6 @@ import { useTranslation } from 'next-i18next'
 import { useCallback } from 'react'
 import { type UseFormReset, type UseFormSetError } from 'react-hook-form'
 import { AuthService } from 'shared/api'
-import { AppRoutes } from 'shared/constants/path'
 import { useSnackbar } from 'shared/hooks'
 import { useModal } from 'shared/hooks/useModal'
 import { type UserError, type UserRegistrationModel } from 'shared/types/auth'
@@ -24,7 +23,8 @@ export const useRegistration = (
 ) => {
   const setEmail = useAuth(selectSetEmail)
   const email = useAuth(selectEmail)
-  const onOpen = useSnackbar(state => state.onOpen)
+
+  useSnackbar(state => state.onOpen)
   const { t } = useTranslation('validation')
   const { setIsOpen } = useModal()
 
@@ -54,7 +54,6 @@ export const useRegistration = (
 
       // FIX
       setError(error?.field as any, errorWithLocalization || {})
-      onOpen('Error', 'danger', 'left')
     },
     onSuccess: () => {
       setIsOpen(true)
