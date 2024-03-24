@@ -27,12 +27,7 @@ export const PasswordRecoveryForm = () => {
     validErrors: { emailError, recaptchaError },
   } = useValidationForm(['email', 'recaptcha'])
   const { theme } = useTheme()
-  const {
-    isInfoTextShown,
-    isLoading,
-    localizedError: error,
-    onSubmit,
-  } = useRecoverPassword(setValue)
+  const { isInfoTextShown, isLoading, localizedError: error, onSubmit } = useRecoverPassword()
 
   if (isLoading) {
     return <PageLoader />
@@ -66,9 +61,7 @@ export const PasswordRecoveryForm = () => {
 
       {error && <p className={cls.error}>{error[0].message}</p>}
 
-      {isInfoTextShown && !!getValues().recaptcha && (
-        <p className={cls.infoText}>{t('recoveryMessage')}</p>
-      )}
+      {isInfoTextShown && <p className={cls.infoText}>{t('recoveryMessage')}</p>}
       <Button
         className={cls.button}
         disabled={!isDisabledValidation || isLoading || !!emailError || !!recaptchaError}

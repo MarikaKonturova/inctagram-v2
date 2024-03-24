@@ -10,7 +10,7 @@ import { type UserError } from 'shared/types/auth'
 
 import { type PasswordRecoveryValidation } from '../ui/passwordRecoveryForm/PasswordRecoveryForm'
 
-export const useRecoverPassword = (setValue: any) => {
+export const useRecoverPassword = () => {
   const [isInfoTextShown, setIsInfoTextShown] = useState(false)
   const setEmail = useAuth(selectSetEmail)
   const { setIsOpen } = useModal()
@@ -22,9 +22,6 @@ export const useRecoverPassword = (setValue: any) => {
     mutate: passwordRecovery,
   } = useMutation<any, AxiosError<UserError>, any>({
     mutationFn: AuthService.passwordRecovery,
-    onSettled: () => {
-      setValue('recaptcha', '')
-    },
     onSuccess: async () => {
       setIsInfoTextShown(true)
       setIsOpen(true)
