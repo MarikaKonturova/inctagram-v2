@@ -22,11 +22,17 @@ export const PasswordRecoveryForm = () => {
     getValues,
     handleSubmit,
     register,
+    setError,
     setValue,
     validErrors: { emailError, recaptchaError },
   } = useValidationForm(['email', 'recaptcha'])
   const { theme } = useTheme()
-  const { isInfoTextShown, isLoading, localizedError: error, onSubmit } = useRecoverPassword()
+  const {
+    isInfoTextShown,
+    isLoading,
+    localizedError: error,
+    onSubmit,
+  } = useRecoverPassword(setValue)
 
   if (isLoading) {
     return <PageLoader />
@@ -38,6 +44,12 @@ export const PasswordRecoveryForm = () => {
       setValue('recaptcha', value)
       clearErrors('recaptcha')
     }
+  }
+
+  const onExpiredRecaptchaHandler = () => {
+    // @ts-ignore
+    setError('recaptcha', '')
+    setValue('recaptcha', '')
   }
 
   return (
@@ -54,8 +66,14 @@ export const PasswordRecoveryForm = () => {
 
       {error && <p className={cls.error}>{error[0].message}</p>}
 
-      {isInfoTextShown && <p className={cls.infoText}>{t('recoveryMessage')}</p>}
-      <Button className={cls.button} disabled={!isDisabledValidation || isLoading} type={'submit'}>
+      {isInfoTextShown && !!getValues().recaptcha && (
+        <p className={cls.infoText}>{t('recoveryMessage')}</p>
+      )}
+      <Button
+        className={cls.button}
+        disabled={!isDisabledValidation || isLoading || !!emailError || !!recaptchaError}
+        type={'submit'}
+      >
         {isInfoTextShown ? t('sendLinkAgain') : t('sendLink')}
       </Button>
       <AppLink active href={AppRoutes.AUTH.LOGIN}>
@@ -66,7 +84,7 @@ export const PasswordRecoveryForm = () => {
         className={cls.recaptcha}
         hl={i18next.language}
         onChange={getRecaptchaValueHandler}
-        onExpired={() => setValue('recaptcha', '')}
+        onExpired={onExpiredRecaptchaHandler}
         sitekey={`${process.env.RECAPTCHA_SITE_KEY as string}`}
         theme={theme === Theme.LIGHT ? 'light' : 'dark'}
       />
