@@ -19,6 +19,8 @@
   "close" : "Close",
   "more": "More",
   "less": "Less",
-  "copyLink": "Copy Link"
+  "copyLink": "Copy Link",
+  "copyUrlSuccess": "URL copied successfully",
+  "copyUrlUnSuccess": "Error copying URL"
 }
 

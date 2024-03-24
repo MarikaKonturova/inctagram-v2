@@ -19,5 +19,7 @@
   "close": "Закрытие",
   "more": "Развернуть",
   "less": "Скрыть",
-  "copyLink": "Копировать ссылку"
+  "copyLink": "Копировать ссылку",
+  "copyUrlSuccess": "URL скопирован успешно",
+  "copyUrlUnSuccess": "Ошибка копирования URL"
 }

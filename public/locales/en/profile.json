@@ -81,6 +81,8 @@
     "YEARLY": "1 year",
     "show": "Show",
     "copyLink": "Copy Link",
+    "copyUrlSuccess": "URL copied successfully",
+    "copyUrlUnSuccess": "Error copying URL",
     "subscribe": "Subscribe",
     "unsubscribe": "Unsubscribe",
     "onPage": "on page",

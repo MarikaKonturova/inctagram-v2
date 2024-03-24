@@ -84,5 +84,7 @@
     "onPage": "на странице",
     "sendMessage": "Отправить сообщение",
     "openDraft": "Загрузить черновик",
-    "copyLink": "Копировать ссылку"
+    "copyLink": "Копировать ссылку",
+    "copyUrlSuccess": "URL скопирован успешно",
+    "copyUrlUnSuccess": "Ошибка копирования URL"
 }
