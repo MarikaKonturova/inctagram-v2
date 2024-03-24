@@ -19,7 +19,7 @@ export const ProfileMainInfo: FC<PropsType> = ({ actionsSlot, userData }) => {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [mode, setMode] = useState<'followers' | 'following'>('followers')
   const [followingCount, setFollowingCount] = useState<number | undefined>(userData?.followingCount)
-  const { data } = useGetUserProfileData(userData?.userName ?? '')
+  const { data } = useGetUserProfileData<ProfileDataModel>(userData?.userName ?? '')
 
   const { t } = useTranslation('profile')
   const userNameData = data?.data

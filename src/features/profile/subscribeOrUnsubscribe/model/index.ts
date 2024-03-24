@@ -5,6 +5,7 @@ import { useSnackbar } from 'shared/hooks'
 
 interface ParamsType {
   isFollowing: boolean
+  onSuccessCallback?: () => void
   userId: number
   userName: string
 }

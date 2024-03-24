@@ -57,6 +57,7 @@ export interface ProfileDataModel {
   firstName: null | string
   followersCount: number
   followingCount: number
+  hasBusinessAccount: boolean
   id: number
   isFollowedBy: boolean
   isFollowing: boolean

@@ -11,12 +11,12 @@ import { PostCards } from 'templates/profile'
 import cls from './ProfilePage.module.scss'
 
 export const ProfilePage = () => {
+  const router = useRouter()
   const { response } = useGetProfileData()
   const userData = response?.data
   const { userId } = useAuth()
   const isMyProfile = userId === userData?.id
   const { t } = useTranslation('profile')
-  const router = useRouter()
 
   const onProfileSettingsClick = () => {
     void router.push(AppRoutes.PROFILE.SETTINGS)

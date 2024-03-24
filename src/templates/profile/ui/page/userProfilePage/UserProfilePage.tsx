@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { AppRoutes } from 'shared/constants/path'
+import { ProfileDataModel } from 'shared/types/auth'
 import { Button } from 'shared/ui'
 import { PostCards } from 'templates/profile'
 
@@ -16,7 +17,7 @@ export const UserProfilePage = () => {
   const userName: string =
     typeof router.query.userprofile === 'string' ? router.query.userprofile : ''
 
-  const { data } = useGetUserProfileData(userName)
+  const { data } = useGetUserProfileData<ProfileDataModel>(userName)
 
   const userData = data?.data
   const { userId } = useAuth()
@@ -36,11 +37,13 @@ export const UserProfilePage = () => {
   const userActions = (
     <div>
       <SendMessageButton />
-      <FollowAndUnfollowButton
-        isFollowing={userData?.isFollowing}
-        userId={userData?.id}
-        userName={userData?.userName}
-      />
+      {userData && (
+        <FollowAndUnfollowButton
+          isFollowing={userData.isFollowing}
+          userId={userData.id}
+          userName={userData.userName}
+        />
+      )}
     </div>
   )
 

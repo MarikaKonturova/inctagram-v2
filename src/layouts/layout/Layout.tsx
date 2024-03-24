@@ -12,16 +12,14 @@ const font = Inter({
   subsets: ['latin'],
 })
 
-interface LayoutProps extends PropsWithChildren {
-  withAuth?: boolean
-}
+interface LayoutProps extends PropsWithChildren {}
 
 export const Layout: NextPage<LayoutProps> = props => {
-  const { children, withAuth = false } = props
+  const { children } = props
 
   return (
     <div className={clsx(cls.layout, font.className)}>
-      <Header withAuth={withAuth} />
+      <Header />
       <main className={cls.main}>
         <Container>{children}</Container>
         <SnackBar />

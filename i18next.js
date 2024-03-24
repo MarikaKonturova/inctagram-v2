@@ -22,6 +22,7 @@ i18n
   .use(LanguageDetector) // detect user language
   .use(initReactI18next)
   .init({
+    debug: true,
     defaultNS: 'common',
     fallbackLng: 'en',
     interpolation: { escapeValue: false },

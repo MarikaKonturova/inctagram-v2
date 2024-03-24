@@ -34,37 +34,43 @@ export const PostModal: React.FC<IProps> = props => {
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
 
+  const closeButton = (
+    <div className={cls.closeIconContainer} onClick={handleClose}>
+      <CloseIcon fill={'#ffffff'} />
+    </div>
+  )
+
+  const previousArrowButton = !isPublic && (
+    <button
+      className={clsx(cls.backIconContainer, cls.iconContainer)}
+      onClick={() => handleClick && handleClick('back')}
+      style={{
+        visibility: !firstElement ? 'visible' : 'hidden',
+      }}
+    >
+      <ArrowForwardBackIcon fill={fill} />
+    </button>
+  )
+
+  const nextArrowButton = !isPublic && (
+    <button
+      className={clsx(cls.nextIconContainer, cls.iconContainer)}
+      onClick={() => handleClick && handleClick('next')}
+      style={{
+        visibility: !lastElement ? 'visible' : 'hidden',
+      }}
+    >
+      <ArrowForwardNextIcon fill={fill} />
+    </button>
+  )
+
   return (
     <Modal id={id} isOpen={isOpen} onClose={handleClose} withHeader={false} withStyles={false}>
       <div className={cls.container}>
-        <div className={cls.closeIconContainer} onClick={handleClose}>
-          <CloseIcon fill={'#ffffff'} />
-        </div>
-        {!isPublic && (
-          <button
-            className={clsx(cls.backIconContainer, cls.iconContainer)}
-            onClick={() => handleClick && handleClick('back')}
-            style={{
-              visibility: !firstElement ? 'visible' : 'hidden',
-            }}
-          >
-            <ArrowForwardBackIcon fill={fill} />
-          </button>
-        )}
-
+        {closeButton}
+        {previousArrowButton}
         {content}
-
-        {!isPublic && (
-          <button
-            className={clsx(cls.nextIconContainer, cls.iconContainer)}
-            onClick={() => handleClick && handleClick('next')}
-            style={{
-              visibility: !lastElement ? 'visible' : 'hidden',
-            }}
-          >
-            <ArrowForwardNextIcon fill={fill} />
-          </button>
-        )}
+        {nextArrowButton}
       </div>
     </Modal>
   )

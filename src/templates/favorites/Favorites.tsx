@@ -37,10 +37,10 @@ export const FavoritesPage = () => {
   const handleClick = (direction: 'back' | 'next') => {
     if (direction === 'back' && currentIndex > 0) {
       setCurrentIndex(currentIndex - 1)
-      router.query.postId = String(idsArray[currentIndex] + 1)
+      router.query.postId = String(idsArray[currentIndex - 1])
     } else if (direction === 'next' && currentIndex < idsArray.length - 1) {
       setCurrentIndex(currentIndex + 1)
-      router.query.postId = String(idsArray[currentIndex] - 1)
+      router.query.postId = String(idsArray[currentIndex + 1])
     }
 
     router.push(router)
