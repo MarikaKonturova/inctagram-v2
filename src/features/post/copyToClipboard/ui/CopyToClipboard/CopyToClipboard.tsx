@@ -17,26 +17,31 @@ type PropsType = {
 
 export const CopyToClipboard: React.FC<PropsType> = props => {
   const onOpen = useSnackbar(state => state.onOpen)
+  const { t } = useTranslation(['post'])
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff' + ''
 
   const copyUrl = () => {
-    const currentUrl = new URL(window.location.href)
-    const postId = props.publ.id
+    const currentUrl = new URL(window.location.origin)
 
-    currentUrl.searchParams.set('postid', postId.toString())
+    const postId = props.publ.id
+    const userName = props.publ.userName
+
+    currentUrl.pathname = `/profile/${userName}`
+
+    currentUrl.searchParams.set('postId', postId.toString())
+
     const newUrl = currentUrl.toString()
 
     navigator.clipboard
       .writeText(newUrl)
       .then(() => {
-        onOpen(`URL скопирован успешно`, 'success', 'right')
+        onOpen(t('copyUrlSuccess'), 'success', 'left')
       })
       .catch(() => {
-        onOpen('Ошибка копирования URL', 'danger', 'right')
+        onOpen(t('copyUrlUnSuccess'), 'danger', 'left')
       })
   }
-  const { t } = useTranslation(['post'])
 
   return (
     <Menu.Item>

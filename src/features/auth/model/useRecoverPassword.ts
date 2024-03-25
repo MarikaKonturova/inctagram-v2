@@ -20,7 +20,6 @@ export const useRecoverPassword = () => {
     isLoading,
     isSuccess,
     mutate: passwordRecovery,
-    variables,
   } = useMutation<any, AxiosError<UserError>, any>({
     mutationFn: AuthService.passwordRecovery,
     onSuccess: async () => {
@@ -38,9 +37,11 @@ export const useRecoverPassword = () => {
   const localizedError = error
     ? error.response?.data.messages.map(el => {
         if (el.message.includes('registered')) {
+          const email = el.message.split(' ').find(el => el.includes('@'))
+
           return {
             ...el,
-            message: t('userNotRegistered', { email: variables.email || '' }),
+            message: t('userNotRegistered', { email: email || '' }),
           }
         } else if (el.message.includes('Recaptcha')) {
           return {
@@ -53,5 +54,5 @@ export const useRecoverPassword = () => {
       })
     : null
 
-  return { isInfoTextShown, isLoading, isSuccess, localizedError, onSubmit }
+  return { isInfoTextShown, isLoading, isSuccess, localizedError, onSubmit, setIsInfoTextShown }
 }

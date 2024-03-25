@@ -18,7 +18,7 @@ export const LoginForm = () => {
     validErrors: { emailError, passwordError },
   } = useValidationForm(['email', 'password'])
 
-  const { error, isLoading, isSuccess, login } = useLogin()
+  const { error, isLoading, login } = useLogin()
   const onSubmit = (data: UserLoginModel, event: any): void => {
     event.preventDefault()
     login(data)
@@ -30,7 +30,7 @@ export const LoginForm = () => {
       <SocialIcons type={'Login'} />
       <Input
         {...register('email')}
-        className={error ? cls.errorBorder : cls.input}
+        className={cls.input}
         errorText={emailError}
         placeholder={t('email') ?? ''}
         type={'text'}
