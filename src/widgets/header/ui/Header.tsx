@@ -23,7 +23,7 @@ export const Header = (props: HeaderProps) => {
         <div className={cls.rightBlock}>
           <ThemeSwitcher />
           <LangSelect />
-          <AuthButtons isAuth={isAuth} />
+          {!isAuth && <AuthButtons />}
         </div>
       </Container>
     </header>

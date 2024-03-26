@@ -20,7 +20,6 @@ type PropsType = {
   firstElement?: boolean
   handleClick?: (direction: 'back' | 'next') => void
   isDelePostConfirmationModalOpen: boolean
-  isFollowing?: boolean
   isMyProfile: boolean
   isPublic?: boolean
   lastElement?: boolean
@@ -44,7 +43,6 @@ export const PostManagementModal = ({
   firstElement,
   handleClick,
   isDelePostConfirmationModalOpen,
-  isFollowing,
   isMyProfile,
   isPublic,
   lastElement,
@@ -66,7 +64,7 @@ export const PostManagementModal = ({
         ) : (
           <>
             <FollowAndUnfollowMenuItemButton
-              isFollowing={isFollowing || userData.isFollowing}
+              isFollowing={userData.isFollowing}
               userId={userData.id}
               userName={userData.userName}
             />

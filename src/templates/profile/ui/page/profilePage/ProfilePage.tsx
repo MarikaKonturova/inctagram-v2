@@ -14,7 +14,7 @@ export const ProfilePage = () => {
   const router = useRouter()
   const { response } = useGetProfileData()
   const userData = response?.data
-  const { userId } = useAuth()
+  const { isAuth, userId } = useAuth()
   const isMyProfile = userId === userData?.id
   const { t } = useTranslation('profile')
 
@@ -29,7 +29,7 @@ export const ProfilePage = () => {
 
   return (
     <div className={cls.container}>
-      <ProfileMainInfo actionsSlot={button} userData={userData} />
+      <ProfileMainInfo actionsSlot={button} isAuth={isAuth} userData={userData} />
       {userData && <PostCards isMyProfile={isMyProfile} userData={userData} />}
     </div>
   )
