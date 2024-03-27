@@ -6,20 +6,18 @@ import { Sidebar } from 'widgets/sidebar'
 import { Layout } from '../layout/Layout'
 import cls from './LayoutWithSidebar.module.scss'
 
-export const LayoutWithSidebar: NextPage<PropsWithChildren> = ({ children }) => {
-  return (
-    <Layout>
-      <AuthRedirect>
-        <div className={cls.wrapper}>
-          <Sidebar />
-          <Suspense fallback={<div>Loading...</div>}>
-            <div className={cls.children}>{children}</div>
-          </Suspense>
-        </div>
-      </AuthRedirect>
-    </Layout>
-  )
-}
+export const LayoutWithSidebar: NextPage<PropsWithChildren> = ({ children }) => (
+  <Layout>
+    <AuthRedirect>
+      <div className={cls.wrapper}>
+        <Sidebar />
+        <Suspense fallback={<div>Loading...</div>}>
+          <div className={cls.children}>{children}</div>
+        </Suspense>
+      </div>
+    </AuthRedirect>
+  </Layout>
+)
 
 export const getLayoutWithSidebar = (page: ReactElement) => {
   return <LayoutWithSidebar>{page}</LayoutWithSidebar>

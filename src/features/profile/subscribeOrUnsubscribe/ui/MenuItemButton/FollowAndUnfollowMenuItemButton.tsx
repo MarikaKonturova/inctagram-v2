@@ -20,7 +20,12 @@ export const FollowAndUnfollowMenuItemButton: FC<IProps> = ({ isFollowing, userI
   const { theme } = useTheme()
   const fill = theme === Theme.LIGHT ? '#000000' : '#ffffff'
   const { t } = useTranslation('profile')
-  const { subscribeOrUnsubscribe } = useSubscribeOrUnsubscribe({ isFollowing, userId, userName })
+
+  const { subscribeOrUnsubscribe } = useSubscribeOrUnsubscribe({
+    isFollowing,
+    userId,
+    userName,
+  })
 
   const onUnsubscribePersonClick = useCallback(async () => {
     subscribeOrUnsubscribe()

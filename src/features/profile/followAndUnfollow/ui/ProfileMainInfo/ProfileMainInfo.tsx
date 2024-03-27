@@ -11,15 +11,16 @@ import { Avatar, Button } from 'shared/ui'
 import cls from './ProfileMainInfo.module.scss'
 
 type PropsType = {
-  actionsSlot: ReactNode
+  actionsSlot?: ReactNode
+  isAuth: boolean
   userData?: ProfileDataModel
 }
 
-export const ProfileMainInfo: FC<PropsType> = ({ actionsSlot, userData }) => {
+export const ProfileMainInfo: FC<PropsType> = ({ actionsSlot, isAuth, userData }) => {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [mode, setMode] = useState<'followers' | 'following'>('followers')
   const [followingCount, setFollowingCount] = useState<number | undefined>(userData?.followingCount)
-  const { data } = useGetUserProfileData(userData?.userName ?? '')
+  const { data } = useGetUserProfileData<ProfileDataModel>(userData?.userName ?? '')
 
   const { t } = useTranslation('profile')
   const userNameData = data?.data
@@ -63,14 +64,14 @@ export const ProfileMainInfo: FC<PropsType> = ({ actionsSlot, userData }) => {
           <div className={cls.userName}>
             {userName} {userNameData?.hasBusinessAccount ? <BusinessLogo /> : ''}
           </div>
-          {actionsSlot}
+          {isAuth && actionsSlot}
         </div>
         <div className={cls.info}>
-          <Button onClick={activateFollowingMode} theme={BUTTON_VARIANTS.CLEAR}>
+          <Button disabled={!isAuth} onClick={activateFollowingMode} theme={BUTTON_VARIANTS.CLEAR}>
             <div className={cls.subscribe}>{followingCount}</div>
             <div className={cls.subscribeTitle}>{t('subscriptions')}</div>
           </Button>
-          <Button onClick={activateFollowersMode} theme={BUTTON_VARIANTS.CLEAR}>
+          <Button disabled={!isAuth} onClick={activateFollowersMode} theme={BUTTON_VARIANTS.CLEAR}>
             <div className={cls.subscribe}>{followersCount}</div>
             <div className={cls.subscribeTitle}>{t('subscribers')}</div>
           </Button>

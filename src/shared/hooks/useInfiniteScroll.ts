@@ -37,7 +37,7 @@ export const useInfiniteScroll = ({ data, fetchNextPage, hasNextPage, postId }: 
 
   useEffect(() => {
     setCurrentIndex(foundIndex)
-  }, [postId])
+  }, [postId, foundIndex])
 
   useEffect(() => {
     {

@@ -39,4 +39,5 @@ export async function getStaticProps(ctx: GetServerSidePropsContext) {
     revalidate: 60,
   }
 }
+
 Public.getLayout = getPublicLayout
