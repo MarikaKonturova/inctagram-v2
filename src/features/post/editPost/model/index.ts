@@ -15,7 +15,7 @@ export const useEditPost = ({ handleClose, postId }: ParamsType) => {
   const queryClient = useQueryClient()
   const onOpen = useSnackbar(state => state.onOpen)
 
-  const { isSuccess, mutate } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: ({ data, postId }: { data: Record<'description', string>; postId: number }) =>
       MyPostService.editPost(postId, data),
     onError: (error: AxiosError<{ message: string }>) => {
@@ -34,5 +34,5 @@ export const useEditPost = ({ handleClose, postId }: ParamsType) => {
     mutate({ data, postId })
   }
 
-  return { isSuccess, saveChanges }
+  return { saveChanges }
 }
