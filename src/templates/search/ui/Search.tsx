@@ -7,6 +7,7 @@ import { useInView } from 'react-intersection-observer'
 import userPhoto from 'shared/assets/images/user.png'
 import { AppRoutes } from 'shared/constants/path'
 import { useDebounce } from 'shared/hooks'
+import { User } from 'shared/types/users'
 import { Input, Loader } from 'shared/ui'
 
 import cls from './Search.module.scss'
@@ -18,7 +19,7 @@ export const SearchPage = () => {
   const [searchUserValue, setSearchUserValue] = useState<string>()
   const debounceSearchUserValue = useDebounce(searchUserValue, 500)
 
-  const [searchUserData, setSearchUserData] = useState<any>()
+  const [searchUserData, setSearchUserData] = useState<User[]>()
 
   const {
     dataUsers: usersData,
@@ -50,11 +51,7 @@ export const SearchPage = () => {
         type={'search'}
         value={searchUserValue}
       />
-      {!debounceSearchUserValue && searchUserData?.length > 0 && (
-        <p className={cls.titleList}>Recent requests</p>
-      )}
-
-      {!debounceSearchUserValue && searchUserData == undefined && (
+      {!debounceSearchUserValue && searchUserData && searchUserData.length > 0 && (
         <p className={cls.titleList}>Recent requests</p>
       )}
 
@@ -75,7 +72,7 @@ export const SearchPage = () => {
           </div>
         )}
 
-        {(debounceSearchUserValue ? usersData : searchUserData)?.map((user: any) => (
+        {(debounceSearchUserValue ? usersData : searchUserData)?.map((user: User) => (
           <div className={cls.userCard} key={user.id}>
             <div className={cls.userBlock}>
               <p className={cls.userName}>
