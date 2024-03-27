@@ -28,7 +28,7 @@ export const Description: React.FC<IProps> = ({ avatar, description, title }) =>
       <Avatar size={AvatarSizes.medium} src={avatar?.thumbnail?.url || userPhoto.src} />
       <div className={cls.rightBlock}>
         <span className={cls.headerTitle}>{title}</span>
-        {description && truncatedDescription}
+        <span className={cls.title}>{description && truncatedDescription} </span>
         {description?.length > 90 && (
           <div onClick={handleToggleExpand}>
             <div className={cls.lessMore}>{isExpanded ? t('less') : t('more')}</div>

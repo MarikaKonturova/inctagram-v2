@@ -35,8 +35,7 @@ export const UserProfilePage = () => {
   )
 
   const userActions = (
-    <div>
-      <SendMessageButton />
+    <div className={cls.actionsWrapper}>
       {userData && (
         <FollowAndUnfollowButton
           isFollowing={userData.isFollowing}
@@ -44,6 +43,7 @@ export const UserProfilePage = () => {
           userName={userData.userName}
         />
       )}
+      <SendMessageButton />
     </div>
   )
   const button = isMyProfile ? myProfileActions : userActions
