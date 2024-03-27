@@ -7,6 +7,7 @@ import { useInView } from 'react-intersection-observer'
 import userPhoto from 'shared/assets/images/user.png'
 import { AppRoutes } from 'shared/constants/path'
 import { useDebounce } from 'shared/hooks'
+import { User } from 'shared/types/users'
 import { Input, Loader } from 'shared/ui'
 
 import cls from './Search.module.scss'
@@ -18,6 +19,8 @@ export const SearchPage = () => {
   const [searchUserValue, setSearchUserValue] = useState<string>()
   const debounceSearchUserValue = useDebounce(searchUserValue, 500)
 
+  const [searchUserData, setSearchUserData] = useState<User[]>()
+
   const {
     dataUsers: usersData,
     fetchNextPage,
@@ -28,6 +31,7 @@ export const SearchPage = () => {
   } = useGetSearchUsers(debounceSearchUserValue)
   const onSearchUserValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchUserValue(e.target.value)
+    setSearchUserData(usersData)
   }
 
   useEffect(() => {
@@ -47,49 +51,61 @@ export const SearchPage = () => {
         type={'search'}
         value={searchUserValue}
       />
-      <p className={cls.titleList}>{'Recent requests'} </p>
-      {isUsersLoading && (
-        <div className={cls.loader}>
-          <Loader />
-        </div>
+      {!debounceSearchUserValue && searchUserData && searchUserData.length > 0 && (
+        <p className={cls.titleList}>Recent requests</p>
       )}
+
+      {usersData?.length == 0 && <p className={cls.noResults}>No results found</p>}
+
       <div className={cls.usersList}>
-        {!debounceSearchUserValue && (
+        {!debounceSearchUserValue && searchUserData == undefined && (
           <div className={cls.emptyList}>
             <h3>Oops! This place looks empty!</h3>
             <p>No recent requests</p>
           </div>
         )}
-        {debounceSearchUserValue &&
-          usersData?.map((user: any) => {
-            return (
-              <div className={cls.userCard} key={user.id}>
-                <div className={cls.userBlock}>
-                  <p className={cls.userName}>
-                    <Image
-                      alt={user.userName}
-                      className={cls.userAvatar}
-                      height={50}
-                      src={user.avatars?.medium?.url || userPhoto}
-                      width={50}
-                    />
-                    <div className={cls.userInfoBox}>
-                      <Link
-                        href={{
-                          pathname: `${AppRoutes.PROFILE.PROFILE}/${user.userName}`,
-                        }}
-                      >
-                        {user.userName}
-                      </Link>
-                      <p className={cls.userInfo}>
-                        {user.firstName} {user.lastName}
-                      </p>
-                    </div>
+
+        {!debounceSearchUserValue && usersData == undefined && searchUserData?.length == 0 && (
+          <div className={cls.emptyList}>
+            <h3>Oops! This place looks empty!</h3>
+            <p>No recent requests</p>
+          </div>
+        )}
+
+        {(debounceSearchUserValue ? usersData : searchUserData)?.map((user: User) => (
+          <div className={cls.userCard} key={user.id}>
+            <div className={cls.userBlock}>
+              <p className={cls.userName}>
+                <Link
+                  href={{
+                    pathname: `${AppRoutes.PROFILE.PROFILE}/${user.userName}`,
+                  }}
+                >
+                  <Image
+                    alt={user.userName}
+                    className={cls.userAvatar}
+                    height={50}
+                    src={user.avatars?.medium?.url || userPhoto}
+                    width={50}
+                  />
+                </Link>
+                <div className={cls.userInfoBox}>
+                  <Link
+                    href={{
+                      pathname: `${AppRoutes.PROFILE.PROFILE}/${user.userName}`,
+                    }}
+                  >
+                    {user.userName}
+                  </Link>
+                  <p className={cls.userInfo}>
+                    {user.firstName} {user.lastName}
                   </p>
                 </div>
-              </div>
-            )
-          })}
+              </p>
+            </div>
+          </div>
+        ))}
+
         {isSuccess && (
           <div className={cls.loaderContainer} ref={ref}>
             {isFetchingNextPage && <Loader />}
