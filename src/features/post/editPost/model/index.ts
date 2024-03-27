@@ -25,7 +25,7 @@ export const useEditPost = ({ handleClose, postId }: ParamsType) => {
       onOpen('Your changes are saved', 'success', 'left')
       handleClose()
       queryClient.invalidateQueries(['post', postId])
-      router.push(`${AppRoutes.PROFILE.MY_PROFILE}/?postId=${postId}`).then(() => {})
+      router.push(`${AppRoutes.PROFILE.MY_PROFILE}/?postId=${postId}`)
     },
     retry: false,
   })
