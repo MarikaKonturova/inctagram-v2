@@ -61,7 +61,7 @@ export const GetPostModal: React.FC<IProps> = props => {
                 <CreationDate date={creationDate} />
               </div>
             </div>
-            {isAuth && <AddCommentBox postId={post.id} />}
+            {isAuth && <AddCommentBox className={cls.commentSection} postId={post.id} />}
           </div>
         </>
       }

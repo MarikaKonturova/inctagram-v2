@@ -2,6 +2,8 @@
   width: 50%;
   height: 85vh;
   object-fit: fill;
+  border: 1px solid var(--modal-100-color);
+  border-right: none;
 }
 
 .rightBlock {
@@ -28,7 +30,10 @@
 .bottomSection {
   padding: 0 20px;
   border-top: 1px solid var(--modal-100-color);
-  border-bottom: 1px solid var(--modal-100-color);
+}
+
+.commentSection {
+  border-top: 1px solid var(--modal-100-color);
 }
 
 .wrapper {
