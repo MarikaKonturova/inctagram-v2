@@ -1,7 +1,7 @@
 import { useGetPosts } from 'entities/Home'
 import { Description, useGetMyPost } from 'entities/Post'
 import { useRouter } from 'next/router'
-import React, { type FC, useEffect, useState } from 'react'
+import React, { type FC, useCallback, useEffect, useState } from 'react'
 import { AppRoutes } from 'shared/constants/path'
 import { MODALS, type Values } from 'shared/constants/post'
 import { useInfiniteScroll } from 'shared/hooks/useInfiniteScroll'
@@ -67,10 +67,10 @@ export const PostCards: FC<Props> = ({ isMyProfile, userData }) => {
     router.push(router)
   }
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     closeModal()
     setCurrentIndex(foundIndex)
-  }
+  }, [closeModal, foundIndex, setCurrentIndex])
 
   const renderContent = (page: ResponseType) =>
     page.items.map((item: PostResponse, index) => {
@@ -103,9 +103,10 @@ export const PostCards: FC<Props> = ({ isMyProfile, userData }) => {
   useEffect(() => {
     if (router.query.postId) {
       setPostId(Number(router.query.postId))
+    } else {
+      handleClose()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [handleClose, router.query.postId])
 
   useEffect(() => {
     const hasPost = router.query.postId && post
@@ -121,8 +122,7 @@ export const PostCards: FC<Props> = ({ isMyProfile, userData }) => {
         `${AppRoutes.PROFILE.PROFILE}/${post?.userName}?postId=${post?.id ?? router.query.postId}`
       )
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [post?.id, post?.userName, userData.userName])
+  }, [openModal, post, post?.id, post?.userName, router, userData.userName])
 
   return (
     <>
