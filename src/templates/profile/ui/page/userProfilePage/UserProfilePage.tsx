@@ -2,9 +2,10 @@ import { useGetUserProfileData } from 'entities/Profile'
 import { useAuth } from 'features/auth'
 import { FollowAndUnfollowButton, ProfileMainInfo, SendMessageButton } from 'features/profile'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 import { AppRoutes } from 'shared/constants/path'
+import { ProfileDataModel } from 'shared/types/auth'
 import { Button } from 'shared/ui'
 import { PostCards } from 'templates/profile'
 
@@ -16,10 +17,10 @@ export const UserProfilePage = () => {
   const userName: string =
     typeof router.query.userprofile === 'string' ? router.query.userprofile : ''
 
-  const { data } = useGetUserProfileData(userName)
+  const { data } = useGetUserProfileData<ProfileDataModel>(userName)
 
   const userData = data?.data
-  const { userId } = useAuth()
+  const { isAuth, userId } = useAuth()
   const isMyProfile = userId === userData?.id
   const { t } = useTranslation('profile')
 
@@ -35,21 +36,21 @@ export const UserProfilePage = () => {
 
   const userActions = (
     <div className={cls.actionsWrapper}>
-      <FollowAndUnfollowButton
-        isFollowing={userData?.isFollowing}
-        userId={userData?.id}
-        userName={userData?.userName}
-      />
+      {userData && (
+        <FollowAndUnfollowButton
+          isFollowing={userData.isFollowing}
+          userId={userData.id}
+          userName={userData.userName}
+        />
+      )}
       <SendMessageButton />
     </div>
   )
+  const button = isMyProfile ? myProfileActions : userActions
 
   return (
     <div className={cls.container}>
-      <ProfileMainInfo
-        actionsSlot={isMyProfile ? myProfileActions : userActions}
-        userData={userData}
-      />
+      <ProfileMainInfo actionsSlot={button} isAuth={isAuth} userData={userData} />
       {userData && <PostCards isMyProfile={isMyProfile} userData={userData} />}
     </div>
   )

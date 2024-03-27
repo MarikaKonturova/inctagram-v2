@@ -1,11 +1,10 @@
-import { Description, useGetMyPost } from 'entities/Post'
 import {RegisteredUsers} from 'entities/Public';
+import { useAuth } from 'features/auth';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { AppRoutes } from 'shared/constants/path';
 import {LastPublicationsResponse} from 'shared/types/home';
 import {PostResponse} from 'shared/types/post';
-import { Commentaries } from 'widgets/commentaries'
-import { GetPostModal } from 'widgets/post'
 import {PublicPostList} from 'widgets/public';
 
 import cls from './PublicPage.module.scss'
@@ -16,46 +15,22 @@ export interface PublicPageProps {
 
 export const PublicPage = ({data}: PublicPageProps) => {
   const router = useRouter()
-  const [post, setPost] = useState<PostResponse | null>(null)
-  const { post: postData } = useGetMyPost(Number(router.query.postId))
-  
+  const { userId } = useAuth()
+
   const openPost = (post: PostResponse) => {
-    setPost(post)
-    router.query.postId = String(post.id)
-    router.push(router)
-  }
+    const hasPost = post && post.id
+    const isMyPost = hasPost && post.ownerId === userId
+    const path = isMyPost ? AppRoutes.PROFILE.MY_PROFILE : `${AppRoutes.PROFILE.PROFILE}/${post.userName}`
 
-  const handleClose = () => {
-    setPost(null)
-    if (router.query.postId) {
-      delete router.query.postId
-      router.push(router, undefined, { shallow: true })
+    if(hasPost) {
+      router.push(`${path}?postId=${post.id}`)
     }
   }
-
-  useEffect(() => {
-    if(postData) {
-      setPost(postData)
-    }
-  }, [postData])
 
   return (
     <div className={cls.container}>
       <RegisteredUsers className={cls.users} userCount={data.countUsers} />
       {data.lastPosts && <PublicPostList openPost={openPost} posts={data.lastPosts} />}
-      {post && <GetPostModal
-              content={
-                <div className={cls.content}>
-                  {post.description && <Description post={post} />}
-                  <Commentaries postId={post.id} />
-                </div>
-              }
-              handleClose={handleClose}
-              isOpen={post !== null}
-              isPublic
-              key={'GetPostModal'}
-              post={post}
-            />}
     </div>
   )
 }

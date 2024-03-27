@@ -22,6 +22,6 @@
   "generalError": "Some error occurred",
   "success": "Success",
   "registeredUsers": "Registered users:",
-  "error": "Error!"
-
+  "error": "Error!",
+  "public": "Public"
 }
