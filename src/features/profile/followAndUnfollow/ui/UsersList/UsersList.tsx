@@ -135,6 +135,7 @@ export const UsersList: FC<PropsType> = ({
               isOpen={isDeleteUserConfirmationModalOpen}
               key={'DeleteUserModal'}
               setIsOpen={setIsDeleteUserConfirmationModalOpen}
+              userData={userData}
               userId={userData?.userId}
               userName={userData?.userName}
             />
