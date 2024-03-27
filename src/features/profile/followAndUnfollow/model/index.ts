@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useTranslation } from 'next-i18next'
 import { UsersService } from 'shared/api'
 import { useSnackbar } from 'shared/hooks'
 import { type User } from 'shared/types/auth'
@@ -62,29 +63,37 @@ export function useToggleFollowUser(debounceSearchUser: string) {
   )
 }
 
-export function useDeleteUser(debounceSearchUser: string) {
+interface Args {
+  handleClose: () => void
+  userId?: number
+  userName?: string
+}
+
+export function useDeleteUser({ handleClose, userId, userName }: Args) {
+  const { t } = useTranslation(['profile'])
   const queryClient = useQueryClient()
   const onOpen = useSnackbar(state => state.onOpen)
 
-  return useMutation(
-    async (userToDelete: User) => {
-      const response = await UsersService.unfollow(userToDelete.userId)
-
-      if (response.status !== 204) {
-        throw new Error('Failed to process unfollow action')
+  const { mutate } = useMutation({
+    mutationFn: () => {
+      if (userId) {
+        return UsersService.unfollow(userId)
+      } else {
+        return Promise.reject(new Error('userId is undefined'))
       }
-
-      return userToDelete.id
     },
-    {
-      onError: () => {
-        onOpen('Error while deleting user:', 'danger', 'right')
-      },
-      onSuccess: id => {
-        queryClient.setQueriesData(['users', debounceSearchUser], (oldData: User[] | undefined) => {
-          return oldData?.filter(user => user.id !== id)
-        })
-      },
-    }
-  )
+    onSuccess: async () => {
+      handleClose()
+      await queryClient.invalidateQueries(['users'])
+      await queryClient.invalidateQueries(['userByName'])
+      await queryClient.invalidateQueries(['getProfileData'])
+      onOpen(`${t('deleteSubscriber')} ${userName}`, 'success', 'right')
+    },
+    retry: false,
+  })
+  const onDelete = () => {
+    mutate()
+  }
+
+  return { onDelete }
 }
