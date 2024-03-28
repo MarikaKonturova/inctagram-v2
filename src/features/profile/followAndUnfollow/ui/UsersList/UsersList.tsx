@@ -1,8 +1,8 @@
+import { DeleteUserModal } from 'features/profile/followAndUnfollow/ui/DeleteUserModal/DeleteUserModal'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
-import React, { FC, ReactNode } from 'react'
+import React, { FC, useState } from 'react'
 import userPhoto from 'shared/assets/images/user.png'
 import { BUTTON_VARIANTS } from 'shared/constants'
 import { AppRoutes } from 'shared/constants/path'
@@ -35,7 +35,19 @@ export const UsersList: FC<PropsType> = ({
   const onOpen = useSnackbar(state => state.onOpen)
   const { t } = useTranslation('profile')
   const router = useRouter()
+  const [userData, setUserData] = useState<User>()
+  const [isDeleteUserConfirmationModalOpen, setIsDeleteUserConfirmationModalOpen] = useState(false)
 
+  const closeModal = () => {
+    if (router.query.postId) {
+      delete router.query.postId
+      router.push(router, undefined, { shallow: true })
+    }
+  }
+  const closeDeleteUserModal = () => {
+    setIsDeleteUserConfirmationModalOpen(false)
+    closeModal()
+  }
   const toggleFollowUser = useToggleFollowUser(debounceSearchUserValue)
   const handleToggleFollow = (user: User) => {
     toggleFollowUser.mutate(user, {
@@ -57,10 +69,16 @@ export const UsersList: FC<PropsType> = ({
     })
   }
 
+  const handleToggleDelete = (user: User) => {
+    setIsDeleteUserConfirmationModalOpen(true)
+    user && setUserData(user)
+  }
+
   return (
     <div className={cls.usersList}>
       {usersData?.map((user: User) => {
         const toggleHandler = () => handleToggleFollow(user)
+        const toggleHandlerDelete = () => handleToggleDelete(user)
 
         const navigateToUsersPage = () => {
           router.push(`${AppRoutes.PROFILE.PROFILE}/${user.userName}`)
@@ -103,6 +121,7 @@ export const UsersList: FC<PropsType> = ({
                   </Button>
                   <Button
                     className={cls.deleteButton}
+                    onClick={toggleHandlerDelete}
                     theme={BUTTON_VARIANTS.SECONDARY}
                     type={'button'}
                   >
@@ -111,6 +130,15 @@ export const UsersList: FC<PropsType> = ({
                 </>
               )}
             </div>
+            <DeleteUserModal
+              handleClose={closeDeleteUserModal}
+              isOpen={isDeleteUserConfirmationModalOpen}
+              key={'DeleteUserModal'}
+              setIsOpen={setIsDeleteUserConfirmationModalOpen}
+              userData={userData}
+              userId={userData?.userId}
+              userName={userData?.userName}
+            />
           </div>
         )
       })}

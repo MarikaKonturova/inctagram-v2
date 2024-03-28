@@ -7,3 +7,5 @@ export { SendMessageButton } from './sendMessage/ui/SendMessageButton'
 export { FollowAndUnfollowButton } from './subscribeOrUnsubscribe/ui/FollowAndUnfollowButton/FollowAndUnfollowButton'
 
 export { FollowAndUnfollowMenuItemButton } from './subscribeOrUnsubscribe/ui/MenuItemButton/FollowAndUnfollowMenuItemButton'
+
+export { DeleteUserModal } from 'features/profile/followAndUnfollow/ui/DeleteUserModal/DeleteUserModal'
