@@ -48,6 +48,7 @@ export function useToggleFollowUser(debounceSearchUser: string) {
         onOpen('Error while toggling follow/unfollow', 'danger', 'right')
       },
       onSuccess: ({ id, newFollowingState }) => {
+        queryClient.invalidateQueries(['users'])
         queryClient.setQueriesData(['users', debounceSearchUser], (oldData: User[] | undefined) => {
           return oldData?.map(user => {
             if (user.id === id) {
