@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import { useRouter } from 'next/router'
 import { MyPostService } from 'shared/api'
+import { AppRoutes } from 'shared/constants/path'
 import { useSnackbar } from 'shared/hooks'
 
 type ParamsType = {
@@ -9,6 +11,7 @@ type ParamsType = {
 }
 
 export const useEditPost = ({ handleClose, postId }: ParamsType) => {
+  const router = useRouter()
   const queryClient = useQueryClient()
   const onOpen = useSnackbar(state => state.onOpen)
 
@@ -22,6 +25,7 @@ export const useEditPost = ({ handleClose, postId }: ParamsType) => {
       onOpen('Your changes are saved', 'success', 'left')
       handleClose()
       queryClient.invalidateQueries(['post', postId])
+      router.push(`${AppRoutes.PROFILE.MY_PROFILE}/?postId=${postId}`)
     },
     retry: false,
   })

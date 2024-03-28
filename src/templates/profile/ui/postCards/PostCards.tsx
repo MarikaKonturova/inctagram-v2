@@ -113,7 +113,7 @@ export const PostCards: FC<Props> = ({ isMyProfile, userData }) => {
     const isNotMyPost = hasPost && post?.userName !== userData.userName
     const isMyPost = hasPost && post?.userName === userData.userName
 
-    if (isMyPost) {
+    if (isMyPost && currentModal === null) {
       openModal(MODALS.GetPostModal)
     }
 
